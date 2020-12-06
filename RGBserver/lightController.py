@@ -42,12 +42,14 @@ def starryNight(strip, wait_ms=50):
         strip.setPixelColor(LED, Color(x, x, x))
         strip.show()
         x += 1
+        print(LED, x)
         time.sleep(wait_ms/1000.0)
     
     while x > 0:
         strip.setPixelColor(LED, Color(x, x, x))
         strip.show()
         x -= 1
+        print(LED, x)
         time.sleep(wait_ms/1000.0)
 
 def theaterChase(strip, color, wait_ms=50, iterations=10):
