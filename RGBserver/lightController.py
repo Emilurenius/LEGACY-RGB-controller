@@ -38,7 +38,7 @@ def starryNight(strip, wait_ms=50):
     LED = random.randint(0, 148)
     
     x = 0
-    while x <= 255:
+    while x <= 254:
         strip.setPixelColor(LED, Color(x, x, x))
         strip.show()
         x += 1
