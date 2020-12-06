@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RGB mode select</title>
+</head>
+<body>
+    <div class="header">
+        <h1>RGB LED strip Mode select</h1>
+    </div>
+    <div class="button">
+        <a href="http://192.168.1.117:3000/modes?mode=none">Standard</a>
+    </div>
+    <div class="button">
+        <a href="http://192.168.1.117:3000/modes?mode=breathe">Breathe</a>
+    </div>
+    <div class="slidecontainer">
+        <label for ="bSpeed">Breathe speed:</label>
+        <input type="range" min="1" max="100" class="slider-br" id="bSpeed">
+    </div>
+    <div class="phonebutton-slider">
+        <input type="button" id="phonebutton-slider" value="Send slider info">
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/javascript/modes.js"></script>
+</body>
+</html>
