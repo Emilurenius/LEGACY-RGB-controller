@@ -130,8 +130,7 @@ if __name__ == '__main__':
                 time.sleep(0.05)
 
             if data["onoff"]:
-                #colorWipe(strip, Color(data["R"], data["G"], data["B"]), 3)
-                starryNight(strip, 1)
+                colorWipe(strip, Color(data["R"], data["G"], data["B"]), 3)
             else:
                 colorWipe(strip, Color(0, 0, 0), 3)
 
