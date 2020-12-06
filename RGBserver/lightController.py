@@ -130,7 +130,7 @@ if __name__ == '__main__':
                 time.sleep(0.05)
 
             if data["onoff"]:
-                colorWipe(strip, (Color(float(data["R"])) * data["brightness"] / 100, float(data["G"]) * data["brightness"] / 100, float(data["B"]) * data["brightness"] / 100), 3)
+                colorWipe(strip, Color(float(data["R"])) * data["brightness"] / 100, float(data["G"]) * data["brightness"] / 100, float(data["B"]) * data["brightness"] / 100), 3)
             else:
                 colorWipe(strip, Color(0, 0, 0), 3)
 
