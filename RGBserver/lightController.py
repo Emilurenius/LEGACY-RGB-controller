@@ -110,7 +110,7 @@ if __name__ == '__main__':
                 print("JSON busy...")
                 time.sleep(0.05)
 
-            solidColor(strip, Color(data["R"], data["G"], data["B"]))
+            colorWipe(strip, Color(data["R"], data["G"], data["B"]))
 
         #     print ('Color wipe animations.')
         #     colorWipe(strip, Color(255, 0, 0))  # Red wipe
