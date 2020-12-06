@@ -99,17 +99,18 @@ if __name__ == '__main__':
         print('Use "-c" argument to clear LEDs on exit')
 
     try:
-        #solidColor(strip, Color(255, 255, 255))
+        solidColor(strip, Color(255, 255, 255))
         while True:
-            #solidColor(strip, Color(255, 255, 255))
+            solidColor(strip, Color(255, 255, 255))
 
             try:
                 with open("./json/data.json") as JSON:
                     data = json.load(JSON)
-                    #solidColor(strip, Color(data["R"], data["G"], data["B"]))
             except:
                 print("JSON busy...")
                 time.sleep(0.05)
+
+            solidColor(strip, Color(data["R"], data["G"], data["B"]))
 
         #     print ('Color wipe animations.')
         #     colorWipe(strip, Color(255, 0, 0))  # Red wipe
