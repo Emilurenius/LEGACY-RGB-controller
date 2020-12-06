@@ -97,16 +97,16 @@ app.get("/modes", (req, res) => {
     let save = false
     res.sendFile(path.join(__dirname, "/html/modes.html"))
     
-    if (req.query.mode == "none" || req.query.mode == "breathe") {
+    if (req.query.mode != undefined) {
         save = true
         data.mode = req.query.mode
         console.log(`Mode changed to: ${data.mode}`)
     }
     
-    if (req.query.bSpeed) {
+    if (req.query.speed) {
         save = true
         data.breatheSpeed = parseInt(req.query.bSpeed)
-        console.log(`Breathe Speed channged to: ${data.breatheSpeed}`)
+        console.log(`Speed channged to: ${data.speed}`)
     }
     
     if (save) {

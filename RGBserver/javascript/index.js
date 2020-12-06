@@ -5,8 +5,10 @@ const G = document.getElementById("G")
 const B = document.getElementById("B")
 const sliderButton = document.getElementById("phonebutton-slider")
 const toggle = document.getElementById("toggle")
+const modes = document.getElementById("modes")
 
 toggle.setAttribute("href", `${url}/?toggle=change`)
+modes.setAttribute("href", `${url}/modes`)
 
 
 function getJSON(url) {

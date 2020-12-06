@@ -1,6 +1,11 @@
 const url = (new URL(document.location)).origin
-const bSpeed = document.getElementById("bSpeed")
+const speed = document.getElementById("speed")
+const standard = document.getElementById("standard")
+const rainbow = document.getElementById("rainbow")
 const sliderButton = document.getElementById("phonebutton-slider")
+
+standard.setAttribute("href", `${url}/modes?mode=standard`)
+rainbow.setAttribute("href", `${url}/modes?mode=rainbow`)
 
 function getJSON(url) {
     var j = []
@@ -14,13 +19,13 @@ function getJSON(url) {
     return j
 }
 
-bSpeed.value = getJSON(`${url}/json/data.json`).breatheSpeed
+speed.value = getJSON(`${url}/json/data.json`).speed
 
 sliderButton.addEventListener("click", (event) => {
-    window.location.replace(`${url}/modes?bSpeed=${bSpeed.value}`)
+    window.location.replace(`${url}/modes?speed=${speed.value}`)
 })
 
 
-bSpeed.onmouseup = () => {
-    window.location.replace(`${url}/modes?bSpeed=${bSpeed.value}`)
+speed.onmouseup = () => {
+    window.location.replace(`${url}/modes?speed=${speed.value}`)
 }
