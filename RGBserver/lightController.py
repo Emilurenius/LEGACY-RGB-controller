@@ -129,6 +129,11 @@ if __name__ == '__main__':
                 print("JSON busy...")
                 time.sleep(0.05)
 
+            if data["brightness"] != LED_BRIGHTNESS:
+                LED_BRIGHTNESS = data["brightness"]
+                strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+                strip.begin()
+
             if data["onoff"]:
                 # The commented out code under won't work:
                 #colorWipe(strip, Color(float(data["R"]) * float(data["brightness"] / 100), float(data["G"]) * float(data["brightness"] / 100), float(data["B"])) * float(data["brightness"] / 100), 3)
