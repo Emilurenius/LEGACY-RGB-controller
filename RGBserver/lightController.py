@@ -133,6 +133,8 @@ if __name__ == '__main__':
                 # The commented out code under won't work:
                 #colorWipe(strip, Color(float(data["R"]) * float(data["brightness"] / 100), float(data["G"]) * float(data["brightness"] / 100), float(data["B"])) * float(data["brightness"] / 100), 3)
                 colorWipe(strip, Color(data["R"], data["G"], data["B"]), 3)
+            elif data["onoff"] and data["mode"] == "rainbow":
+                rainbow(strip)
             else:
                 colorWipe(strip, Color(0, 0, 0), 3)
 
