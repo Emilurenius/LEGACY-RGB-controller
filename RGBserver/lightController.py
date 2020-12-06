@@ -75,7 +75,7 @@ def theaterChase(strip, color, wait_ms=50):
             for i in range(0, strip.numPixels(), 3):
                 try:
                     with open("./json/data.json") as JSON:
-                    data = json.load(JSON)
+                        data = json.load(JSON)
                 except:
                     print("JSON busy...")
                 if data["onoff"] != True or data["mode"] != "theaterChase":
