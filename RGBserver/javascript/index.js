@@ -4,8 +4,9 @@ const R = document.getElementById("R")
 const G = document.getElementById("G")
 const B = document.getElementById("B")
 const sliderButton = document.getElementById("phonebutton-slider")
+const toggle = document.getElementById("toggle")
 
-//toggle.setAttribute("href", `${url}/?toggle=change&slider=${slider.value / 100}`)
+toggle.setAttribute("href", `${url}/?toggle=change`)
 
 
 function getJSON(url) {
