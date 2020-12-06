@@ -76,9 +76,13 @@ def wheel(pos):
 
 def rainbow(strip, wait_ms=20, iterations=1):
     """Draw rainbow that fades across all pixels at once."""
+    roundOne = True
     for j in range(256*iterations):
         for i in range(strip.numPixels()):
             strip.setPixelColor(i, wheel((i+j) & 255))
+            if roundOne == True:
+                strip.show()
+        roundOne = False
         strip.show()
         try:
             with open("./json/data.json") as JSON:
