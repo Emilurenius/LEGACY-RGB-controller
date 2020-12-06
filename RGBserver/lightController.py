@@ -3,7 +3,7 @@
 # Direct port of the Arduino NeoPixel library strandtest example.  Showcases
 # various animations on a strip of NeoPixels.
 
-import time, json, os
+import time, json, os, random
 from rpi_ws281x import *
 import argparse
 
@@ -32,6 +32,23 @@ def solidColor(strip, color, wait_ms=50):
     for i in range(strip.numPixels()):
         strip.setPixelColor(i, color)
     strip.show()
+
+def starryNight(strip, wait_ms=50):
+    # Fades on and off one random LED at a time:
+    LED = random.randint(0, 149)
+    
+    x = 0
+    while x < 255:
+        strip.setPixelColor(LED, Color(x, x, x))
+        strip.show()
+        x += 1
+        time.sleep(wait_ms/1000.0)
+    
+    while x > 0:
+        strip.setPixelColor(LED, Color(x, x, x))
+        strip.show()
+        x -= 1
+        time.sleep(wait_ms/1000.0)
 
 def theaterChase(strip, color, wait_ms=50, iterations=10):
     """Movie theater light style chaser animation."""
@@ -111,7 +128,8 @@ if __name__ == '__main__':
                 time.sleep(0.05)
 
             if data["onoff"]:
-                colorWipe(strip, Color(data["R"], data["G"], data["B"]), 3)
+                #colorWipe(strip, Color(data["R"], data["G"], data["B"]), 3)
+                starryNight(strip)
             else:
                 colorWipe(strip, Color(0, 0, 0), 3)
 
