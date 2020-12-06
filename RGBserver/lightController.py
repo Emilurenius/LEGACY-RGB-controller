@@ -99,9 +99,9 @@ if __name__ == '__main__':
         print('Use "-c" argument to clear LEDs on exit')
 
     try:
-        solidColor(strip, Color(255, 255, 255))
+        #solidColor(strip, Color(255, 255, 255))
         while True:
-            solidColor(strip, Color(255, 255, 255))
+            #solidColor(strip, Color(255, 255, 255))
 
             try:
                 with open("./json/data.json") as JSON:
