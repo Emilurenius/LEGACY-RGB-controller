@@ -52,13 +52,20 @@ def starryNight(strip, wait_ms=50):
         print(LED, x)
         time.sleep(wait_ms/1000.0)
 
-def theaterChase(strip, color, wait_ms=50, iterations=10):
+def theaterChase(strip, color, wait_ms=50):
     """Movie theater light style chaser animation."""
-    for j in range(iterations):
+    while True:
         for q in range(3):
             for i in range(0, strip.numPixels(), 3):
                 strip.setPixelColor(i+q, color)
             strip.show()
+            try:
+                with open("./json/data.json") as JSON:
+                    data = json.load(JSON)
+            except:
+                print("JSON busy...")
+            if data["onoff"] != True or data["mode"] != "theaterChase":
+                break
             time.sleep(wait_ms/1000.0)
             for i in range(0, strip.numPixels(), 3):
                 strip.setPixelColor(i+q, 0)
