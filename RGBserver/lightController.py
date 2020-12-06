@@ -38,14 +38,14 @@ def starryNight(strip, wait_ms=50):
     LED = random.randint(0, 149)
     
     x = 0
-    while x < 255:
+    while x <= 255:
         strip.setPixelColor(LED, Color(x, x, x))
         strip.show()
         x += 1
         print(LED, x)
         time.sleep(wait_ms/1000.0)
     
-    while x > 0:
+    while x >= 0:
         strip.setPixelColor(LED, Color(x, x, x))
         strip.show()
         x -= 1
@@ -131,7 +131,7 @@ if __name__ == '__main__':
 
             if data["onoff"]:
                 #colorWipe(strip, Color(data["R"], data["G"], data["B"]), 3)
-                starryNight(strip)
+                starryNight(strip, 1)
             else:
                 colorWipe(strip, Color(0, 0, 0), 3)
 
