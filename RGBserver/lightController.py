@@ -80,6 +80,13 @@ def rainbow(strip, wait_ms=20, iterations=1):
         for i in range(strip.numPixels()):
             strip.setPixelColor(i, wheel((i+j) & 255))
         strip.show()
+        try:
+            with open("./json/data.json") as JSON:
+                data = json.load(JSON)
+        except:
+            print("JSON busy...")
+        if data["onoff"] != True and data["mode"] != "rainbow":
+            break
         time.sleep(wait_ms/1000.0)
 
 def rainbowCycle(strip, wait_ms=20, iterations=5):
