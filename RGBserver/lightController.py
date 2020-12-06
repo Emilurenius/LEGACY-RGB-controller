@@ -129,7 +129,7 @@ if __name__ == '__main__':
                 print("JSON busy...")
                 time.sleep(0.05)
 
-            if data["onoff"] and data["mode"] == "none":
+            if data["onoff"] and data["mode"] == "standard":
                 # The commented out code under won't work:
                 #colorWipe(strip, Color(float(data["R"]) * float(data["brightness"] / 100), float(data["G"]) * float(data["brightness"] / 100), float(data["B"])) * float(data["brightness"] / 100), 3)
                 colorWipe(strip, Color(data["R"], data["G"], data["B"]), 3)
