@@ -85,7 +85,7 @@ def rainbow(strip, wait_ms=20, iterations=1):
                 data = json.load(JSON)
         except:
             print("JSON busy...")
-        if data["onoff"] != True and data["mode"] != "rainbow":
+        if data["onoff"] != True or data["mode"] != "rainbow":
             break
         time.sleep(wait_ms/1000.0)
 
