@@ -3,10 +3,12 @@ const speed = document.getElementById("speed")
 const standard = document.getElementById("standard")
 const rainbow = document.getElementById("rainbow")
 const back = document.getElementById("back")
+const theaterChase = document.getElementById("theaterChase")
 const sliderButton = document.getElementById("phonebutton-slider")
 
 standard.setAttribute("href", `${url}/modes?mode=standard`)
 rainbow.setAttribute("href", `${url}/modes?mode=rainbow`)
+theaterChase.setAttribute("href", `${url}/modes?mode=theaterChase`)
 back.setAttribute("href", `${url}/`)
 
 function getJSON(url) {

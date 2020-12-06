@@ -146,6 +146,8 @@ if __name__ == '__main__':
                 colorWipe(strip, Color(data["R"], data["G"], data["B"]), 3)
             elif data["onoff"] and data["mode"] == "rainbow":
                 rainbow(strip)
+            elif data["onoff"] and data["mode"] == "theaterChase":
+                theaterChase(strip, Color(data["R"], data["G"], data["B"]))
             else:
                 colorWipe(strip, Color(0, 0, 0), 3)
 
