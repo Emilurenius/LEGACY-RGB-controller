@@ -35,7 +35,7 @@ def solidColor(strip, color, wait_ms=50):
 
 def starryNight(strip, wait_ms=50):
     # Fades on and off one random LED at a time:
-    LED = random.randint(0, 149)
+    LED = random.randint(0, 148)
     
     x = 0
     while x <= 255:
