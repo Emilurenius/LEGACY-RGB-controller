@@ -145,9 +145,9 @@ def theaterChaseRainbow(strip, wait_ms=50):
 
 def norge(strip, wait_ms=50):
     # Makes the color strip create the norwegian flag!
-    numberofRED = float(strip.numPixels()) * 0.3
-    numberofWHITE = float(strip.numPixels()) * 0.1
-    numberofBLUE = float(strip.numPixels()) * 0.2
+    numberofRED = int(float(strip.numPixels()) * 0.3)
+    numberofWHITE = int(float(strip.numPixels()) * 0.1)
+    numberofBLUE = int(float(strip.numPixels()) * 0.2)
     print(numberofRED, numberofWHITE, numberofBLUE)
     #for i in range(strip.numPixels()):
 
@@ -170,27 +170,23 @@ if __name__ == '__main__':
 
     try:
         norge(strip)
-        #solidColor(strip, Color(255, 255, 255))
-        # while True:
-        #     #solidColor(strip, Color(255, 255, 255))
+        while True:
+            norge(strip)
+            try:
+                with open("./json/data.json") as JSON:
+                    data = json.load(JSON)
+            except:
+                print("JSON busy...")
+                time.sleep(0.05)
 
-        #     try:
-        #         with open("./json/data.json") as JSON:
-        #             data = json.load(JSON)
-        #     except:
-        #         print("JSON busy...")
-        #         time.sleep(0.05)
-
-        #     if data["onoff"] and data["mode"] == "standard":
-        #         # The commented out code under won't work:
-        #         #colorWipe(strip, Color(float(data["R"]) * float(data["brightness"] / 100), float(data["G"]) * float(data["brightness"] / 100), float(data["B"])) * float(data["brightness"] / 100), 3)
-        #         colorWipe(strip, Color(data["R"], data["G"], data["B"]), 3)
-        #     elif data["onoff"] and data["mode"] == "rainbow":
-        #         rainbow(strip)
-        #     elif data["onoff"] and data["mode"] == "theaterChase":
-        #         theaterChase(strip, Color(data["R"], data["G"], data["B"]))
-        #     else:
-        #         colorWipe(strip, Color(0, 0, 0), 3)
+            # if data["onoff"] and data["mode"] == "standard":
+            #     colorWipe(strip, Color(data["R"], data["G"], data["B"]), 3)
+            # elif data["onoff"] and data["mode"] == "rainbow":
+            #     rainbow(strip)
+            # elif data["onoff"] and data["mode"] == "theaterChase":
+            #     theaterChase(strip, Color(data["R"], data["G"], data["B"]))
+            # else:
+            #     colorWipe(strip, Color(0, 0, 0), 3)
 
         #     print ('Color wipe animations.')
         #     colorWipe(strip, Color(255, 0, 0))  # Red wipe
