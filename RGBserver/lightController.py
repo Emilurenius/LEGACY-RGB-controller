@@ -155,8 +155,34 @@ def norge(strip, wait_ms=50):
         newTotal = numberofRED * 2 + numberofWHITE * 2 + numberofBLUE
         print(newTotal)
     
-    #for i in range(strip.numPixels()):
-
+    for i in range(strip.numPixels()):
+        x = 1
+        LED = 0
+        while x < numberofRED:
+            strip.setPixelColor(LED, Color(255, 0, 0))
+            x += 1
+            LED += 1
+        x = 0
+        while x < numberofWHITE:
+            strip.setPixelcolor(LED, Color(255, 255, 255))
+            x += 1
+            LED += 1
+        x = 0
+        while x < numberofBLUE:
+            strip.setPixelcolor(LED, Color(0, 0, 255))
+            x += 1
+            LED += 1
+        x = 0
+        while x < numberofWHITE:
+            strip.setPixelcolor(LED, Color(255, 255, 255))
+            x += 1
+            LED += 1
+        x = 0
+        while x < numberofRED:
+            strip.setPixelColor(LED, Color(255, 0, 0))
+            x += 1
+            LED += 1
+        strip.show()
 
 
 # Main program logic follows:
