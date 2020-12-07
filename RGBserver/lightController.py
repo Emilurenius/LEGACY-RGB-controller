@@ -225,6 +225,14 @@ def colorDrip(strip, wait_ms=50):
         
         steps -= 1
 
+        try:
+            with open("./json/data.json") as JSON:
+                data = json.load(JSON)
+        except:
+            print("JSON busy...")
+        if data["onoff"] != True or data["mode"] != "colorDrip":
+            break
+
         if steps == 0:
             colorWipe(strip, Color(0, 0, 0))
 
