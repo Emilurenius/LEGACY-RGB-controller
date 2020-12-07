@@ -253,6 +253,8 @@ if __name__ == '__main__':
                 theaterChase(strip, Color(data["R"], data["G"], data["B"]))
             elif data["onoff"] and data["mode"] == "norway":
                 norge(strip)
+            elif data["onoff"] and data["mode"] == "colorDrip":
+                colorDrip(strip, 10)
             else:
                 colorWipe(strip, Color(0, 0, 0), 3)
 
