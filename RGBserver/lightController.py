@@ -150,6 +150,10 @@ def norge(strip, wait_ms=50):
     numberofBLUE = int(float(strip.numPixels()) * 0.2)
     total = numberofRED * 2 + numberofWHITE * 2 + numberofBLUE
     print(total)
+    if total != strip.numPixels():
+        numberofRED += (strip.numPixels() - total) / 2
+        newTotal = numberofRED * 2 + numberofWHITE * 2 + numberofBLUE
+        print(newTotal)
     
     #for i in range(strip.numPixels()):
 
