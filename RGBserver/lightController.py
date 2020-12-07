@@ -218,6 +218,8 @@ if __name__ == '__main__':
                 rainbow(strip)
             elif data["onoff"] and data["mode"] == "theaterChase":
                 theaterChase(strip, Color(data["R"], data["G"], data["B"]))
+            elif data["onoff"] and data["mode"] == "norway":
+                norge(strip)
             else:
                 colorWipe(strip, Color(0, 0, 0), 3)
 

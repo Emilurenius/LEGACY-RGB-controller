@@ -2,6 +2,7 @@ const url = (new URL(document.location)).origin
 const speed = document.getElementById("speed")
 const standard = document.getElementById("standard")
 const rainbow = document.getElementById("rainbow")
+const norway = document.getElementById("norway")
 const back = document.getElementById("back")
 const theaterChase = document.getElementById("theaterChase")
 const sliderButton = document.getElementById("phonebutton-slider")
@@ -9,6 +10,7 @@ const sliderButton = document.getElementById("phonebutton-slider")
 standard.setAttribute("href", `${url}/modes?mode=standard`)
 rainbow.setAttribute("href", `${url}/modes?mode=rainbow`)
 theaterChase.setAttribute("href", `${url}/modes?mode=theaterChase`)
+norway.setAttribute("href", `${url}/modes?mode=norway`)
 back.setAttribute("href", `${url}/`)
 
 function getJSON(url) {
