@@ -157,7 +157,7 @@ def norge(strip, wait_ms=50):
     
     for i in range(strip.numPixels()):
         x = 1
-        LED = 1
+        LED = 0
         while x < numberofRED:
             strip.setPixelColor(LED, Color(255, 0, 0))
             x += 1
