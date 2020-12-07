@@ -263,7 +263,7 @@ if __name__ == '__main__':
                 time.sleep(0.05)
 
             if data["onoff"] and data["mode"] == "standard":
-                colorWipe(strip, Color(data["R"], data["G"], data["B"]), 3)
+                colorWipe(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 100), int(float(data["G"]) * float(data["brightness"]) / 100), int(float(data["B"]) * float(data["brightness"]) / 100)), 3)
             elif data["onoff"] and data["mode"] == "rainbow":
                 rainbow(strip)
             elif data["onoff"] and data["mode"] == "theaterChase":
