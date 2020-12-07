@@ -213,6 +213,8 @@ def colorDrip(strip, wait_ms=50):
             if x < steps -1:
                 strip.setPixelColor(x, Color(0, 0, 0))
             x += 1
+        
+        steps -= 1
 
 # Main program logic follows:
 if __name__ == '__main__':
