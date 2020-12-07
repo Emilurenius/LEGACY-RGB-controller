@@ -143,6 +143,15 @@ def theaterChaseRainbow(strip, wait_ms=50):
             for i in range(0, strip.numPixels(), 3):
                 strip.setPixelColor(i+q, 0)
 
+def norge(strip, wait_ms=50):
+    # Makes the color strip create the norwegian flag!
+    numberofRED = float(strip.numPixels()) * 0.3
+    numberofWHITE = float(strip.numPixels()) * 0.1
+    numberofBLUE = float(strip.numPixels()) * 0.2
+    print(numberofRED, numberofWHITE, numberofBLUE)
+    #for i in range(strip.numPixels()):
+
+
 # Main program logic follows:
 if __name__ == '__main__':
     # Process arguments
