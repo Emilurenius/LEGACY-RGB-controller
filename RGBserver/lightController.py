@@ -203,7 +203,7 @@ if __name__ == '__main__':
 
     try:
         norge(strip)
-        while True:
+        #while True:
             #norge(strip)
             # try:
             #     with open("./json/data.json") as JSON:
