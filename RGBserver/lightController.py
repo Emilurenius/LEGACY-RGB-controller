@@ -184,6 +184,34 @@ def norge(strip, wait_ms=50):
         x += 1
         LED += 1
 
+def colorDrip(strip, wait_ms=50):
+    # Colors drip in from the side, and collect in the end of the LED strip:
+    steps = strip.numkPixels()
+    for i in range(strip.numPixels()):
+        color1 = random.randint(0, 255)
+        color2 = random.randint(0, 255)
+        fullColor = random.randint(0, 2)
+
+        if fullColor == 0:
+            r = 255
+            g = color1
+            b = color2
+        elif fullColor == 1:
+            r = color1
+            g = 255
+            b = color2
+        elif fullColor == 2:
+            r = color1
+            g = color2
+            b = 255
+
+        x = 0
+        while x < steps -1:
+            strip.setPixelColor(x, Color(r, g, b))
+            strip.show()
+            time.sleep(wait_ms/1000.0)
+            strip.setPixelColor(x, Color(0, 0, 0))
+            x += 1
 
 # Main program logic follows:
 if __name__ == '__main__':
@@ -202,26 +230,25 @@ if __name__ == '__main__':
         print('Use "-c" argument to clear LEDs on exit')
 
     try:
-        #norge(strip)
-        while True:
-            #norge(strip)
-            try:
-                with open("./json/data.json") as JSON:
-                    data = json.load(JSON)
-            except:
-                print("JSON busy...")
-                time.sleep(0.05)
+        colorDrip(strip)
+        # while True:
+        #     try:
+        #         with open("./json/data.json") as JSON:
+        #             data = json.load(JSON)
+        #     except:
+        #         print("JSON busy...")
+        #         time.sleep(0.05)
 
-            if data["onoff"] and data["mode"] == "standard":
-                colorWipe(strip, Color(data["R"], data["G"], data["B"]), 3)
-            elif data["onoff"] and data["mode"] == "rainbow":
-                rainbow(strip)
-            elif data["onoff"] and data["mode"] == "theaterChase":
-                theaterChase(strip, Color(data["R"], data["G"], data["B"]))
-            elif data["onoff"] and data["mode"] == "norway":
-                norge(strip)
-            else:
-                colorWipe(strip, Color(0, 0, 0), 3)
+        #     if data["onoff"] and data["mode"] == "standard":
+        #         colorWipe(strip, Color(data["R"], data["G"], data["B"]), 3)
+        #     elif data["onoff"] and data["mode"] == "rainbow":
+        #         rainbow(strip)
+        #     elif data["onoff"] and data["mode"] == "theaterChase":
+        #         theaterChase(strip, Color(data["R"], data["G"], data["B"]))
+        #     elif data["onoff"] and data["mode"] == "norway":
+        #         norge(strip)
+        #     else:
+        #         colorWipe(strip, Color(0, 0, 0), 3)
 
         #     print ('Color wipe animations.')
         #     colorWipe(strip, Color(255, 0, 0))  # Red wipe
