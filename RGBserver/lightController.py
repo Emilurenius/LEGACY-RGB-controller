@@ -151,7 +151,7 @@ def norge(strip, wait_ms=50):
     total = numberofRED * 2 + numberofWHITE * 2 + numberofBLUE
     print(total)
     
-    for i in range(strip.numPixels()):
+    #for i in range(strip.numPixels()):
 
 
 
