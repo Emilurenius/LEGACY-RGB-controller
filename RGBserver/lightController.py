@@ -202,9 +202,9 @@ if __name__ == '__main__':
         print('Use "-c" argument to clear LEDs on exit')
 
     try:
-        norge(strip)
+        #norge(strip)
         while True:
-            norge(strip)
+            #norge(strip)
             try:
                 with open("./json/data.json") as JSON:
                     data = json.load(JSON)
@@ -212,14 +212,14 @@ if __name__ == '__main__':
                 print("JSON busy...")
                 time.sleep(0.05)
 
-            # if data["onoff"] and data["mode"] == "standard":
-            #     colorWipe(strip, Color(data["R"], data["G"], data["B"]), 3)
-            # elif data["onoff"] and data["mode"] == "rainbow":
-            #     rainbow(strip)
-            # elif data["onoff"] and data["mode"] == "theaterChase":
-            #     theaterChase(strip, Color(data["R"], data["G"], data["B"]))
-            # else:
-            #     colorWipe(strip, Color(0, 0, 0), 3)
+            if data["onoff"] and data["mode"] == "standard":
+                colorWipe(strip, Color(data["R"], data["G"], data["B"]), 3)
+            elif data["onoff"] and data["mode"] == "rainbow":
+                rainbow(strip)
+            elif data["onoff"] and data["mode"] == "theaterChase":
+                theaterChase(strip, Color(data["R"], data["G"], data["B"]))
+            else:
+                colorWipe(strip, Color(0, 0, 0), 3)
 
         #     print ('Color wipe animations.')
         #     colorWipe(strip, Color(255, 0, 0))  # Red wipe
