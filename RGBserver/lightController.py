@@ -216,6 +216,9 @@ def colorDrip(strip, wait_ms=50):
         
         steps -= 1
 
+        if steps == 0:
+            colorWipe(strip, Color(0, 0, 0))
+
 # Main program logic follows:
 if __name__ == '__main__':
     # Process arguments
@@ -233,8 +236,9 @@ if __name__ == '__main__':
         print('Use "-c" argument to clear LEDs on exit')
 
     try:
-        colorDrip(strip)
-        # while True:
+        #colorDrip(strip)
+        while True:
+            colorDrip(strip, 10)
         #     try:
         #         with open("./json/data.json") as JSON:
         #             data = json.load(JSON)
