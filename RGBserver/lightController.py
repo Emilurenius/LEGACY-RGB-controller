@@ -209,6 +209,15 @@ def colorDrip(strip, wait_ms=50):
         while x < steps:
             strip.setPixelColor(x, Color(r, g, b))
             strip.show()
+
+            try:
+                with open("./json/data.json") as JSON:
+                    data = json.load(JSON)
+            except:
+                print("JSON busy...")
+            if data["onoff"] != True or data["mode"] != "colorDrip":
+                break
+
             time.sleep(wait_ms/1000.0)
             if x < steps -1:
                 strip.setPixelColor(x, Color(0, 0, 0))
