@@ -238,7 +238,7 @@ if __name__ == '__main__':
     try:
         #colorDrip(strip)
         while True:
-            colorDrip(strip, 3)
+            colorDrip(strip, 10)
         #     try:
         #         with open("./json/data.json") as JSON:
         #             data = json.load(JSON)
