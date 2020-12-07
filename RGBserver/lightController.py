@@ -206,7 +206,7 @@ def colorDrip(strip, wait_ms=50):
             b = 255
 
         x = 0
-        while x < steps -1:
+        while x < steps:
             strip.setPixelColor(x, Color(r, g, b))
             strip.show()
             time.sleep(wait_ms/1000.0)
