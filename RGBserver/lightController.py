@@ -151,40 +151,38 @@ def norge(strip, wait_ms=50):
     total = numberofRED * 2 + numberofWHITE * 2 + numberofBLUE
     if total != strip.numPixels():
         numberofRED += (strip.numPixels() - total) / 2
-        newTotal = numberofRED * 2 + numberofWHITE * 2 + numberofBLUE
     
-    for i in range(strip.numPixels()):
-        x = 0
-        LED = 0
-        while x < numberofRED:
-            strip.setPixelColor(LED, Color(255, 0, 0))
-            strip.show()
-            x += 1
-            LED += 1
-        x = 0
-        while x < numberofWHITE:
-            strip.setPixelColor(LED, Color(255, 255, 255))
-            strip.show()
-            x += 1
-            LED += 1
-        x = 0
-        while x < numberofBLUE:
-            strip.setPixelColor(LED, Color(0, 0, 255))
-            strip.show()
-            x += 1
-            LED += 1
-        x = 0
-        while x < numberofWHITE:
-            strip.setPixelColor(LED, Color(255, 255, 255))
-            strip.show()
-            x += 1
-            LED += 1
-        x = 0
-        while x < numberofRED:
-            strip.setPixelColor(LED, Color(255, 0, 0))
-            strip.show()
-            x += 1
-            LED += 1
+    x = 0
+    LED = 0
+    while x < numberofRED:
+        strip.setPixelColor(LED, Color(255, 0, 0))
+        strip.show()
+        x += 1
+        LED += 1
+    x = 0
+    while x < numberofWHITE:
+        strip.setPixelColor(LED, Color(255, 255, 255))
+        strip.show()
+        x += 1
+        LED += 1
+    x = 0
+    while x < numberofBLUE:
+        strip.setPixelColor(LED, Color(0, 0, 255))
+        strip.show()
+        x += 1
+        LED += 1
+    x = 0
+    while x < numberofWHITE:
+        strip.setPixelColor(LED, Color(255, 255, 255))
+        strip.show()
+        x += 1
+        LED += 1
+    x = 0
+    while x < numberofRED:
+        strip.setPixelColor(LED, Color(255, 0, 0))
+        strip.show()
+        x += 1
+        LED += 1
 
 
 # Main program logic follows:
