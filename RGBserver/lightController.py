@@ -210,7 +210,8 @@ def colorDrip(strip, wait_ms=50):
             strip.setPixelColor(x, Color(r, g, b))
             strip.show()
             time.sleep(wait_ms/1000.0)
-            strip.setPixelColor(x, Color(0, 0, 0))
+            if x < steps -1:
+                strip.setPixelColor(x, Color(0, 0, 0))
             x += 1
 
 # Main program logic follows:
