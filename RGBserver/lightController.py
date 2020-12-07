@@ -186,7 +186,7 @@ def norge(strip, wait_ms=50):
 
 def colorDrip(strip, wait_ms=50):
     # Colors drip in from the side, and collect in the end of the LED strip:
-    steps = strip.numkPixels()
+    steps = strip.numPixels()
     for i in range(strip.numPixels()):
         color1 = random.randint(0, 255)
         color2 = random.randint(0, 255)
