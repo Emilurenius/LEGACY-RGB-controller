@@ -169,27 +169,28 @@ if __name__ == '__main__':
         print('Use "-c" argument to clear LEDs on exit')
 
     try:
+        norge(strip)
         #solidColor(strip, Color(255, 255, 255))
-        while True:
-            #solidColor(strip, Color(255, 255, 255))
+        # while True:
+        #     #solidColor(strip, Color(255, 255, 255))
 
-            try:
-                with open("./json/data.json") as JSON:
-                    data = json.load(JSON)
-            except:
-                print("JSON busy...")
-                time.sleep(0.05)
+        #     try:
+        #         with open("./json/data.json") as JSON:
+        #             data = json.load(JSON)
+        #     except:
+        #         print("JSON busy...")
+        #         time.sleep(0.05)
 
-            if data["onoff"] and data["mode"] == "standard":
-                # The commented out code under won't work:
-                #colorWipe(strip, Color(float(data["R"]) * float(data["brightness"] / 100), float(data["G"]) * float(data["brightness"] / 100), float(data["B"])) * float(data["brightness"] / 100), 3)
-                colorWipe(strip, Color(data["R"], data["G"], data["B"]), 3)
-            elif data["onoff"] and data["mode"] == "rainbow":
-                rainbow(strip)
-            elif data["onoff"] and data["mode"] == "theaterChase":
-                theaterChase(strip, Color(data["R"], data["G"], data["B"]))
-            else:
-                colorWipe(strip, Color(0, 0, 0), 3)
+        #     if data["onoff"] and data["mode"] == "standard":
+        #         # The commented out code under won't work:
+        #         #colorWipe(strip, Color(float(data["R"]) * float(data["brightness"] / 100), float(data["G"]) * float(data["brightness"] / 100), float(data["B"])) * float(data["brightness"] / 100), 3)
+        #         colorWipe(strip, Color(data["R"], data["G"], data["B"]), 3)
+        #     elif data["onoff"] and data["mode"] == "rainbow":
+        #         rainbow(strip)
+        #     elif data["onoff"] and data["mode"] == "theaterChase":
+        #         theaterChase(strip, Color(data["R"], data["G"], data["B"]))
+        #     else:
+        #         colorWipe(strip, Color(0, 0, 0), 3)
 
         #     print ('Color wipe animations.')
         #     colorWipe(strip, Color(255, 0, 0))  # Red wipe
