@@ -164,17 +164,17 @@ def norge(strip, wait_ms=50):
             LED += 1
         x = 0
         while x < numberofWHITE:
-            strip.setPixelcolor(LED, Color(255, 255, 255))
+            strip.setPixelColor(LED, Color(255, 255, 255))
             x += 1
             LED += 1
         x = 0
         while x < numberofBLUE:
-            strip.setPixelcolor(LED, Color(0, 0, 255))
+            strip.setPixelColor(LED, Color(0, 0, 255))
             x += 1
             LED += 1
         x = 0
         while x < numberofWHITE:
-            strip.setPixelcolor(LED, Color(255, 255, 255))
+            strip.setPixelColor(LED, Color(255, 255, 255))
             x += 1
             LED += 1
         x = 0
