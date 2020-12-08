@@ -228,7 +228,6 @@ if __name__ == '__main__':
         print('Use "-c" argument to clear LEDs on exit')
 
     try:
-        #colorDrip(strip)
         while True:
             try:
                 with open("./json/data.json") as JSON:
@@ -239,6 +238,8 @@ if __name__ == '__main__':
 
             if data["onoff"] and data["mode"] == "standard":
                 colorWipe(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 100), int(float(data["G"]) * float(data["brightness"]) / 100), int(float(data["B"]) * float(data["brightness"]) / 100)), 3)
+            elif data["onoff"] and data["mode"] == "solidColor":
+                solidColor(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 100), int(float(data["G"]) * float(data["brightness"]) / 100), int(float(data["B"]) * float(data["brightness"]) / 100)))
             elif data["onoff"] and data["mode"] == "rainbow":
                 rainbow(strip)
             elif data["onoff"] and data["mode"] == "theaterChase":
