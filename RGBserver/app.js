@@ -93,6 +93,7 @@ app.get("/b", (req, res) => {
 })
 
 app.get("/rgb", (req, res) => { // This is for API control of the lights without the server sending a webpage as a response.
+    let save = false
     if (req.query.br) {
         data.brightness = parseInt(req.query.br)
         console.log(`BR changed to: ${data.brightness}`)
