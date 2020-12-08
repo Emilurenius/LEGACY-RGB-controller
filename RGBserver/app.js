@@ -130,7 +130,7 @@ app.get("/rgb", (req, res) => { // This is for API control of the lights without
     }
 })
 
-app.get("modes/set", (req, res) => {
+app.get("/modes/set", (req, res) => {
     console.log("API loaded: Mode select")
 
     let save = false
