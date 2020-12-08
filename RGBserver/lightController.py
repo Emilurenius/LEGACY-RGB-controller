@@ -18,6 +18,17 @@ LED_INVERT     = False   # True to invert the signal (when using NPN transistor 
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 
+def checkBreak(mode):
+    try:
+        with open("./json/data.json") as JSON:
+            data = json.load(JSON)
+        if data["onoff"] != True or data["mode"] != mode:
+            return True
+        else:
+            return False
+    except:
+        print("JSON busy...")
+        return False
 
 # Define functions which animate LEDs in various ways.
 def colorWipe(strip, color, wait_ms=50):
@@ -210,12 +221,7 @@ def colorDrip(strip, wait_ms=50):
             strip.setPixelColor(x, Color(r, g, b))
             strip.show()
 
-            try:
-                with open("./json/data.json") as JSON:
-                    data = json.load(JSON)
-            except:
-                print("JSON busy...")
-            if data["onoff"] != True or data["mode"] != "colorDrip":
+            if checkBreak("colorDrip"):
                 break
 
             time.sleep(wait_ms/1000.0)
@@ -225,12 +231,7 @@ def colorDrip(strip, wait_ms=50):
         
         steps -= 1
 
-        try:
-            with open("./json/data.json") as JSON:
-                data = json.load(JSON)
-        except:
-            print("JSON busy...")
-        if data["onoff"] != True or data["mode"] != "colorDrip":
+        if checkBreak("colorDrip"):
             break
 
         if steps == 0:
