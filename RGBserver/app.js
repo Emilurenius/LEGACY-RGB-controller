@@ -137,6 +137,14 @@ app.get("/modes/set", (req, res) => {
     if (req.query.mode) {
         save = true
         data.mode = req.query.mode
+
+    if (save) {
+        let stringified = JSON.stringify(data, null, 2)
+    
+        fs.writeFile("./json/data.json", stringified, (err) => {
+            if (err) throw err
+            console.log("Data written to file")
+        })
         res.send("data recieved")
     } else {
         res.send("no data recieved")
