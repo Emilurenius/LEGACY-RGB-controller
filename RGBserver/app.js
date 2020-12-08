@@ -93,6 +93,8 @@ app.get("/b", (req, res) => {
 })
 
 app.get("/rgb", (req, res) => { // This is for API control of the lights without the server sending a webpage as a response.
+    console.log("API loaded: RGB")
+
     let save = false
     if (req.query.br) {
         data.brightness = parseInt(req.query.br)
@@ -125,6 +127,16 @@ app.get("/rgb", (req, res) => { // This is for API control of the lights without
         res.send("data sent")
     } else {
         res.send("no data recieved")
+    }
+})
+
+app.get("modes/set", (req, res) => {
+    console.log("API loaded: Mode select")
+
+    let save = false
+    if (req.query.mode) {
+        save = true
+        data.mode = req.query.mode
     }
 })
 
