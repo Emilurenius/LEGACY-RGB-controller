@@ -124,7 +124,7 @@ app.get("/rgb", (req, res) => { // This is for API control of the lights without
             if (err) throw err
             console.log("Data written to file")
         })
-        res.send("data sent")
+        res.send("data recieved")
     } else {
         res.send("no data recieved")
     }
@@ -137,6 +137,9 @@ app.get("/modes/set", (req, res) => {
     if (req.query.mode) {
         save = true
         data.mode = req.query.mode
+        res.send("data recieved")
+    } else {
+        res.send("no data recieved")
     }
 })
 
