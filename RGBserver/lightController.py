@@ -66,42 +66,21 @@ def starryNight(strip, wait_ms=50):
 def theaterChase(strip, color, wait_ms=50, iterations=1):
     """Movie theater light style chaser animation."""
     for j in range(iterations):
-        try:
-            with open("./json/data.json") as JSON:
-                data = json.load(JSON)
-        except:
-            print("JSON busy...")
-        if data["onoff"] != True or data["mode"] != "theaterChase":
+        if checkBreak("theaterChase"):
             break
-
         for q in range(3):
-            try:
-                with open("./json/data.json") as JSON:
-                    data = json.load(JSON)
-            except:
-                print("JSON busy...")
-            if data["onoff"] != True or data["mode"] != "theaterChase":
+            if checkBreak("theaterChase"):
                 break
 
             for i in range(0, strip.numPixels(), 3):
-                try:
-                    with open("./json/data.json") as JSON:
-                        data = json.load(JSON)
-                except:
-                    print("JSON busy...")
-                if data["onoff"] != True or data["mode"] != "theaterChase":
+                if checkBreak("theaterChase"):
                     break
 
                 strip.setPixelColor(i+q, color)
             strip.show()
             time.sleep(wait_ms/1000.0)
             for i in range(0, strip.numPixels(), 3):
-                try:
-                    with open("./json/data.json") as JSON:
-                        data = json.load(JSON)
-                except:
-                    print("JSON busy...")
-                if data["onoff"] != True or data["mode"] != "theaterChase":
+                if checkBreak("theaterChase"):
                     break
                 strip.setPixelColor(i+q, 0)
 
@@ -126,12 +105,7 @@ def rainbow(strip, wait_ms=20, iterations=1):
                 strip.show()
         roundOne = False
         strip.show()
-        try:
-            with open("./json/data.json") as JSON:
-                data = json.load(JSON)
-        except:
-            print("JSON busy...")
-        if data["onoff"] != True or data["mode"] != "rainbow":
+        if checkBreak("theaterChase"):
             break
         time.sleep(wait_ms/1000.0)
 
