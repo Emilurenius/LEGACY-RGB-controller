@@ -92,6 +92,41 @@ app.get("/b", (req, res) => {
     res.send(data.B.toString())
 })
 
+app.get("/rgb", (req, res) => { // This is for API control of the lights without the server sending a webpage as a response.
+    if (req.query.br) {
+        data.brightness = parseInt(req.query.br)
+        console.log(`BR changed to: ${data.brightness}`)
+        save = true
+    }
+    if (req.query.r) {
+        data.R = parseInt(req.query.r)
+        console.log(`R changed to: ${data.R}`)
+        save = true
+    }
+    if (req.query.g) {
+        data.G = parseInt(req.query.g)
+        console.log(`G changed to: ${data.G}`)
+        save = true
+    }
+    if (req.query.b) {
+        data.B = parseInt(req.query.b)
+        console.log(`B changed to: ${data.B}`)
+        save = true
+    }
+    
+    if (save) {
+        let stringified = JSON.stringify(data, null, 2)
+    
+        fs.writeFile("./json/data.json", stringified, (err) => {
+            if (err) throw err
+            console.log("Data written to file")
+        })
+        res.send("data sent")
+    } else {
+        res.send("no data recieved")
+    }
+})
+
 app.get("/modes", (req, res) => {
     console.log("\nMode select loaded")
     let save = false
