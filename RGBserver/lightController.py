@@ -105,7 +105,7 @@ def rainbow(strip, wait_ms=20, iterations=1):
                 strip.show()
         roundOne = False
         strip.show()
-        if checkBreak("theaterChase"):
+        if checkBreak("rainbow"):
             break
         time.sleep(wait_ms/1000.0)
 
