@@ -212,9 +212,6 @@ def colorDrip(strip, wait_ms=50):
             colorWipe(strip, Color(0, 0, 0))
 
 def alarmClock(strip, alarmTime):
-    if checkBreak(mode):
-        break
-
     currentTime = datetime.datetime.now()
 
     hours = currentTime.hour
