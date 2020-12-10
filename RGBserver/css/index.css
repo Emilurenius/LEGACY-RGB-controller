@@ -3,28 +3,6 @@ body {
     background: #010414;
 }
 
-a, a:hover, a:focus, a:active {
-    text-decoration: none;
-    color: white;
-    opacity: 1;
-}
-
-a {
-    background-color: #001496;
-    color: white;
-    padding: 20px;
-    outline: none;
-    font-size: 50px;
-    border-radius: 20px;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-}
-
-.button {
-    margin: 50px;
-}
-
 .slidecontainer {
     color: white;
     font-size: 25px;

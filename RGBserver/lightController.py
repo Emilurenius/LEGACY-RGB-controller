@@ -272,7 +272,7 @@ if __name__ == '__main__':
             elif data["onoff"] and data["mode"] == "colorDrip":
                 colorDrip(strip, 10)
             elif data["onoff"] and data["mode"] == "alarmClock":
-                alarmClock(strip, "17:45")
+                alarmClock(strip, data["alarmClockData"]["alarmTime"])
             else:
                 colorWipe(strip, Color(0, 0, 0), 3)
 
