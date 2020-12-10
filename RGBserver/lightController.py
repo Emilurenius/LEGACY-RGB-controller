@@ -197,13 +197,14 @@ def colorDrip(strip, wait_ms=50):
         while x < steps:
             strip.setPixelColor(x, Color(r, g, b))
             strip.show()
+            time.sleep(wait_ms/1000.0)
 
             if checkBreak("colorDrip"):
                 break
 
-            time.sleep(wait_ms/1000.0)
             if x < steps -1:
                 strip.setPixelColor(x, Color(0, 0, 0))
+                time.sleep(wait_ms/1000.0)
             x += 1
         
         steps -= 1
