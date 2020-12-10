@@ -98,7 +98,7 @@ def wheel(pos):
         pos -= 170
         return Color(0, pos * 3, 255 - pos * 3)
 
-def rainbow(strip, wait_ms=20, iterations=1):
+def rainbow(strip, wait_ms=20, iterations=10):
     """Draw rainbow that fades across all pixels at once."""
     roundOne = True
     for j in range(256*iterations):
