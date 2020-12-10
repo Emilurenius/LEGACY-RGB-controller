@@ -18,15 +18,18 @@ LED_INVERT     = False   # True to invert the signal (when using NPN transistor 
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 
+# A check to see if a mode is still chosen. 
+# will return False if the mode given to the function is the same as the one currently chosen on the web interface, or if there is an error loading the JSON file.
+# Will return True if the mode given to the function is not the same as the one currently chosen on the web interface.
 def checkBreak(mode):
-    try:
+    try: # Try opening the json file, and check it
         with open("./json/data.json") as JSON:
             data = json.load(JSON)
         if data["onoff"] != True or data["mode"] != mode:
             return True
         else:
             return False
-    except:
+    except: # If you can't open the json file, just return False
         print("JSON busy...")
         return False
 
@@ -215,11 +218,11 @@ def alarmClock(strip, alarmTime, wait_ms=50):
     colorWipe(strip, Color(0, 0, 0), 3)
     currentTime = datetime.datetime.now()
 
-    hour = currentTime.hour
-    minute = currentTime.minute
-    currentTime_Formatted = str(hour) + ":" + str(minute)
+    hour = currentTime.hour # Extract current hour from datetime
+    minute = currentTime.minute # Extract current minute from datetime
+    currentTime_Formatted = str(hour) + ":" + str(minute) # Combine hour and minute into format
 
-    if currentTime_Formatted == alarmTime:
+    if currentTime_Formatted == alarmTime: # Check if current time is the same as inputted alarm activation time.
         lightState = False
         while True:
             if checkBreak("alarmClock"):
@@ -252,6 +255,7 @@ if __name__ == '__main__':
 
     try:
         while True:
+            # Import data file:
             try:
                 with open("./json/data.json") as JSON:
                     data = json.load(JSON)
@@ -259,6 +263,7 @@ if __name__ == '__main__':
                 print("JSON busy...")
                 time.sleep(0.05)
 
+            # Checking what mode to run:
             if data["onoff"] and data["mode"] == "standard":
                 colorWipe(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 100), int(float(data["G"]) * float(data["brightness"]) / 100), int(float(data["B"]) * float(data["brightness"]) / 100)), 3)
             elif data["onoff"] and data["mode"] == "solidColor":
@@ -276,5 +281,5 @@ if __name__ == '__main__':
             else:
                 colorWipe(strip, Color(0, 0, 0), 3)
 
-    except KeyboardInterrupt:
+    except KeyboardInterrupt: # This makes sure the RGB strip turns off when you close the script
         colorWipe(strip, Color(0,0,0), 10)

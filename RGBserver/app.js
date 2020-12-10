@@ -81,7 +81,7 @@ app.get("/modes", (req, res) => {
     
     if (req.query.speed) {
         save = true
-        data.breatheSpeed = parseInt(req.query.bSpeed)
+        data.speed = parseInt(req.query.speed)
         console.log(`Speed channged to: ${data.speed}`)
     }
 
