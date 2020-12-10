@@ -68,6 +68,40 @@ app.get("/", (req, res) => {
     
 })
 
+app.get("/modes", (req, res) => {
+    console.log("\nMode select loaded")
+    let save = false
+    res.sendFile(path.join(__dirname, "/html/modes.html"))
+    
+    if (req.query.mode != undefined) {
+        save = true
+        data.mode = req.query.mode
+        console.log(`Mode changed to: ${data.mode}`)
+    }
+    
+    if (req.query.speed) {
+        save = true
+        data.breatheSpeed = parseInt(req.query.bSpeed)
+        console.log(`Speed channged to: ${data.speed}`)
+    }
+
+    if (req.query.alarmTime) {
+        save = true
+        data.alarmClockData.alarmTime = req.query.alarmTime
+        console.log(`Alarm set to activate at: ${data.alarmClockData.alarmTime}`)
+    }
+    
+    if (save) {
+        let stringified = JSON.stringify(data, null, 2)
+    
+        fs.writeFile("./json/data.json", stringified, (err) => {
+            if (err) throw err
+            console.log("Data written to file")
+        })
+    }
+})
+
+// API control:
 app.get("/lightstate", (req, res) => {
     if (data.onoff) {
         res.send("true")
@@ -92,7 +126,7 @@ app.get("/b", (req, res) => {
     res.send(data.B.toString())
 })
 
-app.get("/rgb", (req, res) => { // This is for API control of the lights without the server sending a webpage as a response.
+app.get("/rgb", (req, res) => {
     console.log("API loaded: RGB")
 
     let save = false
@@ -149,33 +183,6 @@ app.get("/modes/set", (req, res) => {
         res.send(`Data recieved: mode changed to ${data.mode}`)
     } else {
         res.send("no data recieved")
-    }
-})
-
-app.get("/modes", (req, res) => {
-    console.log("\nMode select loaded")
-    let save = false
-    res.sendFile(path.join(__dirname, "/html/modes.html"))
-    
-    if (req.query.mode != undefined) {
-        save = true
-        data.mode = req.query.mode
-        console.log(`Mode changed to: ${data.mode}`)
-    }
-    
-    if (req.query.speed) {
-        save = true
-        data.breatheSpeed = parseInt(req.query.bSpeed)
-        console.log(`Speed channged to: ${data.speed}`)
-    }
-    
-    if (save) {
-        let stringified = JSON.stringify(data, null, 2)
-    
-        fs.writeFile("./json/data.json", stringified, (err) => {
-            if (err) throw err
-            console.log("Data written to file")
-        })
     }
 })
 

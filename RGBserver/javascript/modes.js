@@ -4,6 +4,7 @@ const standard = document.getElementById("standard")
 const rainbow = document.getElementById("rainbow")
 const norway = document.getElementById("norway")
 const colorDrip = document.getElementById("colorDrip")
+const alarmClock = document.getElementById("alarmClock")
 const back = document.getElementById("back")
 const theaterChase = document.getElementById("theaterChase")
 const sliderButton = document.getElementById("phonebutton-slider")
@@ -33,6 +34,10 @@ sliderButton.addEventListener("click", (event) => {
     window.location.replace(`${url}/modes?speed=${speed.value}`)
 })
 
+alarmClock.addEventListener("click", (event) => {
+    const alarmTime = prompt("What time do you want to wake up?", "Insert value")
+    window.location.replace(`${url}/modes?mode=alarmClock&alarmTime=${alarmTime}`)
+})
 
 speed.onmouseup = () => {
     window.location.replace(`${url}/modes?speed=${speed.value}`)
