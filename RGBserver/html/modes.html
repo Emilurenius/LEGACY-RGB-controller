@@ -2,38 +2,41 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/main.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RGB mode select</title>
 </head>
 <body>
-    <div class="header">
-        <h1>RGB LED strip Mode select</h1>
-    </div>
-    <div class="button">
-        <a href="" id="standard">Standard</a>
-    </div>
-    <div class="button">
-        <a href="" id="rainbow">Rainbow</a>
-    </div>
-    <div class="button">
-        <a href="" id="theaterChase">Theater Chase</a>
-    </div>
-    <div class="button">
-        <a href="" id="norway">Norwegian flag</a>
-    </div>
-    <div class="button">
-        <a href="" id="colorDrip">Color Drip</a>
-    </div>
-    <div class="slidecontainer">
-        <label for ="speed">Speed:</label>
-        <input type="range" min="1" max="100" class="slider-br" id="speed">
-    </div>
-    <div class="phonebutton-slider">
-        <input type="button" id="phonebutton-slider" value="Send slider info">
-    </div>
-    <div class="button">
-        <a href="" id="back">Back</a>
+    <div class="Container">
+        <div class="Content-box">
+            <p class="Main-Text">RGB LED strip Mode select</p>
+        </div>
+        <div class="button">
+            <a href="" id="standard">Standard</a>
+        </div>
+        <div class="button">
+            <a href="" id="rainbow">Rainbow</a>
+        </div>
+        <div class="button">
+            <a href="" id="theaterChase">Theater Chase</a>
+        </div>
+        <div class="button">
+            <a href="" id="norway">Norwegian flag</a>
+        </div>
+        <div class="button">
+            <a href="" id="colorDrip">Color Drip</a>
+        </div>
+        <div class="slidecontainer">
+            <label for ="speed">Speed:</label>
+            <input type="range" min="1" max="100" class="slider-br" id="speed">
+        </div>
+        <div class="phonebutton-slider">
+            <input type="button" id="phonebutton-slider" value="Send slider info">
+        </div>
+        <div class="button">
+            <a href="" id="back">Back</a>
+        </div>
     </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="/javascript/modes.js"></script>
