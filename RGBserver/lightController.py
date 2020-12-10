@@ -211,14 +211,25 @@ def colorDrip(strip, wait_ms=50):
         if steps == 0:
             colorWipe(strip, Color(0, 0, 0))
 
-def alarmClock(strip, alarmTime):
+def alarmClock(strip, alarmTime, wait_ms=50):
+    colorWipe(strip, Color(0, 0, 0), 3)
     currentTime = datetime.datetime.now()
 
     hour = currentTime.hour
     minute = currentTime.minute
     currentTime_Formatted = str(hour) + ":" + str(minute)
-    print(currentTime_Formatted)
-    print(alarmTime)
+
+    if currentTime_Formatted == alarmTime:
+        lightState = False
+        while True:
+            if checkBreak("alarmClock"):
+                break
+            
+            if lightState == False:
+                colorWipe(strip, Color(255, 255, 255), 3)
+                lightState = True
+            else:
+                colorWipe(strip, Color(0, 0, 0), 3)
 
 
 
@@ -239,42 +250,30 @@ if __name__ == '__main__':
         print('Use "-c" argument to clear LEDs on exit')
 
     try:
-        alarmClock(strip, "06:00")
-        # while True:
-        #     try:
-        #         with open("./json/data.json") as JSON:
-        #             data = json.load(JSON)
-        #     except:
-        #         print("JSON busy...")
-        #         time.sleep(0.05)
+        while True:
+            try:
+                with open("./json/data.json") as JSON:
+                    data = json.load(JSON)
+            except:
+                print("JSON busy...")
+                time.sleep(0.05)
 
-        #     if data["onoff"] and data["mode"] == "standard":
-        #         colorWipe(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 100), int(float(data["G"]) * float(data["brightness"]) / 100), int(float(data["B"]) * float(data["brightness"]) / 100)), 3)
-        #     elif data["onoff"] and data["mode"] == "solidColor":
-        #         solidColor(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 100), int(float(data["G"]) * float(data["brightness"]) / 100), int(float(data["B"]) * float(data["brightness"]) / 100)))
-        #     elif data["onoff"] and data["mode"] == "rainbow":
-        #         rainbow(strip)
-        #     elif data["onoff"] and data["mode"] == "theaterChase":
-        #         theaterChase(strip, Color(data["R"], data["G"], data["B"]))
-        #     elif data["onoff"] and data["mode"] == "norway":
-        #         norge(strip)
-        #     elif data["onoff"] and data["mode"] == "colorDrip":
-        #         colorDrip(strip, 10)
-        #     else:
-        #         colorWipe(strip, Color(0, 0, 0), 3)
-
-        #     print ('Color wipe animations.')
-        #     colorWipe(strip, Color(255, 0, 0))  # Red wipe
-        #     colorWipe(strip, Color(0, 255, 0))  # Blue wipe
-        #     colorWipe(strip, Color(0, 0, 255))  # Green wipe
-        #     print ('Theater chase animations.')
-        #     theaterChase(strip, Color(127, 127, 127))  # White theater chase
-        #     theaterChase(strip, Color(127,   0,   0))  # Red theater chase
-        #     theaterChase(strip, Color(  0,   0, 127))  # Blue theater chase
-        #     print ('Rainbow animations.')
-        #     rainbow(strip)
-        #     rainbowCycle(strip)
-        #     theaterChaseRainbow(strip)
+            if data["onoff"] and data["mode"] == "standard":
+                colorWipe(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 100), int(float(data["G"]) * float(data["brightness"]) / 100), int(float(data["B"]) * float(data["brightness"]) / 100)), 3)
+            elif data["onoff"] and data["mode"] == "solidColor":
+                solidColor(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 100), int(float(data["G"]) * float(data["brightness"]) / 100), int(float(data["B"]) * float(data["brightness"]) / 100)))
+            elif data["onoff"] and data["mode"] == "rainbow":
+                rainbow(strip)
+            elif data["onoff"] and data["mode"] == "theaterChase":
+                theaterChase(strip, Color(data["R"], data["G"], data["B"]))
+            elif data["onoff"] and data["mode"] == "norway":
+                norge(strip)
+            elif data["onoff"] and data["mode"] == "colorDrip":
+                colorDrip(strip, 10)
+            elif data["onoff"] and data["mode"] == "alarmClock":
+                alarmClock(strip, "06:00")
+            else:
+                colorWipe(strip, Color(0, 0, 0), 3)
 
     except KeyboardInterrupt:
         colorWipe(strip, Color(0,0,0), 10)

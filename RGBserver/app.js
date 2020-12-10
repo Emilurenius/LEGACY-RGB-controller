@@ -131,7 +131,7 @@ app.get("/rgb", (req, res) => { // This is for API control of the lights without
 })
 
 app.get("/modes/set", (req, res) => {
-    console.log("API loaded: Mode select")
+    console.log("\nAPI loaded: Mode select")
 
     let save = false
     if (req.query.mode) {
@@ -146,7 +146,7 @@ app.get("/modes/set", (req, res) => {
             if (err) throw err
             console.log("Data written to file")
         })
-        res.send("data recieved")
+        res.send(`Data recieved: mode changed to ${data.mode}`)
     } else {
         res.send("no data recieved")
     }
