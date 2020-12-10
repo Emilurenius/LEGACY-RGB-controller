@@ -218,6 +218,7 @@ def alarmClock(strip, alarmTime):
     minute = currentTime.minute
     currentTime_Formatted = str(hour) + ":" + str(minute)
     print(currentTime_Formatted)
+    print(alarmTime)
 
 
 
