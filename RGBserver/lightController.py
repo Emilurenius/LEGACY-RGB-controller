@@ -230,7 +230,7 @@ def alarmClock(strip, alarmTime, wait_ms=50):
                 lightState = True
             else:
                 colorWipe(strip, Color(0, 0, 0), 3)
-                lightState = false
+                lightState = False
 
 
 
@@ -272,7 +272,7 @@ if __name__ == '__main__':
             elif data["onoff"] and data["mode"] == "colorDrip":
                 colorDrip(strip, 10)
             elif data["onoff"] and data["mode"] == "alarmClock":
-                alarmClock(strip, "06:00")
+                alarmClock(strip, "17:45")
             else:
                 colorWipe(strip, Color(0, 0, 0), 3)
 
