@@ -214,9 +214,9 @@ def colorDrip(strip, wait_ms=50):
 def alarmClock(strip, alarmTime):
     currentTime = datetime.datetime.now()
 
-    hours = currentTime.hour
-    minutes = currentTime.minutes
-    print(hours, minutes)
+    hour = currentTime.hour
+    minute = currentTime.minute
+    print(hour, minute)
 
 
 
