@@ -230,6 +230,7 @@ def alarmClock(strip, alarmTime, wait_ms=50):
                 lightState = True
             else:
                 colorWipe(strip, Color(0, 0, 0), 3)
+                lightState = false
 
 
 
