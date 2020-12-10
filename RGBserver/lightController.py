@@ -3,7 +3,7 @@
 # Direct port of the Arduino NeoPixel library strandtest example.  Showcases
 # various animations on a strip of NeoPixels.
 
-import time, json, os, random
+import time, json, os, random, datetime
 from rpi_ws281x import *
 import argparse
 
@@ -211,6 +211,18 @@ def colorDrip(strip, wait_ms=50):
         if steps == 0:
             colorWipe(strip, Color(0, 0, 0))
 
+def alarmClock(strip, alarmTime):
+    if checkBreak(mode):
+        break
+
+    currentTime = datetime.datetime.now()
+
+    hours = currentTime.hour
+    minutes = currnetTime.minutes
+    print(hours, minutes)
+
+
+
 # Main program logic follows:
 if __name__ == '__main__':
     # Process arguments
@@ -228,28 +240,29 @@ if __name__ == '__main__':
         print('Use "-c" argument to clear LEDs on exit')
 
     try:
-        while True:
-            try:
-                with open("./json/data.json") as JSON:
-                    data = json.load(JSON)
-            except:
-                print("JSON busy...")
-                time.sleep(0.05)
+        alarmClock(strip, "06:00")
+        # while True:
+        #     try:
+        #         with open("./json/data.json") as JSON:
+        #             data = json.load(JSON)
+        #     except:
+        #         print("JSON busy...")
+        #         time.sleep(0.05)
 
-            if data["onoff"] and data["mode"] == "standard":
-                colorWipe(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 100), int(float(data["G"]) * float(data["brightness"]) / 100), int(float(data["B"]) * float(data["brightness"]) / 100)), 3)
-            elif data["onoff"] and data["mode"] == "solidColor":
-                solidColor(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 100), int(float(data["G"]) * float(data["brightness"]) / 100), int(float(data["B"]) * float(data["brightness"]) / 100)))
-            elif data["onoff"] and data["mode"] == "rainbow":
-                rainbow(strip)
-            elif data["onoff"] and data["mode"] == "theaterChase":
-                theaterChase(strip, Color(data["R"], data["G"], data["B"]))
-            elif data["onoff"] and data["mode"] == "norway":
-                norge(strip)
-            elif data["onoff"] and data["mode"] == "colorDrip":
-                colorDrip(strip, 10)
-            else:
-                colorWipe(strip, Color(0, 0, 0), 3)
+        #     if data["onoff"] and data["mode"] == "standard":
+        #         colorWipe(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 100), int(float(data["G"]) * float(data["brightness"]) / 100), int(float(data["B"]) * float(data["brightness"]) / 100)), 3)
+        #     elif data["onoff"] and data["mode"] == "solidColor":
+        #         solidColor(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 100), int(float(data["G"]) * float(data["brightness"]) / 100), int(float(data["B"]) * float(data["brightness"]) / 100)))
+        #     elif data["onoff"] and data["mode"] == "rainbow":
+        #         rainbow(strip)
+        #     elif data["onoff"] and data["mode"] == "theaterChase":
+        #         theaterChase(strip, Color(data["R"], data["G"], data["B"]))
+        #     elif data["onoff"] and data["mode"] == "norway":
+        #         norge(strip)
+        #     elif data["onoff"] and data["mode"] == "colorDrip":
+        #         colorDrip(strip, 10)
+        #     else:
+        #         colorWipe(strip, Color(0, 0, 0), 3)
 
         #     print ('Color wipe animations.')
         #     colorWipe(strip, Color(255, 0, 0))  # Red wipe
