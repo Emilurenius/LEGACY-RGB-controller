@@ -178,7 +178,7 @@ nav {
 }
 
 .Content .button {
-    background-color: #4f3d48;
+    background-color: var(--main-background-color);
   	border: none;
  	color: white;
   	text-align: center;
