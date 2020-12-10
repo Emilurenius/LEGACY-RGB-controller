@@ -215,7 +215,7 @@ def alarmClock(strip, alarmTime):
     currentTime = datetime.datetime.now()
 
     hours = currentTime.hour
-    minutes = currnetTime.minutes
+    minutes = currentTime.minutes
     print(hours, minutes)
 
 
