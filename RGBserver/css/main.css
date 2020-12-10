@@ -178,7 +178,7 @@ nav {
 }
 
 .Content .button {
-    background-color: var(--main-background-color);
+    background-color: var(--secondary-background-color);
   	border: none;
  	color: white;
   	text-align: center;
@@ -190,6 +190,11 @@ nav {
     padding: 10px;
     font-family: 'Poppins', sans-serif;
     margin: 15px;
+}
+
+.Content .button a {
+    text-decoration: none;
+    color: #ffffff;
 }
 
 .Content .Box {
