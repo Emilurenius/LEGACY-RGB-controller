@@ -104,7 +104,7 @@ def rainbow(strip, wait_ms=20):
     while True:
         if checkBreak("rainbow"):
             break
-        
+
         for j in range(256):
             for i in range(strip.numPixels()):
                 strip.setPixelColor(i, wheel((i+j) & 255))
@@ -283,7 +283,7 @@ if __name__ == '__main__':
             elif data["onoff"] and data["mode"] == "colorDrip":
                 colorDrip(strip, data["speed"])
             elif data["onoff"] and data["mode"] == "alarmClock":
-                alarmClock(strip, data["alarmClockData"]["alarmTime"])
+                alarmClock(strip, data["alarmClockData"]["alarmTime"], data["speed"])
             else:
                 colorWipe(strip, Color(0, 0, 0), 3)
 
