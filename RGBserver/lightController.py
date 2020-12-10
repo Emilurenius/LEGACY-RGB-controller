@@ -33,7 +33,7 @@ def checkBreak(mode):
         print("JSON busy...")
         return False
 
-# Define functions which animate LEDs in various ways.
+# Define functions which animate LEDs in various ways:
 def colorWipe(strip, color, wait_ms=50):
     """Wipe color across display a pixel at a time."""
     for i in range(strip.numPixels()):
@@ -229,11 +229,12 @@ def alarmClock(strip, alarmTime, wait_ms=50):
                 break
             
             if lightState == False:
-                colorWipe(strip, Color(255, 255, 255), 3)
+                colorWipe(strip, Color(255, 255, 255), wait_ms)
                 lightState = True
             else:
-                colorWipe(strip, Color(0, 0, 0), 3)
+                colorWipe(strip, Color(0, 0, 0), wait_ms)
                 lightState = False
+            strip.show()
 
 
 
@@ -269,13 +270,13 @@ if __name__ == '__main__':
             elif data["onoff"] and data["mode"] == "solidColor":
                 solidColor(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 100), int(float(data["G"]) * float(data["brightness"]) / 100), int(float(data["B"]) * float(data["brightness"]) / 100)))
             elif data["onoff"] and data["mode"] == "rainbow":
-                rainbow(strip)
+                rainbow(strip, data["speed"])
             elif data["onoff"] and data["mode"] == "theaterChase":
-                theaterChase(strip, Color(data["R"], data["G"], data["B"]))
+                theaterChase(strip, Color(data["R"], data["G"], data["B"]), data["speed"])
             elif data["onoff"] and data["mode"] == "norway":
                 norge(strip)
             elif data["onoff"] and data["mode"] == "colorDrip":
-                colorDrip(strip, 10)
+                colorDrip(strip, data["speed"])
             elif data["onoff"] and data["mode"] == "alarmClock":
                 alarmClock(strip, data["alarmClockData"]["alarmTime"])
             else:
