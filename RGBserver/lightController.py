@@ -98,19 +98,23 @@ def wheel(pos):
         pos -= 170
         return Color(0, pos * 3, 255 - pos * 3)
 
-def rainbow(strip, wait_ms=20, iterations=10):
+def rainbow(strip, wait_ms=20):
     """Draw rainbow that fades across all pixels at once."""
     roundOne = True
-    for j in range(256*iterations):
-        for i in range(strip.numPixels()):
-            strip.setPixelColor(i, wheel((i+j) & 255))
-            if roundOne == True:
-                strip.show()
-        roundOne = False
-        strip.show()
+    while True:
         if checkBreak("rainbow"):
             break
-        time.sleep(wait_ms/1000.0)
+        
+        for j in range(256):
+            for i in range(strip.numPixels()):
+                strip.setPixelColor(i, wheel((i+j) & 255))
+                if roundOne == True:
+                    strip.show()
+            roundOne = False
+            strip.show()
+            if checkBreak("rainbow"):
+                break
+            time.sleep(wait_ms/1000.0)
 
 def rainbowCycle(strip, wait_ms=20, iterations=5):
     """Draw rainbow that uniformly distributes itself across all pixels."""
