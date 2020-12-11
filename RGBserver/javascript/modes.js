@@ -9,11 +9,11 @@ const back = document.getElementById("back")
 const theaterChase = document.getElementById("theaterChase")
 const sliderButton = document.getElementById("phonebutton-slider")
 
-standard.setAttribute("href", `${url}/modes?mode=standard`)
-rainbow.setAttribute("href", `${url}/modes?mode=rainbow`)
-theaterChase.setAttribute("href", `${url}/modes?mode=theaterChase`)
-norway.setAttribute("href", `${url}/modes?mode=norway`)
-colorDrip.setAttribute("href", `${url}/modes?mode=colorDrip`)
+standard.setAttribute("href", `${url}/modes?panel=modes&mode=standard`)
+rainbow.setAttribute("href", `${url}/modes?panel=modes&mode=rainbow`)
+theaterChase.setAttribute("href", `${url}/modes?panel=modes&mode=theaterChase`)
+norway.setAttribute("href", `${url}/modes?panel=modes&mode=norway`)
+colorDrip.setAttribute("href", `${url}/modes?panel=modes&mode=colorDrip`)
 back.setAttribute("href", `${url}/`)
 
 function getJSON(url) {
@@ -31,14 +31,14 @@ function getJSON(url) {
 speed.value = getJSON(`${url}/json/data.json`).speed
 
 sliderButton.addEventListener("click", (event) => {
-    window.location.replace(`${url}/modes?speed=${speed.value}`)
+    window.location.replace(`${url}/modes?panel=modes&speed=${speed.value}`)
 })
 
 alarmClock.addEventListener("click", (event) => {
     const alarmTime = prompt("What time do you want to wake up?", "Insert value")
-    window.location.replace(`${url}/modes?mode=alarmClock&alarmTime=${alarmTime}`)
+    window.location.replace(`${url}/modes?panel=modes&mode=alarmClock&alarmTime=${alarmTime}`)
 })
 
 speed.onmouseup = () => {
-    window.location.replace(`${url}/modes?speed=${speed.value}`)
+    window.location.replace(`${url}/modes?panel=modes&speed=${speed.value}`)
 }

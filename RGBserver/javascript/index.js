@@ -31,23 +31,23 @@ B.value = getJSON(`${url}/json/data.json`).B
 
 
 sliderButton.addEventListener("click", (event) => {
-    window.location.replace(`${url}/?br=${brightness.value}&r=${R.value}&g=${G.value}&b=${B.value}`)
+    window.location.replace(`${url}/?panel=main&br=${brightness.value}&r=${R.value}&g=${G.value}&b=${B.value}`)
 })
 
 brightness.onmouseup = () => {
-    window.location.replace(`${url}/?br=${brightness.value}`)
+    window.location.replace(`${url}/?panel=main&br=${brightness.value}`)
 }
 
 R.onmouseup = () => {
-    window.location.replace(`${url}/?r=${R.value}`)
+    window.location.replace(`${url}/?panel=main&r=${R.value}`)
 }
 
 G.onmouseup = () => {
-    window.location.replace(`${url}/?g=${G.value}`)
+    window.location.replace(`${url}/?panel=main&g=${G.value}`)
 }
 
 B.onmouseup = () => {
-    window.location.replace(`${url}/?b=${B.value}`)
+    window.location.replace(`${url}/?panel=main&b=${B.value}`)
 }
 
 

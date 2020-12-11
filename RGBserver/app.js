@@ -19,86 +19,88 @@ app.use("/css", express.static("css"))
 app.use("/javascript", express.static("javascript"))
 app.use("/json", express.static("json"))
 
-// All adresses are defined:
+// Graphical control interface:
 app.get("/", (req, res) => {
-    console.log("\nControl panel loaded")
-    let save = false
+    
     res.sendFile(path.join(__dirname, "/html/index.html"))
     
-    if (req.query.toggle == "change") {
-        if (data.onoff == true) {
-            data.onoff = false
-            save = true
-        }else {
-            data.onoff = true
+    if (req.query.panel == "main") {
+        console.log("\nControl panel loaded")
+        let save = false
+
+        if (req.query.toggle == "change") {
+            if (data.onoff == true) {
+                data.onoff = false
+                save = true
+            }else {
+                data.onoff = true
+                save = true
+            }
+            console.log(`Light state changed to: ${data.onoff}`)
+        }
+        
+        if (req.query.br) {
+            data.brightness = parseInt(req.query.br)
+            console.log(`BR changed to: ${data.brightness}`)
             save = true
         }
-        console.log(`Light state changed to: ${data.onoff}`)
+        if (req.query.r) {
+            data.R = parseInt(req.query.r)
+            console.log(`R changed to: ${data.R}`)
+            save = true
+        }
+        if (req.query.g) {
+            data.G = parseInt(req.query.g)
+            console.log(`G changed to: ${data.G}`)
+            save = true
+        }
+        if (req.query.b) {
+            data.B = parseInt(req.query.b)
+            console.log(`B changed to: ${data.B}`)
+            save = true
+        }
+        
+        if (save) {
+            let stringified = JSON.stringify(data, null, 2)
+        
+            fs.writeFile("./json/data.json", stringified, (err) => {
+                if (err) throw err
+                console.log("Data written to file")
+            })
+        }
     }
-    
-    if (req.query.br) {
-        data.brightness = parseInt(req.query.br)
-        console.log(`BR changed to: ${data.brightness}`)
-        save = true
-    }
-    if (req.query.r) {
-        data.R = parseInt(req.query.r)
-        console.log(`R changed to: ${data.R}`)
-        save = true
-    }
-    if (req.query.g) {
-        data.G = parseInt(req.query.g)
-        console.log(`G changed to: ${data.G}`)
-        save = true
-    }
-    if (req.query.b) {
-        data.B = parseInt(req.query.b)
-        console.log(`B changed to: ${data.B}`)
-        save = true
-    }
-    
-    if (save) {
-        let stringified = JSON.stringify(data, null, 2)
-    
-        fs.writeFile("./json/data.json", stringified, (err) => {
-            if (err) throw err
-            console.log("Data written to file")
-        })
-    }
-    
-})
+    else if (req.query.panel == "modes") {
+        console.log("\nMode select loaded")
+        let save = false
 
-app.get("/modes", (req, res) => {
-    console.log("\nMode select loaded")
-    let save = false
-    res.sendFile(path.join(__dirname, "/html/modes.html"))
+        if (req.query.mode != undefined) {
+            save = true
+            data.mode = req.query.mode
+            console.log(`Mode changed to: ${data.mode}`)
+        }
+        
+        if (req.query.speed) {
+            save = true
+            data.speed = parseInt(req.query.speed)
+            console.log(`Speed channged to: ${data.speed}`)
+        }
     
-    if (req.query.mode != undefined) {
-        save = true
-        data.mode = req.query.mode
-        console.log(`Mode changed to: ${data.mode}`)
+        if (req.query.alarmTime) {
+            save = true
+            data.alarmClockData.alarmTime = req.query.alarmTime
+            console.log(`Alarm set to activate at: ${data.alarmClockData.alarmTime}`)
+        }
+        
+        if (save) {
+            let stringified = JSON.stringify(data, null, 2)
+        
+            fs.writeFile("./json/data.json", stringified, (err) => {
+                if (err) throw err
+                console.log("Data written to file")
+            })
+        }
     }
     
-    if (req.query.speed) {
-        save = true
-        data.speed = parseInt(req.query.speed)
-        console.log(`Speed channged to: ${data.speed}`)
-    }
-
-    if (req.query.alarmTime) {
-        save = true
-        data.alarmClockData.alarmTime = req.query.alarmTime
-        console.log(`Alarm set to activate at: ${data.alarmClockData.alarmTime}`)
-    }
-    
-    if (save) {
-        let stringified = JSON.stringify(data, null, 2)
-    
-        fs.writeFile("./json/data.json", stringified, (err) => {
-            if (err) throw err
-            console.log("Data written to file")
-        })
-    }
 })
 
 // API control:
