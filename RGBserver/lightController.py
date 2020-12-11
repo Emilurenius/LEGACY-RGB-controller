@@ -284,7 +284,7 @@ if __name__ == '__main__':
             elif data["onoff"] and data["mode"] == "solidColor":
                 solidColor(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 100), int(float(data["G"]) * float(data["brightness"]) / 100), int(float(data["B"]) * float(data["brightness"]) / 100)))
             elif data["onoff"] and data["mode"] == "rainbow":
-                rainbow(strip, data["speed"])
+                rainbow(strip, 100 - data["speed"])
             elif data["onoff"] and data["mode"] == "theaterChase":
                 theaterChase(strip, Color(data["R"], data["G"], data["B"]), 100 - data["speed"])
             elif data["onoff"] and data["mode"] == "norway":
