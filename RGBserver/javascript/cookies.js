@@ -28,7 +28,7 @@ if (getCookie("scrollPos") != "") {
 }
 
 function scroll() {
-    const top = window.pageYOffset || document.documentElement.scrollTop
+    const top = document.documentElement.scrollTop || window.pageYOffset
     console.log(top)
     setCookie("scrollPos", top, 1)
 }
