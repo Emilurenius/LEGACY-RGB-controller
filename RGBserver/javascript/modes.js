@@ -1,4 +1,3 @@
-const url = (new URL(document.location)).origin
 const speed = document.getElementById("speed")
 const standard = document.getElementById("standard")
 const rainbow = document.getElementById("rainbow")
