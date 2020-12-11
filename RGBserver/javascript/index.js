@@ -3,11 +3,11 @@ const brightness = document.getElementById("brightness")
 const R = document.getElementById("R")
 const G = document.getElementById("G")
 const B = document.getElementById("B")
-const sliderButton = document.getElementById("phonebutton-slider")
+const sliderButtonMain = document.getElementById("phonebutton-slider-main")
 const toggle = document.getElementById("toggle")
 const modes = document.getElementById("modes")
 
-toggle.setAttribute("href", `${url}/?toggle=change`)
+toggle.setAttribute("href", `${url}/?panel=main&toggle=change`)
 modes.setAttribute("href", `${url}/modes`)
 
 
@@ -30,7 +30,7 @@ B.value = getJSON(`${url}/json/data.json`).B
     
 
 
-sliderButton.addEventListener("click", (event) => {
+sliderButtonMain.addEventListener("click", (event) => {
     window.location.replace(`${url}/?panel=main&br=${brightness.value}&r=${R.value}&g=${G.value}&b=${B.value}`)
 })
 

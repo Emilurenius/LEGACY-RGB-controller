@@ -6,7 +6,7 @@ const colorDrip = document.getElementById("colorDrip")
 const alarmClock = document.getElementById("alarmClock")
 const back = document.getElementById("back")
 const theaterChase = document.getElementById("theaterChase")
-const sliderButton = document.getElementById("phonebutton-slider")
+const sliderButtonModes = document.getElementById("phonebutton-slider-modes")
 
 standard.setAttribute("href", `${url}/modes?panel=modes&mode=standard`)
 rainbow.setAttribute("href", `${url}/modes?panel=modes&mode=rainbow`)
