@@ -115,7 +115,8 @@ def rainbow(strip, wait_ms=20):
             break
 
         if getDataval("speed"):
-            wait_ms = getDataval("speed")
+            print("Updated rainbow speed")
+            wait_ms = 100 - getDataval("speed")
 
         for j in range(256):
             for i in range(strip.numPixels()):
