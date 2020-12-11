@@ -38,6 +38,10 @@ function scroll() {
     }
     else if (previousScrollVal < 10 && top == 100) {
         top = 0
+        previousScrollVal = top
+    }
+    else {
+        previousScrollVal = top
     }
     console.log(top)
     setCookie("scrollPos", top, 1)
