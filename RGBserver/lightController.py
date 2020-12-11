@@ -114,10 +114,6 @@ def rainbow(strip, wait_ms=20):
         if checkBreak("rainbow"):
             break
 
-        if getDataval("speed"):
-            print("Updated rainbow speed")
-            wait_ms = 100 - getDataval("speed")
-
         for j in range(256):
             for i in range(strip.numPixels()):
                 strip.setPixelColor(i, wheel((i+j) & 255))
@@ -125,8 +121,13 @@ def rainbow(strip, wait_ms=20):
                     strip.show()
             roundOne = False
             strip.show()
+
             if checkBreak("rainbow"):
                 break
+
+            if getDataval("speed"):
+                print("Updated rainbow speed")
+                wait_ms = 100 - getDataval("speed")
             time.sleep(wait_ms/1000.0)
 
 def rainbowCycle(strip, wait_ms=20, iterations=5):
