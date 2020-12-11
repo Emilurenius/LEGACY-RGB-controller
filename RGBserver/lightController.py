@@ -286,13 +286,13 @@ if __name__ == '__main__':
             elif data["onoff"] and data["mode"] == "rainbow":
                 rainbow(strip, data["speed"])
             elif data["onoff"] and data["mode"] == "theaterChase":
-                theaterChase(strip, Color(data["R"], data["G"], data["B"]), data["speed"])
+                theaterChase(strip, Color(data["R"], data["G"], data["B"]), 100 - data["speed"])
             elif data["onoff"] and data["mode"] == "norway":
                 norge(strip)
             elif data["onoff"] and data["mode"] == "colorDrip":
-                colorDrip(strip, data["speed"])
+                colorDrip(strip, 100 - data["speed"])
             elif data["onoff"] and data["mode"] == "alarmClock":
-                alarmClock(strip, data["alarmClockData"]["alarmTime"], data["speed"])
+                alarmClock(strip, data["alarmClockData"]["alarmTime"], 100 - data["speed"])
             else:
                 colorWipe(strip, Color(0, 0, 0), 3)
 
