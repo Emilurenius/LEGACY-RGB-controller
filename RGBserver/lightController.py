@@ -240,10 +240,8 @@ def alarmClock(strip, alarmTime, wait_ms=50):
     colorWipe(strip, Color(0, 0, 0), 3)
     currentTime = datetime.datetime.now()
 
-    #hour = currentTime.hour # Extract current hour from datetime
-    #minute = currentTime.minute # Extract current minute from datetime
-    hour = 6
-    minute = 0
+    hour = currentTime.hour # Extract current hour from datetime
+    minute = currentTime.minute # Extract current minute from datetime
 
     if hour < 10:
         hour = "0" + str(hour)
