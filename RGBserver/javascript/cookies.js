@@ -26,7 +26,7 @@ const body = document.getElementById("body")
 function scroll() {
     let scroll = ev.target.scrollTop
     console.log(scroll)
-})
+}
 
 var bodySelector = $("body").first()
 console.log(bodySelector.scrollTop())
