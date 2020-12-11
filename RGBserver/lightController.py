@@ -33,6 +33,18 @@ def checkBreak(mode):
         print("JSON busy...")
         return False
 
+def getDataval(dataval) {
+    try: # Try opening the json file, and check it
+        with open("./json/data.json") as JSON:
+            data = json.load(JSON)
+        return data[dataval]
+        else:
+            return False
+    except: # If you can't open the json file, just return False
+        print("JSON busy...")
+        return False
+}
+
 # Define functions which animate LEDs in various ways:
 def colorWipe(strip, color, wait_ms=50):
     """Wipe color across display a pixel at a time."""
@@ -104,6 +116,9 @@ def rainbow(strip, wait_ms=20):
     while True:
         if checkBreak("rainbow"):
             break
+
+        if getDataval("speed"):
+            wait_ms = getDataval("speed")
 
         for j in range(256):
             for i in range(strip.numPixels()):
