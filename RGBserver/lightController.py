@@ -226,9 +226,9 @@ def alarmClock(strip, alarmTime, wait_ms=50):
     hour = currentTime.hour # Extract current hour from datetime
     minute = currentTime.minute # Extract current minute from datetime
 
-    if len(hour) < 2:
+    if hour < 10:
         hour = "0" + str(hour)
-    if len(minute) < 2:
+    if minute < 10:
         minute = "0" + str(minute)
 
     currentTime_Formatted = str(hour) + ":" + str(minute) # Combine hour and minute into format
