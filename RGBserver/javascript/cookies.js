@@ -27,9 +27,16 @@ if (getCookie("scrollPos") != "") {
     document.documentElement.scrollTop = parseInt(getCookie("scrollPos"))
 }
 
+let previousScrollVal = undefined
 function scroll() {
-    const top = document.documentElement.scrollTop || window.pageYOffset
+    let top = document.documentElement.scrollTop || window.pageYOffset
     console.log(top)
+    if (previousScrollVal == undefined) {
+        previousScrollVal = top
+    }
+    else if (previousScrollVal < 10 && top == 100) {
+        top = 0
+    }
     setCookie("scrollPos", top, 1)
 }
 
