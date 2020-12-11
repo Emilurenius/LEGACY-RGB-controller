@@ -23,7 +23,7 @@ function getCookie(cname) { // Search for cookie with name of variable cname. If
 
 const body = document.getElementById("body")
 
-body.addEventListener("scroll", (ev) => {
+function scroll() {
     let scroll = ev.target.scrollTop
     console.log(scroll)
 })
