@@ -126,7 +126,6 @@ def rainbow(strip, wait_ms=20):
                 break
 
             if getDataval("speed"):
-                print("Updated rainbow speed")
                 wait_ms = 100 - getDataval("speed")
             time.sleep(wait_ms/1000.0)
 
