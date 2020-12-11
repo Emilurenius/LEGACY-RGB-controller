@@ -21,11 +21,14 @@ function getCookie(cname) { // Search for cookie with name of variable cname. If
     return ""
 }
 
-const body = document.getElementById("body")
+if (getCookie("scrollPos") != "") {
+    console.log(getCookie("scrollPos"))
+}
 
 function scroll() {
     const top = window.pageYOffset || document.documentElement.scrollTop
     console.log(top)
+    setCookie("scrollPos", top, 1)
 }
 
 var bodySelector = $("body").first()
