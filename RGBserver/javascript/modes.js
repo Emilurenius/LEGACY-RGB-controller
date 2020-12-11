@@ -29,7 +29,7 @@ function getJSON(url) {
 
 speed.value = getJSON(`${url}/json/data.json`).speed
 
-sliderButton.addEventListener("click", (event) => {
+sliderButtonModes.addEventListener("click", (event) => {
     window.location.replace(`${url}/modes?panel=modes&speed=${speed.value}`)
 })
 
