@@ -38,8 +38,6 @@ def getDataval(dataval):
         with open("./json/data.json") as JSON:
             data = json.load(JSON)
         return data[dataval]
-        else:
-            return False
     except: # If you can't open the json file, just return False
         print("JSON busy...")
         return False
