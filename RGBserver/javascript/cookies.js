@@ -30,13 +30,16 @@ if (getCookie("scrollPos") != "") {
 let previousScrollVal = undefined
 function scroll() {
     let top = document.documentElement.scrollTop || window.pageYOffset
-    console.log(top)
+
+    // You might think this if statement looks unnecessary and wierd, but it is needed, trust me. 
+    // Just try to remove it, and you will understand soon.
     if (previousScrollVal == undefined) {
         previousScrollVal = top
     }
     else if (previousScrollVal < 10 && top == 100) {
         top = 0
     }
+    console.log(top)
     setCookie("scrollPos", top, 1)
 }
 
