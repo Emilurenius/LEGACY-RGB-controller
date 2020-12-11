@@ -33,7 +33,7 @@ def checkBreak(mode):
         print("JSON busy...")
         return False
 
-def getDataval(dataval) {
+def getDataval(dataval):
     try: # Try opening the json file, and check it
         with open("./json/data.json") as JSON:
             data = json.load(JSON)
@@ -43,7 +43,6 @@ def getDataval(dataval) {
     except: # If you can't open the json file, just return False
         print("JSON busy...")
         return False
-}
 
 # Define functions which animate LEDs in various ways:
 def colorWipe(strip, color, wait_ms=50):
