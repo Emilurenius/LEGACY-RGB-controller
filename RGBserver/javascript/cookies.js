@@ -21,24 +21,5 @@ function getCookie(cname) { // Search for cookie with name of variable cname. If
     return ""
 }
 
-let scrollPos = getCookie("scrollPos")
-
-if (scrollPos != "") {
-    window.pageYOffset = parseInt(scrollPos)
-    document.documentElement.scrollTop = parseInt(scrollPos)
-} else {
-    window.pageYOffset = 0
-    document.documentElement.scrollTop = 0
-}
-
-var runOnScroll = (evt) => {
-    setCookie("scrollPos", window.pageYOffset, 1)
-    scrollPos = window.pageYOffset
-}
-
-var elements = document.querySelectorAll("...")
-elements = Array.prototype.slice.call(elements)
-
-elements.forEach( (element) => {
-    window.addEventListener("scroll", runOnScroll, {passive: true})
-})
+var bodySelector = $("body").first()
+$("body").last().text("scrollTop:" + bodySelector.scrollTop())
