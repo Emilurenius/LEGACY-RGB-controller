@@ -22,4 +22,4 @@ function getCookie(cname) { // Search for cookie with name of variable cname. If
 }
 
 var bodySelector = $("body").first()
-$("body").last().text("scrollTop:" + bodySelector.scrollTop())
+console.log(bodySelector.scrollTop())
