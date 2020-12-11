@@ -24,8 +24,8 @@ function getCookie(cname) { // Search for cookie with name of variable cname. If
 const body = document.getElementById("body")
 
 function scroll() {
-    const body = $("body").first()
-    console.log(body.scrollTop())
+    const top = window.pageYOffset || document.documentElement.scrollTop
+    console.log(top)
 }
 
 var bodySelector = $("body").first()
