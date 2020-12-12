@@ -15,6 +15,7 @@ GPIO.setup(led_pin, GPIO.OUT)
 # If button is pushed, light up LED
 try:
     lastBtnState = False
+    btnState = False
     while True:
         if GPIO.input(btn_pin):
             nochange = False
