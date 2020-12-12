@@ -105,6 +105,26 @@ app.get("/", (req, res) => {
 
 // API control:
 app.get("/lightstate", (req, res) => {
+    save = false
+
+    if (req.query.toggle == "change") {
+        if (data.onoff == true) {
+            data.onoff = false
+            save = true
+        }else {
+            data.onoff = true
+            save = true
+        }
+
+    if (save) {
+        let stringified = JSON.stringify(data, null, 2)
+        
+        fs.writeFile("./json/data.json", stringified, (err) => {
+            if (err) throw err
+            console.log("Data written to file")
+        })
+    }
+
     if (data.onoff) {
         res.send("true")
     }else {
