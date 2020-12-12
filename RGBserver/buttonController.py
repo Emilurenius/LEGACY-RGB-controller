@@ -38,7 +38,7 @@ try:
         if btnState != lastBtnState:
             print("button pushed!")
             lastBtnState = btnState
-            requests.get("http://localhost:3000/?toggle=change")
+            requests.get("http://localhost:3000/lightstate?toggle=change")
 
 # When you press ctrl+c, this will be called
 finally:
