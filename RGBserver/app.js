@@ -111,14 +111,17 @@ app.get("/lightstate", (req, res) => {
         if (data.onoff == true) {
             data.onoff = false
             save = true
-        }else {
+        }
+        else {
             data.onoff = true
             save = true
         }
+        console.log(`Light state changed to: ${data.onoff}`)
+    }
 
     if (save) {
         let stringified = JSON.stringify(data, null, 2)
-        
+    
         fs.writeFile("./json/data.json", stringified, (err) => {
             if (err) throw err
             console.log("Data written to file")
