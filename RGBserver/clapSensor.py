@@ -9,7 +9,6 @@ GPIO.setup(clapSensor, GPIO.IN)
 
 try:
     while True:
-        time.sleep(0.1)
         if GPIO.input(clapSensor):
             print("Clap detected")
             startTime = datetime.datetime.now()
