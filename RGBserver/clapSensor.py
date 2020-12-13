@@ -14,11 +14,12 @@ try:
             startTime = datetime.datetime.now().timestamp()
             print(startTime)
             x = 0
-            # while startTime < startTime + datetime.timedelta(seconds=5):
-            #     print(x)
-            #     x +=1
-            #     if GPIO.input(clapSensor):
-            #         print("Double clap!")
-            #         break
+            while startTime < startTime + 50:
+                print(x)
+                x +=1
+                if GPIO.input(clapSensor):
+                    print("Double clap!")
+                    break
+            time.sleep(0.1)
 finally:
     GPIO.cleanup()
