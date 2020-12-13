@@ -17,6 +17,6 @@ try:
                 if GPIO.input(clapSensor):
                     print("Double clap!")
                     time.sleep(0.2)
-                    break<
+                    break
 finally:
     GPIO.cleanup()
