@@ -15,7 +15,7 @@ try:
             print(startTime)
             time.sleep(0.1)
             x = 0
-            while datetime.datetime.now().timestamp() - startTime < 5:
+            while datetime.datetime.now().timestamp() - startTime < 1:
                 print(x)
                 x +=1
                 if GPIO.input(clapSensor):
