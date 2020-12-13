@@ -13,8 +13,9 @@ try:
             print("Clap detected")
             startTime = datetime.datetime.now().timestamp()
             print(startTime)
+            time.sleep(0.1)
             x = 0
-            while startTime < startTime + 50:
+            while startTime < startTime + 1:
                 print(x)
                 x +=1
                 if GPIO.input(clapSensor):
