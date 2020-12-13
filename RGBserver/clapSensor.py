@@ -11,10 +11,11 @@ try:
     while True:
         if GPIO.input(clapSensor):
             print("Clap detected")
-            startTime = datetime.datetime.now()
+            startTime = datetime.datetime.now().timestamp()
+            print(startTime)
             x = 0
             while startTime < startTime + datetime.timedelta(seconds=5):
-                print(x)
+                #print(x)
                 x +=1
                 if GPIO.input(clapSensor):
                     print("Double clap!")
