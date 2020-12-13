@@ -11,5 +11,6 @@ try:
     while True:
         if GPIO.input(clapSensor):
             print("Clap detected")
+            time.sleep(1)
 finally:
     GPIO.cleanup()
