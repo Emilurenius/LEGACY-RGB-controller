@@ -13,7 +13,7 @@ try:
             print("Clap detected")
             time.sleep(0.2)
             startTime = time.time()
-            while startTime + 5 != time.time():
+            while startTime + 2 != time.time():
                 if GPIO.input(clapSensor):
                     print("Double clap!")
                     time.sleep(0.2)
