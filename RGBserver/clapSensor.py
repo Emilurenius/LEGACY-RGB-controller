@@ -14,7 +14,7 @@ try:
             time.sleep(0.2)
             startTime = time.time()
             x = 0
-            while startTime + 2 != time.time():
+            while startTime + 0.3 != time.time():
                 print(x)
                 x +=1
                 if GPIO.input(clapSensor):
