@@ -9,17 +9,16 @@ GPIO.setup(clapSensor, GPIO.IN)
 
 try:
     while True:
+        time.sleep(0.1)
         if GPIO.input(clapSensor):
             print("Clap detected")
-            time.sleep(0.2)
-            startTime = time.time()
+            startTime = datetime.datetime.now()
             x = 0
-            while startTime + 0.3 != time.time():
+            while startTime != startTime + datetime.timedelta(seconds=5):
                 print(x)
                 x +=1
                 if GPIO.input(clapSensor):
                     print("Double clap!")
-                    time.sleep(0.2)
                     break
 finally:
     GPIO.cleanup()
