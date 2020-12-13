@@ -8,7 +8,8 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(clapSensor, GPIO.IN)
 
 try:
-    if GPIO.input(clapSensor):
-        print("Clap detected")
+    while True:
+        if GPIO.input(clapSensor):
+            print("Clap detected")
 finally:
     GPIO.cleanup()
