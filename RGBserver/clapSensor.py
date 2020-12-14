@@ -12,8 +12,8 @@ try:
         if GPIO.input(clapSensor):
             print("Clap detected")
             startTime = datetime.datetime.now().timestamp()
-            print(startTime)
-            time.sleep(0.1)
+            print("Started waiting for double clap:", startTime)
+            time.sleep(1)
             while datetime.datetime.now().timestamp() - startTime < 1:
                 if GPIO.input(clapSensor):
                     print("Double clap!")
