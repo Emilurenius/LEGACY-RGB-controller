@@ -105,6 +105,7 @@ app.get("/", (req, res) => {
 
 // API control:
 app.get("/lightstate", (req, res) => {
+    console.log("\nAPI loaded: Lightstate")
     save = false
 
     if (req.query.toggle == "change") {
@@ -136,23 +137,27 @@ app.get("/lightstate", (req, res) => {
 })
 
 app.get("/br", (req, res) => {
+    console.log("\nAPI loaded: Send brightness")
     res.send(data.brightness.toString())
 })
 
 app.get("/r", (req, res) => {
+    console.log("\nAPI loaded: Send red")
     res.send(data.R.toString())
 })
 
 app.get("/g", (req, res) => {
+    console.log("\nAPI loaded: Send green")
     res.send(data.G.toString())
 })
 
 app.get("/b", (req, res) => {
+    console.log("\nAPI loaded: Send blue")
     res.send(data.B.toString())
 })
 
 app.get("/rgb", (req, res) => {
-    console.log("API loaded: RGB")
+    console.log("\nAPI loaded: RGB")
 
     let save = false
     if (req.query.br) {

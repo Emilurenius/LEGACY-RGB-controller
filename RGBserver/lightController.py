@@ -249,18 +249,19 @@ def alarmClock(strip, alarmTime, wait_ms=50):
         minute = "0" + str(minute)
 
     currentTime_Formatted = str(hour) + ":" + str(minute) # Combine hour and minute into format
-    print(currentTime_Formatted)
 
     if currentTime_Formatted == alarmTime: # Check if current time is the same as inputted alarm activation time.
         lightState = False
         while True:
-            if checkBreak("alarmClock"):
-                break
             
             if lightState == False:
+                if checkBreak("alarmClock"):
+                    break
                 colorWipe(strip, Color(255, 255, 255), wait_ms)
                 lightState = True
             else:
+                if checkBreak("alarmClock"):
+                    break
                 colorWipe(strip, Color(0, 0, 0), wait_ms)
                 lightState = False
             strip.show()
