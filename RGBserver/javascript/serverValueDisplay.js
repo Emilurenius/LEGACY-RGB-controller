@@ -34,7 +34,7 @@ serverValueReset.addEventListener("click", (evt) => {
     const speed = document.createElement("p")
     speed.appendChild(document.createTextNode(`Animation speed: ${serverState.speed}`))
     const alarmClockTime = document.createElement("p")
-    alarmClockTime.appendChild(docuemtn.createTextNode(`Alarm clock activation time: ${serverState.alarmClockData.alarmTime}`))
+    alarmClockTime.appendChild(document.createTextNode(`Alarm clock activation time: ${serverState.alarmClockData.alarmTime}`))
 
     serverValueReadout.appendChild(speed)
     serverValueReadout.appendChild(alarmClockTime)
