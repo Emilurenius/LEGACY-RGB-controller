@@ -1,7 +1,8 @@
-const serverValueReadout = document.getElementById("serverValueReadout")
+const serverReadout = document.getElementById("serverReadout")
 const serverValueReset = document.getElementById("serverValueReset")
 
 serverValueReset.addEventListener("click", (evt) => {
+    serverReadout.innerHTML = ""
     const serverState = getJSON(`${url}/json/data.json`)
     console.log(serverState)
 
@@ -14,7 +15,7 @@ serverValueReset.addEventListener("click", (evt) => {
         toggleStateValue = document.createTextNode("Lightstate: Off")
     }
     toggleState.appendChild(toggleStateValue)
-    serverValueReadout.appendChild(toggleState)
+    serverReadout.appendChild(toggleState)
 
     const r = document.createElement("p")
     r.appendChild(document.createTextNode(`Red: ${serverState.R}`))
@@ -25,18 +26,18 @@ serverValueReset.addEventListener("click", (evt) => {
     const br = document.createElement("p")
     br.appendChild(document.createTextNode(` Brightness: ${serverState.brightness}`))
 
-    serverValueReadout.appendChild(r)
-    serverValueReadout.appendChild(g)
-    serverValueReadout.appendChild(b)
-    serverValueReadout.appendChild(br)
-    serverValueReadout.appendChild(document.createElement("br"))
+    serverReadout.appendChild(r)
+    serverReadout.appendChild(g)
+    serverReadout.appendChild(b)
+    serverReadout.appendChild(br)
+    serverReadout.appendChild(document.createElement("br"))
 
     const speed = document.createElement("p")
     speed.appendChild(document.createTextNode(`Animation speed: ${serverState.speed}`))
     const alarmClockTime = document.createElement("p")
     alarmClockTime.appendChild(document.createTextNode(`Alarm clock activation time: ${serverState.alarmClockData.alarmTime}`))
 
-    serverValueReadout.appendChild(speed)
-    serverValueReadout.appendChild(alarmClockTime)
+    serverReadout.appendChild(speed)
+    serverReadout.appendChild(alarmClockTime)
 
 })
