@@ -18,7 +18,7 @@ try:
                 if GPIO.input(clapSensor):
                     print("Double clap!")
                     response = requests.get("http://localhost:3000/lightstate?toggle=change")
-                    print(response)
+                    print(response.text)
                     break
             time.sleep(0.1)
 finally:
