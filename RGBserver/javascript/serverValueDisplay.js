@@ -24,7 +24,7 @@ function updateServerState() {
     const b = document.createElement("p")
     b.appendChild(document.createTextNode(`Blue: ${serverState.B}`))
     const br = document.createElement("p")
-    br.appendChild(document.createTextNode(` Brightness: ${serverState.brightness}`))
+    br.appendChild(document.createTextNode(` Brightness: ${serverState.brightness}%`))
 
     serverReadout.appendChild(r)
     serverReadout.appendChild(g)
