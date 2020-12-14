@@ -36,7 +36,7 @@ function scroll() {
     if (previousScrollVal == undefined) {
         previousScrollVal = top
     }
-    else if (previousScrollVal < 10 && top > 5) {
+    else if (previousScrollVal < 10 && top < 5) {
         top = 0
         previousScrollVal = top
     }
