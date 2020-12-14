@@ -4,7 +4,6 @@ const rainbow = document.getElementById("rainbow")
 const norway = document.getElementById("norway")
 const colorDrip = document.getElementById("colorDrip")
 const alarmClock = document.getElementById("alarmClock")
-const back = document.getElementById("back")
 const theaterChase = document.getElementById("theaterChase")
 const sliderButtonModes = document.getElementById("phonebutton-slider-modes")
 
@@ -13,7 +12,6 @@ rainbow.setAttribute("href", `${url}/?panel=modes&mode=rainbow`)
 theaterChase.setAttribute("href", `${url}/?panel=modes&mode=theaterChase`)
 norway.setAttribute("href", `${url}/?panel=modes&mode=norway`)
 colorDrip.setAttribute("href", `${url}/?panel=modes&mode=colorDrip`)
-back.setAttribute("href", `${url}/`)
 
 function getJSON(url) {
     var j = []

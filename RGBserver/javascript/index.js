@@ -5,10 +5,8 @@ const G = document.getElementById("G")
 const B = document.getElementById("B")
 const sliderButtonMain = document.getElementById("phonebutton-slider-main")
 const toggle = document.getElementById("toggle")
-const modes = document.getElementById("modes")
 
 toggle.setAttribute("href", `${url}/?panel=main&toggle=change`)
-modes.setAttribute("href", `${url}/modes`)
 
 
 function getJSON(url) {
