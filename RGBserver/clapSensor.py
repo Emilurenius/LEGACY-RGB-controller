@@ -17,6 +17,7 @@ try:
             while datetime.datetime.now().timestamp() - startTime < 1:
                 if GPIO.input(clapSensor):
                     print("Double clap!")
+                    requests.get("http://localhost:3000/lightstate?toggle=change")
                     break
             time.sleep(0.1)
 finally:
