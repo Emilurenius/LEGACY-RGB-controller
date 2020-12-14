@@ -1,7 +1,7 @@
 const serverReadout = document.getElementById("serverReadout")
 const serverValueReset = document.getElementById("serverValueReset")
 
-serverValueReset.addEventListener("click", (evt) => {
+function updateServerState() {
     serverReadout.innerHTML = ""
     const serverState = getJSON(`${url}/json/data.json`)
     console.log(serverState)
@@ -34,10 +34,18 @@ serverValueReset.addEventListener("click", (evt) => {
 
     const speed = document.createElement("p")
     speed.appendChild(document.createTextNode(`Animation speed: ${serverState.speed}`))
+    const mode = document.createElement("p")
+    mode.appendChild(document.createTextNode(`Current mode: ${serverState.mode}`))
     const alarmClockTime = document.createElement("p")
     alarmClockTime.appendChild(document.createTextNode(`Alarm clock activation time: ${serverState.alarmClockData.alarmTime}`))
 
     serverReadout.appendChild(speed)
+    serverReadout.appendChild(mode)
     serverReadout.appendChild(alarmClockTime)
+}
 
+serverValueReset.addEventListener("click", (evt) => {
+    updateServerState()
 })
+
+updateServerState()
