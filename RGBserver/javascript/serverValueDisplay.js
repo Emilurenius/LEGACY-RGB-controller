@@ -6,11 +6,12 @@ serverValueReset.addEventListener("click", (evt) => {
     console.log(serverState)
 
     const toggleState = document.createElement("p")
+    let toggleStateValue = undefined
     if (serverState.onoff == true) {
-        const toggleStateValue = document.createTextNode("Lightstate: On")
+        toggleStateValue = document.createTextNode("Lightstate: On")
     }
     else {
-        const toggleStateValue = document.createTextNode("Lightstate: Off")
+        toggleStateValue = document.createTextNode("Lightstate: Off")
     }
     toggleState.appendChild(toggleStateValue)
     serverValueReadout.appendChild(toggleState)
