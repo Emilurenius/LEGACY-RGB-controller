@@ -79,6 +79,7 @@ def theaterChase(strip, color, wait_ms=50):
     """Movie theater light style chaser animation."""
 
     while True:
+        wait_ms = getDataval("speed")
         if checkBreak("theaterChase"):
             break
         for q in range(3):
