@@ -292,6 +292,7 @@ if __name__ == '__main__':
     try:
         previousData = False
         while True:
+            time.sleep(0.5)
             # Import data file:
             try:
                 with open("./json/data.json") as JSON:
