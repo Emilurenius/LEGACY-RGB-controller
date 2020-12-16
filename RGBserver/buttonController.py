@@ -25,7 +25,7 @@ try:
                     change = True
                     break
                 else:
-                    time.sleep(0.1)
+                    time.sleep(0.3)
             if change == False:
                 btnState = True
                 time.sleep(0.0001)
