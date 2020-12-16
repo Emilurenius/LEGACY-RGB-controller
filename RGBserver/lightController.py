@@ -119,10 +119,6 @@ def rainbow(strip, wait_ms=20):
         if checkBreak("rainbow"):
             break
         
-        newSpeed = getDataval("speed")
-        if newSpeed:
-            wait_ms = 100 - newSpeed # Making sure the speed stays up to date with JSON file.
-
         for j in range(256):
             for i in range(strip.numPixels()):
                 strip.setPixelColor(i, wheel((i+j) & 255))
@@ -130,6 +126,9 @@ def rainbow(strip, wait_ms=20):
                     strip.show()
             roundOne = False
             strip.show()
+            newSpeed = getDataval("speed")
+            if newSpeed:
+                wait_ms = 100 - newSpeed # Making sure the speed stays up to date with JSON file.
             time.sleep(wait_ms/1000.0)
 
             if checkBreak("rainbow"):
