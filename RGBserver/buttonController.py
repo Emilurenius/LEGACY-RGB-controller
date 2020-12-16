@@ -28,10 +28,9 @@ try:
                     time.sleep(0.1)
             if change == False:
                 btnState = True
-                time.sleep(0.0001)
+                time.sleep(1)
             else:
-                change = False
-                time.sleep(0.0001)
+                time.sleep(1)
         else:
             btnState = False
         
