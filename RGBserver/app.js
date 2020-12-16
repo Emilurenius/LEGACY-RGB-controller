@@ -11,7 +11,6 @@ var counter = 0
 const LIMIT = 20
 const DELAY = 1000
 let tick = 0
-const app = express()
 let connections = []
 
 app.use(cors()) // Making sure the browser can request more data after it is loaded on the client computer.
