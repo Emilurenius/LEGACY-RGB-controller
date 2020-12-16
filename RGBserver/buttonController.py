@@ -20,7 +20,7 @@ try:
         if GPIO.input(btn_pin):
             change = False
             startTime = datetime.datetime.now().timestamp()
-            while datetime.datetime.now().timestamp() - startTime < 1: # Checks the button for 1 second. For removing noise in signal.
+            while datetime.datetime.now().timestamp() - startTime < 0.5: # Checks the button for 1 second. For removing noise in signal.
                 if not GPIO.input(btn_pin):
                     change = True
                     break
@@ -28,10 +28,9 @@ try:
                     time.sleep(0.1)
             if change == False:
                 btnState = True
-                time.sleep(0.0001)
+                time.sleep(1)
             else:
-                change = False
-                time.sleep(0.0001)
+                time.sleep(1)
         else:
             btnState = False
         

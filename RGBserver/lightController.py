@@ -75,9 +75,14 @@ def starryNight(strip, wait_ms=50):
         print(LED, x)
         time.sleep(wait_ms/1000.0)
 
-def theaterChase(strip, color, wait_ms=50, iterations=1):
+def theaterChase(strip, color, wait_ms=50):
     """Movie theater light style chaser animation."""
-    for j in range(iterations):
+
+    while True:
+        newSpeed = getDataval("speed")
+        if newSpeed:
+            wait_ms = 100 - newSpeed # Making sure the speed stays up to date with JSON file.
+
         if checkBreak("theaterChase"):
             break
         for q in range(3):
@@ -113,7 +118,7 @@ def rainbow(strip, wait_ms=20):
     while True:
         if checkBreak("rainbow"):
             break
-
+        
         for j in range(256):
             for i in range(strip.numPixels()):
                 strip.setPixelColor(i, wheel((i+j) & 255))
@@ -121,13 +126,13 @@ def rainbow(strip, wait_ms=20):
                     strip.show()
             roundOne = False
             strip.show()
+            newSpeed = getDataval("speed")
+            if newSpeed:
+                wait_ms = 100 - newSpeed # Making sure the speed stays up to date with JSON file.
+            time.sleep(wait_ms/1000.0)
 
             if checkBreak("rainbow"):
                 break
-
-            if getDataval("speed"):
-                wait_ms = 100 - getDataval("speed")
-            time.sleep(wait_ms/1000.0)
 
 def rainbowCycle(strip, wait_ms=20, iterations=5):
     """Draw rainbow that uniformly distributes itself across all pixels."""
@@ -285,7 +290,9 @@ if __name__ == '__main__':
         print('Use "-c" argument to clear LEDs on exit')
 
     try:
+        previousData = False
         while True:
+            time.sleep(0.5)
             # Import data file:
             try:
                 with open("./json/data.json") as JSON:
@@ -293,24 +300,27 @@ if __name__ == '__main__':
             except:
                 print("JSON busy...")
                 time.sleep(0.05)
-
-            # Checking what mode to run:
-            if data["onoff"] and data["mode"] == "standard":
-                colorWipe(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 100), int(float(data["G"]) * float(data["brightness"]) / 100), int(float(data["B"]) * float(data["brightness"]) / 100)), 3)
-            elif data["onoff"] and data["mode"] == "solidColor":
-                solidColor(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 100), int(float(data["G"]) * float(data["brightness"]) / 100), int(float(data["B"]) * float(data["brightness"]) / 100)))
-            elif data["onoff"] and data["mode"] == "rainbow":
-                rainbow(strip, 100 - data["speed"])
-            elif data["onoff"] and data["mode"] == "theaterChase":
-                theaterChase(strip, Color(data["R"], data["G"], data["B"]), 100 - data["speed"])
-            elif data["onoff"] and data["mode"] == "norway":
-                norge(strip)
-            elif data["onoff"] and data["mode"] == "colorDrip":
-                colorDrip(strip, 100 - data["speed"])
-            elif data["onoff"] and data["mode"] == "alarmClock":
-                alarmClock(strip, data["alarmClockData"]["alarmTime"], 100 - data["speed"])
-            else:
-                colorWipe(strip, Color(0, 0, 0), 3)
+            
+            if previousData != data:
+                print("Checking mode")
+                previousData = data
+                # Checking what mode to run:
+                if data["onoff"] and data["mode"] == "standard":
+                    colorWipe(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 100), int(float(data["G"]) * float(data["brightness"]) / 100), int(float(data["B"]) * float(data["brightness"]) / 100)), 3)
+                elif data["onoff"] and data["mode"] == "solidColor":
+                    solidColor(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 100), int(float(data["G"]) * float(data["brightness"]) / 100), int(float(data["B"]) * float(data["brightness"]) / 100)))
+                elif data["onoff"] and data["mode"] == "rainbow":
+                    rainbow(strip, 100 - data["speed"])
+                elif data["onoff"] and data["mode"] == "theaterChase":
+                    theaterChase(strip, Color(data["R"], data["G"], data["B"]), 100 - data["speed"])
+                elif data["onoff"] and data["mode"] == "norway":
+                    norge(strip)
+                elif data["onoff"] and data["mode"] == "colorDrip":
+                    colorDrip(strip, 100 - data["speed"])
+                elif data["onoff"] and data["mode"] == "alarmClock":
+                    alarmClock(strip, data["alarmClockData"]["alarmTime"], 100 - data["speed"])
+                else:
+                    colorWipe(strip, Color(0, 0, 0), 3)
 
     except KeyboardInterrupt: # This makes sure the RGB strip turns off when you close the script
         colorWipe(strip, Color(0,0,0), 10)
