@@ -290,8 +290,7 @@ if __name__ == '__main__':
         print('Use "-c" argument to clear LEDs on exit')
 
     try:
-        previousMode = "standard"
-        previousOnoff = True
+        previousData = False
         while True:
             # Import data file:
             try:
@@ -300,14 +299,9 @@ if __name__ == '__main__':
             except:
                 print("JSON busy...")
                 time.sleep(0.05)
-
-            print(previousMode, data["mode"])
-            print(previousOnoff, data["onoff"])
-
-            if previousMode != data["mode"] or previousOnoff != data["onoff"]: # Making sure this only runs if the mode or onoff state changes
-                previousMode = data["mode"]
-                previousOnoff = data["onoff"]
-
+            
+            if previousData != data:
+                previousData = data
                 # Checking what mode to run:
                 if data["onoff"] and data["mode"] == "standard":
                     colorWipe(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 100), int(float(data["G"]) * float(data["brightness"]) / 100), int(float(data["B"]) * float(data["brightness"]) / 100)), 3)
