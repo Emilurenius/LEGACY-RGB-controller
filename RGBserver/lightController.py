@@ -130,9 +130,9 @@ def rainbow(strip, wait_ms=20):
             if checkBreak("rainbow"):
                 break
 
-            if getDataval("speed"):
-                wait_ms = 100 - getDataval("speed")
-            time.sleep(wait_ms/1000.0)
+            newSpeed = getDataval("speed")
+                if newSpeed:
+                wait_ms = 100 - newSpeed # Making sure the speed stays up to date with JSON file
 
 def rainbowCycle(strip, wait_ms=20, iterations=5):
     """Draw rainbow that uniformly distributes itself across all pixels."""
