@@ -75,9 +75,10 @@ def starryNight(strip, wait_ms=50):
         print(LED, x)
         time.sleep(wait_ms/1000.0)
 
-def theaterChase(strip, color, wait_ms=50, iterations=1):
+def theaterChase(strip, color, wait_ms=50):
     """Movie theater light style chaser animation."""
-    for j in range(iterations):
+
+    while True:
         if checkBreak("theaterChase"):
             break
         for q in range(3):
