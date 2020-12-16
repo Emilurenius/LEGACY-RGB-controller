@@ -130,6 +130,7 @@ def rainbow(strip, wait_ms=20):
                     strip.show()
             roundOne = False
             strip.show()
+            time.sleep(wait_ms/1000.0)
 
             if checkBreak("rainbow"):
                 break
