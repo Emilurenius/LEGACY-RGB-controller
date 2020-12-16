@@ -296,7 +296,10 @@ if __name__ == '__main__':
                 print("JSON busy...")
                 time.sleep(0.05)
 
-            if previousMode != data["mode"] and previousOnoff != data["onoff"]: # Making sure this only runs if the mode or onoff state changes
+            print(previousMode, data["mode"])
+            print(previousOnoff, data["onoff"])
+
+            if previousMode != data["mode"] or previousOnoff != data["onoff"]: # Making sure this only runs if the mode or onoff state changes
                 # Checking what mode to run:
                 if data["onoff"] and data["mode"] == "standard":
                     colorWipe(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 100), int(float(data["G"]) * float(data["brightness"]) / 100), int(float(data["B"]) * float(data["brightness"]) / 100)), 3)
