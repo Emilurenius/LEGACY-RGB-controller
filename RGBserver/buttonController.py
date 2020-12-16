@@ -1,4 +1,4 @@
-import time
+import time, datetime
 import RPi.GPIO as GPIO
 import requests
 
@@ -18,19 +18,19 @@ try:
     btnState = False
     while True:
         if GPIO.input(btn_pin):
-            nochange = False
-            x = 0
-            while x < 100000:
+            change = False
+            startTime = datetime.datetime.now().timestamp()
+            while datetime.datetime.now().timestamp() - startTime < 1: # Checks the button for 1 second. For removing noise in signal.
                 if not GPIO.input(btn_pin):
-                    nochange = True
+                    change = True
                     break
                 else:
-                    x += 1
-            if nochange == False:
+                    time.sleep(0.1)
+            if change == False:
                 btnState = True
                 time.sleep(0.0001)
             else:
-                nochange = False
+                change = False
                 time.sleep(0.0001)
         else:
             btnState = False
