@@ -81,7 +81,7 @@ def theaterChase(strip, color, wait_ms=50):
     while True:
         newSpeed = getDataval("speed")
         if newSpeed:
-            wait_ms = 100 - newSpeed # Making sure the speed stays up to date with JSON file
+            wait_ms = 100 - newSpeed # Making sure the speed stays up to date with JSON file.
 
         if checkBreak("theaterChase"):
             break
@@ -121,7 +121,7 @@ def rainbow(strip, wait_ms=20):
         
         newSpeed = getDataval("speed")
         if newSpeed:
-            wait_ms = 100 - newSpeed # Making sure the speed stays up to date with JSON file
+            wait_ms = 100 - newSpeed # Making sure the speed stays up to date with JSON file.
 
         for j in range(256):
             for i in range(strip.numPixels()):
