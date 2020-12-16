@@ -131,7 +131,7 @@ def rainbow(strip, wait_ms=20):
                 break
 
             newSpeed = getDataval("speed")
-                if newSpeed:
+            if newSpeed:
                 wait_ms = 100 - newSpeed # Making sure the speed stays up to date with JSON file
 
 def rainbowCycle(strip, wait_ms=20, iterations=5):
