@@ -301,6 +301,7 @@ if __name__ == '__main__':
                 time.sleep(0.05)
             
             if previousData != data:
+                print("Checking mode")
                 previousData = data
                 # Checking what mode to run:
                 if data["onoff"] and data["mode"] == "standard":
