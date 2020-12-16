@@ -7,6 +7,13 @@ const cors = require("cors")
 const port = 3000
 var counter = 0
 
+// Variables set up for long polling address:
+const LIMIT = 20
+const DELAY = 1000
+let tick = 0
+const app = express()
+let connections = []
+
 app.use(cors()) // Making sure the browser can request more data after it is loaded on the client computer.
 
 // JSON file loaded in before the server is started:
@@ -215,6 +222,29 @@ app.get("/modes/set", (req, res) => {
         res.send("no data recieved")
     }
 })
+
+app.get("/reqdata", (req, res, next) => { // this is a long polling address for sending LED strip data to other devices
+    res.setHeader("Content-Type", "text/html; charset=utf-8")
+    res.setHeader("Transfer-Encoding", "chunked")
+
+    connections.push(res)
+})
+
+setTimeout(function run() { // Timeout function for long polling
+    if (++tick > LIMIT) {
+        connections.map(res => {
+            console.log(res)
+            res.write("END\n")
+            res.end()
+        })
+        connections = []
+        tick = 0
+    }
+    connections.map((res, i) => {
+        res.write(`Connected ${i}`)
+    })
+    setTimeout(run, DELAY)
+}, DELAY)
 
 
 
