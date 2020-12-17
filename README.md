@@ -56,6 +56,19 @@ To start the other python scripts I listed above, simply use the same method as 
 I will warn you though, those scripts are very experimental, and large changes may occur to them in future updates.
 I would suggest you use them as inspiration for your own scripts, as they are made specifically for the hardware I have set up.
 
+# Reasons things might not work:
+
+## LightController.py not running:
+
+Have you installed the library used by the script? If not, that might be the issue.
+
+Needed library can be found here: https://github.com/jgarff/rpi_ws281x
+
+If you are not sure if you have downloaded the library, check if the following directory exists: /home/pi/rpi_ws281x
+
+If it's not there, navigate to "/home/pi" in the terminal on your raspberry pi (This is the directory that the terminal opens in) and write the following: git clone https://github.com/jgarff/rpi_ws281x
+
+Now try again. If the script still won't run, create an issue in this repository, and I will do what I can to help you.
 
 # Server Addresses and what they do:
 
