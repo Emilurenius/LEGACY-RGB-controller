@@ -1,7 +1,12 @@
-#!/usr/bin/env python3 rpi_ws281x library strandtest example Author: Tony DiCola (tony@tonydicola.com)
-#
-# Direct port of the Arduino NeoPixel library strandtest example.  Showcases
-# various animations on a strip of NeoPixels.
+# Based on the python3 rpi_ws281x library strandtest example made by: Tony DiCola (tony@tonydicola.com)
+# The structure of the code, and many of the functions that animate the LEDs are taken directly from the strandtest example.
+# I have made a lot of changes, like adding some of my own functions for animating the LED strip, and connecting the script to a JSON file.
+# The JSON file tells the script how to animate the LEDs, and what color they should be when they are not being animated.
+# Other information could also be passed through the JSON file. If you add your own data to the JSON file named data.json
+# That data will be available in the dictionary variable called "data"
+
+# The original example script that this script is built upon can be found in the same github repository as this file
+# Or you can go to the original github repository here: https://github.com/jgarff/rpi_ws281x
 
 import time, json, os, random, datetime
 from rpi_ws281x import *
