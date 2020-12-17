@@ -25,13 +25,13 @@ def checkBreak(mode):
     try: # Try opening the json file, and check it
         with open("./json/data.json") as JSON:
             data = json.load(JSON)
-        if data["onoff"] != True or data["mode"] != mode:
-            return True
+        if data["onoff"] != True or data["mode"] != mode: # Check if the mode has changed, and if the lights should be on
+            return True # Return True if lights should be off, or the mode has changed
         else:
-            return False
+            return False # Return False if lights should be on, and the mode has not changed
     except: # If you can't open the json file, just return False
         print("JSON busy...")
-        return False
+        return False # If the JSON file can't be opened, just assume the lights should be on, and the mode hasn't changed
 
 def getDataval(dataval):
     try: # Try opening the json file, and check it
@@ -52,7 +52,7 @@ def colorWipe(strip, color, wait_ms=50):
 
 def solidColor(strip, color, wait_ms=50):
     # Displays a single solid color untill told otherwise:
-    for i in range(strip.numPixels()):
+    for i in range(strip.numPixels()): # Assign color to every pixel
         strip.setPixelColor(i, color)
     strip.show()
 
@@ -155,40 +155,44 @@ def theaterChaseRainbow(strip, wait_ms=50):
 
 def norge(strip, wait_ms=50):
     # Makes the color strip create the norwegian flag!
-    numberofRED = int(float(strip.numPixels()) * 0.3)
-    numberofWHITE = int(float(strip.numPixels()) * 0.1)
-    numberofBLUE = int(float(strip.numPixels()) * 0.2)
+
+    # Calculate number of LEDs for every color in the flag based on the amount of LEDs being controlled.
+    # This makes the script compatible with any length of LED strip.
+    numberofRED = int(float(strip.numPixels()) * 0.3) # Calculate number of red LEDs on both sides of the flag
+    numberofWHITE = int(float(strip.numPixels()) * 0.1) # Calculate number of white LEDs on both sides of the flag
+    numberofBLUE = int(float(strip.numPixels()) * 0.2) # Calculate number of blue LEDs in the middle of the flag
     total = numberofRED * 2 + numberofWHITE * 2 + numberofBLUE
     if total != strip.numPixels():
         numberofRED += (strip.numPixels() - total) / 2
     
-    x = 0
-    LED = 0
-    while x < numberofRED:
+    x = 0 # Value for incrementing
+    LED = 0 # Set start value for first LED to be animated. This should always be 0
+    # Notice that LED does not get reset for every color like x does. That is why x and LED are different variables.
+    while x < numberofRED: # Repeat for amount of red per side calculated
         strip.setPixelColor(LED, Color(255, 0, 0))
         strip.show()
         x += 1
         LED += 1
-    x = 0
-    while x < numberofWHITE:
+    x = 0 # Reset increment for next color
+    while x < numberofWHITE: # Repeat for amount of white per side calculated
         strip.setPixelColor(LED, Color(255, 255, 255))
         strip.show()
         x += 1
         LED += 1
-    x = 0
-    while x < numberofBLUE:
+    x = 0 # Reset increment for next color
+    while x < numberofBLUE: # Repeat for amount of blue calculated
         strip.setPixelColor(LED, Color(0, 0, 255))
         strip.show()
         x += 1
         LED += 1
-    x = 0
-    while x < numberofWHITE:
+    x = 0 # Reset increment for next color
+    while x < numberofWHITE: # Repeat for amount of white per side calculated
         strip.setPixelColor(LED, Color(255, 255, 255))
         strip.show()
         x += 1
         LED += 1
-    x = 0
-    while x < numberofRED:
+    x = 0 # Reset increment for next color
+    while x < numberofRED: 
         strip.setPixelColor(LED, Color(255, 0, 0))
         strip.show()
         x += 1
@@ -233,23 +237,14 @@ def colorDrip(strip, wait_ms=50):
 
                 if checkBreak("colorDrip"): # Stop function if the mode has changed, or the lights are turned off.
                     break
-                
-                # This code apparently makes the previous LED turn off again to make the animation move along the LED strip.
-                # The wierd thing is I don't know how this works, but I was the one that programmed it.
-                # I guess only god knows how this works...
-                # if x < steps -1:
-                #     strip.setPixelColor(x, Color(0, 0, 0))
-                #     if getDataval("speed"):
-                #         wait_ms = 100 - getDataval("speed")
-                #     time.sleep(wait_ms/1000.0)
                 x += 1
             
-            steps -= 1
+            steps -= 1 # Remove one step before next increment. This makes sure the next animation stops right before the previous one, making the colors stack.
 
             if checkBreak("colorDrip"):
                 break
 
-            if steps == 0:
+            if steps == 0: # When all LEDs have been filled, colorWipe with black.
                 colorWipe(strip, Color(0, 0, 0))
 
 def alarmClock(strip, alarmTime, wait_ms=50):
@@ -276,12 +271,12 @@ def alarmClock(strip, alarmTime, wait_ms=50):
             lightState = False
             while True: # This will run untill the user turns off the lights, or changes mode. Note that turning lights off and on will restart the alarmclock function.
                 
-                if lightState == False:
+                if lightState == False: # If just turned off, turn it on
                     if checkBreak("alarmClock"):
                         break
                     colorWipe(strip, Color(255, 255, 255), wait_ms)
                     lightState = True
-                else:
+                else: # If light just turned on, turn it off
                     if checkBreak("alarmClock"):
                         break
                     colorWipe(strip, Color(0, 0, 0), wait_ms)
