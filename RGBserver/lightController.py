@@ -232,7 +232,7 @@ def colorDrip(strip, wait_ms=50):
                 time.sleep(wait_ms/1000.0) # Wait for given time from JSON file
 
                 if checkBreak("colorDrip"): # Stop function if the mode has changed, or the lights are turned off.
-                    break,
+                    break
                 
                 # This code apparently makes the previous LED turn off again to make the animation move along the LED strip.
                 # The wierd thing is I don't know how this works, but I was the one that programmed it.
