@@ -231,11 +231,11 @@ def colorDrip(strip, wait_ms=50):
                 if checkBreak("colorDrip"): # Stop function if the mode has changed, or the lights are turned off.
                     break
 
-                # if x < steps -1:
-                #     strip.setPixelColor(x, Color(0, 0, 0))
-                #     if getDataval("speed"):
-                #         wait_ms = 100 - getDataval("speed")
-                #     time.sleep(wait_ms/1000.0)
+                if x < steps -1:
+                    strip.setPixelColor(x, Color(0, 0, 0))
+                    if getDataval("speed"):
+                        wait_ms = 100 - getDataval("speed")
+                    time.sleep(wait_ms/1000.0)
                 x += 1
             
             steps -= 1
