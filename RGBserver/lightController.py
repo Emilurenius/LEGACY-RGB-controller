@@ -242,7 +242,7 @@ def colorDrip(strip, wait_ms=50):
                 #     if getDataval("speed"):
                 #         wait_ms = 100 - getDataval("speed")
                 #     time.sleep(wait_ms/1000.0)
-                # x += 1
+                x += 1
             
             steps -= 1
 
