@@ -309,7 +309,6 @@ if __name__ == '__main__':
     try:
         previousData = False
         while True:
-            time.sleep(0.5)
             # Import data file:
             try:
                 with open("./json/data.json") as JSON:
@@ -338,6 +337,8 @@ if __name__ == '__main__':
                     alarmClock(strip, data["alarmClockData"]["alarmTime"], 100 - data["speed"])
                 else:
                     colorWipe(strip, Color(0, 0, 0), 3)
+            else:
+                time.sleep(0.5)
 
     except KeyboardInterrupt: # This makes sure the RGB strip turns off when you close the script
         colorWipe(strip, Color(0,0,0), 10)
