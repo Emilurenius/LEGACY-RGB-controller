@@ -83,7 +83,7 @@ def theaterChase(strip, color, wait_ms=50):
         if newSpeed:
             wait_ms = 100 - newSpeed # Making sure the speed stays up to date with JSON file.
 
-        if checkBreak("theaterChase"):
+        if checkBreak("theaterChase"): # Stop function if the mode has changed, or the lights are turned off.
             break
         for q in range(3):
             if checkBreak("theaterChase"):
@@ -116,7 +116,7 @@ def rainbow(strip, wait_ms=20):
     """Draw rainbow that fades across all pixels at once."""
     roundOne = True
     while True:
-        if checkBreak("rainbow"):
+        if checkBreak("rainbow"): # Stop function if the mode has changed, or the lights are turned off.
             break
         
         for j in range(256):
@@ -196,12 +196,13 @@ def norge(strip, wait_ms=50):
 
 def colorDrip(strip, wait_ms=50):
     # Colors drip in from the side, and collect in the end of the LED strip:
-    steps = strip.numPixels()
-    for i in range(strip.numPixels()):
-        color1 = random.randint(0, 255)
-        color2 = random.randint(0, 255)
-        fullColor = random.randint(0, 2)
+    
+    for i in range(strip.numPixels()): # Do this once for every LED in the light strip
+        color1 = random.randint(0, 255) # Random color 1
+        color2 = random.randint(0, 255) # Random color 2
+        fullColor = random.randint(0, 2) # Choose one of the three RGB channels to be full brightness
 
+        # The RGB channel chosen to be full brightness is set to 255, the others get assigned color1 and color2, wich are randomly generated
         if fullColor == 0:
             r = 255
             g = color1
@@ -215,15 +216,16 @@ def colorDrip(strip, wait_ms=50):
             g = color2
             b = 255
 
-        x = 0
-        while x < steps:
+        x = 0 # Set x to 0, this will be used to increment while loop underneath
+        steps = strip.numPixels() # Set steps for while Loop underneath to the amount of LEDs in the LED strip
+        while x < steps: # Repeated for every LED in the strip
             strip.setPixelColor(x, Color(r, g, b))
             strip.show()
-            if getDataval("speed"):
+            if getDataval("speed"): #Update speed for animation from JSON file
                 wait_ms = 100 - getDataval("speed")
-            time.sleep(wait_ms/1000.0)
+            time.sleep(wait_ms/1000.0) # Wait for given time from JSON file
 
-            if checkBreak("colorDrip"):
+            if checkBreak("colorDrip"): # Stop function if the mode has changed, or the lights are turned off.
                 break
 
             if x < steps -1:
@@ -243,33 +245,39 @@ def colorDrip(strip, wait_ms=50):
 
 def alarmClock(strip, alarmTime, wait_ms=50):
     colorWipe(strip, Color(0, 0, 0), 3)
-    currentTime = datetime.datetime.now()
 
-    hour = currentTime.hour # Extract current hour from datetime
-    minute = currentTime.minute # Extract current minute from datetime
+    while True: # Run time check forever
 
-    if hour < 10:
-        hour = "0" + str(hour)
-    if minute < 10:
-        minute = "0" + str(minute)
+        if checkBreak("alarmClock"): # Stop function if the mode has changed, or the lights are turned off.
+            break
 
-    currentTime_Formatted = str(hour) + ":" + str(minute) # Combine hour and minute into format
+        currentTime = datetime.datetime.now() # save the current time as a datetime
+        hour = currentTime.hour # Extract current hour from datetime
+        minute = currentTime.minute # Extract current minute from datetime
 
-    if currentTime_Formatted == alarmTime: # Check if current time is the same as inputted alarm activation time.
-        lightState = False
-        while True:
-            
-            if lightState == False:
-                if checkBreak("alarmClock"):
-                    break
-                colorWipe(strip, Color(255, 255, 255), wait_ms)
-                lightState = True
-            else:
-                if checkBreak("alarmClock"):
-                    break
-                colorWipe(strip, Color(0, 0, 0), wait_ms)
-                lightState = False
-            strip.show()
+        # Add 0 to front of hour and minute if they only have one digit
+        if hour < 10:
+            hour = "0" + str(hour)
+        if minute < 10:
+            minute = "0" + str(minute)
+
+        currentTime_Formatted = str(hour) + ":" + str(minute) # Combine hour and minute into format
+
+        if currentTime_Formatted == alarmTime: # Check if current time is the same as inputted alarm activation time
+            lightState = False
+            while True: # This will run untill the user turns off the lights, or changes mode. Note that turning lights off and on will restart the alarmclock function.
+                
+                if lightState == False:
+                    if checkBreak("alarmClock"):
+                        break
+                    colorWipe(strip, Color(255, 255, 255), wait_ms)
+                    lightState = True
+                else:
+                    if checkBreak("alarmClock"):
+                        break
+                    colorWipe(strip, Color(0, 0, 0), wait_ms)
+                    lightState = False
+                strip.show()
 
 
 
