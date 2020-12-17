@@ -225,20 +225,24 @@ def colorDrip(strip, wait_ms=50):
             
             while x < steps: # Repeated for every LED in the strip
                 strip.setPixelColor(x, Color(r, g, b))
+                strip.setPixelColor(x - 1, Color(0, 0, 0))
                 strip.show()
                 if getDataval("speed"): #Update speed for animation from JSON file
                     wait_ms = 100 - getDataval("speed")
                 time.sleep(wait_ms/1000.0) # Wait for given time from JSON file
 
                 if checkBreak("colorDrip"): # Stop function if the mode has changed, or the lights are turned off.
-                    break
-
-                if x < steps -1:
-                    strip.setPixelColor(x, Color(0, 0, 0))
-                    if getDataval("speed"):
-                        wait_ms = 100 - getDataval("speed")
-                    time.sleep(wait_ms/1000.0)
-                x += 1
+                    break,
+                
+                # This code apparently makes the previous LED turn off again to make the animation move along the LED strip.
+                # The wierd thing is I don't know how this works, but I was the one that programmed it.
+                # I guess only god knows how this works...
+                # if x < steps -1:
+                #     strip.setPixelColor(x, Color(0, 0, 0))
+                #     if getDataval("speed"):
+                #         wait_ms = 100 - getDataval("speed")
+                #     time.sleep(wait_ms/1000.0)
+                # x += 1
             
             steps -= 1
 
