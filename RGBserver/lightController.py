@@ -197,51 +197,54 @@ def norge(strip, wait_ms=50):
 def colorDrip(strip, wait_ms=50):
     # Colors drip in from the side, and collect in the end of the LED strip:
     
-    for i in range(strip.numPixels()): # Do this once for every LED in the light strip
-        color1 = random.randint(0, 255) # Random color 1
-        color2 = random.randint(0, 255) # Random color 2
-        fullColor = random.randint(0, 2) # Choose one of the three RGB channels to be full brightness
-
-        # The RGB channel chosen to be full brightness is set to 255, the others get assigned color1 and color2, wich are randomly generated
-        if fullColor == 0:
-            r = 255
-            g = color1
-            b = color2
-        elif fullColor == 1:
-            r = color1
-            g = 255
-            b = color2
-        elif fullColor == 2:
-            r = color1
-            g = color2
-            b = 255
-
-        x = 0 # Set x to 0, this will be used to increment while loop underneath
+    while True:
         steps = strip.numPixels() # Set steps for while Loop underneath to the amount of LEDs in the LED strip
-        while x < steps: # Repeated for every LED in the strip
-            strip.setPixelColor(x, Color(r, g, b))
-            strip.show()
-            if getDataval("speed"): #Update speed for animation from JSON file
-                wait_ms = 100 - getDataval("speed")
-            time.sleep(wait_ms/1000.0) # Wait for given time from JSON file
+        
+        for i in range(strip.numPixels()): # Do this once for every LED in the light strip
+            color1 = random.randint(0, 255) # Random color 1
+            color2 = random.randint(0, 255) # Random color 2
+            fullColor = random.randint(0, 2) # Choose one of the three RGB channels to be full brightness
 
-            if checkBreak("colorDrip"): # Stop function if the mode has changed, or the lights are turned off.
+            # The RGB channel chosen to be full brightness is set to 255, the others get assigned color1 and color2, wich are randomly generated
+            if fullColor == 0:
+                r = 255
+                g = color1
+                b = color2
+            elif fullColor == 1:
+                r = color1
+                g = 255
+                b = color2
+            elif fullColor == 2:
+                r = color1
+                g = color2
+                b = 255
+
+            x = 0 # Set x to 0, this will be used to increment while loop underneath
+            
+            while x < steps: # Repeated for every LED in the strip
+                strip.setPixelColor(x, Color(r, g, b))
+                strip.show()
+                if getDataval("speed"): #Update speed for animation from JSON file
+                    wait_ms = 100 - getDataval("speed")
+                time.sleep(wait_ms/1000.0) # Wait for given time from JSON file
+
+                if checkBreak("colorDrip"): # Stop function if the mode has changed, or the lights are turned off.
+                    break
+
+                # if x < steps -1:
+                #     strip.setPixelColor(x, Color(0, 0, 0))
+                #     if getDataval("speed"):
+                #         wait_ms = 100 - getDataval("speed")
+                #     time.sleep(wait_ms/1000.0)
+                x += 1
+            
+            steps -= 1
+
+            if checkBreak("colorDrip"):
                 break
 
-            # if x < steps -1:
-            #     strip.setPixelColor(x, Color(0, 0, 0))
-            #     if getDataval("speed"):
-            #         wait_ms = 100 - getDataval("speed")
-            #     time.sleep(wait_ms/1000.0)
-            x += 1
-        
-        steps -= 1
-
-        if checkBreak("colorDrip"):
-            break
-
-        if steps == 0:
-            colorWipe(strip, Color(0, 0, 0))
+            if steps == 0:
+                colorWipe(strip, Color(0, 0, 0))
 
 def alarmClock(strip, alarmTime, wait_ms=50):
     colorWipe(strip, Color(0, 0, 0), 3)
