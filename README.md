@@ -74,21 +74,33 @@ Now try again. If the script still won't run, create an issue in this repository
 
 index page: This is the main page of the website, and where you will get the control panel for the LED strip.
 
-/br: API page that returns the brightness level currently in use
+## /br: 
 
-/r: API page that returns the red value currently in use
+API page that returns the brightness level currently in use
 
-/g: API page that returns the green value currently in use
+## /r: 
 
-/b: API page that returns the green value currently in use
+API page that returns the red value currently in use
 
-/rgb: API page that allows control of brightness and RGB values of the server, and hence the lights.
+## /g: 
 
-/mdoes/set: API page that allows control of what mode the lights are in.
+API page that returns the green value currently in use
+
+## /b: 
+
+API page that returns the green value currently in use
+
+## /rgb: 
+
+API page that allows control of brightness and RGB values of the server, and hence the lights.
+
+## /mdoes/set: 
+
+API page that allows control of what mode the lights are in.
 
 # How to use the server API with python script running on the raspberry Pi:
 
-/br, /r, /g, /b: 
+## /br, /r, /g, /b: 
 
 To talk to these addresses, you can use the module called "requests" https://pypi.org/project/requests/
 
@@ -96,7 +108,7 @@ write the following code to send a get request: response = requests.get("http://
 
 Then write this to print out the value returned: print(response.text)
 
-/rgb: 
+# /rgb: 
 
 This address can be used to control the brightness and color of the LED ligts. Here are the different queries you can use to control it:
 
@@ -113,7 +125,7 @@ print(response.text)
 
 This will change the lights to white with maximum brightness, and print the response from the API
 
-/modes/set:
+## /modes/set:
 
 This address can be used to select a mode that is defined in lightController.py
 
