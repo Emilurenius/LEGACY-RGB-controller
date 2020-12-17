@@ -198,6 +198,8 @@ def colorDrip(strip, wait_ms=50):
     # Colors drip in from the side, and collect in the end of the LED strip:
     
     while True:
+        if checkBreak("colorDrip"): # Stop function if the mode has changed, or the lights are turned off.
+            break
         steps = strip.numPixels() # Set steps for while Loop underneath to the amount of LEDs in the LED strip
         
         for i in range(strip.numPixels()): # Do this once for every LED in the light strip
