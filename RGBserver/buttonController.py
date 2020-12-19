@@ -5,7 +5,6 @@ import requests
 
 # Pins definitions
 btn_pin = 17
-led_pin = 12
 
 # Set up pins
 GPIO.setmode(GPIO.BCM)
