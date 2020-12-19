@@ -36,3 +36,14 @@ export function textFormat(rawText, textClass) {
     textBox.appendChild(body)
     return textBox
 }
+
+export function translate(json) {
+    for (let key of Object.keys(json)) {
+        if (key.id) {
+            document.getElementById(key.id).innerHTML = key.translation
+        }
+        else {
+            console.log(`Translating to: ${key.language}`)
+        }
+    }
+}

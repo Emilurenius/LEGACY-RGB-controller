@@ -5,34 +5,34 @@
     <link rel="stylesheet" href="/css/main.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RGB control panel</title>
+    <title id="title">RGB control panel</title>
 </head>
 <body id="body" onscroll="scroll()">
     <!-- Main controls -->
     <div class="Content">
         <div class="Content-box">
-            <p class="Main-Text">RGB LED strip control panel</p>
+            <p class="Main-Text" class="controls-header">RGB LED strip control panel</p>
         </div>
 
         <a href="" id="toggle" class="button">Toggle lights</a>
 
         <div class="slidecontainer">
-            <label for ="brightness">Brightness:</label>
+            <label for ="brightness" id="brightness-label">Brightness:</label>
             <input type="range" min="4" max="1000" class="slider-br" id="brightness">
         </div>
 
         <div class="slidecontainer">
-            <label for ="R">Red:</label>
+            <label for ="R" id="R-label">Red:</label>
             <input type="range" min="0" max="255" class="slider-r" id="R">
         </div>
 
         <div class="slidecontainer">
-            <label for ="G">Green:</label>
+            <label for ="G" id="G-label">Green:</label>
             <input type="range" min="0" max="255" class="slider-g" id="G">
         </div>
 
         <div class="slidecontainer">
-            <label for ="B">Blue:</label>
+            <label for ="B" id="B-label">Blue:</label>
             <input type="range" min="0" max="255" class="slider-b" id="B">
         </div>
 
@@ -44,7 +44,7 @@
     <!-- Mode select and animation speed -->
     <div class="Content">
         <div class="Content-box">
-            <p class="Main-Text">RGB LED strip Mode select</p>
+            <p class="Main-Text" id="modes-header">RGB LED strip Mode select</p>
         </div>
         <a href="" id="standard" class="button">Standard</a>
 
@@ -59,7 +59,7 @@
         <input type="button" id="alarmClock" value="Alarm Clock" class="button">
 
         <div class="slidecontainer">
-            <label for ="speed">Speed:</label>
+            <label for ="speed" id="speed-label">Speed:</label>
             <input type="range" min="1" max="100" class="slider-br" id="speed">
         </div>
 
@@ -85,5 +85,6 @@
     <script src="/javascript/modes.js"></script>
     <script src="/javascript/cookies.js"></script>
     <script src="/javascript/serverValueDisplay.js"></script>
+    <script type="module" src="/javascript/translator.js"></script>
 </body>
 </html>

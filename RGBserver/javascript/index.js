@@ -47,17 +47,3 @@ G.onmouseup = () => {
 B.onmouseup = () => {
     window.location.replace(`${url}/?panel=main&b=${B.value}`)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
