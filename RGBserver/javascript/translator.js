@@ -6,7 +6,7 @@ let translation = getJSON("/json/langs/norwegian.json")
 // translate(translation)
 
 for (let key of Object.keys(translation)) {
-    if (key == header) {
+    if (key == "header") {
         console.log(`Translating to: ${translation[key].language}`)
     }
     else {
