@@ -6,7 +6,7 @@ let norwegian = getJSON("/json/langs/norwegian.json")
 langSelector.addEventListener("change", () => {
     console.log(`Translating to: ${langSelector.value}`)
 
-    if (this.value == "NOB") {
+    if (langSelector.value == "NOB") {
         console.log(norwegian)
         translate(norwegian)
     }
