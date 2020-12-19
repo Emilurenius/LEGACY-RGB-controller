@@ -43,7 +43,6 @@ export function translate(json) {
             console.log(`Translating to: ${key.language}`)
         }
         else {
-            
             console.log(key)
             document.getElementById(key.id).innerHTML = key.translation
         }
