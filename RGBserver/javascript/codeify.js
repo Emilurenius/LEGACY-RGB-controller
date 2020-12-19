@@ -40,6 +40,7 @@ export function textFormat(rawText, textClass) {
 export function translate(json) {
     for (let key of Object.keys(json)) {
         if (key.id) {
+            console.log(key)
             document.getElementById(key.id).innerHTML = key.translation
         }
         else {
