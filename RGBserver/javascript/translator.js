@@ -4,7 +4,7 @@ const langSelector = document.getElementById("lang-select")
 let norwegian = getJSON("/json/langs/norwegian.json")
 
 langSelector.addEventListener("change", () => {
-    console.log(`Translating to: ${this.value}`)
+    console.log(`Translating to: ${langSelector.value}`)
 
     if (this.value == "NOB") {
         console.log(norwegian)
