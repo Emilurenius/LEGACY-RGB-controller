@@ -1,16 +1,13 @@
 import {translate} from "/javascript/codeify.js"
+const langSelector = document.getElementById("lang-select")
 
-let translation = getJSON("/json/langs/norwegian.json")
+let norwegian = getJSON("/json/langs/norwegian.json")
 
-console.log(translation)
-translate(translation)
+langSelector.addEventListener("change", () => {
+    console.log(`Translating to: ${this.value}`)
 
-// for (let key of Object.keys(translation)) {
-//     if (key == "header") {
-//         console.log(`Translating to: ${translation[key].language}`)
-//     }
-//     else {
-//         console.log(key)
-//         document.getElementById(key).innerHTML = translation[key]
-//     }
-// }
+    if (this.value == "NOB") {
+        console.log(norwegian)
+        translate(norwegian)
+    }
+})
