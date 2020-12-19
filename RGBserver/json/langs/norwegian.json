@@ -1,58 +1,18 @@
 {
     "header": {
-        "id": false,
         "language": "NOB"
     },
-    "title": {
-        "id": "title",
-        "translation": "RGB kontroll panel"
-    },
-    "controls-header": {
-        "id": "controls-header",
-        "translation": "RGB kontroll panel"
-    },
-    "toggle": {
-        "id": "toggle",
-        "translation": "Lys av/på"
-    },
-    "brightness-label": {
-        "id": "brightness-label",
-        "translation": "Lysstyrke"
-    },
-    "R-label": {
-        "id": "R-label",
-        "translation": "Rød"
-    },
-    "G-label": {
-        "id": "G-label",
-        "translation": "Grønn"
-    },
-    "B-label": {
-        "id": "B-label",
-        "translation": "Blå"
-    },
-    "modes-header": {
-        "id": "modes-header",
-        "translation": "Velg LED list modus"
-    },
-    "rainbow": {
-        "id": "rainbow",
-        "translation": "Regnbue"
-    },
-    "theaterChase": {
-        "id": "theaterChase",
-        "translation": "Teaterjakt"
-    },
-    "norway": {
-        "id": "norway",
-        "translation": "Norsk flagg"
-    },
-    "colorDrip": {
-        "id": "colorDrip",
-        "translation": "Fargedråper"
-    },
-    "speed-label": {
-        "id": "speed-label",
-        "translation": "Hastighet"
-    }
+    "title": "RGB kontroll panel",
+    "controls-header": "RGB LED list kontroll panel",
+    "toggle": "Lys av/på",
+    "brightness-label": "Lysstyrke:",
+    "R-label": "Rød",
+    "G-label": "Grønn",
+    "B-label": "Blå",
+    "modes-header": "Velg LED list modus:",
+    "rainbow": "Regnbue",
+    "theaterChase": "Teaterjakt",
+    "norway": "Norsk flag",
+    "colorDrip": "Fargedråper",
+    "speed-label": "Hastighet:"
 }
