@@ -22,7 +22,6 @@ function getCookie(cname) { // Search for cookie with name of variable cname. If
 }
 
 if (getCookie("scrollPos") != "") {
-    console.log(getCookie("scrollPos"))
     window.pageYOffset = parseInt(getCookie("scrollPos"))
     document.documentElement.scrollTop = parseInt(getCookie("scrollPos"))
 }
@@ -43,9 +42,7 @@ function scroll() {
     else {
         previousScrollVal = top
     }
-    console.log(top)
     setCookie("scrollPos", top, 1)
 }
 
 var bodySelector = $("body").first()
-console.log(bodySelector.scrollTop())
