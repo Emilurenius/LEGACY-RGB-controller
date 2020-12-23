@@ -291,6 +291,41 @@ def alarmClock(strip, alarmTime, wait_ms=50):
                     lightState = False
                 strip.show()
 
+def elitus(strip, data):
+    while True:
+        if checkBreak("elitus"):
+            break
+
+        try:
+            with open(dataFilePath) as JSON:
+                data = json.load(JSON)
+        except:
+            print("JSON busy...")
+            time.sleep(0.05)
+
+        if data.eliteData.mode == "standard":
+            for i in range(strip.numPixels()):
+                strip.setPixelColor(i, 255, 24, 0)
+            strip.show()
+
+        if data.eliteData.mode == "jump":
+            startTime = datetime.datetime.now().timestamp()
+            br = 1.0
+            plus = False
+            while datetime.datetime.now().timestamp() - startTime < 20:
+                for i in range(strip.numPixels()):
+                    strip.setPixelColor(i, int(float(255) * br), int(float(24) * br), 0)
+                strip.show()
+                if plus:
+                    br += 0.01
+                else:
+                    br -= 0.01
+                if br == 0.0:
+                    plus = True
+                elif br == 1.0:
+                    plus = False
+                
+
 
 
 # Main program logic follows:
@@ -338,6 +373,8 @@ if __name__ == '__main__':
                     colorDrip(strip, 100 - data["speed"])
                 elif data["onoff"] and data["mode"] == "alarmClock":
                     alarmClock(strip, data["alarmClockData"]["alarmTime"], 100 - data["speed"])
+                elif data["onoff"] and data["mode"] == "elitus":
+                    elitus(strip, data)
                 else:
                     colorWipe(strip, Color(0, 0, 0), 3)
             else:
