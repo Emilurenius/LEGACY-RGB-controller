@@ -16,17 +16,17 @@ let connections = []
 app.use(cors()) // Making sure the browser can request more data after it is loaded on the client computer.
 
 // Change this path to where the folder containing this file is:
-const folderPath = "home/pi/projects/RGB-controller/RGBserver"
+const folderPath = "/home/pi/projects/RGB-controller/RGBserver"
 
 // JSON file loaded in before the server is started:
-let rawdata = fs.readFileSync(path.join(__dirname, "/json/data.json"))
+let rawdata = fs.readFileSync(`${folderPath}/json/data.json`)
 let data = JSON.parse(rawdata)
 console.log(`Data loaded: ${data}`)
 
 // All server folders are set up:
-app.use("/css", express.static(path.join(__dirname, "/css")))
-app.use("/javascript", express.static(path.join(__dirname, "/css")))
-app.use("/json", express.static(path.join(__dirname, "/css")))
+app.use(`${folderPath}/css`, express.static("css"))
+app.use(`${folderPath}/javascript`, express.static("javascript"))
+app.use(`${folderPath}/json`, express.static("json"))
 
 // Graphical control interface:
 app.get("/", (req, res) => {
