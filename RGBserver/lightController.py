@@ -300,12 +300,12 @@ def elitus(strip, data):
             print("JSON busy...")
             time.sleep(0.05)
 
-        if data.eliteData.mode == "standard":
+        if data["eliteData"]["mode"] == "standard":
             for i in range(strip.numPixels()):
                 strip.setPixelColor(i, 255, 24, 0)
             strip.show()
 
-        if data.eliteData.mode == "jump":
+        if data["eliteData"]["mode"] == "jump":
             startTime = datetime.datetime.now().timestamp()
             br = 1.0
             plus = False
