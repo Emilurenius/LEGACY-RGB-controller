@@ -320,7 +320,7 @@ def elitus(strip, data):
                     br -= 1
                 if br == 0:
                     plus = True
-                elif br == 1:
+                elif br == 100:
                     plus = False
                 time.sleep(0.1)
 
