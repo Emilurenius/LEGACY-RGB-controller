@@ -12,13 +12,10 @@ import time, json, os, random, datetime
 from rpi_ws281x import *
 import argparse
 
-# Change this path to where data.json is saved on your Pi:
-dataFilePath = "/home/pi/projects/RGB-controller/RGBserver/json/data.json"
-
 # LED strip configuration:
-LED_COUNT      = 149     # Number of LED pixels.
+LED_COUNT      = 149      # Number of LED pixels.
 LED_PIN        = 18      # GPIO pin connected to the pixels (18 uses PWM!).
-#LED_PIN        = 10     # GPIO pin connected to the pixels (10 uses SPI /dev/spidev0.0).
+#LED_PIN        = 10      # GPIO pin connected to the pixels (10 uses SPI /dev/spidev0.0).
 LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
 LED_DMA        = 10      # DMA channel to use for generating signal (try 10)
 LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
@@ -31,7 +28,7 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 # Will return True if the mode given to the function is not the same as the one currently chosen on the web interface.
 def checkBreak(mode):
     try: # Try opening the json file, and check it
-        with open(dataFilePath) as JSON:
+        with open("./json/data.json") as JSON:
             data = json.load(JSON)
         if data["onoff"] != True or data["mode"] != mode: # Check if the mode has changed, and if the lights should be on
             return True # Return True if lights should be off, or the mode has changed
@@ -43,7 +40,7 @@ def checkBreak(mode):
 
 def getDataval(dataval):
     try: # Try opening the json file, and check it
-        with open(dataFilePath) as JSON:
+        with open("./json/data.json") as JSON:
             data = json.load(JSON)
         return data[dataval]
     except: # If you can't open the json file, just return False
@@ -314,7 +311,7 @@ if __name__ == '__main__':
         while True:
             # Import data file:
             try:
-                with open(dataFilePath) as JSON:
+                with open("./json/data.json") as JSON:
                     data = json.load(JSON)
             except:
                 print("JSON busy...")

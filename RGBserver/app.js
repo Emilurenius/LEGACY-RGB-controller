@@ -15,11 +15,8 @@ let connections = []
 
 app.use(cors()) // Making sure the browser can request more data after it is loaded on the client computer.
 
-// Change this path to where data.json is saved on your Pi:
-const dataFilePath = "/home/pi/projects/RGB-controller/RGBserver/json/data.json"
-
 // JSON file loaded in before the server is started:
-let rawdata = fs.readFileSync(dataFilePath)
+let rawdata = fs.readFileSync("./json/data.json")
 let data = JSON.parse(rawdata)
 console.log(`Data loaded: ${data}`)
 
@@ -72,7 +69,7 @@ app.get("/", (req, res) => {
         if (save) {
             let stringified = JSON.stringify(data, null, 2)
         
-            fs.writeFile(dataFilePath, stringified, (err) => {
+            fs.writeFile("./json/data.json", stringified, (err) => {
                 if (err) throw err
                 console.log("Data written to file")
             })
@@ -103,7 +100,7 @@ app.get("/", (req, res) => {
         if (save) {
             let stringified = JSON.stringify(data, null, 2)
         
-            fs.writeFile(dataFilePath, stringified, (err) => {
+            fs.writeFile("./json/data.json", stringified, (err) => {
                 if (err) throw err
                 console.log("Data written to file")
             })
@@ -132,7 +129,7 @@ app.get("/lightstate", (req, res) => {
     if (save) {
         let stringified = JSON.stringify(data, null, 2)
     
-        fs.writeFile(dataFilePath, stringified, (err) => {
+        fs.writeFile("./json/data.json", stringified, (err) => {
             if (err) throw err
             console.log("Data written to file")
         })
@@ -193,7 +190,7 @@ app.get("/rgb", (req, res) => {
     if (save) {
         let stringified = JSON.stringify(data, null, 2)
     
-        fs.writeFile(dataFilePath, stringified, (err) => {
+        fs.writeFile("./json/data.json", stringified, (err) => {
             if (err) throw err
             console.log("Data written to file")
         })
@@ -215,7 +212,7 @@ app.get("/modes/set", (req, res) => {
     if (save) {
         let stringified = JSON.stringify(data, null, 2)
     
-        fs.writeFile(dataFilePath, stringified, (err) => {
+        fs.writeFile("./json/data.json", stringified, (err) => {
             if (err) throw err
             console.log("Data written to file")
         })
