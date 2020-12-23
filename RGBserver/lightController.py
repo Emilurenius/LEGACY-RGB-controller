@@ -307,17 +307,17 @@ def elitus(strip, data):
 
         if data["eliteData"]["mode"] == "jump":
             startTime = datetime.datetime.now().timestamp()
-            br = 1.0
+            br = 100
             plus = False
             while datetime.datetime.now().timestamp() - startTime < 20:
                 print(br)
                 for i in range(strip.numPixels()):
-                    strip.setPixelColor(i, Color(int(float(255) * br), int(float(24) * br), 0))
+                    strip.setPixelColor(i, Color(int(float(255) * float(br / 100)), int(float(24) * float(br / 100)), 0))
                 strip.show()
                 if plus:
-                    br += 0.010
+                    br += 1
                 else:
-                    br -= 0.010
+                    br -= 1
                 if br == 0.01:
                     plus = True
                 elif br == 1.0:
