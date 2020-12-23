@@ -317,7 +317,7 @@ def elitus(strip, data):
                     br += 0.01
                 else:
                     br -= 0.01
-                if br == 0.0:
+                if br == 0.01:
                     plus = True
                 elif br == 1.0:
                     plus = False
@@ -357,7 +357,7 @@ if __name__ == '__main__':
                 if data["onoff"] and data["mode"] == "standard":
                     colorWipe(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 1000), int(float(data["G"]) * float(data["brightness"]) / 1000), int(float(data["B"]) * float(data["brightness"]) / 1000)), 3)
                 elif data["onoff"] and data["mode"] == "solidColor":
-                    solidColor(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 100), int(float(data["G"]) * float(data["brightness"]) / 100), int(float(data["B"]) * float(data["brightness"]) / 100)))
+                    solidColor(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 1000), int(float(data["G"]) * float(data["brightness"]) / 1000), int(float(data["B"]) * float(data["brightness"]) / 1000)))
                 elif data["onoff"] and data["mode"] == "rainbow":
                     rainbow(strip, 100 - data["speed"])
                 elif data["onoff"] and data["mode"] == "theaterChase":
