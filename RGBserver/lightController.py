@@ -315,9 +315,9 @@ def elitus(strip, data):
                     strip.setPixelColor(i, Color(int(float(255) * br), int(float(24) * br), 0))
                 strip.show()
                 if plus:
-                    br += 0.01
+                    br += 0.010
                 else:
-                    br -= 0.01
+                    br -= 0.010
                 if br == 0.01:
                     plus = True
                 elif br == 1.0:
