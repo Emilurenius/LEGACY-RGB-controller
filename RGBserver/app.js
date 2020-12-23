@@ -209,6 +209,11 @@ app.get("/modes/set", (req, res) => {
         data.mode = req.query.mode
     }
 
+    if (req.query.elitusMode) {
+        save = true
+        data.eliteData.mode = req.query.elitusMode
+    }
+
     if (save) {
         let stringified = JSON.stringify(data, null, 2)
     
