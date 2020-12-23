@@ -329,7 +329,7 @@ def elitus(strip, data):
 
             startTime = datetime.datetime.now().timestamp()
             while datetime.datetime.now().timestamp() - startTime < 20:
-               color1 = random.randint(0, 255) # Random color 1
+                color1 = random.randint(0, 255) # Random color 1
                 color2 = random.randint(0, 255) # Random color 2
                 fullColor = random.randint(0, 2) # Choose one of the three RGB channels to be full brightness
 
