@@ -13,7 +13,6 @@ from rpi_ws281x import *
 import argparse
 
 dataFilePath = os.path.abspath("data.json") # Find the path to data.json
-print(dataFilePath)
 
 # LED strip configuration:
 LED_COUNT      = 149      # Number of LED pixels.
