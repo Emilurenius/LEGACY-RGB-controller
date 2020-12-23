@@ -302,7 +302,7 @@ def elitus(strip, data):
 
         if data["eliteData"]["mode"] == "standard":
             for i in range(strip.numPixels()):
-                strip.setPixelColor(i, 255, 24, 0)
+                strip.setPixelColor(i, Color(255, 24, 0)
             strip.show()
 
         if data["eliteData"]["mode"] == "jump":
