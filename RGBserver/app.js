@@ -15,15 +15,18 @@ let connections = []
 
 app.use(cors()) // Making sure the browser can request more data after it is loaded on the client computer.
 
+// Change this path to where the folder containing this file is:
+const folderPath = "home/pi/projects/RGB-controller/RGBserver"
+
 // JSON file loaded in before the server is started:
-let rawdata = fs.readFileSync("/json/data.json")
+let rawdata = fs.readFileSync(path.join(__dirname, "/json/data.json"))
 let data = JSON.parse(rawdata)
 console.log(`Data loaded: ${data}`)
 
 // All server folders are set up:
-app.use("/css", express.static("/css"))
-app.use("/javascript", express.static("/javascript"))
-app.use("/json", express.static("/json"))
+app.use("/css", express.static(path.join(__dirname, "/css")))
+app.use("/javascript", express.static(path.join(__dirname, "/javascript")))
+app.use("/json", express.static(path.join(__dirname, "/json")))
 
 // Graphical control interface:
 app.get("/", (req, res) => {
@@ -69,7 +72,7 @@ app.get("/", (req, res) => {
         if (save) {
             let stringified = JSON.stringify(data, null, 2)
         
-            fs.writeFile("/json/data.json", stringified, (err) => {
+            fs.writeFile(`${folderPath}/json/data.json`, stringified, (err) => {
                 if (err) throw err
                 console.log("Data written to file")
             })
@@ -100,7 +103,7 @@ app.get("/", (req, res) => {
         if (save) {
             let stringified = JSON.stringify(data, null, 2)
         
-            fs.writeFile("/json/data.json", stringified, (err) => {
+            fs.writeFile(`${folderPath}/json/data.json`, stringified, (err) => {
                 if (err) throw err
                 console.log("Data written to file")
             })
@@ -129,7 +132,7 @@ app.get("/lightstate", (req, res) => {
     if (save) {
         let stringified = JSON.stringify(data, null, 2)
     
-        fs.writeFile("/json/data.json", stringified, (err) => {
+        fs.writeFile(`${folderPath}/json/data.json`, stringified, (err) => {
             if (err) throw err
             console.log("Data written to file")
         })
@@ -190,7 +193,7 @@ app.get("/rgb", (req, res) => {
     if (save) {
         let stringified = JSON.stringify(data, null, 2)
     
-        fs.writeFile("/json/data.json", stringified, (err) => {
+        fs.writeFile(`${folderPath}/json/data.json`, stringified, (err) => {
             if (err) throw err
             console.log("Data written to file")
         })
@@ -212,7 +215,7 @@ app.get("/modes/set", (req, res) => {
     if (save) {
         let stringified = JSON.stringify(data, null, 2)
     
-        fs.writeFile("/json/data.json", stringified, (err) => {
+        fs.writeFile(`${folderPath}/json/data.json`, stringified, (err) => {
             if (err) throw err
             console.log("Data written to file")
         })
