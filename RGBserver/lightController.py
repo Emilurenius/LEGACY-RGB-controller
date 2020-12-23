@@ -309,6 +309,7 @@ def elitus(strip, data):
             startTime = datetime.datetime.now().timestamp()
             br = 100
             plus = False
+            cancelAnimation = False
             while datetime.datetime.now().timestamp() - startTime < 20:
                 print(br)
                 for i in range(strip.numPixels()):
@@ -318,10 +319,11 @@ def elitus(strip, data):
                     with open("./json/data.json") as JSON:
                         data = json.load(JSON)
                         if data["eliteData"]["mode"] != "jump":
+                            cancelAnimation = True
                             break
                 except:
                     print("JSON busy...")
-                time.sleep(0.05)
+                    time.sleep(0.05)
                 if checkBreak("elitus"):
                     break
                 if plus:
@@ -339,6 +341,8 @@ def elitus(strip, data):
 
             startTime = datetime.datetime.now().timestamp()
             while datetime.datetime.now().timestamp() - startTime < 13:
+                if cancelAnimation:
+                    break
                 color1 = random.randint(0, 255) # Random color 1
                 color2 = random.randint(0, 255) # Random color 2
                 fullColor = random.randint(0, 2) # Choose one of the three RGB channels to be full brightness
