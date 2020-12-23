@@ -25,8 +25,8 @@ console.log(`Data loaded: ${data}`)
 
 // All server folders are set up:
 app.use("/css", express.static(path.join(__dirname, "/css")))
-app.use("/javascript", express.static(path.join(__dirname, "/css")))
-app.use("/json", express.static(path.join(__dirname, "/css")))
+app.use("/javascript", express.static(path.join(__dirname, "/javascript")))
+app.use("/json", express.static(path.join(__dirname, "/json")))
 
 // Graphical control interface:
 app.get("/", (req, res) => {
