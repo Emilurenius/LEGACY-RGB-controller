@@ -316,9 +316,9 @@ def elitus(strip, data):
                 strip.show()
                 try:
                     with open("./json/data.json") as JSON:
-                    data = json.load(JSON)
-                    if data["eliteData"]["mode"] != jump:
-                        break
+                        data = json.load(JSON)
+                        if data["eliteData"]["mode"] != jump:
+                            break
                 except:
                     print("JSON busy...")
             time.sleep(0.05)
