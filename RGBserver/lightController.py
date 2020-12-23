@@ -12,8 +12,6 @@ import time, json, os, random, datetime
 from rpi_ws281x import *
 import argparse
 
-dataFilePath = os.path.abspath("data.json") # Find the path to data.json
-
 # LED strip configuration:
 LED_COUNT      = 149      # Number of LED pixels.
 LED_PIN        = 18      # GPIO pin connected to the pixels (18 uses PWM!).
@@ -30,7 +28,7 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 # Will return True if the mode given to the function is not the same as the one currently chosen on the web interface.
 def checkBreak(mode):
     try: # Try opening the json file, and check it
-        with open(dataFilePath) as JSON:
+        with open("./json/data.json") as JSON:
             data = json.load(JSON)
         if data["onoff"] != True or data["mode"] != mode: # Check if the mode has changed, and if the lights should be on
             return True # Return True if lights should be off, or the mode has changed
@@ -42,7 +40,7 @@ def checkBreak(mode):
 
 def getDataval(dataval):
     try: # Try opening the json file, and check it
-        with open(dataFilePath) as JSON:
+        with open("./json/data.json") as JSON:
             data = json.load(JSON)
         return data[dataval]
     except: # If you can't open the json file, just return False
@@ -313,7 +311,7 @@ if __name__ == '__main__':
         while True:
             # Import data file:
             try:
-                with open(dataFilePath) as JSON:
+                with open("./json/data.json") as JSON:
                     data = json.load(JSON)
             except:
                 print("JSON busy...")
