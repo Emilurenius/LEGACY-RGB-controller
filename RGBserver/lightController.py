@@ -317,11 +317,11 @@ def elitus(strip, data):
                 try:
                     with open("./json/data.json") as JSON:
                         data = json.load(JSON)
-                        if data["eliteData"]["mode"] != jump:
+                        if data["eliteData"]["mode"] != "jump":
                             break
                 except:
                     print("JSON busy...")
-            time.sleep(0.05)
+                time.sleep(0.05)
                 if checkBreak("elitus"):
                     break
                 if plus:
