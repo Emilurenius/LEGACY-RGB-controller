@@ -294,7 +294,7 @@ def elitus(strip, data):
             break
 
         try:
-            with open(dataFilePath) as JSON:
+            with open("./json/data.json") as JSON:
                 data = json.load(JSON)
         except:
             print("JSON busy...")
