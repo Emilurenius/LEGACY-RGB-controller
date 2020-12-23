@@ -350,7 +350,7 @@ def elitus(strip, data):
                 for i in range(strip.numPixels()):
                     strip.setPixelColor(i, Color(r, g, b))
                 strip.show()
-                time.sleep(0.1)
+                time.sleep(0.05)
 
 
 
