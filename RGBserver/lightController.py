@@ -318,9 +318,9 @@ def elitus(strip, data):
                     br += 1
                 else:
                     br -= 1
-                if br == 0.01:
+                if br == 0:
                     plus = True
-                elif br == 1.0:
+                elif br == 1:
                     plus = False
                 time.sleep(0.1)
 
