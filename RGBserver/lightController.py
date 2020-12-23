@@ -318,8 +318,8 @@ def elitus(strip, data):
                     br += 5
                 else:
                     br -= 5
-                if br < 0:
-                    br = 0
+                if br < 1:
+                    br = 1
                 elif br > 100:
                     br = 100
                 if br == 1:
