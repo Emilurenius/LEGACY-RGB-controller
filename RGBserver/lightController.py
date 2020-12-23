@@ -314,6 +314,16 @@ def elitus(strip, data):
                 for i in range(strip.numPixels()):
                     strip.setPixelColor(i, Color(int(float(255) * float(br / 100)), int(float(24) * float(br / 100)), 0))
                 strip.show()
+                try:
+                    with open("./json/data.json") as JSON:
+                    data = json.load(JSON)
+                    if data["eliteData"]["mode"] != jump:
+                        break
+                except:
+                    print("JSON busy...")
+            time.sleep(0.05)
+                if checkBreak("elitus"):
+                    break
                 if plus:
                     br += 2
                 else:
@@ -350,6 +360,8 @@ def elitus(strip, data):
                 for i in range(strip.numPixels()):
                     strip.setPixelColor(i, Color(r, g, b))
                 strip.show()
+                if checkBreak("elitus"):
+                    break
                 time.sleep(0.05)
 
 
