@@ -12,11 +12,8 @@ import time, json, os, random, datetime
 from rpi_ws281x import *
 import argparse
 
-for p in  os.environ["PATH"].split(";"):
-    for r,d,f in os.walk(p):
-        for files in f:
-             if files == "data.json":
-                 dataFilePath = os.path.join(r,files)
+dataFilePath = os.path.abspath("data.json") # Find the path to data.json
+print(dataFilePath)
 
 # LED strip configuration:
 LED_COUNT      = 149      # Number of LED pixels.
