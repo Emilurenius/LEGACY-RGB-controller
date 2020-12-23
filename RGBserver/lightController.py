@@ -311,7 +311,7 @@ def elitus(strip, data):
             plus = False
             while datetime.datetime.now().timestamp() - startTime < 20:
                 for i in range(strip.numPixels()):
-                    strip.setPixelColor(i, int(float(255) * br), int(float(24) * br), 0)
+                    strip.setPixelColor(i, Color(int(float(255) * br), int(float(24) * br), 0))
                 strip.show()
                 if plus:
                     br += 0.01
