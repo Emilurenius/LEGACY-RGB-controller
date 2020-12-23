@@ -314,7 +314,6 @@ if __name__ == '__main__':
 
     try:
         previousData = False
-        data = False
         while True:
             # Import data file:
             try:
@@ -324,7 +323,7 @@ if __name__ == '__main__':
                 print("JSON busy...")
                 time.sleep(0.05)
             
-            if previousData != data and data != false:
+            if previousData != data:
                 print("Checking mode")
                 previousData = data
                 # Checking what mode to run:
