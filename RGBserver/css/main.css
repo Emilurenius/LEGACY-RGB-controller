@@ -156,7 +156,7 @@ nav {
 .Content .Content-box {
     margin: 20px;
     border-radius: 25px;
-    background: var(--main-background-color);
+    background: var(--secondary-background-color);
 }
 
 .Content .Main-Text {
@@ -178,7 +178,7 @@ nav {
 }
 
 .Content .button {
-    background-color: var(--secondary-background-color);
+    background-color: var(--main-background-color);
   	border: none;
  	color: white;
   	text-align: center;
