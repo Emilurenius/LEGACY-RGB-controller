@@ -75,6 +75,7 @@ body {
 @media screen and (max-width: 425px) {
     .slidecontainer {
         width: 80%;
+        margin-left: 10%;
     }
 }
 
