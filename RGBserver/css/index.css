@@ -38,7 +38,7 @@ body {
     cursor: pointer; /* Cursor on hover */
 }
   
-  .slider-br::-moz-range-thumb, .slider-r::-moz-range-thumb, .slider-g::-moz-range-thumb, .slider-b::-moz-range-thumb {
+.slider-br::-moz-range-thumb, .slider-r::-moz-range-thumb, .slider-g::-moz-range-thumb, .slider-b::-moz-range-thumb {
     width: 25px; /* Set a specific slider handle width */
     height: 25px; /* Slider handle height */
     border-radius: 50%;
@@ -69,6 +69,12 @@ body {
 @media screen and (min-width: 769px) {
     .phonebutton-slider {
         display: none;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .slidecontainer {
+        width: 80%;
     }
 }
 

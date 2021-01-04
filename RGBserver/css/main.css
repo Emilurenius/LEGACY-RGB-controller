@@ -260,19 +260,7 @@ nav {
         height:50%;
     }
 
-    .Content .Body-Text {
-        font-size: 15px;
-    }
-    
-    .Content .Body-Text-alignLeft {
-        font-size: 15px;
-    }
-
-    .Content .button {
-        font-size: 15px;
-    }
-
-    .Content-box .button {
+    .Content .Body-Text, Content .Body-Text-alignLeft, .Content .button, .Content-box .button {
         font-size: 15px;
     }
 }
