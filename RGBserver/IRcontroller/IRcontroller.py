@@ -102,7 +102,8 @@ elif mode == "noiseReduce":
 		if noiseFound:
 			noiseFoundTime = datetime.now().timestamp()
 		else:
-			print("checking for", now + timedelta(seconds=20) - noiseFoundTime, "more seconds!")
+			now = datetime.now()
+			print("checking for", datetime.now().timestamp() - noiseFoundTime * 60, "more seconds")
 
 	print("No more noise found!")
 	print("noise found:", noiseList)
