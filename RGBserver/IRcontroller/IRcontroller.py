@@ -88,7 +88,7 @@ if mode == "test":
 elif mode == "noiseReduce":
 	noiseList = []
 	noiseFoundTime = datetime.now().timestamp()
-	while datetime.now().timestamp() - noiseFoundTime < 1:
+	while datetime.now().timestamp() - noiseFoundTime < 20:
 		noise = convertHex(getBinary())
 		print(noise)
 
@@ -103,7 +103,7 @@ elif mode == "noiseReduce":
 			noiseFoundTime = datetime.now().timestamp()
 		else:
 			now = datetime.now()
-			print("checking for", datetime.now().timestamp() - noiseFoundTime * 60, "more seconds")
+			print("checking for", datetime.now().timestamp() - noiseFoundTime * -1, "more seconds")
 
 	print("No more noise found!")
 	print("noise found:", noiseList)
