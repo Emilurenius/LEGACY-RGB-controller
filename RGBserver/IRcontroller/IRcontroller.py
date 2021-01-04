@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 from datetime import datetime
+import pickle
 
 pin = 11
 buttons = []
@@ -91,7 +92,19 @@ elif mode == "noiseReduce":
 		print(noise)
 
 		if noise in noiseList:
-			continue
+			noiseFound = False
 		else:
+			noiseFound = True
 			print("New noise signal found")
 			noiseList.append(noise)
+
+		if noiseFound:
+			noiseFoundTime = datetime.now().timestamp()
+		else:
+			now = datetime.now().timestamp()
+			if noiseFoundTime > now + 60:
+				print("No more noise found!")
+				print("noise found:", noiseList)
+				open_file = open("noise.pkl", "wb")
+				pickle.dump(noiseList)
+				open_file.close()
