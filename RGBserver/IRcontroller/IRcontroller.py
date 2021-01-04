@@ -108,3 +108,5 @@ elif mode == "noiseReduce":
 				open_file = open("noise.pkl", "wb")
 				pickle.dump(noiseList)
 				open_file.close()
+			else:
+				print("checking for", now + timedelta(seconds=20) - noiseFoundTime, "more seconds!")
