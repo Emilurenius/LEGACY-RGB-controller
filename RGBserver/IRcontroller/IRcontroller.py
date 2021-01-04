@@ -88,7 +88,7 @@ elif mode == "noiseReduce":
 	noiseList = []
 	while True:
 		noise = convertHex(getBinary())
-		print(inData)
+		print(noise)
 
 		if noise in noiseList:
 			continue
