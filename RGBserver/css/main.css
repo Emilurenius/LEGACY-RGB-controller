@@ -249,3 +249,30 @@ nav {
         height:50%;
     }
 }
+
+@media screen and (max-width: 425px) {
+    .Content .Main-Text {
+        font-size: 25px;
+    }
+    .Content .image {
+        margin: 10px;
+        width: 50%;
+        height:50%;
+    }
+
+    .Content .Body-Text {
+        font-size: 15px;
+    }
+    
+    .Content .Body-Text-alignLeft {
+        font-size: 15px;
+    }
+
+    .Content .button {
+        font-size: 15px;
+    }
+
+    .Content-box .button {
+        font-size: 15px;
+    }
+}
