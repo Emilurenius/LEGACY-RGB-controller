@@ -108,5 +108,5 @@ elif mode == "noiseReduce":
 	print("No more noise found!")
 	print("noise found:", noiseList)
 	open_file = open("noise.pkl", "wb")
-	pickle.dump(noiseList)
+	pickle.dump(noiseList, open_file)
 	open_file.close()
