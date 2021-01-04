@@ -102,7 +102,7 @@ elif mode == "noiseReduce":
 			noiseFoundTime = datetime.now()
 		else:
 			now = datetime.now()
-			if noiseFoundTime > now - timedelta(seconds=20):
+			if noiseFoundTime > now + timedelta(seconds=20):
 				print("No more noise found!")
 				print("noise found:", noiseList)
 				open_file = open("noise.pkl", "wb")
