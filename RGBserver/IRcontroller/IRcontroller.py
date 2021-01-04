@@ -66,6 +66,7 @@ def convertHex(binaryValue):
 
 previousVal = False
 mode = input(">>")
+print(mode)
 
 if mode == "test":
 	while True:
@@ -83,7 +84,7 @@ if mode == "test":
 			print("Fist buttonpress")
 			previousVal = inData
 
-if mode == "noiseReduce":
+elif mode == "noiseReduce":
 	noiseList = []
 	while True:
 		noise = convertHex(getBinary())
