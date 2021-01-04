@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-from datetime import datetime
+from datetime import datetime, timedelta
 import pickle
 
 pin = 11
@@ -99,10 +99,10 @@ elif mode == "noiseReduce":
 			noiseList.append(noise)
 
 		if noiseFound:
-			noiseFoundTime = datetime.now().timestamp()
+			noiseFoundTime = datetime.now()
 		else:
-			now = datetime.now().timestamp()
-			if noiseFoundTime > now + 60:
+			now = datetime.now()
+			if noiseFoundTime > now - timedelta(seconds=20):
 				print("No more noise found!")
 				print("noise found:", noiseList)
 				open_file = open("noise.pkl", "wb")
