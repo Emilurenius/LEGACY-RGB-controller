@@ -87,7 +87,8 @@ if mode == "test":
 
 elif mode == "noiseReduce":
 	noiseList = []
-	while True:
+	noiseFoundTime = datetime.now().timestamp()
+	while datetime.now().timestamp() - noiseFoundTime < 1:
 		noise = convertHex(getBinary())
 		print(noise)
 
@@ -99,14 +100,17 @@ elif mode == "noiseReduce":
 			noiseList.append(noise)
 
 		if noiseFound:
-			noiseFoundTime = datetime.now()
-		else:
-			now = datetime.now()
-			if noiseFoundTime > now + timedelta(seconds=20):
+			noiseFoundTime = datetime.now().timestamp()
 				print("No more noise found!")
 				print("noise found:", noiseList)
 				open_file = open("noise.pkl", "wb")
 				pickle.dump(noiseList)
 				open_file.close()
-			else:
-				print("checking for", now + timedelta(seconds=20) - noiseFoundTime, "more seconds!")
+		else:
+			print("checking for", now + timedelta(seconds=20) - noiseFoundTime, "more seconds!")
+			
+	print("No more noise found!")
+	print("noise found:", noiseList)
+	open_file = open("noise.pkl", "wb")
+	pickle.dump(noiseList)
+	open_file.close()
