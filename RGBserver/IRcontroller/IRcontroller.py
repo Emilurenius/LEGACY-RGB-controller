@@ -70,20 +70,22 @@ mode = input(">>")
 print(mode)
 
 if mode == "test":
+	noiseFile = open("noise.pkl", "rb")
+	noise = pickle.load(noiseFile)
 	while True:
 		inData = convertHex(getBinary())
 		print(inData)
-		
-		if previousVal:
-			if previousVal == inData:
-				print("Same one again")
-				previousVal = inData
+		if inData not in noise:
+			if previousVal:
+				if previousVal == inData:
+					print("Same one again")
+					previousVal = inData
+				else:
+					print("New button!")
+					previousVal = inData
 			else:
-				print("New button!")
+				print("Fist buttonpress")
 				previousVal = inData
-		else:
-			print("Fist buttonpress")
-			previousVal = inData
 
 elif mode == "noiseReduce":
 	noiseList = []
@@ -101,8 +103,8 @@ elif mode == "noiseReduce":
 
 		if noiseFound:
 			noiseFoundTime = datetime.now().timestamp()
-		else:
-			now = datetime.now()
+		#else:
+			#now = datetime.now()
 			#This print statement does not do it's job
 			#print("checking for", datetime.now().timestamp() - noiseFoundTime * -1, "more seconds")
 
