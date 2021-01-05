@@ -388,6 +388,7 @@ if __name__ == '__main__':
 
     try:
         previousData = False
+        data = False
         while True:
             # Import data file:
             try:
