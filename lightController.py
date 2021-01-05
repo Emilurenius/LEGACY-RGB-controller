@@ -13,7 +13,7 @@ from rpi_ws281x import *
 import argparse
 
 # LED strip configuration:
-LED_COUNT      = 149      # Number of LED pixels.
+LED_COUNT      = 149     # Number of LED pixels.
 LED_PIN        = 18      # GPIO pin connected to the pixels (18 uses PWM!).
 #LED_PIN        = 10      # GPIO pin connected to the pixels (10 uses SPI /dev/spidev0.0).
 LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
@@ -28,7 +28,7 @@ LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 # Will return True if the mode given to the function is not the same as the one currently chosen on the web interface.
 def checkBreak(mode):
     try: # Try opening the json file, and check it
-        with open("./json/data.json") as JSON:
+        with open("./RGBserver/json/data.json") as JSON:
             data = json.load(JSON)
         if data["onoff"] != True or data["mode"] != mode: # Check if the mode has changed, and if the lights should be on
             return True # Return True if lights should be off, or the mode has changed
@@ -40,7 +40,7 @@ def checkBreak(mode):
 
 def getDataval(dataval):
     try: # Try opening the json file, and check it
-        with open("./json/data.json") as JSON:
+        with open("./RGBserver/json/data.json") as JSON:
             data = json.load(JSON)
         return data[dataval]
     except: # If you can't open the json file, just return False
@@ -294,7 +294,7 @@ def elitus(strip, data):
             break
 
         try:
-            with open("./json/data.json") as JSON:
+            with open("./RGBserver/json/data.json") as JSON:
                 data = json.load(JSON)
         except:
             print("JSON busy...")
@@ -316,7 +316,7 @@ def elitus(strip, data):
                     strip.setPixelColor(i, Color(int(float(255) * float(br / 100)), int(float(24) * float(br / 100)), 0))
                 strip.show()
                 try:
-                    with open("./json/data.json") as JSON:
+                    with open("./RGBserver/json/data.json") as JSON:
                         data = json.load(JSON)
                         if data["eliteData"]["mode"] != "jump":
                             cancelAnimation = True
@@ -391,7 +391,7 @@ if __name__ == '__main__':
         while True:
             # Import data file:
             try:
-                with open("./json/data.json") as JSON:
+                with open("./RGBserver/json/data.json") as JSON:
                     data = json.load(JSON)
             except:
                 print("JSON busy...")
