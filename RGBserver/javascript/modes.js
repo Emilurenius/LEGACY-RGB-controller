@@ -32,7 +32,7 @@ sliderButtonModes.addEventListener("click", (event) => {
 })
 
 alarmClock.addEventListener("click", (event) => {
-    const alarmTime = prompt("What time do you want to wake up?", "Insert value")
+    const alarmTime = prompt("What time do you want to wake up?", `${getJSON(`${url}/json/data.json`).alarmClockData.alarmTime}`)
     window.location.replace(`${url}/?panel=modes&mode=alarmClock&alarmTime=${alarmTime}`)
 })
 
