@@ -245,6 +245,14 @@ def colorDrip(strip, wait_ms=50):
                 if checkBreak("colorDrip"): # Stop function if the mode has changed, or the lights are turned off.
                     break
                 x += 1
+
+            strip.setPixelColor(x - 4, Color(0, 0, 0))
+            wait_ms = 100 - getDataval("speed")
+            strip.setPixelColor(x - 3, Color(0, 0, 0))
+            wait_ms = 100 - getDataval("speed")
+            strip.setPixelColor(x - 2, Color(0, 0, 0))
+            wait_ms = 100 - getDataval("speed")
+            strip.setPixelColor(x - 1, Color(0, 0, 0))
             
             steps -= 1 # Remove one step before next increment. This makes sure the next animation stops right before the previous one, making the colors stack.
 
