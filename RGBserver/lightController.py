@@ -248,15 +248,12 @@ def colorDrip(strip, wait_ms=50):
 
             strip.setPixelColor(steps - 4, Color(0, 0, 0))
             strip.show()
-            # wait_ms = 100 - getDataval("speed")
-            # strip.setPixelColor(steps - 3, Color(0, 0, 0))
-            # strip.show()
-            # wait_ms = 100 - getDataval("speed")
-            # strip.setPixelColor(steps - 2, Color(0, 0, 0))
-            # strip.show()
-            # wait_ms = 100 - getDataval("speed")
-            # strip.setPixelColor(steps - 1, Color(0, 0, 0))
-            # strip.show()
+            wait_ms = 100 - getDataval("speed")
+            strip.setPixelColor(steps - 3, Color(0, 0, 0))
+            strip.show()
+            wait_ms = 100 - getDataval("speed")
+            strip.setPixelColor(steps - 2, Color(0, 0, 0))
+            strip.show()
             
             steps -= 1 # Remove one step before next increment. This makes sure the next animation stops right before the previous one, making the colors stack.
 
