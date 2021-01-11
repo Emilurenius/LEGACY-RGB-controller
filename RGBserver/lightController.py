@@ -232,11 +232,13 @@ def colorDrip(strip, wait_ms=50):
             x = 0 # Set x to 0, this will be used to increment while loop underneath
             
             while x < steps: # Repeated for every LED in the strip
-                strip.setPixelColor(x, Color(r, g, b))
-                strip.setPixelColor(x - 1, Color(int(float(r) * float(60 / 100)), int(float(g) * float(60 / 100)), int(float(b) * float(60 / 100))))
-                strip.setPixelColor(x - 2, Color(int(float(r) * float(20 / 100)), int(float(g) * float(20 / 100)), int(float(b) * float(20 / 100))))
-                strip.setPixelColor(x - 3, Color(int(float(r) * float(1 / 100)), int(float(g) * float(1 / 100)), int(float(b) * float(1 / 100))))
-                strip.setPixelColor(x - 4, Color(0, 0, 0))
+
+                # generate droplet with tail:
+                strip.setPixelColor(x, Color(r, g, b)) # main pixel
+                strip.setPixelColor(x - 1, Color(int(float(r) * float(60 / 100)), int(float(g) * float(60 / 100)), int(float(b) * float(60 / 100)))) # Tail pixel 1
+                strip.setPixelColor(x - 2, Color(int(float(r) * float(20 / 100)), int(float(g) * float(20 / 100)), int(float(b) * float(20 / 100)))) # Tail pixel 2
+                strip.setPixelColor(x - 3, Color(int(float(r) * float(1 / 100)), int(float(g) * float(1 / 100)), int(float(b) * float(1 / 100)))) # Tail pixel 3
+                strip.setPixelColor(x - 4, Color(0, 0, 0)) # Reset overflowing tail pixels
                 strip.show()
                 if getDataval("speed"): #Update speed for animation from JSON file
                     wait_ms = 100 - getDataval("speed")
@@ -246,6 +248,7 @@ def colorDrip(strip, wait_ms=50):
                     break
                 x += 1
 
+            # Remove tail when droplet stops:
             strip.setPixelColor(steps - 4, Color(0, 0, 0))
             strip.show()
             wait_ms = 100 - getDataval("speed")
@@ -357,7 +360,6 @@ def alarmClock(strip):
                     colorWipe(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 1000), int(float(data["G"]) * float(data["brightness"]) / 1000), int(float(data["B"]) * float(data["brightness"]) / 1000)), 3)
                 else:
                     colorWipe(strip, Color(0, 0, 0), 3)
-
 
 def elitus(strip, data):
     while True:
