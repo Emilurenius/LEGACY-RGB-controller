@@ -8,9 +8,8 @@
 # The original example script that this script is built upon can be found in the same github repository as this file
 # Or you can go to the original github repository here: https://github.com/jgarff/rpi_ws281x
 
-import time, json, os, random, datetime
+import time, json, os, random, datetime, argparse, requests
 from rpi_ws281x import *
-import argparse
 
 # LED strip configuration:
 LED_COUNT      = 149      # Number of LED pixels.
@@ -285,7 +284,9 @@ def newAlarmClock(strip):
         alarmTime = data["alarmClockData"]["alarmTime"]
 
         if currentTime_Formatted == alarmTime: # Check if current time is the same as inputted alarm activation time
-            lightState = False
+            if data["onoff"] == False:
+                requests.get("http://localhost:3000/lightstate?toggle=change")
+                
             while True: # This will run untill the user turns off the lights, or changes mode. Note that turning lights off and on will restart the alarmclock function.
                 
                 colorWipe(strip, Color(255, 255, 255), 0)
