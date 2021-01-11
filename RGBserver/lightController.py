@@ -340,7 +340,10 @@ def newAlarmClock(strip):
         else: # If the alarm time has not been reached, act like standard mode.
             if previousData != data: 
                 previousData = data
-                colorWipe(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 1000), int(float(data["G"]) * float(data["brightness"]) / 1000), int(float(data["B"]) * float(data["brightness"]) / 1000)), 3)
+                if data["onoff"]:
+                    colorWipe(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 1000), int(float(data["G"]) * float(data["brightness"]) / 1000), int(float(data["B"]) * float(data["brightness"]) / 1000)), 3)
+                else:
+                    colorWipe(strip, Color(0, 0, 0), 3)
         
 
 def alarmClock(strip, alarmTime, wait_ms=50):
