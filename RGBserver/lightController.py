@@ -251,7 +251,7 @@ def colorDrip(strip, wait_ms=50):
             if steps == 0: # When all LEDs have been filled, colorWipe with black.
                 colorWipe(strip, Color(0, 0, 0))
 
-def newAlarmClock(strip):
+def alarmClock(strip):
     alarmDone = False
     while True:
 
@@ -286,7 +286,7 @@ def newAlarmClock(strip):
         if currentTime_Formatted == alarmTime: # Check if current time is the same as inputted alarm activation time
             if data["onoff"] == False:
                 requests.get("http://localhost:3000/lightstate?toggle=change")
-                
+
             while True: # This will run untill the user turns off the lights, or changes mode. Note that turning lights off and on will restart the alarmclock function.
                 
                 colorWipe(strip, Color(255, 255, 255), 0)
@@ -345,43 +345,7 @@ def newAlarmClock(strip):
                     colorWipe(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 1000), int(float(data["G"]) * float(data["brightness"]) / 1000), int(float(data["B"]) * float(data["brightness"]) / 1000)), 3)
                 else:
                     colorWipe(strip, Color(0, 0, 0), 3)
-        
 
-def alarmClock(strip, alarmTime, wait_ms=50):
-    colorWipe(strip, Color(0, 0, 0), 3) # Wipe the LEDs OFF
-
-    while True: # Run time check forever
-
-        if checkBreak("alarmClock"): # Stop function if the mode has changed, or the lights are turned off.
-            break
-
-        currentTime = datetime.datetime.now() # save the current time as a datetime
-        hour = currentTime.hour # Extract current hour from datetime
-        minute = currentTime.minute # Extract current minute from datetime
-
-        # Add 0 to front of hour and minute if they only have one digit
-        if hour < 10:
-            hour = "0" + str(hour)
-        if minute < 10:
-            minute = "0" + str(minute)
-
-        currentTime_Formatted = str(hour) + ":" + str(minute) # Combine hour and minute into format
-
-        if currentTime_Formatted == alarmTime: # Check if current time is the same as inputted alarm activation time
-            lightState = False
-            while True: # This will run untill the user turns off the lights, or changes mode. Note that turning lights off and on will restart the alarmclock function.
-                
-                if lightState == False: # If just turned off, turn it on
-                    if checkBreak("alarmClock"):
-                        break
-                    colorWipe(strip, Color(255, 255, 255), wait_ms)
-                    lightState = True
-                else: # If light just turned on, turn it off
-                    if checkBreak("alarmClock"):
-                        break
-                    colorWipe(strip, Color(0, 0, 0), wait_ms)
-                    lightState = False
-                strip.show()
 
 def elitus(strip, data):
     while True:
@@ -509,7 +473,7 @@ if __name__ == '__main__':
                 elif data["onoff"] and data["mode"] == "colorDrip":
                     colorDrip(strip, 100 - data["speed"])
                 elif data["onoff"] and data["mode"] == "alarmClock":
-                    newAlarmClock(strip)
+                    alarmClock(strip)
                 elif data["onoff"] and data["mode"] == "elitus":
                     elitus(strip, data)
                 else:
