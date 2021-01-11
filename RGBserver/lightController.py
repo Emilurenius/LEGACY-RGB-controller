@@ -55,7 +55,7 @@ def colorWipe(strip, color, wait_ms=50):
         strip.show()
         time.sleep(wait_ms/1000.0)
 
-def solidColor(strip, color, wait_ms=50):
+def solidColor(strip, color):
     # Displays a single solid color untill told otherwise:
     for i in range(strip.numPixels()): # Assign color to every pixel
         strip.setPixelColor(i, color)
@@ -288,19 +288,25 @@ def newAlarmClock(strip):
             lightState = False
             while True: # This will run untill the user turns off the lights, or changes mode. Note that turning lights off and on will restart the alarmclock function.
                 
-                if lightState == False: # If just turned off, turn it on
-                    if checkBreak("alarmClock"):
-                        alarmDone = True
-                        break
-                    colorWipe(strip, Color(255, 255, 255), 0)
-                    lightState = True
-                else: # If light just turned on, turn it off
-                    if checkBreak("alarmClock"):
-                        alarnDone = True
-                        break
-                    colorWipe(strip, Color(0, 0, 0), 0)
-                    lightState = False
-                strip.show()
+                colorWipe(strip, Color(255, 255, 255), 0)
+                colorWipe(strip, Color(0, 0, 0), 0)
+
+                solidColor(strip, Color(255, 255, 255))
+                time.sleep(0.3)
+                solidColor(strip, Color(0, 0, 0))
+                time.sleep(0.3)
+                solidColor(strip, Color(255, 255, 255))
+                time.sleep(0.3)
+                solidColor(strip, Color(0, 0, 0))
+                time.sleep(0.3)
+                solidColor(strip, Color(255, 255, 255))
+                time.sleep(0.3)
+                solidColor(strip, Color(0, 0, 0))
+                time.sleep(0.3)
+                solidColor(strip, Color(255, 255, 255))
+                time.sleep(0.3)
+                solidColor(strip, Color(0, 0, 0))
+
         else: # If the alarm time has not been reached, act like standard mode.
             if previousData != data: 
                 previousData = data
