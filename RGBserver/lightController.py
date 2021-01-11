@@ -233,9 +233,9 @@ def colorDrip(strip, wait_ms=50):
             
             while x < steps: # Repeated for every LED in the strip
                 strip.setPixelColor(x, Color(r, g, b))
-                strip.setPixelColor(x - 1, Color(r * 25 / 100, g * 25 / 100, b * 25 / 100))
-                strip.setPixelColor(x - 2, Color(r * 50 / 100, g * 50 / 100, b * 50 / 100))
-                strip.setPixelColor(x - 3, Color(r * 75 / 100, g * 75 / 100, b * 75 / 100))
+                strip.setPixelColor(x - 1, Color(int(float(r) * float(25 / 100)), int(float(g) * float(25 / 100)), int(float(b) * float(25 / 100))))
+                strip.setPixelColor(x - 2, Color(int(float(r) * float(50 / 100)), int(float(g) * float(50 / 100)), int(float(b) * float(50 / 100))))
+                strip.setPixelColor(x - 3, Color(int(float(r) * float(75 / 100)), int(float(g) * float(75 / 100)), int(float(b) * float(75 / 100))))
                 strip.setPixelColor(x - 4, Color(0, 0, 0))
                 strip.show()
                 if getDataval("speed"): #Update speed for animation from JSON file
