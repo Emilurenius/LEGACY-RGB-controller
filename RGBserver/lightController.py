@@ -251,10 +251,10 @@ def colorDrip(strip, wait_ms=50):
             # Remove tail when droplet stops:
             strip.setPixelColor(steps - 4, Color(0, 0, 0))
             strip.show()
-            wait_ms = 100 - getDataval("speed")
+            time.sleep(wait_ms/1000.0) # Wait for given time from JSON file
             strip.setPixelColor(steps - 3, Color(0, 0, 0))
             strip.show()
-            wait_ms = 100 - getDataval("speed")
+            time.sleep(wait_ms/1000.0) # Wait for given time from JSON file
             strip.setPixelColor(steps - 2, Color(0, 0, 0))
             strip.show()
             
