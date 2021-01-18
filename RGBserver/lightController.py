@@ -243,7 +243,7 @@ def colorDrip(strip, wait_ms=50):
             while x < steps: # Repeated for every LED in the strip
 
                 # generate droplet with tail:
-                strip.setPixelColor(x, Color(r, g, b)) # main pixel
+                strip.setPixelColor(x, Color(RGB["r"], RGB["g"], RGB["b"])) # main pixel
                 strip.setPixelColor(x - 1, Color(int(float(RGB["r"]) * float(60 / 100)), int(float(RGB["g"]) * float(60 / 100)), int(float(RGB["b"]) * float(60 / 100)))) # Tail pixel 1
                 strip.setPixelColor(x - 2, Color(int(float(RGB["r"]) * float(20 / 100)), int(float(RGB["g"]) * float(20 / 100)), int(float(RGB["b"]) * float(20 / 100)))) # Tail pixel 2
                 strip.setPixelColor(x - 3, Color(int(float(RGB["r"]) * float(1 / 100)), int(float(RGB["g"]) * float(1 / 100)), int(float(RGB["b"]) * float(1 / 100)))) # Tail pixel 3
