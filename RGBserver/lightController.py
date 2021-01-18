@@ -437,8 +437,8 @@ def elitus(strip, data):
 def colorBubbles(strip): 
     stripBrightness = {}
 
-    for i in range(strip.numPixels() + 1):
-        stripBrightness[i] = {
+    for i in range(strip.numPixels()):
+        stripBrightness[i + 1] = {
             "val": 0,
             "up": True,
             "active": False
@@ -449,14 +449,14 @@ def colorBubbles(strip):
             break
 
         noneActive = True
-        for i in range(len(stripBrightness) - 1):
+        for i in range(len(stripBrightness)):
             if stripBrightness[i]["active"] == True:
                 noneActive = False
                 break
         if noneActive:
             stripBrightness[0]["active"] = True
 
-        for i in range(len(stripBrightness) - 1):
+        for i in range(len(stripBrightness)):
             if stripBrightness[i]["up"] == True and stripBrightness[i]["val"] < 1000 and stripBrightness[i]["active"] == True:
                 stripBrightness[i]["val"] += 50
                 print(i, stripBrightness[i]["val"])
@@ -465,7 +465,7 @@ def colorBubbles(strip):
                 stripBrightness[i]["up"] = False
                 stripBrightness[i]["val"] -= 10
                 print(i, stripBrightness[i]["val"])
-                print(len(stripBrightness) - 1)
+                print(len(stripBrightness))
 
             else:
                 stripBrightness[i]["active"] = False
@@ -473,7 +473,7 @@ def colorBubbles(strip):
             if stripBrightness[i]["val"] > 999 and i < len(stripBrightness) - 1:
                 stripBrightness[i + 1]["active"] = True
 
-            if i == len(stripBrightness) - 1:
+            if i == len(stripBrightness):
                 stripBrightness[0]["active"] = True
 
             color = Color(int(float(255) * float(stripBrightness[i]["val"]) / 1000), int(float(255) * float(stripBrightness[i]["val"]) / 1000), int(float(255) * float(stripBrightness[i]["val"]) / 1000))
