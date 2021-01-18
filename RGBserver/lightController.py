@@ -458,12 +458,12 @@ def colorBubbles(strip):
 
         for i in range(len(stripBrightness) - 1):
             if stripBrightness[i]["up"] == True and stripBrightness[i]["val"] < 1000 and stripBrightness[i]["active"] == True:
-                stripBrightness[i]["val"] += 20
+                stripBrightness[i]["val"] += 50
                 print(i, stripBrightness[i]["val"])
 
             elif stripBrightness[i]["active"] == True and stripBrightness[i]["val"] > 0:
                 stripBrightness[i]["up"] = False
-                stripBrightness[i]["val"] -= 20
+                stripBrightness[i]["val"] -= 10
                 print(i, stripBrightness[i]["val"])
 
             else:
