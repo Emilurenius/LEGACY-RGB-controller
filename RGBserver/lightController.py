@@ -437,7 +437,7 @@ def elitus(strip, data):
 def colorBubbles(strip): 
     stripBrightness = {}
 
-    for i in range(strip.numPixels()):
+    for i in range(strip.numPixels() + 1):
         stripBrightness[i] = {
             "val": 0,
             "up": True,
