@@ -472,6 +472,10 @@ def colorBubbles(strip):
             if stripBrightness[i]["val"] == 500 and i < len(stripBrightness) - 1:
                 stripBrightness[i + 1]["active"] = True
 
+            color = Color(int(float(255) * float(stripBrightness["val"]) / 1000, int(float(255) * float(stripBrightness["val"]) / 1000, int(float(255) * float(stripBrightness["val"]) / 1000)
+            strip.setPixelColor(i, color)
+        strip.show()
+
 
 # Main program logic follows:
 if __name__ == '__main__':
