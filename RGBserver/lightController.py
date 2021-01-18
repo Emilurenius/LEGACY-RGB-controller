@@ -454,7 +454,7 @@ def colorBubbles(strip):
                 noneActive = False
                 break
         if noneActive:
-            stripBrightness[0]["active"] = True
+            stripBrightness[1]["active"] = True
 
         for i in range(len(stripBrightness)):
             if stripBrightness[i + 1]["up"] == True and stripBrightness[i]["val"] < 1000 and stripBrightness[i]["active"] == True:
