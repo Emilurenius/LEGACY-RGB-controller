@@ -485,7 +485,7 @@ if __name__ == '__main__':
                 if data["onoff"] and data["mode"] == "standard":
                     print("Standard / ColorWipe")
                     print("RGB:", data["R"], data["G"], data["B"])
-                    print("Brightness:", data["brightness"])
+                    print("Brightness:", data["brightness"] / 1000, "%")
                     colorWipe(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 1000), int(float(data["G"]) * float(data["brightness"]) / 1000), int(float(data["B"]) * float(data["brightness"]) / 1000)), 3)
                 
                 elif data["onoff"] and data["mode"] == "solidColor":
