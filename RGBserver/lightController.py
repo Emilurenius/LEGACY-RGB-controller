@@ -479,26 +479,46 @@ if __name__ == '__main__':
                 time.sleep(0.05)
             
             if previousData != data:
-                print("Checking mode")
+                print("\nChecking mode")
                 previousData = data
                 # Checking what mode to run:
                 if data["onoff"] and data["mode"] == "standard":
+                    print("Standard / ColorWipe")
+                    print("RGB:", data["r"], data["g"], data["b"])
                     colorWipe(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 1000), int(float(data["G"]) * float(data["brightness"]) / 1000), int(float(data["B"]) * float(data["brightness"]) / 1000)), 3)
+                
                 elif data["onoff"] and data["mode"] == "solidColor":
+                    print("SolidColor")
+                    print("RGB:", data["r"], data["g"], data["b"])
                     solidColor(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 1000), int(float(data["G"]) * float(data["brightness"]) / 1000), int(float(data["B"]) * float(data["brightness"]) / 1000)))
+                
                 elif data["onoff"] and data["mode"] == "rainbow":
+                    print("Rainbow")
                     rainbow(strip, 100 - data["speed"])
+                
                 elif data["onoff"] and data["mode"] == "theaterChase":
+                    print("Theater chase")
                     theaterChase(strip, Color(data["R"], data["G"], data["B"]), 100 - data["speed"])
+                
                 elif data["onoff"] and data["mode"] == "norway":
+                    print("NORWAY!")
                     norge(strip)
+                
                 elif data["onoff"] and data["mode"] == "colorDrip":
+                    print("Color drip")
                     colorDrip(strip, 100 - data["speed"])
+                
                 elif data["onoff"] and data["mode"] == "alarmClock":
+                    print("Alarm clock")
+                    print("Waking up at:", data["alarmClockData"]["alarmTime"])
                     alarmClock(strip)
+                
                 elif data["onoff"] and data["mode"] == "elitus":
+                    print("Elitus mode")
                     elitus(strip, data)
+                
                 else:
+                    print("Lights off")
                     colorWipe(strip, Color(0, 0, 0), 3)
             else:
                 time.sleep(0.5)
