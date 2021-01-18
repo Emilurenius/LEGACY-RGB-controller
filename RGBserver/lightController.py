@@ -508,6 +508,10 @@ if __name__ == '__main__':
                 elif data["onoff"] and data["mode"] == "elitus":
                     print("Elitus mode")
                     elitus(strip, data)
+
+                elif data["onoff"] and data["mode"] == "colorBubbles":
+                    print("Color bubbles")
+                    colorBubbles(strip)
                 
                 else:
                     print("Lights off")
