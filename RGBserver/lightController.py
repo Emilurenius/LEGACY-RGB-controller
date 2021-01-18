@@ -438,9 +438,33 @@ def colorBubbles(strip):
     stripBrightness = {}
 
     for i in range(strip.numPixels()):
-        stripBrightness[i] = 0
-    for i in range(strip.numPixels()):
-        print(stripBrightness[i])
+        stripBrightness[i] = {
+            "val": 0,
+            "up": True,
+            "active": False
+        }
+    
+    while True:
+        if checkBreak("colorBubbles"):
+            break
+
+        noneActive = True
+        for i in range(stripBrightness):
+            if stripBrightness[i]["active"] == True:
+                noneActive = False
+                break
+        if noneActive:
+            stripBrightness[0]["active"] = True
+
+        for i in range(stripBrightness):
+            if stripBrightness[i]["up"] == True and stripBrightness[i]["val"] < 1000 and stripBrightness[i]["active"] == True:
+                stripBrightness[i]["val"] += 1
+                print(i, stripBrightness[i]["val"])
+
+            elif stripBrightness[i]["active"] == True:
+                stripBrightness[i]["up"] = False
+                stripBrightness[i]["val"] -= 1
+                print(i, stripBrightness[i]["val"])
 
 
 # Main program logic follows:
