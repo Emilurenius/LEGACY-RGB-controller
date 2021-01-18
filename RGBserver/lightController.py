@@ -434,6 +434,13 @@ def elitus(strip, data):
                     break
                 time.sleep(0.05)
 
+def colorBubbles(strip): 
+    stripBrightness = {}
+
+    for i in range(strip.numPixels()):
+        stripBrightness[i] = 0
+    print(len(stripBrightness))
+
 
 # Main program logic follows:
 if __name__ == '__main__':
