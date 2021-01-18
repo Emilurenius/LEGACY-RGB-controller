@@ -439,7 +439,8 @@ def colorBubbles(strip):
 
     for i in range(strip.numPixels()):
         stripBrightness[i] = 0
-    print(len(stripBrightness))
+    for i in range(strip.numPixels()):
+        print(stripBrightness[i])
 
 
 # Main program logic follows:
