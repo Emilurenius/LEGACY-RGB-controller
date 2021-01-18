@@ -450,33 +450,33 @@ def colorBubbles(strip):
 
         noneActive = True
         for i in range(len(stripBrightness)):
-            if stripBrightness[i]["active"] == True:
+            if stripBrightness[i + 1]["active"] == True:
                 noneActive = False
                 break
         if noneActive:
             stripBrightness[0]["active"] = True
 
         for i in range(len(stripBrightness)):
-            if stripBrightness[i]["up"] == True and stripBrightness[i]["val"] < 1000 and stripBrightness[i]["active"] == True:
-                stripBrightness[i]["val"] += 50
-                print(i, stripBrightness[i]["val"])
+            if stripBrightness[i + 1]["up"] == True and stripBrightness[i]["val"] < 1000 and stripBrightness[i]["active"] == True:
+                stripBrightness[i + 1]["val"] += 50
+                print(i, stripBrightness[i + 1]["val"])
 
-            elif stripBrightness[i]["active"] == True and stripBrightness[i]["val"] > 0:
-                stripBrightness[i]["up"] = False
-                stripBrightness[i]["val"] -= 10
-                print(i, stripBrightness[i]["val"])
+            elif stripBrightness[i + 1]["active"] == True and stripBrightness[i]["val"] > 0:
+                stripBrightness[i + 1]["up"] = False
+                stripBrightness[i + 1]["val"] -= 10
+                print(i, stripBrightness[i + 1]["val"])
                 print(len(stripBrightness))
 
             else:
-                stripBrightness[i]["active"] = False
+                stripBrightness[i + 1]["active"] = False
 
-            if stripBrightness[i]["val"] > 999 and i < len(stripBrightness) - 1:
-                stripBrightness[i + 1]["active"] = True
+            if stripBrightness[i + 1]["val"] > 999 and i < len(stripBrightness) - 1:
+                stripBrightness[i + 2]["active"] = True
 
             if i == len(stripBrightness):
-                stripBrightness[0]["active"] = True
+                stripBrightness[1]["active"] = True
 
-            color = Color(int(float(255) * float(stripBrightness[i]["val"]) / 1000), int(float(255) * float(stripBrightness[i]["val"]) / 1000), int(float(255) * float(stripBrightness[i]["val"]) / 1000))
+            color = Color(int(float(255) * float(stripBrightness[i + 1]["val"]) / 1000), int(float(255) * float(stripBrightness[i + 1]["val"]) / 1000), int(float(255) * float(stripBrightness[i + 1]["val"]) / 1000))
             strip.setPixelColor(i, color)
         strip.show()
 
