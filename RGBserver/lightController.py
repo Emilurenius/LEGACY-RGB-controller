@@ -465,6 +465,7 @@ def colorBubbles(strip):
                 stripBrightness[i]["up"] = False
                 stripBrightness[i]["val"] -= 10
                 print(i, stripBrightness[i]["val"])
+                print(len(stripBrightness) - 1)
 
             else:
                 stripBrightness[i]["active"] = False
