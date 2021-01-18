@@ -445,7 +445,7 @@ def colorBubbles(strip):
         }
     
     while True:
-        wait_ms = getDataval("speed")
+        wait_ms = 100 - getDataval("speed")
         if checkBreak("colorBubbles"):
             break
 
@@ -485,7 +485,7 @@ def colorBubbles(strip):
             color = Color(int(float(255) * float(stripBrightness[i + 1]["val"]) / 1000), int(float(255) * float(stripBrightness[i + 1]["val"]) / 1000), int(float(255) * float(stripBrightness[i + 1]["val"]) / 1000))
             strip.setPixelColor(i, color)
         strip.show()
-        time.sleep(100 - wait_ms /1000.0)
+        time.sleep(wait_ms/1000.0)
 
 
 # Main program logic follows:
