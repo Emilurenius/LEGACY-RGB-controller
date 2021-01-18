@@ -425,26 +425,10 @@ def elitus(strip, data):
             while datetime.datetime.now().timestamp() - startTime < 13:
                 if cancelAnimation:
                     break
-                color1 = random.randint(0, 255) # Random color 1
-                color2 = random.randint(0, 255) # Random color 2
-                fullColor = random.randint(0, 2) # Choose one of the three RGB channels to be full brightness
-
-                # The RGB channel chosen to be full brightness is set to 255, the others get assigned color1 and color2, wich are randomly generated
-                if fullColor == 0:
-                    r = 255
-                    g = color1
-                    b = color2
-                elif fullColor == 1:
-                    r = color1
-                    g = 255
-                    b = color2
-                elif fullColor == 2:
-                    r = color1
-                    g = color2
-                    b = 255
+                RGB = randColor()
                 
                 for i in range(strip.numPixels()):
-                    strip.setPixelColor(i, Color(r, g, b))
+                    strip.setPixelColor(i, Color(RGB["r"], RGB["g"], RGB["b"]))
                 strip.show()
                 if checkBreak("elitus"):
                     break
