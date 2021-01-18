@@ -461,10 +461,13 @@ def colorBubbles(strip):
                 stripBrightness[i]["val"] += 1
                 print(i, stripBrightness[i]["val"])
 
-            elif stripBrightness[i]["active"] == True:
+            elif stripBrightness[i]["active"] == True and stripBrightness[i]["val"] > 0:
                 stripBrightness[i]["up"] = False
                 stripBrightness[i]["val"] -= 1
                 print(i, stripBrightness[i]["val"])
+
+            else:
+                stripBrightness[i]["active"] = False
 
 
 # Main program logic follows:
