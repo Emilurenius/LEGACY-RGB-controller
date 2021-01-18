@@ -484,12 +484,12 @@ if __name__ == '__main__':
                 # Checking what mode to run:
                 if data["onoff"] and data["mode"] == "standard":
                     print("Standard / ColorWipe")
-                    print("RGB:", data["r"], data["g"], data["b"])
+                    print("RGB:", data["R"], data["G"], data["B"])
                     colorWipe(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 1000), int(float(data["G"]) * float(data["brightness"]) / 1000), int(float(data["B"]) * float(data["brightness"]) / 1000)), 3)
                 
                 elif data["onoff"] and data["mode"] == "solidColor":
                     print("SolidColor")
-                    print("RGB:", data["r"], data["g"], data["b"])
+                    print("RGB:", data["R"], data["G"], data["B"])
                     solidColor(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 1000), int(float(data["G"]) * float(data["brightness"]) / 1000), int(float(data["B"]) * float(data["brightness"]) / 1000)))
                 
                 elif data["onoff"] and data["mode"] == "rainbow":
