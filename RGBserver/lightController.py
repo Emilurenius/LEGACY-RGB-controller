@@ -469,7 +469,7 @@ def colorBubbles(strip):
             else:
                 stripBrightness[i]["active"] = False
 
-            if stripBrightness[i]["val"] == 500:
+            if stripBrightness[i]["val"] == 500 and i < len(stripBrightness):
                 stripBrightness[i + 1]["active"] = True
 
 
