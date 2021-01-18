@@ -47,6 +47,31 @@ def getDataval(dataval):
         return False
 
 # Define functions which animate LEDs in various ways:
+def randColor():
+    color1 = random.randint(0, 255) # Random color 1
+    color2 = random.randint(0, 255) # Random color 2
+    fullColor = random.randint(0, 2) # Choose one of the three RGB channels to be full brightness
+
+    # The RGB channel chosen to be full brightness is set to 255, the others get assigned color1 and color2, wich are randomly generated
+    if fullColor == 0:
+        r = 255
+        g = color1
+        b = color2
+    elif fullColor == 1:
+        r = color1
+        g = 255
+        b = color2
+    elif fullColor == 2:
+        r = color1
+        g = color2
+        b = 255
+    RGB = {
+        "r": r,
+        "g": g,
+        "b": b
+    }
+    return RGB
+
 def colorWipe(strip, color, wait_ms=50):
     """Wipe color across display a pixel at a time."""
     for i in range(strip.numPixels()):
@@ -211,23 +236,7 @@ def colorDrip(strip, wait_ms=50):
         steps = strip.numPixels() # Set steps for while Loop underneath to the amount of LEDs in the LED strip
         
         for i in range(strip.numPixels()): # Do this once for every LED in the light strip
-            color1 = random.randint(0, 255) # Random color 1
-            color2 = random.randint(0, 255) # Random color 2
-            fullColor = random.randint(0, 2) # Choose one of the three RGB channels to be full brightness
-
-            # The RGB channel chosen to be full brightness is set to 255, the others get assigned color1 and color2, wich are randomly generated
-            if fullColor == 0:
-                r = 255
-                g = color1
-                b = color2
-            elif fullColor == 1:
-                r = color1
-                g = 255
-                b = color2
-            elif fullColor == 2:
-                r = color1
-                g = color2
-                b = 255
+            RGB = randColor()
 
             x = 0 # Set x to 0, this will be used to increment while loop underneath
             
@@ -235,9 +244,9 @@ def colorDrip(strip, wait_ms=50):
 
                 # generate droplet with tail:
                 strip.setPixelColor(x, Color(r, g, b)) # main pixel
-                strip.setPixelColor(x - 1, Color(int(float(r) * float(60 / 100)), int(float(g) * float(60 / 100)), int(float(b) * float(60 / 100)))) # Tail pixel 1
-                strip.setPixelColor(x - 2, Color(int(float(r) * float(20 / 100)), int(float(g) * float(20 / 100)), int(float(b) * float(20 / 100)))) # Tail pixel 2
-                strip.setPixelColor(x - 3, Color(int(float(r) * float(1 / 100)), int(float(g) * float(1 / 100)), int(float(b) * float(1 / 100)))) # Tail pixel 3
+                strip.setPixelColor(x - 1, Color(int(float(RGB["r"]) * float(60 / 100)), int(float(RGB["g"]) * float(60 / 100)), int(float(RGB["b"]) * float(60 / 100)))) # Tail pixel 1
+                strip.setPixelColor(x - 2, Color(int(float(RGB["r"]) * float(20 / 100)), int(float(RGB["g"]) * float(20 / 100)), int(float(RGB["b"]) * float(20 / 100)))) # Tail pixel 2
+                strip.setPixelColor(x - 3, Color(int(float(RGB["r"]) * float(1 / 100)), int(float(RGB["g"]) * float(1 / 100)), int(float(RGB["b"]) * float(1 / 100)))) # Tail pixel 3
                 strip.setPixelColor(x - 4, Color(0, 0, 0)) # Reset overflowing tail pixels
                 strip.show()
                 if getDataval("speed"): #Update speed for animation from JSON file
@@ -440,7 +449,6 @@ def elitus(strip, data):
                 if checkBreak("elitus"):
                     break
                 time.sleep(0.05)
-
 
 
 # Main program logic follows:
