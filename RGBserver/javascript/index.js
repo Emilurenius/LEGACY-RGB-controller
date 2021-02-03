@@ -25,7 +25,7 @@ G.value = getJSON(`${url}/json/data.json`).G
 B.value = getJSON(`${url}/json/data.json`).B
 
 toggle.addEventListener("click", (event) => {
-    getJSON(`${url}/lightstate?change=true`)
+    getJSON(`${url}/lightstate?toggle=change`)
 })
 
 sliderButtonMain.addEventListener("click", (event) => {
