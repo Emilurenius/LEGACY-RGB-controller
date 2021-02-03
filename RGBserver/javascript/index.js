@@ -6,8 +6,6 @@ const B = document.getElementById("B")
 const sliderButtonMain = document.getElementById("phonebutton-slider-main")
 const toggle = document.getElementById("toggle")
 
-toggle.setAttribute("href", `${url}/?panel=main&toggle=change`)
-
 
 function getJSON(url) {
     var j = []
@@ -25,8 +23,10 @@ brightness.value = getJSON(`${url}/json/data.json`).brightness
 R.value = getJSON(`${url}/json/data.json`).R
 G.value = getJSON(`${url}/json/data.json`).G
 B.value = getJSON(`${url}/json/data.json`).B
-    
 
+toggle.addEventListener("click", (event) => {
+    getJSON(`${url}/lightstate?change=true`)
+})
 
 sliderButtonMain.addEventListener("click", (event) => {
     getJSON(`${url}/?panel=main&br=${brightness.value}&r=${R.value}&g=${G.value}&b=${B.value}`)
@@ -47,17 +47,3 @@ G.onmouseup = () => {
 B.onmouseup = () => {
     getJSON(`${url}/?panel=main&b=${B.value}`)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

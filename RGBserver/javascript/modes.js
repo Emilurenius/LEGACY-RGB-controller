@@ -7,12 +7,6 @@ const alarmClock = document.getElementById("alarmClock")
 const theaterChase = document.getElementById("theaterChase")
 const sliderButtonModes = document.getElementById("phonebutton-slider-modes")
 
-standard.setAttribute("href", `${url}/?panel=modes&mode=standard`)
-rainbow.setAttribute("href", `${url}/?panel=modes&mode=rainbow`)
-theaterChase.setAttribute("href", `${url}/?panel=modes&mode=theaterChase`)
-norway.setAttribute("href", `${url}/?panel=modes&mode=norway`)
-colorDrip.setAttribute("href", `${url}/?panel=modes&mode=colorDrip`)
-
 function getJSON(url) {
     var j = []
     $.ajax({
@@ -25,15 +19,39 @@ function getJSON(url) {
     return j
 }
 
+standard.addEventListener("click", (event) => {
+    getJSON(`${url}/modes/set?mode=standard`)
+})
+
+rainbow.addEventListener("click", (event) => {
+    getJSON(`${url}/modes/set?mode=rainbow`)
+})
+
+norway.addEventListener("click", (event) => {
+    getJSON(`${url}/modes/set?mode=norway`)
+})
+
+colorDrip.addEventListener("click", (event) => {
+    getJSON(`${url}/modes/set?mode=colorDrip`)
+})
+
+alarmClock.addEventListener("click", (event) => {
+    getJSON(`${url}/modes/set?mode=alarmClock`)
+})
+
+theaterChase.addEventListener("click", (event) => {
+    getJSON(`${url}/modes/set?mode=theaterChase`)
+})
+
 speed.value = getJSON(`${url}/json/data.json`).speed
 
 sliderButtonModes.addEventListener("click", (event) => {
-    window.location.replace(`${url}/?panel=modes&speed=${speed.value}`)
+    getJSON(`${url}/?panel=modes&speed=${speed.value}`)
 })
 
 alarmClock.addEventListener("click", (event) => {
     const alarmTime = prompt("What time do you want to wake up?", `${getJSON(`${url}/json/data.json`).alarmClockData.alarmTime}`)
-    window.location.replace(`${url}/?panel=modes&mode=alarmClock&alarmTime=${alarmTime}`)
+    getJSON(`${url}/?panel=modes&mode=alarmClock&alarmTime=${alarmTime}`)
 })
 
 speed.onmouseup = () => {
