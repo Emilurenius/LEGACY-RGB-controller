@@ -227,6 +227,8 @@ app.get("/modes/set", (req, res) => {
     }
 })
 
+
+// Longpolling:
 app.get("/reqdata", (req, res, next) => { // this is a long polling address for sending LED strip data to other devices
     res.setHeader("Content-Type", "text/html; charset=utf-8")
     res.setHeader("Transfer-Encoding", "chunked")

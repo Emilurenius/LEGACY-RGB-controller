@@ -20,9 +20,9 @@ function getJSON(url) {
 }
 
 brightness.value = getJSON(`${url}/json/data.json`).brightness
-R.value = getJSON(`${url}/json/data.json`).R
-G.value = getJSON(`${url}/json/data.json`).G
-B.value = getJSON(`${url}/json/data.json`).B
+R.value = getJSON(`${url}/json/data.json`)
+G.value = getJSON(`${url}/json/data.json`)
+B.value = getJSON(`${url}/json/data.json`)
 
 toggle.addEventListener("click", (event) => {
     getJSON(`${url}/lightstate?toggle=change`)
