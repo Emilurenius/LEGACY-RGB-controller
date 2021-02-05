@@ -240,6 +240,12 @@ app.get("/presets", (req, res) => {
             "G": req.query.G,
             "B": req.query.B
         }
+
+        let stringified = JSON.stringify(presetData, null, 4)
+        fs.writeFile(path.join(__dirname, "/json/presets.json"), stringified, (err) => {
+            if (err) throw err
+            console.log("Data written to file")
+        })
     }
 })
 
