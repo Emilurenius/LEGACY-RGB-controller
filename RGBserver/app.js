@@ -67,7 +67,7 @@ app.get("/", (req, res) => {
         }
         
         if (save) {
-            let stringified = JSON.stringify(data, null, 2)
+            let stringified = JSON.stringify(data, null, 4)
         
             fs.writeFile(path.join(__dirname, "/json/data.json"), stringified, (err) => {
                 if (err) throw err
@@ -98,7 +98,7 @@ app.get("/", (req, res) => {
         }
         
         if (save) {
-            let stringified = JSON.stringify(data, null, 2)
+            let stringified = JSON.stringify(data, null, 4)
         
             fs.writeFile(path.join(__dirname, "/json/data.json"), stringified, (err) => {
                 if (err) throw err
@@ -127,7 +127,7 @@ app.get("/lightstate", (req, res) => {
     }
 
     if (save) {
-        let stringified = JSON.stringify(data, null, 2)
+        let stringified = JSON.stringify(data, null, 4)
     
         fs.writeFile(path.join(__dirname, "/json/data.json"), stringified, (err) => {
             if (err) throw err
@@ -188,7 +188,7 @@ app.get("/rgb", (req, res) => {
     }
     
     if (save) {
-        let stringified = JSON.stringify(data, null, 2)
+        let stringified = JSON.stringify(data, null, 4)
     
         fs.writeFile(path.join(__dirname, "/json/data.json"), stringified, (err) => {
             if (err) throw err
@@ -215,7 +215,7 @@ app.get("/modes/set", (req, res) => {
     }
 
     if (save) {
-        let stringified = JSON.stringify(data, null, 2)
+        let stringified = JSON.stringify(data, null, 4)
     
         fs.writeFile(path.join(__dirname, "/json/data.json"), stringified, (err) => {
             if (err) throw err
@@ -227,6 +227,21 @@ app.get("/modes/set", (req, res) => {
     }
 })
 
+app.get("/presets", (req, res) => {
+    console.log(`\nPreset API loaded:`)
+
+    if (req.query.mode == "new") {
+        console.log("New preset being generated")
+        let presetRawData = fs.readFileSync(path.join(__dirname, "/json/presets.json"))
+        let presetData = JSON.parse(presetRawData)
+
+        presetData[req.query.presetName] =  {
+            "R": req.query.R,
+            "G": req.query.G,
+            "B": req.query.B
+        }
+    }
+})
 
 // Longpolling:
 app.get("/reqdata", (req, res, next) => { // this is a long polling address for sending LED strip data to other devices
