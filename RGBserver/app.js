@@ -249,6 +249,9 @@ app.get("/presets", (req, res) => {
         })
         res.send("Success")
     }
+    else if (req.query.mode == "load") {
+        res.send("Null")
+    }
 })
 
 // Longpolling:
