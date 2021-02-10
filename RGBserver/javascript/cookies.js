@@ -42,9 +42,7 @@ function scroll() {
     else {
         previousScrollVal = top
     }
-    console.log(top)
     setCookie("scrollPos", top, 1)
 }
 
 var bodySelector = $("body").first()
-console.log(bodySelector.scrollTop())
