@@ -12,6 +12,7 @@ savePresetButton.addEventListener("click", (event) => {
 
 function loadPresetButtons(JSONdataURL) {
     const JSONdata = getJSON(JSONdataURL)
+    console.log(JSONdata)
     for (let i = 0; i < JSONdata.length; i ++) {
         const name = JSONdata[i]
         const R = JSONddata[i].R
