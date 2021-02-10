@@ -20,11 +20,19 @@ function loadPresetButtons(JSONdataURL) {
         const B = v.B
         console.log(`${name}: ${R} ${G} ${B}`)
 
+        const averageBrightness = r + g + b / 3
+        if (averageBrightness < 128) {
+            const textColor = "white"
+        }
+        else {
+            const textColor = "black"
+        }
+
         const button = document.createElement("input")
         button.type = "button"
         button.classList.add("button")
         button.value = name
-        button.style = `background: rgb(${R}, ${G}, ${B});`
+        button.style = `background: rgb(${R}, ${G}, ${B}); color: ${textColor};`
         presetContainer.appendChild(button)
     }
 }
