@@ -9,3 +9,20 @@ savePresetButton.addEventListener("click", (event) => {
 
     getJSON(`${url}/presets?mode=new&presetName=${presetName}&R=${R.value}&G=${G.value}&B=${B.value}`)
 })
+
+function loadPresetButtons(JSONdataURL) {
+    const JSONdata = getJSON(JSONdataURL)
+    for (let i = 0; i < JSONdata.length; i ++) {
+        const name = JSONdata[i]
+        const R = JSONddata[i].R
+        const G = JSONddata[i].G
+        const B = JSONddata[i].B
+
+        const button = document.createElement("input")
+        button.type = "button"
+        button.classList.add("button")
+        console.log(JSONdata[i])
+    }
+}
+
+loadPresetButtons(`${url}/presets?mode=load`)
