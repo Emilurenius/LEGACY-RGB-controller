@@ -20,7 +20,7 @@ function loadPresetButtons(JSONdataURL) {
         const B = v.B
         console.log(`${name}: ${R} ${G} ${B}`)
 
-        const averageBrightness = r + g + b / 3
+        const averageBrightness = R + G + B / 3
         if (averageBrightness < 128) {
             const textColor = "white"
         }
