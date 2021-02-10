@@ -250,7 +250,7 @@ app.get("/presets", (req, res) => {
         res.send("Success")
     }
     else if (req.query.mode == "load") {
-        res.send("Null")
+        res.sendFile(path.join(__dirname, "/json/presets.json"))
     }
 })
 
