@@ -21,6 +21,7 @@ function loadPresetButtons(JSONdataURL) {
         const button = document.createElement("input")
         button.type = "button"
         button.classList.add("button")
+        console.log("Hello world")
         console.log(JSONdata[i])
     }
 }
