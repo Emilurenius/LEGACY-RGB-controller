@@ -14,7 +14,7 @@ function loadPresetButtons(JSONdataURL) {
     const JSONdata = getJSON(JSONdataURL)
     console.log(JSONdata)
     for (const [k, v] of Object.entries(JSONdata)) {
-        const name = JSONdata[k]
+        const name = k
         const R = v.R
         const G = v.G
         const B = v.B
