@@ -1,0 +1,1 @@
+document.body.style.backgroundColor = `rgb(${R.value}, ${G.value}, ${B.value})`
