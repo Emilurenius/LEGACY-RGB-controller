@@ -22,7 +22,6 @@ function getCookie(cname) { // Search for cookie with name of variable cname. If
 }
 
 if (getCookie("scrollPos") != "") {
-    console.log(getCookie("scrollPos"))
     window.pageYOffset = parseInt(getCookie("scrollPos"))
     document.documentElement.scrollTop = parseInt(getCookie("scrollPos"))
 }
