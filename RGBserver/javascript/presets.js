@@ -21,11 +21,12 @@ function loadPresetButtons(JSONdataURL) {
         console.log(`${name}: ${R} ${G} ${B}`)
 
         const averageBrightness = R + G + B / 3
+        const textColor = null
         if (averageBrightness < 128) {
-            const textColor = "white"
+            textColor = "white"
         }
         else {
-            const textColor = "black"
+            textColor = "black"
         }
 
         const button = document.createElement("input")
