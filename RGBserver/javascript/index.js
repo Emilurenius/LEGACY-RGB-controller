@@ -55,4 +55,4 @@ B.onmouseup = () => {
     updateBackgroundColor()
 }
 
-updateBackgroundColor()
+updateBackgroundLightState(getJSON(`${url}/lightstate`))
