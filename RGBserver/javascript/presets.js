@@ -23,7 +23,8 @@ function loadPresetButtons(JSONdataURL) {
         const button = document.createElement("input")
         button.type = "button"
         button.classList.add("button")
-        console.log("Hello world")
+        button.value = name
+        presetContainer.appendChild(button)
     }
 }
 

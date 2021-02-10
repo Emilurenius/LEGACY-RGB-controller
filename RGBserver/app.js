@@ -29,7 +29,7 @@ app.use("/json", express.static("json"))
 app.get("/", (req, res) => {
     
     res.sendFile(path.join(__dirname, "/html/index.html"))
-    console.log("Website loaded")
+    console.log("\nWebsite loaded")
     
     if (req.query.panel == "main") {
         console.log("\nControl panel loaded")
