@@ -137,9 +137,9 @@ app.get("/lightstate", (req, res) => {
     }
 
     if (data.onoff) {
-        res.send("true")
+        res.send(true)
     }else {
-        res.send("false")
+        res.send(false)
     }
 })
 
