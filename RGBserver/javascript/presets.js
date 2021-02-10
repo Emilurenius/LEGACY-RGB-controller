@@ -13,17 +13,17 @@ savePresetButton.addEventListener("click", (event) => {
 function loadPresetButtons(JSONdataURL) {
     const JSONdata = getJSON(JSONdataURL)
     console.log(JSONdata)
-    for (let i = 0; i < JSONdata.length; i ++) {
-        const name = JSONdata[i]
-        const R = JSONddata[i].R
-        const G = JSONddata[i].G
-        const B = JSONddata[i].B
+    for (const [k, v] of Object.entries(JSONdata)) {
+        const name = JSONdata[k]
+        const R = v.R
+        const G = v.G
+        const B = v.B
+        console.log(`${name}: ${R} ${G} ${B}`)
 
         const button = document.createElement("input")
         button.type = "button"
         button.classList.add("button")
         console.log("Hello world")
-        console.log(JSONdata[i])
     }
 }
 
