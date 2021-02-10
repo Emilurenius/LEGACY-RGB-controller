@@ -36,7 +36,7 @@ function loadPresetButtons(JSONdataURL) {
         button.value = name
 
         button.onclick = (event) => {
-            console.log(event)
+            console.log(event.name)
             //updateRGB(R, G, B)
         }
 
