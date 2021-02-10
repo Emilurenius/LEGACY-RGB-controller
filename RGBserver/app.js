@@ -246,6 +246,7 @@ app.get("/presets", (req, res) => {
             if (err) throw err
             console.log("Data written to file")
         })
+        res.send("Success")
     }
 })
 
