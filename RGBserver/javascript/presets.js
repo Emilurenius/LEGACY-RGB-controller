@@ -24,7 +24,7 @@ function loadPresetButtons(JSONdataURL) {
         button.type = "button"
         button.classList.add("button")
         button.value = name
-        button.style = `color: rgb(${R}, ${G}, ${B});`
+        button.style = `background: rgb(${R}, ${G}, ${B});`
         presetContainer.appendChild(button)
     }
 }
