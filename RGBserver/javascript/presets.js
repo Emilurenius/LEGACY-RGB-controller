@@ -36,17 +36,19 @@ function loadPresetButtons(JSONdataURL) {
         button.value = name
         button.id = name
 
-        button.onclick = "updateRGB(this.value)"
+        button.onclick = (event) => {
+            console.log(event.target.id)
+            //updateRGB(R, G, B)
+        }
 
         button.style = `background: rgb(${R}, ${G}, ${B}); color: ${textColor};`
         presetContainer.appendChild(button)
     }
 }
 
-function updateRGB(name) {
-    // getJSON(`${url}/rgb?R=${R}&G=${G}&B=${B}`)
-    // updateBackgroundLightState(getJSON(`${url}/lightstate`))
-    console.log(name)
+function updateRGB(R, G, B) {
+    getJSON(`${url}/rgb?R=${R}&G=${G}&B=${B}`)
+    updateBackgroundLightState(getJSON(`${url}/lightstate`))
 }
 
 loadPresetButtons(`${url}/presets?mode=load`)
