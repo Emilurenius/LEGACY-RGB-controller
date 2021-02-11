@@ -54,6 +54,7 @@ function loadPresetButtons() {
         }
 
         button.style = `background: rgb(${R}, ${G}, ${B}); color: ${textColor};`
+        presetContainer.innerHTML = ""
         presetContainer.appendChild(button)
     }
 }
