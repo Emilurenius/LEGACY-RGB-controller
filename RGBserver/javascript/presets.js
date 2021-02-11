@@ -8,6 +8,7 @@ savePresetButton.addEventListener("click", (event) => {
     const presetName = prompt("What do you want to call the preset?", "")
 
     getJSON(`${url}/presets?mode=new&presetName=${presetName}&R=${R.value}&G=${G.value}&B=${B.value}`)
+    loadPresetButtons()
 })
 
 function loadPresetButtons() {
