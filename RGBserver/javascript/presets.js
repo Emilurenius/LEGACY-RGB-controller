@@ -43,9 +43,9 @@ function loadPresetButtons() {
                     console.log(`${url}/rgb?r=${v.R}&g=${v.G}&b=${v.B}`)
                     getJSON(`${url}/rgb?r=${v.R}&g=${v.G}&b=${v.B}`)
 
-                    R.value = v.R
-                    G.value = v.G
-                    B.value = v.B
+                    document.getElementById("R").value = v.R
+                    document.getElementById("G").value = v.G
+                    document.getElementById("B").value = v.B
 
                     updateBackgroundLightState(getJSON(`${url}/lightstate`))
                 }
