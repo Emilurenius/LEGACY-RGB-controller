@@ -55,5 +55,5 @@ alarmClock.addEventListener("click", (event) => {
 })
 
 speed.onmouseup = () => {
-    window.location.replace(`${url}/?panel=modes&speed=${speed.value}`)
+    getJSON(`${url}/?panel=modes&speed=${speed.value}`)
 }
