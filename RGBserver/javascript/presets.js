@@ -36,7 +36,7 @@ function loadPresetButtons(JSONdataURL) {
         button.value = name
         button.id = name
 
-        button.onclick = updateRGB(this.value)
+        button.onclick = "updateRGB(this.value)"
 
         button.style = `background: rgb(${R}, ${G}, ${B}); color: ${textColor};`
         presetContainer.appendChild(button)
