@@ -10,18 +10,15 @@ savePresetButton.addEventListener("click", (event) => {
     getJSON(`${url}/presets?mode=new&presetName=${presetName}&R=${R.value}&G=${G.value}&B=${B.value}`)
 })
 
-function loadPresetButtons(JSONdataURL) {
-    const JSONdata = getJSON(JSONdataURL)
-    console.log(JSONdata)
+function loadPresetButtons() {
+    const JSONdata = getJSON(`${url}/presets?mode=load`)
     for (const [k, v] of Object.entries(JSONdata)) {
         const name = k
         const R = v.R
         const G = v.G
         const B = v.B
-        console.log(`${name}: ${R} ${G} ${B}`)
 
         const averageBrightness = parseInt(R) + parseInt(G) + parseInt(B) / 3
-        console.log(averageBrightness)
         let textColor = null
         if (averageBrightness < 128) {
             textColor = "white"
@@ -38,7 +35,14 @@ function loadPresetButtons(JSONdataURL) {
 
         button.onclick = (event) => {
             console.log(event.target.id)
-            //updateRGB(R, G, B)
+            
+            const JSONdata = getJSON(`${url}/presets?mode=load`)
+            for (const [k, v] of Object.entries(JSONdata)) {
+                if (k == event.target.id) {
+                    getJSON(`${url}/rgb?R=${v.R}&G=${v.G}&B=${v.B}`)
+                    updateBackgroundLightState(getJSON(`${url}/lightstate`))
+                }
+            }
         }
 
         button.style = `background: rgb(${R}, ${G}, ${B}); color: ${textColor};`
@@ -51,4 +55,4 @@ function updateRGB(R, G, B) {
     updateBackgroundLightState(getJSON(`${url}/lightstate`))
 }
 
-loadPresetButtons(`${url}/presets?mode=load`)
+loadPresetButtons()
