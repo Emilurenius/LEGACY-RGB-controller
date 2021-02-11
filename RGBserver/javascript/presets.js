@@ -13,6 +13,7 @@ savePresetButton.addEventListener("click", (event) => {
 
 function loadPresetButtons() {
     const JSONdata = getJSON(`${url}/presets?mode=load`)
+    presetContainer.innerHTML = ""
     for (const [k, v] of Object.entries(JSONdata)) {
         const name = k
         const R = v.R
@@ -54,7 +55,6 @@ function loadPresetButtons() {
         }
 
         button.style = `background: rgb(${R}, ${G}, ${B}); color: ${textColor};`
-        presetContainer.innerHTML = ""
         presetContainer.appendChild(button)
     }
 }
