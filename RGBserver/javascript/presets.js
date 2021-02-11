@@ -42,6 +42,11 @@ function loadPresetButtons() {
                     console.log("match found")
                     console.log(`${url}/rgb?r=${v.R}&g=${v.G}&b=${v.B}`)
                     getJSON(`${url}/rgb?r=${v.R}&g=${v.G}&b=${v.B}`)
+
+                    R.value = v.R
+                    G.value = v.G
+                    B.value = v.B
+
                     updateBackgroundLightState(getJSON(`${url}/lightstate`))
                 }
             }
