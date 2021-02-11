@@ -40,6 +40,7 @@ function loadPresetButtons() {
             for (const [k, v] of Object.entries(JSONdata)) {
                 console.log(k)
                 if (k == event.target.id) {
+                    console.log("match found")
                     getJSON(`${url}/rgb?R=${v.R}&G=${v.G}&B=${v.B}`)
                     updateBackgroundLightState(getJSON(`${url}/lightstate`))
                 }
