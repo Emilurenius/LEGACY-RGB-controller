@@ -1,6 +1,6 @@
 const bpmPresetContainer = document.getElementById("BPMpresets")
 const bpmSlider = document.getElementById("BPMslider")
-const bpmLabel = document.getElementById("BPMsliderlabel")
+const bpmLabel = document.getElementById("BPMsliderLabel")
 const bpmData = getJSON(`${url}/bpm?mode=getBPM`)
 
 bpmSlider.value = bpmData.value
