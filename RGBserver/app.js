@@ -263,6 +263,7 @@ app.get("/colorpresets", (req, res) => {
 })
 
 app.get("/bpm", (req, res) => {
+    console.log("\nBPM API loaded:")
     if (req.query.mode == "getBPM") {
         res.sendFile(path.join(__dirname, "/json/bpm.json"))
     }

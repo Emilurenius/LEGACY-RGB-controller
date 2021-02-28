@@ -8,4 +8,5 @@ bpmLabel.innerHTML = `BPM: ${bpmSlider.value}`
 
 bpmSlider.onmouseup = () => {
     getJSON(`${url}/bpm?mode=updateBPM&bpm=${bpmSlider.value}`)
+    bpmLabel.innerHTML = `BPM: ${bpmSlider.value}`
 }
