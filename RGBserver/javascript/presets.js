@@ -7,12 +7,12 @@ savePresetButton.addEventListener("click", (event) => {
     console.log(B.value)
     const presetName = prompt("What do you want to call the preset?", "")
 
-    getJSON(`${url}/presets?mode=new&presetName=${presetName}&R=${R.value}&G=${G.value}&B=${B.value}`)
-    loadPresetButtons()
+    getJSON(`${url}/colorpresets?mode=new&presetName=${presetName}&R=${R.value}&G=${G.value}&B=${B.value}`)
+    loadColorPresetButtons()
 })
 
-function loadPresetButtons() {
-    const JSONdata = getJSON(`${url}/presets?mode=load`)
+function loadColorPresetButtons() {
+    const JSONdata = getJSON(`${url}/colorpresets?mode=load`)
     presetContainer.innerHTML = ""
     for (const [k, v] of Object.entries(JSONdata)) {
         const name = k
@@ -38,7 +38,7 @@ function loadPresetButtons() {
         button.onclick = (event) => {
             console.log(event.target.id)
             
-            const JSONdata = getJSON(`${url}/presets?mode=load`)
+            const JSONdata = getJSON(`${url}/colorpresets?mode=load`)
             for (const [k, v] of Object.entries(JSONdata)) {
                 if (k == event.target.id) {
                     console.log("match found")
@@ -64,4 +64,4 @@ function updateRGB(R, G, B) {
     updateBackgroundLightState(getJSON(`${url}/lightstate`))
 }
 
-loadPresetButtons()
+loadColorPresetButtons()

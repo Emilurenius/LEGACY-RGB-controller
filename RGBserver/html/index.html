@@ -53,13 +53,18 @@
         <div class="Content-box" id="BPMpresets"></div>
 
         <div class="slidecontainer">
-            <label for ="BPM">BPM:</label>
+            <label for ="BPMslider" id="BPMsliderLabel">BPM:</label>
             <input type="range" min="1" max="200" class="slider-br" id="BPMslider">
+        </div>
+
+        <div class="phonebutton-slider">
+            <input type="button" id="phonebutton-slider-bpm" value="Send slider info" class="button">
         </div>
     </div>
 
     <!-- Mode select -->
     <div class="Content" id="modes">
+        <p class="Main-Text">BPM controls:</p>
         <div class="Content-box">
             <p class="Main-Text">RGB LED strip Mode select</p>
         </div>
@@ -107,5 +112,6 @@
     <script src="/javascript/cookies.js"></script>
     <script src="/javascript/presets.js"></script>
     <script src="/javascript/serverValueDisplay.js"></script>
+    <script src="/javascript/bpm.js"></script>
 </body>
 </html>

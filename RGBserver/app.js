@@ -236,7 +236,7 @@ app.get("/modes/set", (req, res) => {
     }
 })
 
-app.get("/presets", (req, res) => {
+app.get("/colorpresets", (req, res) => {
     console.log(`\nPreset API loaded:`)
 
     if (req.query.mode == "new") {
@@ -259,6 +259,26 @@ app.get("/presets", (req, res) => {
     }
     else if (req.query.mode == "load") {
         res.sendFile(path.join(__dirname, "/json/presets.json"))
+    }
+})
+
+app.get("/bpm", (req, res) => {
+    if (req.query.mode == "getBPM") {
+        res.sendFile(path.join(__dirname, "/json/bpm.json"))
+    }
+    else if (req.query.mode == "updateBPM") {
+        let rawData = fs.readFileSync(path.join(__dirname, "/json/bpm.json"))
+        let bpmData = JSON.parse(rawData)
+
+        bpmData.value = req.query.bpm
+        console.log(`Current BPM: ${bpmData.value}`)
+
+        let stringified = JSON.stringify(bpmData, null, 4)
+        fs.writeFile(path.join(__dirname, "/json/bpm.json"), stringified, (err) => {
+            if (err) throw err
+            console.log("Data written to file")
+        })
+        res.send("Success")
     }
 })
 
