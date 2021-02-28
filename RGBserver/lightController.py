@@ -484,6 +484,27 @@ def colorBubbles(strip):
         strip.show()
         time.sleep(wait_ms/1000.0)
 
+def bpm(strip):
+    while True:
+        if checkBreak("bpm"):
+            break
+        
+        solidColor(strip, randColor()) # Assign a random color to the whole light strip
+
+        # Load BPM data to see how long to wait until the color is changed again.
+        while True: # This goes in a loop until the JSON file can be loaded, or mode is changed
+            try:
+                with open("./json/bpm.json") as JSON: # Load BPM data saved to json file by server
+                    rawBPMdata = json.load(JSON) # Load JSON file as a dictionary
+                    BPM = rawBPMdata["value"] # Extract BPM value
+                    waitTime = 60 / int(BPM) # Calculate wait time based on BPM
+                    break # When the JSON file is loaded, end the loop
+            except:
+                print("JSON busy...") # If you can't open the file, just try again
+                if checkBreak("bpm"):
+                    break
+            
+            time.sleep(waitTime) # Wait the time that was calculated above
 
 # Main program logic follows:
 if __name__ == '__main__':
@@ -555,6 +576,10 @@ if __name__ == '__main__':
                 elif data["onoff"] and data["mode"] == "colorBubbles":
                     print("Color bubbles")
                     colorBubbles(strip)
+
+                elif data["onoff"] and data["mode"] == "bpm":
+                    print("bpm activated")
+                    bpm(strip)
                 
                 else:
                     print("Lights off")
