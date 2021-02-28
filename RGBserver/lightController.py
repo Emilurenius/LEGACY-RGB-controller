@@ -489,7 +489,8 @@ def bpm(strip):
         if checkBreak("bpm"):
             break
         
-        solidColor(strip, Color(randColor())) # Assign a random color to the whole light strip
+        RGB = randColor()
+        solidColor(strip, Color(RGB["r"], RGB["g"], RGB["b"])) # Assign a random color to the whole light strip
         console.log("Changed color")
 
         # Load BPM data to see how long to wait until the color is changed again.
