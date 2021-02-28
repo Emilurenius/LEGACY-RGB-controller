@@ -143,6 +143,14 @@ app.get("/lightstate", (req, res) => {
     }
 })
 
+app.get("/checklightstate", (req, res) => {
+    if (data.onoff) {
+        res.send(true)
+    }else {
+        res.send(false)
+    }
+})
+
 app.get("/br", (req, res) => {
     console.log("\nAPI loaded: Send brightness")
     res.send(data.brightness.toString())

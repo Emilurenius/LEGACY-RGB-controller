@@ -14,7 +14,7 @@
             <p class="Main-Text">RGB LED strip control panel</p>
         </div>
 
-        <button id="toggle" class="button">Toggle lights</button>
+        <input type="button" id="toggle" class="button" value="Toggle lights">
         <input type="button" id="savePreset" value="Save as preset" class="button">
 
         <div class="slidecontainer">
@@ -52,18 +52,20 @@
         <div class="Content-box">
             <p class="Main-Text">RGB LED strip Mode select</p>
         </div>
-        <a href="" id="standard" class="button">Standard</a>
+        <input type="button" id="standard" class="button" value="Standard">
 
         <div class="Content-box">
             <p class="Main-Text">Animations and presets:</p>
-            <button  id="rainbow" class="button">Rainbow</button>
-            <button id="theaterChase" class="button">Theater Chase</button>
-            <button id="norway" class="button">Norwegian flag</button>
-            <button id="colorDrip" class="button">Color Drip</button>
+            <input type="button" id="rainbow"      class="button" value="Ranbow"        >
+            <input type="button" id="theaterChase" class="button" value="Theater Chase" >
+            <input type="button" id="norway"       class="button" value="Norwegian Flag">
+            <input type="button" id="colorDrip"    class="button" value="Color Drip"    >
+
             <div class="slidecontainer">
                 <label for ="speed">Speed:</label>
                 <input type="range" min="1" max="100" class="slider-br" id="speed">
             </div>
+            
             <div class="phonebutton-slider">
                 <input type="button" id="phonebutton-slider-modes" value="Send slider info" class="button">
             </div>

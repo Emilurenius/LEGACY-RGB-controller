@@ -25,34 +25,32 @@ G.value = getJSON(`${url}/json/data.json`).G
 B.value = getJSON(`${url}/json/data.json`).B
 
 toggle.addEventListener("click", (event) => {
-    const lightState = getJSON(`${url}/lightstate?toggle=change`)
-    updateBackgroundColor()
-    updateBackgroundLightState(lightState)
+    updateBackgroundLightState(getJSON(`${url}/lightstate?toggle=change`))
 })
 
 sliderButtonMain.addEventListener("click", (event) => {
-    getJSON(`${url}/?panel=main&br=${brightness.value}&r=${R.value}&g=${G.value}&b=${B.value}`)
-    updateBackgroundColor()
+    getJSON(`${url}/rgb?br=${brightness.value}&r=${R.value}&g=${G.value}&b=${B.value}`)
+    updateBackgroundLightState(getJSON(`${url}/checklightstate`))
 })
 
 brightness.onmouseup = () => {
-    getJSON(`${url}/?panel=main&br=${brightness.value}`)
-    updateBackgroundColor()
+    getJSON(`${url}/rgb?br=${brightness.value}`)
+    updateBackgroundLightState(getJSON(`${url}/checklightstate`))
 }
 
 R.onmouseup = () => {
-    getJSON(`${url}/?panel=main&r=${R.value}`)
-    updateBackgroundColor()
+    getJSON(`${url}/rgb?r=${R.value}`)
+    updateBackgroundLightState(getJSON(`${url}/checklightstate`))
 }
 
 G.onmouseup = () => {
-    getJSON(`${url}/?panel=main&g=${G.value}`)
-    updateBackgroundColor()
+    getJSON(`${url}/rgb?g=${G.value}`)
+    updateBackgroundLightState(getJSON(`${url}/checklightstate`))
 }
 
 B.onmouseup = () => {
-    getJSON(`${url}/?panel=main&b=${B.value}`)
-    updateBackgroundColor()
+    getJSON(`${url}/rgb?b=${B.value}`)
+    updateBackgroundLightState(getJSON(`${url}/checklightstate`))
 }
 
 updateBackgroundLightState(getJSON(`${url}/lightstate`))
