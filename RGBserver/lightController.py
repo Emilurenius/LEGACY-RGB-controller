@@ -505,9 +505,28 @@ def bpm(strip):
                 print("JSON busy...") # If you can't open the file, just try again
                 if checkBreak("bpm"):
                     break
-            
-        print(waitTime)
-        time.sleep(waitTime) # Wait the time that was calculated above
+
+        startTime = time.time() # Save current seconds since 1.January 1970
+        endTime = startTime + waitTime # Add wait time to startTime to get endTime
+        while True:
+            if time.time() >= endTime: # Stop looping when current time equals endTime
+                break
+            elif checkBreak("bpm"): # Stop looping if mode is changed
+                break
+
+            try:
+                with open("./json/bpm.json") as JSON: # Load BPM data saved to json file by server
+                    rawBPMdata = json.load(JSON) # Load JSON file as a dictionary
+                    BPM = rawBPMdata["value"] # Extract BPM value
+                    newWaitTime = 60 / int(BPM) # Calculate wait time based on BPM
+                    
+                    if newWaitTime != waitTime: # Stop waiting if the wait time is changed
+                        waitTime = newWaitTime
+                        break
+            except:
+                print("JSON busy...") # If you can't open the file, just loop around
+                if checkBreak("bpm"):
+                    break
 
 # Main program logic follows:
 if __name__ == '__main__':
