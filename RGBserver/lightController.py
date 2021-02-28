@@ -491,7 +491,7 @@ def bpm(strip):
         
         RGB = randColor()
         solidColor(strip, Color(RGB["r"], RGB["g"], RGB["b"])) # Assign a random color to the whole light strip
-        console.log("Changed color")
+        print("Changed color")
 
         # Load BPM data to see how long to wait until the color is changed again.
         while True: # This goes in a loop until the JSON file can be loaded, or mode is changed
