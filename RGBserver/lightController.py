@@ -489,7 +489,8 @@ def bpm(strip):
         if checkBreak("bpm"):
             break
         
-        solidColor(strip, randColor()) # Assign a random color to the whole light strip
+        solidColor(strip, Color(randColor())) # Assign a random color to the whole light strip
+        console.log("Changed color")
 
         # Load BPM data to see how long to wait until the color is changed again.
         while True: # This goes in a loop until the JSON file can be loaded, or mode is changed
