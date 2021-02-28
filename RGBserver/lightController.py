@@ -506,6 +506,7 @@ def bpm(strip):
                 if checkBreak("bpm"):
                     break
             
+            print(waitTime)
             time.sleep(waitTime) # Wait the time that was calculated above
 
 # Main program logic follows:
