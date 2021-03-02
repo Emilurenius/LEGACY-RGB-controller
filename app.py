@@ -1,4 +1,4 @@
-import spotipy, time
+import spotipy, time, requests
 from pprint import pprint
 from flask import Flask, request, url_for, session, redirect
 from spotipy.oauth2 import SpotifyOAuth
@@ -57,7 +57,9 @@ def getBPM():
     sp = spotipy.Spotify(auth=tokenInfo["access_token"])
     playingSong = sp.currently_playing()["item"]["id"]
     tempo = sp.audio_features(playingSong)[0]["tempo"]
-    return str(tempo)
+
+    requests.get(f"http://192.168.1.124:3000/bpm?mode=spotifyResponse&bpm={tempo}")
+    return redirect("http://192.168.1.124:3000/")
 
 
 

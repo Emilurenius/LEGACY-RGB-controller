@@ -284,6 +284,12 @@ app.get("/bpm", (req, res) => {
         })
         res.send("Success")
     }
+    else if (req.query.mode == "spotifySync") {
+        res.redirect("http://192.168.1.124:8000/")
+    }
+    else if (req.query.mode == "spotifyResponse") {
+        console.log(req.query.bpm)
+    }
 })
 
 // Longpolling:
