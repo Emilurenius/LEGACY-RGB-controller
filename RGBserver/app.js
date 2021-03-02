@@ -4,8 +4,11 @@ const app = express()
 const path = require("path")
 const fs = require("fs")
 const cors = require("cors")
-const port = 3000
-var counter = 0
+
+// Reading input from terminal start
+const port = parseInt(process.argv[2])
+console.log(`${port} registered as server port`)
+// Reading input from terminal end
 
 // Variables set up for long polling address:
 const LIMIT = 20
