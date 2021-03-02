@@ -2,10 +2,12 @@ const bpmPresetContainer = document.getElementById("BPMpresets")
 const bpmSlider = document.getElementById("BPMslider")
 const bpmLabel = document.getElementById("BPMsliderLabel")
 const bpmActivate = document.getElementById("activateBPMmode")
+const spotifySyncButton = document.getElementById("spotifySyncButton")
 const bpmData = getJSON(`${url}/bpm?mode=getBPM`)
 
 bpmSlider.value = bpmData.value
 bpmLabel.innerHTML = `BPM: ${bpmSlider.value}`
+spotifySyncButton.href = `${url}/bpm?mode=spotifySync`
 
 bpmSlider.onmouseup = () => {
     getJSON(`${url}/bpm?mode=updateBPM&bpm=${bpmSlider.value}`)
