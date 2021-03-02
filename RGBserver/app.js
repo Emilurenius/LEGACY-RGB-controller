@@ -290,7 +290,7 @@ app.get("/bpm", (req, res) => {
     else if (req.query.mode == "spotifyResponse") {
         let rawData = fs.readFileSync(path.join(__dirname, "/json/bpm.json"))
         let bpmData = JSON.parse(rawData)
-        bpmData.value = req.query.bpm
+        bpmData.value = parseFloat(req.query.bpm)
 
         let stringified = JSON.stringify(bpmData, null, 4)
         fs.writeFile(path.join(__dirname, "/json/bpm.json"), stringified, (err) => {
