@@ -60,7 +60,7 @@ def getBPM():
     messageSent = playingSong["timestamp"]
     songProgress = playingSong["progress_ms"]
 
-    requests.get(f"http://192.168.1.124:3000/bpm?mode=spotifyResponse&bpm={tempo}&messageSent={messageSent}&songProgess={songProgress}")
+    requests.get(f"http://192.168.1.124:3000/bpm?mode=spotifyResponse&bpm={tempo}&messageSent={messageSent}&songProgress={songProgress}")
     return redirect("http://192.168.1.124:3000/")
 
 
