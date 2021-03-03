@@ -8,7 +8,7 @@ const bpmData = getJSON(`${url}/bpm?mode=getBPM`)
 
 bpmSlider.value = bpmData.value
 bpmLabel.innerHTML = `BPM: ${bpmSlider.value}`
-spotifySyncButton.href = `${url}/bpm?mode=spotifySync`
+spotifySyncButton.href = `http://192.168.1.124:8000/getBPM`
 
 bpmSlider.onmouseup = () => {
     getJSON(`${url}/bpm?mode=updateBPM&bpm=${bpmSlider.value}`)
