@@ -271,13 +271,13 @@ app.get("/bpm", (req, res) => {
         res.sendFile(path.join(__dirname, "/json/bpm.json"))
     }
     else if (req.query.mode == "updateBPM") {
-        let rawData = fs.readFileSync(path.join(__dirname, "/json/bpm.json"))
-        let bpmData = JSON.parse(rawData)
+        const rawData = fs.readFileSync(path.join(__dirname, "/json/bpm.json"))
+        const bpmData = JSON.parse(rawData)
 
         bpmData.value = req.query.bpm
         console.log(`Current BPM: ${bpmData.value}`)
 
-        let stringified = JSON.stringify(bpmData, null, 4)
+        const stringified = JSON.stringify(bpmData, null, 4)
         fs.writeFile(path.join(__dirname, "/json/bpm.json"), stringified, (err) => {
             if (err) throw err
             console.log("Data written to file")
@@ -288,16 +288,27 @@ app.get("/bpm", (req, res) => {
         res.redirect("http://192.168.1.124:8000/getBPM")
     }
     else if (req.query.mode == "spotifyResponse") {
-        let rawData = fs.readFileSync(path.join(__dirname, "/json/bpm.json"))
-        let bpmData = JSON.parse(rawData)
+        const rawData = fs.readFileSync(path.join(__dirname, "/json/bpm.json"))
+        const bpmData = JSON.parse(rawData)
         bpmData.value = parseFloat(req.query.bpm)
 
-        let stringified = JSON.stringify(bpmData, null, 4)
+        const sinceSent = Date.now() - parseInt(req.query.messageSent)
+        const currentSongProgress = parseInt(req.query.songProgress) + sinceSent
+        
+        const waitTimeMS = (60 / bpmData.value) * 1000
+        const activateAt = 0
+        do {
+            activateAt = activateAt + waitTimeMS
+        }while (beat < currentSongProgress + 100)
+
+        console.log(`Current song progress: ${currentSongProgress}\nActivate at: ${activateAt}`)
+
+        const stringified = JSON.stringify(bpmData, null, 4)
         fs.writeFile(path.join(__dirname, "/json/bpm.json"), stringified, (err) => {
             if (err) throw err
             console.log("Data written to file")
         })
-        console.log(`${req.query.messageSent}, ${req.query.songProgress}`)
+
         res.send(bpmData.value)
     }
 })

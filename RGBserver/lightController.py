@@ -518,7 +518,7 @@ def bpm(strip):
                 with open("./json/bpm.json") as JSON: # Load BPM data saved to json file by server
                     rawBPMdata = json.load(JSON) # Load JSON file as a dictionary
                     BPM = rawBPMdata["value"] # Extract BPM value
-                    newWaitTime = 60 / int(BPM) # Calculate wait time based on BPM
+                    newWaitTime = 60 / float(BPM) # Calculate wait time based on BPM
                     
                     if newWaitTime != waitTime: # Stop waiting if the wait time is changed
                         waitTime = newWaitTime
