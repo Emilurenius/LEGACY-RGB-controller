@@ -299,7 +299,7 @@ app.get("/bpm", (req, res) => {
         let activateAt = 0
         do {
             activateAt = activateAt + waitTimeMS
-        }while (beat < currentSongProgress + 100)
+        }while (activateAt < currentSongProgress + 100)
 
         console.log(`Current song progress: ${currentSongProgress}\nActivate at: ${activateAt}`)
 
