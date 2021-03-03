@@ -309,7 +309,7 @@ app.get("/bpm", (req, res) => {
             console.log("Data written to file")
         })
 
-        res.send(bpmData.value)
+        res.send(`${bpmData.value}`)
     }
 })
 
