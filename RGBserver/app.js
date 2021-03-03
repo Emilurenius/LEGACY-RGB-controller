@@ -303,7 +303,7 @@ app.get("/bpm", (req, res) => {
             activateAt = activateAt + waitTimeMS
         }while (activateAt < currentSongProgress + 100)
         const activateIn = activateAt - currentSongProgress // In milliseconds
-        bpmData.syncDelay = activateIn / 1000
+        bpmData.syncDelay = (Date.now() + activateIn) / 1000
 
         console.log(`Current song progress: ${currentSongProgress}\nActivate in: ${activateIn}`)
 

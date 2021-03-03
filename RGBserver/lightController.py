@@ -506,7 +506,11 @@ def bpm(strip):
                 if checkBreak("bpm"):
                     break
 
-        time.sleep(syncDelay) # Wait for next beat in song
+        while True: # Wait for next beat in song
+            if syncDelay == 0:
+                break # If there is no wait time, just carry on
+            elif time.time() >= syncDelay:
+                break # Break out of loop when the next beat comes
         
         RGB = randColor()
         solidColor(strip, Color(RGB["r"], RGB["g"], RGB["b"])) # Assign a random color to the whole light strip
