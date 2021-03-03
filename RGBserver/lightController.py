@@ -488,10 +488,6 @@ def bpm(strip):
     while True:
         if checkBreak("bpm"):
             break
-        
-        RGB = randColor()
-        solidColor(strip, Color(RGB["r"], RGB["g"], RGB["b"])) # Assign a random color to the whole light strip
-        print("Changed color")
 
         # Load BPM data to see how long to wait until the color is changed again.
         while True: # This goes in a loop until the JSON file can be loaded, or mode is changed
@@ -500,11 +496,21 @@ def bpm(strip):
                     rawBPMdata = json.load(JSON) # Load JSON file as a dictionary
                     BPM = rawBPMdata["value"] # Extract BPM value
                     waitTime = 60 / int(BPM) # Calculate wait time based on BPM
-                    break # When the JSON file is loaded, end the loop
+                    syncDelay = rawBPMdata["syncDelay"] # Check how long to wait for next beat in song
+                    rawBPMdata["syncDelay"] = 0 # Reset delay before next loop
+                    with open("./json/bpm.json", "w") as outFile: # Open json file for editing
+                        json.dump(rawBPMdata, outFile) # Save delay change 
+                    break
             except:
                 print("JSON busy...") # If you can't open the file, just try again
                 if checkBreak("bpm"):
                     break
+
+        time.sleep(syncDelay) # Wait for next beat in song
+        
+        RGB = randColor()
+        solidColor(strip, Color(RGB["r"], RGB["g"], RGB["b"])) # Assign a random color to the whole light strip
+        print("Changed color")
 
         startTime = time.time() # Save current seconds since 1.January 1970
         endTime = startTime + waitTime # Add wait time to startTime to get endTime
@@ -519,6 +525,7 @@ def bpm(strip):
                     rawBPMdata = json.load(JSON) # Load JSON file as a dictionary
                     BPM = rawBPMdata["value"] # Extract BPM value
                     newWaitTime = 60 / float(BPM) # Calculate wait time based on BPM
+                    new
                     
                     if newWaitTime != waitTime: # Stop waiting if the wait time is changed
                         waitTime = newWaitTime

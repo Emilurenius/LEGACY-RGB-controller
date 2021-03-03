@@ -2,5 +2,6 @@
     "value": 50,
     "presets": {
         "test": 50
-    }
+    },
+    "syncDelay": 0
 }

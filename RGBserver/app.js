@@ -275,6 +275,7 @@ app.get("/bpm", (req, res) => {
         const bpmData = JSON.parse(rawData)
 
         bpmData.value = req.query.bpm
+        bpmData.syncDelay = 0
         console.log(`Current BPM: ${bpmData.value}`)
 
         const stringified = JSON.stringify(bpmData, null, 4)
@@ -288,6 +289,7 @@ app.get("/bpm", (req, res) => {
         res.redirect("http://192.168.1.124:8000/getBPM")
     }
     else if (req.query.mode == "spotifyResponse") {
+        console.log("\nSpotify sync response recieved:")
         const rawData = fs.readFileSync(path.join(__dirname, "/json/bpm.json"))
         const bpmData = JSON.parse(rawData)
         bpmData.value = parseFloat(req.query.bpm)
@@ -301,8 +303,10 @@ app.get("/bpm", (req, res) => {
             activateAt = activateAt + waitTimeMS
         }while (activateAt < currentSongProgress + 100)
         const activateIn = activateAt - currentSongProgress // In milliseconds
+        bpmData.syncDelay = activateIn / 1000
 
         console.log(`Current song progress: ${currentSongProgress}\nActivate in: ${activateIn}`)
+
 
         const stringified = JSON.stringify(bpmData, null, 4)
         fs.writeFile(path.join(__dirname, "/json/bpm.json"), stringified, (err) => {
