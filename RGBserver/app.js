@@ -300,8 +300,9 @@ app.get("/bpm", (req, res) => {
         do {
             activateAt = activateAt + waitTimeMS
         }while (activateAt < currentSongProgress + 100)
+        const activateIn = activateAt - currentSongProgress // In miliseconds
 
-        console.log(`Current song progress: ${currentSongProgress}\nActivate at: ${activateAt}`)
+        console.log(`Current song progress: ${currentSongProgress}\nActivate in: ${activateIn}`)
 
         const stringified = JSON.stringify(bpmData, null, 4)
         fs.writeFile(path.join(__dirname, "/json/bpm.json"), stringified, (err) => {
