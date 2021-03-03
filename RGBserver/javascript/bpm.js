@@ -21,4 +21,5 @@ bpmActivate.addEventListener("click", (event) => {
 
 bpmSliderButton.addEventListener("click", (event) => {
     getJSON(`${url}/bpm?mode=updateBPM&bpm=${bpmSlider.value}`)
+    bpmLabel.innerHTML = `BPM: ${bpmSlider.value}`
 })
