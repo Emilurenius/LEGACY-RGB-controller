@@ -296,7 +296,7 @@ app.get("/bpm", (req, res) => {
         const currentSongProgress = parseInt(req.query.songProgress) + sinceSent
         
         const waitTimeMS = (60 / bpmData.value) * 1000
-        const activateAt = 0
+        let activateAt = 0
         do {
             activateAt = activateAt + waitTimeMS
         }while (beat < currentSongProgress + 100)
