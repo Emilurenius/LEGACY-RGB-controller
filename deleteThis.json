@@ -1,0 +1,106 @@
+{
+    "timestamp": 1614858019189,
+    "context": {
+      "external_urls": {
+        "spotify": "https://open.spotify.com/playlist/5Aj0R6fyv2ZECUdIG03xdl"
+      },
+      "href": "https://api.spotify.com/v1/playlists/5Aj0R6fyv2ZECUdIG03xdl",
+      "type": "playlist",
+      "uri": "spotify:playlist:5Aj0R6fyv2ZECUdIG03xdl"
+    },
+    "progress_ms": 79835,
+    "item": {
+      "album": {
+        "album_type": "compilation",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/0LyfQWJT6nXafLPZqxe9Of"
+            },
+            "href": "https://api.spotify.com/v1/artists/0LyfQWJT6nXafLPZqxe9Of",
+            "id": "0LyfQWJT6nXafLPZqxe9Of",
+            "name": "Various Artists",
+            "type": "artist",
+            "uri": "spotify:artist:0LyfQWJT6nXafLPZqxe9Of"
+          }
+        ],
+        "available_markets": [],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/7r2p8wfr3ML0MsNUoW3I9H"
+        },
+        "href": "https://api.spotify.com/v1/albums/7r2p8wfr3ML0MsNUoW3I9H",
+        "id": "7r2p8wfr3ML0MsNUoW3I9H",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b273734800327c53c649c472f8b4",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e02734800327c53c649c472f8b4",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d00004851734800327c53c649c472f8b4",
+            "width": 64
+          }
+        ],
+        "name": "Rocket League x Monstercat Vol. 1",
+        "release_date": "2017-07-05",
+        "release_date_precision": "day",
+        "total_tracks": 18,
+        "type": "album",
+        "uri": "spotify:album:7r2p8wfr3ML0MsNUoW3I9H"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/4AT7XlLBevgZIiKvZQ83ye"
+          },
+          "href": "https://api.spotify.com/v1/artists/4AT7XlLBevgZIiKvZQ83ye",
+          "id": "4AT7XlLBevgZIiKvZQ83ye",
+          "name": "Trivecta",
+          "type": "artist",
+          "uri": "spotify:artist:4AT7XlLBevgZIiKvZQ83ye"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/24CzPFC4y3bM4AkUnZfuAU"
+          },
+          "href": "https://api.spotify.com/v1/artists/24CzPFC4y3bM4AkUnZfuAU",
+          "id": "24CzPFC4y3bM4AkUnZfuAU",
+          "name": "Karra",
+          "type": "artist",
+          "uri": "spotify:artist:24CzPFC4y3bM4AkUnZfuAU"
+        }
+      ],
+      "available_markets": [],
+      "disc_number": 1,
+      "duration_ms": 222631,
+      "explicit": false,
+      "external_ids": {
+        "isrc": "CA6D21700139"
+      },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/4m3k0HciFar8Gzit2SoDSg"
+      },
+      "href": "https://api.spotify.com/v1/tracks/4m3k0HciFar8Gzit2SoDSg",
+      "id": "4m3k0HciFar8Gzit2SoDSg",
+      "is_local": false,
+      "name": "Break Me (feat. Karra)",
+      "popularity": 0,
+      "preview_url": null,
+      "track_number": 10,
+      "type": "track",
+      "uri": "spotify:track:4m3k0HciFar8Gzit2SoDSg"
+    },
+    "currently_playing_type": "track",
+    "actions": {
+      "disallows": {
+        "resuming": true
+      }
+    },
+    "is_playing": true
+  }

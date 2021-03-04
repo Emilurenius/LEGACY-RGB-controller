@@ -59,9 +59,10 @@ def getBPM():
     tempo = sp.audio_features(playingSong["item"]["id"])[0]["tempo"]
     messageSent = playingSong["timestamp"]
     songProgress = playingSong["progress_ms"]
+    songEnd = (playingSong["item"]["duration_ms"] - songProgress) + (time.time() * 1000) # Timestamp in ms
 
     requests.get(f"http://192.168.1.124:3000/bpm?mode=spotifyResponse&bpm={tempo}&messageSent={messageSent}&songProgress={songProgress}")
-    return redirect("http://192.168.1.124:3000/?bpmLiveUpdate=true")
+    return redirect(f"http://192.168.1.124:3000/?bpmLiveUpdate=true&songEnd={songEnd}")
 
 
 

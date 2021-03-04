@@ -27,7 +27,7 @@ bpmSliderButton.addEventListener("click", (event) => {
 if (window.Worker && queries.bpmLiveUpdate == "true") {
     console.log("Worker compatible")
     var myWorker = new Worker(`${url}/javascript/workers/bpmWorker.js`)
-    var message = {nextSongAt: "timestamp goes here later"}
+    var message = {nextSongAt: queries.songEnd}
     myWorker.postMessage(message)
 
     myWorker.onmessage = (e) => {
