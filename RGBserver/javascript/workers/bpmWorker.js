@@ -1,5 +1,5 @@
 this.onmessage = (e) => {
-    while (Date.now() < e.data.nextSongAt + 1000) {
+    while (Date.now() < e.data.nextSongAt + 2000) {
         continue
     }
 
