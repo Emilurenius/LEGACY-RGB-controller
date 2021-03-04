@@ -1,7 +1,15 @@
 function getQueries() {
-    const queryString = window.location.search
+    const queryString = window.location.search.replace("?", "")
     const queriesList = queryString.split("&")
-    return queriesList
+
+    let queriesDict = new Object()
+
+    for (let i of queriesList) {
+        const keyValue = queriesList[i].split("=")
+        queriesDict[keyValue[0]] = keyValue[1]
+    }
+
+    return queriesDict
 }
 
 const queries = getQueries()
