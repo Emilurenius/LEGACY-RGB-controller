@@ -5,9 +5,9 @@ function getQueries() {
     let queriesDict = new Object()
 
     for (let i=0; i<=queriesList.length - 1; i++) {
-        const keyValue = queriesList[i]
+        const keyValue = queriesList[i].split("=")
         console.log(keyValue)
-        //queriesDict[keyValue[0]] = keyValue[1]
+        queriesDict[keyValue[0]] = keyValue[1]
     }
 
     return queriesDict
