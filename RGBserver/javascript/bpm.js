@@ -23,3 +23,14 @@ bpmSliderButton.addEventListener("click", (event) => {
     getJSON(`${url}/bpm?mode=updateBPM&bpm=${bpmSlider.value}`)
     bpmLabel.innerHTML = `BPM: ${bpmSlider.value}`
 })
+
+if (window.Worker) {
+    console.log("Worker compatible")
+    var myWorker = new Worker(`${url}/javascript/workers/bpmWorker.js`)
+    var message = { addThis: {num1:1, num2:1} }
+    myWorker.postMessage(message)
+
+    myWorker.onmessage = (e) => {
+        console.dir(e.data.result)
+    }
+}
