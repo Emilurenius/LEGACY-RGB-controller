@@ -26,12 +26,26 @@ bpmSliderButton.addEventListener("click", (event) => {
 
 if (window.Worker && queries.bpmLiveUpdate == "true") {
     console.log("Worker compatible")
-    var myWorker = new Worker(`${url}/javascript/workers/bpmWorker.js`)
-    var message = {nextSongAt: queries.songEnd}
+    const myWorker = new Worker(`${url}/javascript/workers/bpmWorker.js`)
+    const message = {nextSongAt: queries.songEnd}
+    let currnetSong = queries.songID
+    let newSong = undefined
+
     myWorker.postMessage(message)
 
     myWorker.onmessage = (e) => {
         console.log(e.data.response)
-        window.location.replace("http://192.168.1.124:8000/getBPM")
+        if (e.data.response == "song done") {
+            window.location.replace("http://192.168.1.124:8000/getBPM")
+        }
+        else if (e.data.response == "checkSong") {
+            newSong = getJSON("http://192.168.1.124:8000/getCurrentTrack")
+            if (currnetSong != newSong) {
+                window.location.replace("http://192.168.1.124:8000/getBPM")
+            }
+            else {
+                console.log("Still current song")
+            }
+        }
     }
 }

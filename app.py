@@ -56,13 +56,27 @@ def getBPM():
     
     sp = spotipy.Spotify(auth=tokenInfo["access_token"])
     playingSong = sp.currently_playing()
-    tempo = sp.audio_features(playingSong["item"]["id"])[0]["tempo"]
+    songID = playingSong["item"]["id"]
+    tempo = sp.audio_features(songID)[0]["tempo"]
     messageSent = playingSong["timestamp"]
     songProgress = playingSong["progress_ms"]
     songEnd = (playingSong["item"]["duration_ms"] - songProgress) + (time.time() * 1000) # Timestamp in ms
 
-    requests.get(f"http://192.168.1.124:3000/bpm?mode=spotifyResponse&bpm={tempo}&messageSent={messageSent}&songProgress={songProgress}")
-    return redirect(f"http://192.168.1.124:3000/?bpmLiveUpdate=true&songEnd={songEnd}")
+    requests.get(f"http://192.168.1.124:3000/bpm?mode=spotifyResponse&bpm={tempo}&messageSent={messageSent}&songProgress={songProgress}&songID={songID}")
+    return redirect(f"http://192.168.1.124:3000/?bpmLiveUpdate=true&songEnd={songEnd}&currentSongID={songID}")
+
+@app.route("/getCurrentTrack")
+def getCurrentTrack():
+    try:
+        tokenInfo = getToken()
+    except:
+        print("user not logged in")
+        return "Error: Not logged in"
+    
+    sp = spotipy.Spotify(auth=tokenInfo["access_token"])
+    playingSong = sp.currently_playing()["item"]["id"]
+
+    return playingSong
 
 
 
