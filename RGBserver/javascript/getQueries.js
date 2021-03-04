@@ -4,7 +4,7 @@ function getQueries() {
 
     let queriesDict = new Object()
 
-    for (let i of queriesList) {
+    for (let i=0; i<=queriesList.length; i++) {
         const keyValue = queriesList[i]
         console.log(keyValue)
         //queriesDict[keyValue[0]] = keyValue[1]
