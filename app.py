@@ -76,7 +76,7 @@ def getCurrentTrack():
     sp = spotipy.Spotify(auth=tokenInfo["access_token"])
     playingSong = sp.currently_playing()["item"]["id"]
 
-    return playingSong
+    return redirect(f"http://192.168.1.124:3000/?bpmLiveUpdate=true&newSongID={playingSong}")
 
 
 

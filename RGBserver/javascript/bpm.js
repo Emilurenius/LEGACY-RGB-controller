@@ -28,8 +28,12 @@ if (window.Worker && queries.bpmLiveUpdate == "true") {
     console.log("Worker compatible")
     const myWorker = new Worker(`${url}/javascript/workers/bpmWorker.js`)
     const message = {nextSongAt: queries.songEnd}
-    let currnetSong = queries.songID
-    let newSong = undefined
+
+    if (queries.newSongID != undefined) {
+        if (queries.currentSong != queries.songID) {
+            window.location.replace("http://192.168.1.124:8000/getBPM")
+        }
+    }
 
     myWorker.postMessage(message)
 
@@ -39,13 +43,7 @@ if (window.Worker && queries.bpmLiveUpdate == "true") {
             window.location.replace("http://192.168.1.124:8000/getBPM")
         }
         else if (e.data.response == "checkSong") {
-            newSong = getJSON("http://192.168.1.124:8000/getCurrentTrack")
-            if (currnetSong != newSong) {
-                window.location.replace("http://192.168.1.124:8000/getBPM")
-            }
-            else {
-                console.log("Still current song")
-            }
+            window.location.replace("http://192.168.1.124:8000/getCurrentTrack")
         }
     }
 }
