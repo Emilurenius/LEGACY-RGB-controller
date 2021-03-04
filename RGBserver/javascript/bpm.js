@@ -25,15 +25,14 @@ bpmSliderButton.addEventListener("click", (event) => {
 })
 
 if (window.Worker && queries.bpmLiveUpdate == "true") {
-    console.log("Worker compatible")
-    const myWorker = new Worker(`${url}/javascript/workers/bpmWorker.js`)
-    const message = {nextSongAt: queries.songEnd}
-
     if (queries.newSongID != undefined) {
         if (queries.currentSong != queries.songID) {
             window.location.replace("http://192.168.1.124:8000/getBPM")
         }
     }
+    console.log("Worker compatible")
+    const myWorker = new Worker(`${url}/javascript/workers/bpmWorker.js`)
+    const message = {nextSongAt: queries.songEnd}
 
     myWorker.postMessage(message)
 
