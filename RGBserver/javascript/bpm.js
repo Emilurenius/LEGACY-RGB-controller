@@ -32,5 +32,6 @@ if (window.Worker && queries.bpmLiveUpdate == "true") {
 
     myWorker.onmessage = (e) => {
         console.log(e.data.response)
+        window.location.replace("http://192.168.1.124:8000/getBPM")
     }
 }
