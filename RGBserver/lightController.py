@@ -555,7 +555,7 @@ def screenSync(strip, data=None):
                 if checkBreak("screenSync"):
                     break
 
-        newColor = [data["r"], data["g"], data["b"]]
+        newColor = [data["R"], data["G"], data["B"]]
 
         if currentColor == None:
             currentColor = newColor
