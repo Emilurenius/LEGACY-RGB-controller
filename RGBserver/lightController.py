@@ -34,7 +34,6 @@ def checkBreak(mode):
         else:
             return False # Return False if lights should be on, and the mode has not changed
     except: # If you can't open the json file, just return False
-        print("JSON busy...")
         return False # If the JSON file can't be opened, just assume the lights should be on, and the mode hasn't changed
 
 def getDataval(dataval):
@@ -43,7 +42,6 @@ def getDataval(dataval):
             data = json.load(JSON)
         return data[dataval]
     except: # If you can't open the json file, just return False
-        print("JSON busy...")
         return False
 
 # Define functions which animate LEDs in various ways:
@@ -287,7 +285,6 @@ def alarmClock(strip):
             with open("./json/data.json") as JSON: # Read data file
                 data = json.load(JSON)
         except:
-            print("JSON busy...")
             time.sleep(0.05)
             continue
 
@@ -379,7 +376,6 @@ def elitus(strip, data):
             with open("./json/data.json") as JSON:
                 data = json.load(JSON)
         except:
-            print("JSON busy...")
             time.sleep(0.05)
 
         if data["eliteData"]["mode"] == "standard":
@@ -404,7 +400,6 @@ def elitus(strip, data):
                             cancelAnimation = True
                             break
                 except:
-                    print("JSON busy...")
                     time.sleep(0.05)
                 if checkBreak("elitus"):
                     break
@@ -502,7 +497,6 @@ def bpm(strip):
                         json.dump(rawBPMdata, outFile) # Save delay change 
                     break
             except:
-                print("JSON busy...") # If you can't open the file, just try again
                 if checkBreak("bpm"):
                     break
 
@@ -535,7 +529,6 @@ def bpm(strip):
                         waitTime = newWaitTime
                         break
             except:
-                print("JSON busy...") # If you can't open the file, just loop around
                 if checkBreak("bpm"):
                     break
 
@@ -558,7 +551,6 @@ def screenSync(strip):
                     B = data["B"]
                     break
             except:
-                print("JSON busy...") # If you can't open the file, just try again
                 if checkBreak("screenSync"):
                     break
         print(data)
@@ -611,7 +603,6 @@ if __name__ == '__main__':
                 with open("./json/data.json") as JSON:
                     data = json.load(JSON)
             except:
-                print("JSON busy...")
                 time.sleep(0.05)
             
             if previousData != data:
