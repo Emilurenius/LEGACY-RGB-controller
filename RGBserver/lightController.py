@@ -539,6 +539,47 @@ def bpm(strip):
                 if checkBreak("bpm"):
                     break
 
+def screenSync(strip, data=None):
+    currentColor = None
+    while True:
+        if checkBreak("screenSync"):
+            break
+        
+        while True:
+            try:
+                with open("./json/bpm.json") as JSON: # Load BPM data saved to json file by server
+                    data = json.load(JSON) # Load JSON file as a dictionary
+                    break
+            except:
+                print("JSON busy...") # If you can't open the file, just try again
+                if checkBreak("screenSync"):
+                    break
+
+        newColor = [data["r"], data["g"], data["b"]]
+
+        if currentColor == None:
+            currentColor = newColor
+        elif currentColor == newColor:
+            currentColor = newColor
+        else:
+            if currentColor[0] < newColor[0]: # Change red channel
+                currentColor[0] = currentColor[0] + int(newColor[0] * 0.20)
+            else:
+                currentColor[0] = currentColor[0] - int(newColor[0] * 0.20)
+            
+            if currentColor[1] < newColor[1]: # Change green channel
+                currentColor[1] = currentColor[1] + int(newColor[1] * 0.20)
+            else:
+                currentColor[1] = currentColor[1] - int(newColor[1] * 0.20)
+
+            if currentColor[2] < newColor[2]: # Change blue channel
+                currentColor[2] = currentColor[2] + int(newColor[2] * 0.20)
+            else:
+                currentColor[2] = currentColor[2] - int(newColor[2] * 0.20)
+
+        solidColor(strip, Color(currentColor[0], currentColor[1], currentColor[2]))
+
+
 # Main program logic follows:
 if __name__ == '__main__':
     # Process arguments
@@ -613,6 +654,10 @@ if __name__ == '__main__':
                 elif data["onoff"] and data["mode"] == "bpm":
                     print("bpm activated")
                     bpm(strip)
+
+                elif data["onoff"] and data["mode"] == "screenSync":
+                    print("Screen syncing activated")
+                    screenSync(strip, data=data)
                 
                 else:
                     print("Lights off")
