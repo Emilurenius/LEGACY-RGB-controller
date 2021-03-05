@@ -565,35 +565,35 @@ def screenSync(strip):
                 if newColor[0] - currentColor[0] < 5:
                     currentColor[0] += 5
                 else:
-                    currentColor[0] = currentColor[0] + newColor[0]
+                    currentColor[0] = currentColor[0] + (newColor[0] - currentColor[0])
             else:
                 if currentColor[0] - newColor[0] < 5:
                     currentColor[0] -= 5
                 else:
-                    currentColor[0] = currentColor[0] - newColor[0]
+                    currentColor[0] = currentColor[0] - (currentColor[0] - newColor[0])
             
             if currentColor[1] < newColor[1]: # Change green channel
                 if newColor[1] - currentColor[1] < 5:
                     currentColor[1] += 5
                 else:
-                    currentColor[1] = currentColor[1] + newColor[1]
+                    currentColor[1] = currentColor[1] + (newColor[0] - currentColor[0])
             else:
                 if currentColor[1] - newColor[1] < 5:
                     currentColor[1] -= 5
                 else:
-                    currentColor[1] = currentColor[1] - newColor[1]
+                    currentColor[1] = currentColor[1] - (currentColor[0] - newColor[0])
                 
 
             if currentColor[2] < newColor[2]: # Change blue channel
                 if newColor[2] - currentColor[2] < 5:
                     currentColor[2] += 5
                 else:
-                    currentColor[2] = currentColor[2] + newColor[2]
+                    currentColor[2] = currentColor[2] + (newColor[0] - currentColor[0])
             else:
                 if currentColor[2] - newColor[2] < 5:
                     currentColor[2] -= 5
                 else:
-                    currentColor[2] = currentColor[2] - newColor[2]
+                    currentColor[2] = currentColor[2] - (currentColor[0] - newColor[0])
                 
 
         solidColor(strip, Color(currentColor[0], currentColor[1], currentColor[2]))
