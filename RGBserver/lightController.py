@@ -594,9 +594,8 @@ def screenSync(strip):
                 else:
                     currentColor[2] = currentColor[2] - (currentColor[0] - newColor[0])
                 
-
-        solidColor(strip, Color(currentColor[0], currentColor[1], currentColor[2]))
         print(currentColor)
+        solidColor(strip, Color(currentColor[0], currentColor[1], currentColor[2]))
 
 
 # Main program logic follows:
