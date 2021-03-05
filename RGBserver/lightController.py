@@ -541,7 +541,7 @@ def screenSync(strip):
     B = None
     changePerTick = 1
     delayMS = 40
-    threshold = 2
+    threshold = 5
     while True:
         if checkBreak("screenSync"):
             break
@@ -559,6 +559,36 @@ def screenSync(strip):
                     break
         newColor = [R, G, B]
 
+        if currentColor == None:
+            currentColor = newColor
+        elif currentColor == newColor:
+            currentColor = newColor
+        else:
+            if currentColor[0] < newColor[0]: # Change red channel
+                currentColor[0] += changePerTick
+            else:
+                currentColor[0] -= changePerTick
+            
+            if currentColor[1] < newColor[1]: # Change green channel
+                currentColor[1] += changePerTick
+            else:
+                currentColor[1] -= changePerTick
+                
+
+            if currentColor[2] < newColor[2]: # Change blue channel
+                currentColor[2] += changePerTick
+            else:
+                currentColor[2] -= changePerTick
+
+        # Make sure RGB values are not negative. That would cause a crash. 
+        if currentColor[0] < 0:
+            currentColor[0] = 0
+        if currentColor[1] < 0:
+            currentColor[1] = 0
+        if currentColor[2] < 0:
+            currentColor[2] = 0                
+        print(currentColor)
+
         # Threshold check: (Only change value if one of the channels have changed by a set amount)
         changeColor = False
         if prevColor == None:
@@ -572,36 +602,6 @@ def screenSync(strip):
             changeColor = True
 
         if changeColor == True: # Check if threshold was hit
-            if currentColor == None:
-                currentColor = newColor
-            elif currentColor == newColor:
-                currentColor = newColor
-            else:
-                if currentColor[0] < newColor[0]: # Change red channel
-                    currentColor[0] += changePerTick
-                else:
-                    currentColor[0] -= changePerTick
-                
-                if currentColor[1] < newColor[1]: # Change green channel
-                    currentColor[1] += changePerTick
-                else:
-                    currentColor[1] -= changePerTick
-                    
-
-                if currentColor[2] < newColor[2]: # Change blue channel
-                    currentColor[2] += changePerTick
-                else:
-                    currentColor[2] -= changePerTick
-
-            # Make sure RGB values are not negative. That would cause a crash. 
-            if currentColor[0] < 0:
-                currentColor[0] = 0
-            if currentColor[1] < 0:
-                currentColor[1] = 0
-            if currentColor[2] < 0:
-                currentColor[2] = 0                
-            print(currentColor)
-
             prevColor = currentColor
             solidColor(strip, Color(currentColor[0], currentColor[1], currentColor[2])) # Change color to the new given color
         time.sleep(delayMS / 1000)
