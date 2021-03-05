@@ -540,7 +540,7 @@ def screenSync(strip):
     B = None
     changePerTick = 1
     delayMS = 40
-    threshold = 5
+    threshold = 10
     while True:
         if checkBreak("screenSync"):
             break
