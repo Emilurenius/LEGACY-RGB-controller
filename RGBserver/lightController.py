@@ -593,7 +593,14 @@ def screenSync(strip):
                     currentColor[2] -= 5
                 else:
                     currentColor[2] = currentColor[2] - (currentColor[0] - newColor[0])
-                
+
+        # Make sure RGB values are not negative. That would cause a crash. 
+        if currentColor[0] < 0:
+            currentColor[0] = 0
+        if currentColor[1] < 0:
+            currentColor[1] = 0
+        if currentColor[2] < 0:
+            currentColor[2] = 0                
         print(currentColor)
         solidColor(strip, Color(currentColor[0], currentColor[1], currentColor[2]))
 
