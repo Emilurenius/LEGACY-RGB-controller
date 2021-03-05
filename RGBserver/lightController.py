@@ -539,7 +539,7 @@ def screenSync(strip):
     G = None
     B = None
     changePerTick = 1
-    delayMS = 10
+    delayMS = 20
     while True:
         if checkBreak("screenSync"):
             break
