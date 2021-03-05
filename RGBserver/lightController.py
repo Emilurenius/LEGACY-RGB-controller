@@ -542,6 +542,9 @@ def bpm(strip):
 def screenSync(strip):
     currentColor = None
     data = None
+    R = None
+    G = None
+    B = None
     while True:
         if checkBreak("screenSync"):
             break
@@ -550,13 +553,16 @@ def screenSync(strip):
             try:
                 with open("./json/bpm.json") as JSON: # Load BPM data saved to json file by server
                     data = json.load(JSON) # Load JSON file as a dictionary
+                    R = data["R"]
+                    G = data["G"]
+                    B = data["B"]
                     break
             except:
                 print("JSON busy...") # If you can't open the file, just try again
                 if checkBreak("screenSync"):
                     break
         print(data)
-        newColor = [data["R"], data["G"], data["B"]]
+        newColor = [R, G, B]
 
         if currentColor == None:
             currentColor = newColor
