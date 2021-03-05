@@ -554,7 +554,6 @@ def screenSync(strip):
             except:
                 if checkBreak("screenSync"):
                     break
-        print(data)
         newColor = [R, G, B]
 
         if currentColor == None:
@@ -563,19 +562,19 @@ def screenSync(strip):
             currentColor = newColor
         else:
             if currentColor[0] < newColor[0]: # Change red channel
-                currentColor[0] = currentColor[0] + int(newColor[0] * 0.20)
+                currentColor[0] = currentColor[0] + int(newColor[0] * 0.05)
             else:
-                currentColor[0] = currentColor[0] - int(newColor[0] * 0.20)
+                currentColor[0] = currentColor[0] - int(newColor[0] * 0.05)
             
             if currentColor[1] < newColor[1]: # Change green channel
-                currentColor[1] = currentColor[1] + int(newColor[1] * 0.20)
+                currentColor[1] = currentColor[1] + int(newColor[1] * 0.05)
             else:
-                currentColor[1] = currentColor[1] - int(newColor[1] * 0.20)
+                currentColor[1] = currentColor[1] - int(newColor[1] * 0.05)
 
             if currentColor[2] < newColor[2]: # Change blue channel
-                currentColor[2] = currentColor[2] + int(newColor[2] * 0.20)
+                currentColor[2] = currentColor[2] + int(newColor[2] * 0.05)
             else:
-                currentColor[2] = currentColor[2] - int(newColor[2] * 0.20)
+                currentColor[2] = currentColor[2] - int(newColor[2] * 0.05)
 
         solidColor(strip, Color(currentColor[0], currentColor[1], currentColor[2]))
 
