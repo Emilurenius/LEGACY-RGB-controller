@@ -594,11 +594,11 @@ def screenSync(strip):
         if prevColor == None:
             prevColor = currentColor
             changeColor = True
-        elif currentColor[0] < prevColor[0] - threshold or currentColor[0] > prevColor + threshold:
+        elif currentColor[0] < prevColor[0] - threshold or currentColor[0] > prevColor[0] + threshold:
             changeColor = True
-        elif currentColor[1] < prevColor[1] - threshold or currentColor[1] > prevColor + threshold:
+        elif currentColor[1] < prevColor[1] - threshold or currentColor[1] > prevColor[1] + threshold:
             changeColor = True
-        elif currentColor[2] < prevColor[2] - threshold or currentColor[2] > prevColor + threshold:
+        elif currentColor[2] < prevColor[2] - threshold or currentColor[2] > prevColor[2] + threshold:
             changeColor = True
 
         if changeColor == True: # Check if threshold was hit
