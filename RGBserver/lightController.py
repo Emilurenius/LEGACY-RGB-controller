@@ -538,6 +538,7 @@ def screenSync(strip):
     R = None
     G = None
     B = None
+    changePerTick = 1
     while True:
         if checkBreak("screenSync"):
             break
@@ -561,38 +562,20 @@ def screenSync(strip):
             currentColor = newColor
         else:
             if currentColor[0] < newColor[0]: # Change red channel
-                if newColor[0] - currentColor[0] > 3:
-                    currentColor[0] += 3
-                else:
-                    currentColor[0] = currentColor[0] + (newColor[0] - currentColor[0])
+                currentColor[0] += changePerTick
             else:
-                if currentColor[0] - newColor[0] > 3:
-                    currentColor[0] -= 3
-                else:
-                    currentColor[0] = currentColor[0] - (currentColor[0] - newColor[0])
+                currentColor[0] -= changePerTick
             
             if currentColor[1] < newColor[1]: # Change green channel
-                if newColor[1] - currentColor[1] > 3:
-                    currentColor[1] += 3
-                else:
-                    currentColor[1] = currentColor[1] + (newColor[0] - currentColor[0])
+                currentColor[1] += changePerTick
             else:
-                if currentColor[1] - newColor[1] > 3:
-                    currentColor[1] -= 3
-                else:
-                    currentColor[1] = currentColor[1] - (currentColor[0] - newColor[0])
+                currentColor[1] -= changePerTick
                 
 
             if currentColor[2] < newColor[2]: # Change blue channel
-                if newColor[2] - currentColor[2] > 3:
-                    currentColor[2] += 3
-                else:
-                    currentColor[2] = currentColor[2] + (newColor[0] - currentColor[0])
+                currentColor[2] += changePerTick
             else:
-                if currentColor[2] - newColor[2] > 3:
-                    currentColor[2] -= 3
-                else:
-                    currentColor[2] = currentColor[2] - (currentColor[0] - newColor[0])
+                currentColor[2] -= changePerTick
 
         # Make sure RGB values are not negative. That would cause a crash. 
         if currentColor[0] < 0:
