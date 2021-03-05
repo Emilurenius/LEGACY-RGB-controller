@@ -602,6 +602,7 @@ def screenSync(strip):
             changeColor = True
 
         if changeColor == True: # Check if threshold was hit
+            prevColor = currentColor
             solidColor(strip, Color(currentColor[0], currentColor[1], currentColor[2])) # Change color to the new given color
         time.sleep(delayMS / 1000)
 
