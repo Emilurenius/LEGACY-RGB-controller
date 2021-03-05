@@ -545,7 +545,7 @@ def screenSync(strip):
         
         while True:
             try:
-                with open("./json/bpm.json") as JSON: # Load BPM data saved to json file by server
+                with open("./json/data.json") as JSON: # Load BPM data saved to json file by server
                     data = json.load(JSON) # Load JSON file as a dictionary
                     R = data["R"]
                     G = data["G"]
