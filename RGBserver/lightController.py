@@ -82,6 +82,7 @@ def solidColor(strip, color):
     for i in range(strip.numPixels()): # Assign color to every pixel
         strip.setPixelColor(i, color)
     strip.show()
+    print("New solid color loaded")
 
 def starryNight(strip, wait_ms=50):
     # Fades on and off one random LED at a time:
