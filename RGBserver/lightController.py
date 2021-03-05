@@ -539,8 +539,9 @@ def bpm(strip):
                 if checkBreak("bpm"):
                     break
 
-def screenSync(strip, data=None):
+def screenSync(strip):
     currentColor = None
+    data = None
     while True:
         if checkBreak("screenSync"):
             break
@@ -554,7 +555,7 @@ def screenSync(strip, data=None):
                 print("JSON busy...") # If you can't open the file, just try again
                 if checkBreak("screenSync"):
                     break
-
+        print(data)
         newColor = [data["R"], data["G"], data["B"]]
 
         if currentColor == None:
@@ -657,7 +658,7 @@ if __name__ == '__main__':
 
                 elif data["onoff"] and data["mode"] == "screenSync":
                     print("Screen syncing activated")
-                    screenSync(strip, data=data)
+                    screenSync(strip)
                 
                 else:
                     print("Lights off")
