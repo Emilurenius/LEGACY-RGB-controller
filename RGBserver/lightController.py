@@ -540,7 +540,7 @@ def screenSync(strip):
     B = None
     changePerTick = 1
     delayMS = 40
-    threshold = 3
+    threshold = 5
     while True:
         if checkBreak("screenSync"):
             break
@@ -596,7 +596,7 @@ def screenSync(strip):
             currentColor[1] = 0
         if currentColor[2] < 0:
             currentColor[2] = 0
-                       
+
         print(currentColor)
         solidColor(strip, Color(currentColor[0], currentColor[1], currentColor[2]))
         time.sleep(delayMS / 1000)
