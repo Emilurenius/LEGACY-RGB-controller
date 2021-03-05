@@ -239,6 +239,10 @@ app.get("/modes/set", (req, res) => {
     }
 })
 
+app.get("/modes/current", (req, res) => {
+    res.send(`${data.mode}`)
+})
+
 app.get("/colorpresets", (req, res) => {
     console.log(`\nPreset API loaded:`)
 
