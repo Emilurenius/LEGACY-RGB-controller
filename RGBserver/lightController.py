@@ -534,12 +534,14 @@ def bpm(strip):
 
 def screenSync(strip):
     currentColor = None
+    prevColor = None
     data = None
     R = None
     G = None
     B = None
     changePerTick = 1
     delayMS = 40
+    threshold = 5
     while True:
         if checkBreak("screenSync"):
             break
@@ -586,7 +588,21 @@ def screenSync(strip):
         if currentColor[2] < 0:
             currentColor[2] = 0                
         print(currentColor)
-        solidColor(strip, Color(currentColor[0], currentColor[1], currentColor[2]))
+
+        # Threshold check: (Only change value if one of the channels have changed by a set amount)
+        changeColor = False
+        if prevColor == None:
+            prevColor = currentColor
+            changeColor = True
+        elif currentColor[0] < prevColor[0] - threshold or currentColor[0] > prevColor + threshold:
+            changeColor = True
+        elif currentColor[1] < prevColor[1] - threshold or currentColor[1] > prevColor + threshold:
+            changeColor = True
+        elif currentColor[2] < prevColor[2] - threshold or currentColor[2] > prevColor + threshold:
+            changeColor = True
+
+        if changeColor == True: # Check if threshold was hit
+            solidColor(strip, Color(currentColor[0], currentColor[1], currentColor[2])) # Change color to the new given color
         time.sleep(delayMS / 1000)
 
 
