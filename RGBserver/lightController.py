@@ -542,7 +542,7 @@ def screenSync(strip):
     delayMS = 40
     threshold = 10
     thresholdNotHitCounter = 0
-    maxThresholdNotHit = 50
+    maxThresholdNotHit = 5000
 
     while True:
         if checkBreak("screenSync"):
