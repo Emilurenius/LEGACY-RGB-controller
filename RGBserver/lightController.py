@@ -543,6 +543,8 @@ def screenSync(strip):
     threshold = 10
     thresholdNotHitCounter = 0
     maxThresholdNotHit = 20
+    timesChanged = 0
+    maxTimesChanged = 20
 
     while True:
         if checkBreak("screenSync"):
@@ -582,6 +584,7 @@ def screenSync(strip):
 
         # Run this if the threshold was met:
         if thresholdMet or thresholdNotHitCounter > maxThresholdNotHit:
+            timesChanged += 1
             if currentColor[0] < newColor[0]: # Change red channel
                 currentColor[0] += changePerTick
             else:
@@ -597,6 +600,9 @@ def screenSync(strip):
                 currentColor[2] += changePerTick
             else:
                 currentColor[2] -= changePerTick
+
+        if timesChanged == maxTimesChanged:
+            thresholdNotHitCounter = 0
 
         # Make sure RGB values are not negative. That would cause a crash. 
         if currentColor[0] < 0:
