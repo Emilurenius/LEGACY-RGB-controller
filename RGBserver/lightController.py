@@ -566,7 +566,7 @@ def screenSync(strip):
         if currentColor == None:
             currentColor = newColor
             thresholdNotHitCounter = 0
-        elif curentColor == newColor:
+        elif currentColor == newColor:
             thresholdNotHitCounter = 0
         elif currentColor[0] < newColor[0] - threshold or currentColor[0] > newColor[0] + threshold:
             thresholdMet = True
