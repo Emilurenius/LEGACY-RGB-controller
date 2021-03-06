@@ -544,7 +544,7 @@ def screenSync(strip):
     thresholdNotHitCounter = 0
     maxThresholdNotHit = 20
     timesChanged = 0
-    maxTimesChanged = 50
+    maxTimesChanged = 20
 
     while True:
         if checkBreak("screenSync"):
