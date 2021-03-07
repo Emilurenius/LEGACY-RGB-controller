@@ -538,6 +538,12 @@ def screenSync(strip):
     R = None
     G = None
     B = None
+    prevRedChange = None
+    prevGreenChange = None
+    prevBlueChange = None
+    jitterCounter = 0
+    maxJitter = 0
+    jitterDelayMS = 10
     changePerTick = 1
     delayMS = 40
     threshold = 10
@@ -581,22 +587,52 @@ def screenSync(strip):
             thresholdNotHitCounter += 1
 
         # Run this if the threshold was met:
-        if thresholdMet or thresholdNotHitCounter > maxThresholdNotHit:
+        if thresholdMet or thresholdNotHitCounter > maxThresholdNotHit and jitterCounter < maxJitter:
             if currentColor[0] < newColor[0]: # Change red channel
                 currentColor[0] += changePerTick
+                if prevRedChange == "dwn":
+                    jitterCounter +=1
+                else:
+                    jitterCounter = 0
+                prevRedChange = "up"
             else:
                 currentColor[0] -= changePerTick
+                if prevRedChange == "up":
+                    jitterCounter +=1
+                else:
+                    jitterCounter = 0
+                prevRedChange = "dwn"
             
             if currentColor[1] < newColor[1]: # Change green channel
                 currentColor[1] += changePerTick
+                if prevGreenChange == "dwn":
+                    jitterCounter +=1
+                else:
+                    jitterCounter = 0
+                prevGreenChange = "up"
             else:
                 currentColor[1] -= changePerTick
+                if prevGreenChange == "up":
+                    jitterCounter +=1
+                else:
+                    jitterCounter = 0
+                prevGreenChange = "dwn"
                 
 
             if currentColor[2] < newColor[2]: # Change blue channel
                 currentColor[2] += changePerTick
+                if prevBlueChange == "up":
+                    jitterCounter +=1
+                else:
+                    jitterCounter = 0
+                prevBlueChange = "up"
             else:
                 currentColor[2] -= changePerTick
+                if prevBlueChange == "dwn":
+                    jitterCounter +=1
+                else:
+                    jitterCounter = 0
+                prevBlueChange = "dwn"
 
         # Make sure RGB values are not negative. That would cause a crash. 
         if currentColor[0] < 0:
