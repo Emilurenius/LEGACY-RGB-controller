@@ -594,7 +594,7 @@ def screenSync(strip):
             jitterCounter = 0 # Reset jitter if color difference is high enough
 
         # Run this if the threshold was met, or jitter is within acceptable limits:
-        if thresholdMet or thresholdNotHitCounter > maxThresholdNotHit and jitterCounter < maxJitter:
+        if jitterCounter < maxJitter:
             if currentColor[0] < newColor[0]: # Change red channel
                 currentColor[0] += changePerTick
                 if prevRedChange == "dwn": # Jitter detection
@@ -649,8 +649,8 @@ def screenSync(strip):
         if currentColor[2] < 0:
             currentColor[2] = 0
 
-        #print(currentColor)
-        print(jitterCounter)
+        print(currentColor)
+        #print(jitterCounter)
         solidColor(strip, Color(currentColor[0], currentColor[1], currentColor[2]))
         time.sleep(delayMS / 1000)
 
