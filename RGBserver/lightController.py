@@ -543,7 +543,7 @@ def screenSync(strip):
     prevBlueChange = None
     jitterCounter = 0 # Counter variable to keep track of how many ticks there has been jitter
     maxJitter = 0 # Max ticks with jitter before it is stopped
-    jitterOverride = 5 # The value difference before jitter is ignored
+    jitterOverride = 5 # The value difference between current color and new before jitter is ignored
     changePerTick = 1 # How much to add or remove from the rgb values per tick
     delayMS = 40 # How much delay there is between every tick
     threshold = 10 # Change needed for the script to react to the change in color
@@ -590,7 +590,8 @@ def screenSync(strip):
         greenDiff = currentColor[1] - newColor[1]
         blueDiff = currentColor[2] - newColor[2]
 
-        if redDiff > jitterOverrideThreshold or redDiff < jitterOverrideThreshold * -1 or greenDiff > jitterOverrideThreshold or greenDiff < jitterOverrideThreshold * -1 or blueDiff > jitterOverrideThreshold or blueDiff < jitterOverrideThreshold * -1
+        if redDiff > jitterOverride or redDiff < jitterOverride * -1 or greenDiff > jitterOverride or greenDiff < jitterOverride * -1 or blueDiff > jitterOverride or blueDiff < jitterOverride * -1:
+            jitterCounter = 0 # Reset jitter if color difference is high enough
 
         # Run this if the threshold was met, or jitter is within acceptable limits:
         if thresholdMet or thresholdNotHitCounter > maxThresholdNotHit and jitterCounter < maxJitter:
