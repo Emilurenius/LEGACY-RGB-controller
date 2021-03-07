@@ -561,9 +561,6 @@ def screenSync(strip):
                     break
         newColor = [R, G, B]
 
-        if currentColor == None: # Set the value of the current color on the first round
-            currentColor = newColor
-
         # Run this if the threshold was met:
         if True:
             if currentColor[0] < newColor[0]: # Change red channel
