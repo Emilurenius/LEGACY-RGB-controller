@@ -541,14 +541,14 @@ def screenSync(strip):
     prevRedChange = None
     prevGreenChange = None
     prevBlueChange = None
-    jitterCounter = 0
-    maxJitter = 0
-    jitterDelayMS = 10
-    changePerTick = 1
-    delayMS = 40
-    threshold = 10
-    thresholdNotHitCounter = 0
-    maxThresholdNotHit = 20
+    jitterCounter = 0 # Counter variable to keep track of how many ticks there has been jitter
+    maxJitter = 0 # Max ticks with jitter before it is stopped
+    jitterOverride = 5 # The value difference before jitter is ignored
+    changePerTick = 1 # How much to add or remove from the rgb values per tick
+    delayMS = 40 # How much delay there is between every tick
+    threshold = 10 # Change needed for the script to react to the change in color
+    thresholdNotHitCounter = 0 # Counter variable to keep track of how many ticks there has been too low values to hit the threshold
+    maxThresholdNotHit = 20 # How many times the threshold can be not hit before it is ignored
 
     while True:
         if checkBreak("screenSync"):
@@ -586,18 +586,24 @@ def screenSync(strip):
         else:
             thresholdNotHitCounter += 1
 
-        # Run this if the threshold was met:
+        redDiff = currentColor[0] - newColor[0]
+        greenDiff = currentColor[1] - newColor[1]
+        blueDiff = currentColor[2] - newColor[2]
+
+        if redDiff > jitterOverrideThreshold or redDiff < jitterOverrideThreshold * -1 or greenDiff > jitterOverrideThreshold or greenDiff < jitterOverrideThreshold * -1 or blueDiff > jitterOverrideThreshold or blueDiff < jitterOverrideThreshold * -1
+
+        # Run this if the threshold was met, or jitter is within acceptable limits:
         if thresholdMet or thresholdNotHitCounter > maxThresholdNotHit and jitterCounter < maxJitter:
             if currentColor[0] < newColor[0]: # Change red channel
                 currentColor[0] += changePerTick
-                if prevRedChange == "dwn":
+                if prevRedChange == "dwn": # Jitter detection
                     jitterCounter +=1
                 else:
                     jitterCounter = 0
                 prevRedChange = "up"
             else:
                 currentColor[0] -= changePerTick
-                if prevRedChange == "up":
+                if prevRedChange == "up": # Jitter detection
                     jitterCounter +=1
                 else:
                     jitterCounter = 0
@@ -605,14 +611,14 @@ def screenSync(strip):
             
             if currentColor[1] < newColor[1]: # Change green channel
                 currentColor[1] += changePerTick
-                if prevGreenChange == "dwn":
+                if prevGreenChange == "dwn": # Jitter detection
                     jitterCounter +=1
                 else:
                     jitterCounter = 0
                 prevGreenChange = "up"
             else:
                 currentColor[1] -= changePerTick
-                if prevGreenChange == "up":
+                if prevGreenChange == "up": # Jitter detection
                     jitterCounter +=1
                 else:
                     jitterCounter = 0
