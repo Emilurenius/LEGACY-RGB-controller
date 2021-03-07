@@ -595,7 +595,7 @@ def screenSync(strip):
         greenDiff = currentColor[1] - newColor[1]
         blueDiff = currentColor[2] - newColor[2]
         redCheckDiff = redDiff < 2 or redDiff > -2
-        greenCheckDiff = grenDiff < 2 or greenDiff > -2
+        greenCheckDiff = greenDiff < 2 or greenDiff > -2
         BlueCheckDiff = blueDiff < 2 or blueDiff > -2
         if redCheckDiff and greenCheckDiff and BlueCheckDiff:
             currentColor = newColor
