@@ -564,7 +564,7 @@ def screenSync(strip):
         if currentColor == None: # Set the value of the current color on the first round
             currentColor = newColor
 
-        # Run this if the threshold was met:
+        # Run this if the color has changed:
         if currentColor != newColor:
             if currentColor[0] < newColor[0]: # Change red channel
                 currentColor[0] += changePerTick
@@ -589,6 +589,16 @@ def screenSync(strip):
             currentColor[1] = 0
         if currentColor[2] < 0:
             currentColor[2] = 0
+
+        # Jitter prevention
+        redDiff = currentColor[0] - newColor[0]
+        greenDiff = currentColor[1] - newColor[1]
+        blueDiff = currentColor[2] - newColor[2]
+        redCheckDiff = redDiff < 2 or redDiff > -2
+        greenCheckDiff = grenDiff < 2 or greenDiff > -2
+        BlueCheckDiff = blueDiff < 2 or blueDiff > -2
+        if redCheckDiff and greenCheckDiff and BlueCheckDiff:
+            currentColor = newColor
 
         print(currentColor)
         solidColor(strip, Color(currentColor[0], currentColor[1], currentColor[2]))
