@@ -565,7 +565,7 @@ def screenSync(strip):
             currentColor = newColor
 
         # Run this if the threshold was met:
-        if True:
+        if currentColor != newColor:
             if currentColor[0] < newColor[0]: # Change red channel
                 currentColor[0] += changePerTick
             else:
