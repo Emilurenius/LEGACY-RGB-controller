@@ -649,8 +649,7 @@ def screenSync(strip):
         if currentColor[2] < 0:
             currentColor[2] = 0
 
-        #print(currentColor)
-        print(jitterCounter)
+        print(currentColor)
         solidColor(strip, Color(currentColor[0], currentColor[1], currentColor[2]))
         time.sleep(delayMS / 1000)
 
