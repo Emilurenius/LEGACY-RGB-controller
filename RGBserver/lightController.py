@@ -594,7 +594,7 @@ def screenSync(strip):
             jitterCounter = 0 # Reset jitter if color difference is high enough
 
         # Run this if the threshold was met, or jitter is within acceptable limits:
-        if jitterCounter > maxJitter:
+        if jitterCounter < maxJitter:
             if currentColor[0] < newColor[0]: # Change red channel
                 currentColor[0] += changePerTick
                 if prevRedChange == "dwn": # Jitter detection
