@@ -539,7 +539,7 @@ def screenSync(strip):
     G = None
     B = None
     changePerTick = 1
-    delayMS = 40
+    delayMS = 10
     jitterCounter = 0
     maxJitter = 5
     jitterThreshold = 5
