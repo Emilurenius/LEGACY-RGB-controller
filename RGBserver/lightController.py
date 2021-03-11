@@ -563,18 +563,18 @@ def screenSync(strip):
 
         if currentColor[0] < newColor[0]: # Change red channel
             currentColor[0] += changePerTick
-        else:
+        elif currentColor[0] > newColor[0]:
             currentColor[0] -= changePerTick
         
         if currentColor[1] < newColor[1]: # Change green channel
             currentColor[1] += changePerTick
-        else:
+        elif currentColor[1] > newColor[1]:
             currentColor[1] -= changePerTick
             
 
         if currentColor[2] < newColor[2]: # Change blue channel
             currentColor[2] += changePerTick
-        else:
+        elif currentColor[2] > newColor[2]:
             currentColor[2] -= changePerTick
 
         # Make sure RGB values are not negative. That would cause a crash. 
