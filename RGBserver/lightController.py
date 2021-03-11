@@ -540,9 +540,6 @@ def screenSync(strip):
     B = None
     changePerTick = 1
     delayMS = 10
-    jitterCounter = 0
-    maxJitter = 5
-    jitterThreshold = 5
 
     while True:
         if checkBreak("screenSync"):
@@ -564,23 +561,21 @@ def screenSync(strip):
         if currentColor == None: # Set the value of the current color on the first round
             currentColor = newColor
 
-        # Run this if the threshold was met:
-        if True:
-            if currentColor[0] < newColor[0]: # Change red channel
-                currentColor[0] += changePerTick
-            else:
-                currentColor[0] -= changePerTick
+        if currentColor[0] < newColor[0]: # Change red channel
+            currentColor[0] += changePerTick
+        else:
+            currentColor[0] -= changePerTick
+        
+        if currentColor[1] < newColor[1]: # Change green channel
+            currentColor[1] += changePerTick
+        else:
+            currentColor[1] -= changePerTick
             
-            if currentColor[1] < newColor[1]: # Change green channel
-                currentColor[1] += changePerTick
-            else:
-                currentColor[1] -= changePerTick
-                
 
-            if currentColor[2] < newColor[2]: # Change blue channel
-                currentColor[2] += changePerTick
-            else:
-                currentColor[2] -= changePerTick
+        if currentColor[2] < newColor[2]: # Change blue channel
+            currentColor[2] += changePerTick
+        else:
+            currentColor[2] -= changePerTick
 
         # Make sure RGB values are not negative. That would cause a crash. 
         if currentColor[0] < 0:
@@ -591,8 +586,8 @@ def screenSync(strip):
             currentColor[2] = 0
 
         print(currentColor)
-        solidColor(strip, Color(currentColor[0], currentColor[1], currentColor[2]))
-        time.sleep(delayMS / 1000)
+        solidColor(strip, Color(currentColor[0], currentColor[1], currentColor[2])) # Set the RGB strip to the new color generated
+        time.sleep(delayMS / 1000) # Wait specified amount in delayMS
 
 
 # Main program logic follows:
