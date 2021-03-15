@@ -136,16 +136,13 @@ nav {
     transform: rotate(45deg) translate(-5px,-6px);
 }
 
-.Content, .Content-box, .Content-subBox {
+.Content {
     color: white;
     text-align: center;
     font-family: 'Quicksand', sans-serif;
     font-size: 30px;
     padding-top: 20px;
     padding-bottom: 30px;
-}
-
-.Content {
     border-radius: 25px;
     background: var(--main-background-color);
     padding-top: 20px;
