@@ -82,30 +82,28 @@
         
     </div>
 
-    <!-- All settings go inside this box -->
-    <div class="Content" id="settings">
+    <!-- Settings start here -->
         
         <!-- BPM panel -->
-        <div class="Content-box" id="BPM">
-            <div class="Content-subBox">
-                <p class="Main-Text">BPM controls:</p>
-            </div>
-
-            <a class="button" href="" id="spotifySyncButton">Sync with spotify</a>
-
-            <p class="Main-text">Preset speeds:</p>
-            <div class="Content-subBox" id="BPMpresets"></div>
-
-            <div class="slidecontainer">
-                <label for ="BPMslider" id="BPMsliderLabel">BPM:</label>
-                <input type="range" min="1" max="200" class="slider-br" id="BPMslider">
-            </div>
-
-            <div class="phonebutton-slider">
-                <input type="button" id="phonebutton-slider-bpm" value="Send slider info" class="button">
-            </div>
+    <div class="Content" id="BPM">
+        <div class="Content-box">
+            <p class="Main-Text">BPM settings:</p>
         </div>
 
+        <a class="button" href="" id="spotifySyncButton">Sync with spotify</a>
+        <input type="button" id="BPMcreatePreset" value="Save BPM as preset" class="button">
+
+        <p class="Main-text">Preset speeds:</p>
+        <div class="Content-box" id="BPMpresets"></div>
+
+        <div class="slidecontainer">
+            <label for ="BPMslider" id="BPMsliderLabel">BPM:</label>
+            <input type="range" min="1" max="200" class="slider-br" id="BPMslider">
+        </div>
+
+        <div class="phonebutton-slider">
+            <input type="button" id="phonebutton-slider-bpm" value="Send slider info" class="button">
+        </div>
     </div>
 
     <!-- Value readout from the server -->
