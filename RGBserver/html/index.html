@@ -65,7 +65,7 @@
             <input type="button" id="colorDrip"    class="button" value="Color Drip"    >
 
             <div class="slidecontainer">
-                <label for ="speed">Speed:</label>
+                <label for ="speed">Animation Speed:</label>
                 <input type="range" min="1" max="100" class="slider-br" id="speed">
             </div>
 
@@ -77,30 +77,35 @@
         <div class="Content-box">
             <p class="Main-Text">Functions</p>
             <input type="button" id="alarmClock" value="Alarm Clock" class="button">
+            <input type="button" value="BPM" id="activateBPMmode" class="button">
         </div>
         
     </div>
 
-    <!-- BPM panel -->
-    <div class="Content" id="BPM">
-        <div class="Content-box">
-            <p class="Main-Text">BPM controls:</p>
+    <!-- All settings go inside this box -->
+    <div class="Content" id="settings">
+        
+        <!-- BPM panel -->
+        <div class="Content-box" id="BPM">
+            <div class="Content">
+                <p class="Main-Text">BPM controls:</p>
+            </div>
+
+            <a class="button" href="" id="spotifySyncButton">Sync with spotify</a>
+
+            <p class="Main-text">Preset speeds:</p>
+            <div class="Content" id="BPMpresets"></div>
+
+            <div class="slidecontainer">
+                <label for ="BPMslider" id="BPMsliderLabel">BPM:</label>
+                <input type="range" min="1" max="200" class="slider-br" id="BPMslider">
+            </div>
+
+            <div class="phonebutton-slider">
+                <input type="button" id="phonebutton-slider-bpm" value="Send slider info" class="button">
+            </div>
         </div>
 
-        <input type="button" value="Activate BPM mode" id="activateBPMmode" class="button">
-        <a class="button" href="" id="spotifySyncButton">Sync with spotify</a>
-
-        <p class="Main-text">Preset speeds:</p>
-        <div class="Content-box" id="BPMpresets"></div>
-
-        <div class="slidecontainer">
-            <label for ="BPMslider" id="BPMsliderLabel">BPM:</label>
-            <input type="range" min="1" max="200" class="slider-br" id="BPMslider">
-        </div>
-
-        <div class="phonebutton-slider">
-            <input type="button" id="phonebutton-slider-bpm" value="Send slider info" class="button">
-        </div>
     </div>
 
     <!-- Value readout from the server -->
