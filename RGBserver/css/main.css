@@ -19,7 +19,7 @@ nav {
     align-items: center;
     min-height: 8vh;
     background-color: var(--main-background-color);
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Quicksand', sans-serif;
 }
 
 .Logo {
@@ -139,7 +139,7 @@ nav {
 .Content {
     color: white;
     text-align: center;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Quicksand', sans-serif;
     font-size: 30px;
     padding-top: 20px;
     padding-bottom: 30px;
@@ -188,7 +188,7 @@ nav {
   	cursor: pointer;
     border-radius: 10px;
     padding: 10px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Quicksand', sans-serif;
     margin: 15px;
 }
 
@@ -203,7 +203,7 @@ nav {
   	cursor: pointer;
     border-radius: 10px;
     padding: 10px;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Quicksand', sans-serif;
     margin: 15px;
 }
 
@@ -215,7 +215,7 @@ nav {
 .Content .Box {
     color: white;
     text-align: center;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Quicksand', sans-serif;
     font-size: 30px;
     padding-top: 20px;
     padding-bottom: 30px;
