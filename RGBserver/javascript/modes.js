@@ -7,17 +7,6 @@ const alarmClock = document.getElementById("alarmClock")
 const theaterChase = document.getElementById("theaterChase")
 const sliderButtonModes = document.getElementById("phonebutton-slider-modes")
 
-function getJSON(url) {
-    var j = []
-    $.ajax({
-        type: "GET",
-        url: url,
-        dataType: "json",
-        success: function(data) { j = data},
-        async: false
-    })
-    return j
-}
 
 standard.addEventListener("click", (event) => {
     getJSON(`${url}/modes/set?mode=standard`)

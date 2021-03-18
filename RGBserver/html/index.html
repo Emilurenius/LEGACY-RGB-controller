@@ -82,12 +82,17 @@
 
     <!-- Settings start here -->
 
+    <!-- General settings for the RGB behaviour -->
     <div class="Content" id="mainSettings">
         <div class="Content-box">
             <p class="Main-Text">Main settings</p>
         </div>
-
         
+        <label for="colorChangeModeSelect">Color change mode</label>
+        <select id="colorChangeModeSelect">
+            <option value="fade">Fade</option>
+            <option value="wave">Wave</option>
+        </select>
     </div>
         
     <!-- BPM settings panel -->
@@ -135,5 +140,6 @@
     <script src="/javascript/presets.js"></script>
     <script src="/javascript/serverValueDisplay.js"></script>
     <script src="/javascript/bpm.js"></script>
+    <script src="/javascript/mainSettings.js"></script>
 </body>
 </html>
