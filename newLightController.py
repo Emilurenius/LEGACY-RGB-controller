@@ -725,6 +725,7 @@ if __name__ == '__main__':
                 mode = modes.get(data["mode"], None)
                 if mode:
                     mode(strip)
+                    print("Mode found:", data["mode"])
                 else:
                     print("Invalid mode")
             else:
