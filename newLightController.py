@@ -21,9 +21,9 @@ LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
 LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
-# This is the list of all valid modes, and their accompanying function call:
+# This is the dictionary of all valid modes, and their accompanying function call:
 modes = {
-    "standard": colorWipe,
+    "standard": standard,
     "solidColor": solidColor,
     "rainbow": rainbow,
     "theaterChase": theaterChase,
@@ -85,7 +85,66 @@ def randColor():
     }
     return RGB
 
-def colorWipe(strip, color, wait_ms=50):
+def standard(strip):
+    print("\nStandard mode activated:")
+    data = None
+    standardSettings = None
+
+    while True: # Loop that makes sure all necessary files are loaded before continuing
+        try:
+            with open("./json/data.json") as JSON:
+                data = json.load(JSON)
+        except:
+            time.sleep(0.05)
+
+        try:
+            with open("./json/standardSettings.json") as JSON:
+                standardSettings = json.load(JSON)
+        except:
+            time.sleep(0.05)
+        
+        if data and standardSettings:
+            break
+
+    if standardSettings["colorChange"] == "wipe":
+        R = int(float(data["R"]) * float(data["brightness"]) / 1000)
+        G = int(float(data["G"]) * float(data["brightness"]) / 1000)
+        B = int(float(data["B"]) * float(data["brightness"]) / 1000)
+
+        data["oldR"] = R
+        data["oldG"] = G
+        data["oldB"] = B
+
+        while True:
+            try:
+                with open("./json/data.json", "w") as JSON:
+                    json.dump(data, JSON)
+                    break
+            except:
+                time.sleep(0.05)
+
+        colorWipe(strip, Color(R,G,B))
+    
+    elif standardSettings["colorChange"] == "fade":
+        R = int(float(data["R"]) * float(data["brightness"]) / 1000)
+        G = int(float(data["G"]) * float(data["brightness"]) / 1000)
+        B = int(float(data["B"]) * float(data["brightness"]) / 1000)
+
+        fadeColor(strip, [R,G,B], [data["oldR"],data["oldG"],data["oldB"]])
+
+        data["oldR"] = R
+        data["oldG"] = G
+        data["oldB"] = B
+
+        while True:
+            try:
+                with open("./json/data.json", "w") as JSON:
+                    json.dump(data, JSON)
+                    break
+            except:
+                time.sleep(0.05)
+
+def colorWipe(strip, color, wait_ms=3):
     """Wipe color across display a pixel at a time."""
     for i in range(strip.numPixels()):
         strip.setPixelColor(i, color)
@@ -97,6 +156,35 @@ def solidColor(strip, color):
     for i in range(strip.numPixels()): # Assign color to every pixel
         strip.setPixelColor(i, color)
     strip.show()
+
+def fadeColor(strip, newColor, oldColor, wait_ms=10, changePerTick=1):
+    while True:
+        if newColor == oldColor:
+            break
+
+        if oldColor[0] == newColor[0]: # Change red channel
+            oldColor[0] = newColor[0]
+        elif oldColor[0] < newColor[0]:
+            oldColor[0] += changePerTick
+        elif oldColor[0] > newColor[0]:
+            oldColor[0] -= changePerTick
+        
+        if oldColor[1] == newColor[1]: # Change green channel
+            oldColor[1] = newColor[1]
+        elif oldColor[1] < newColor[1]:
+            oldColor[1] += changePerTick
+        elif oldColor[1] > newColor[1]:
+            oldColor[1] -= changePerTick
+            
+        if oldColor[2] == newColor[2]: # Change blue channel
+            oldColor[2] = newColor[2]
+        elif oldColor[2] < newColor[2]:
+            oldColor[2] += changePerTick
+        elif oldColor[2] > newColor[2]:
+            oldColor[2] -= changePerTick
+
+        solidColor(strip, Color(oldColor[0], oldColor[1], oldColor[2]))
+        time.sleep(delayMS / 1000) # Wait specified amount in delayMS
 
 def starryNight(strip, wait_ms=50):
     # Fades on and off one random LED at a time:
@@ -622,7 +710,7 @@ if __name__ == '__main__':
         print('Use "-c" argument to clear LEDs on exit')
 
     try:
-        previousData = False
+        previousData = None
         while True:
             # Import data file:
             try:
@@ -641,4 +729,4 @@ if __name__ == '__main__':
                 time.sleep(0.5)
 
     except KeyboardInterrupt: # This makes sure the RGB strip turns off when you close the script
-        colorWipe(strip, Color(0,0,0), 10)
+        colorWipe(strip, Color(0,0,0))
