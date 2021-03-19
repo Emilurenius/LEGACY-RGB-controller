@@ -21,21 +21,6 @@ LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
 LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
-# This is the dictionary of all valid modes, and their accompanying function call:
-modes = {
-    "standard": standard,
-    "solidColor": solidColor,
-    "rainbow": rainbow,
-    "theaterChase": theaterChase,
-    "norway": norge,
-    "colorDrip": colorDrip,
-    "alarmClock": alarmClock,
-    "elitus": elitus,
-    "colorBubbles": colorBubbles,
-    "bpm": bpm,
-    "screenSync": screenSync
-}
-
 
 # A check to see if a mode is still chosen. 
 # will return False if the mode given to the function is the same as the one currently chosen on the web interface, or if there is an error loading the JSON file.
@@ -692,6 +677,20 @@ def screenSync(strip):
         solidColor(strip, Color(currentColor[0], currentColor[1], currentColor[2])) # Set the RGB strip to the new color generated
         time.sleep(delayMS / 1000) # Wait specified amount in delayMS
 
+# This is the dictionary of all valid modes, and their accompanying function call:
+modes = {
+    "standard": standard,
+    "solidColor": solidColor,
+    "rainbow": rainbow,
+    "theaterChase": theaterChase,
+    "norway": norge,
+    "colorDrip": colorDrip,
+    "alarmClock": alarmClock,
+    "elitus": elitus,
+    "colorBubbles": colorBubbles,
+    "bpm": bpm,
+    "screenSync": screenSync
+}
 
 # Main program logic follows:
 if __name__ == '__main__':
