@@ -712,13 +712,16 @@ if __name__ == '__main__':
         previousData = None
         while True:
             # Import data file:
-            try:
-                with open("./json/data.json") as JSON:
-                    data = json.load(JSON)
-            except:
-                time.sleep(0.05)
+            while True: # Run in a loop untill the file is loaded
+                try:
+                    with open("./json/data.json") as JSON:
+                        data = json.load(JSON)
+                        break
+                except:
+                    time.sleep(0.05)
             
             if previousData != data and data["onoff"]:
+                previousData = data
                 mode = modes.get(data["mode"], None)
                 if mode:
                     mode(strip)
