@@ -100,10 +100,12 @@ def standard(strip, colorOverride=None):
 
     if standardSettings["colorChange"] == "wipe":
         if colorOverride:
+            print("Color overridden")
             R = colorOverride[0]
             G = colorOverride[1]
             B = colorOverride[2]
         else:
+            print(colorOverride)
             R = int(float(data["R"]) * float(data["brightness"]) / 1000)
             G = int(float(data["G"]) * float(data["brightness"]) / 1000)
             B = int(float(data["B"]) * float(data["brightness"]) / 1000)
@@ -125,10 +127,12 @@ def standard(strip, colorOverride=None):
     
     elif standardSettings["colorChange"] == "fade":
         if colorOverride:
+            print("Color overridden")
             R = colorOverride[0]
             G = colorOverride[1]
             B = colorOverride[2]
         else:
+            print(colorOverride)
             R = int(float(data["R"]) * float(data["brightness"]) / 1000)
             G = int(float(data["G"]) * float(data["brightness"]) / 1000)
             B = int(float(data["B"]) * float(data["brightness"]) / 1000)
