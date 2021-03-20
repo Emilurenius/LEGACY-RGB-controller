@@ -49,7 +49,7 @@ def unpackRGB(color):
     r = 0xFF & (color >> 16)
     g = 0xFF & (color >> 8)
     b = 0xFF & color
-    return r, g, b
+    return [r, g, b]
 
 # Define functions which animate LEDs in various ways:
 def randColor():
@@ -125,7 +125,7 @@ def standard(strip):
 
         print(data["oldR"],data["oldG"],data["oldB"])
 
-        fadeColor(strip, [R,G,B], [data["oldR"],data["oldG"],data["oldB"]])
+        fadeColor(strip, [R,G,B])
 
         data["oldR"] = R
         data["oldG"] = G
@@ -153,8 +153,8 @@ def solidColor(strip, color):
         strip.setPixelColor(i, color)
     strip.show()
 
-def fadeColor(strip, newColor, oldColor, wait_ms=10, changePerTick=1):
-    print(oldColor)
+def fadeColor(strip, newColor, wait_ms=10, changePerTick=1):
+    oldColor = unpackRGB(strip.getPixelColor(0))
     while True:
         if newColor == oldColor:
             break
@@ -741,7 +741,6 @@ if __name__ == '__main__':
                     print("Invalid mode")
             elif previousData != data and not data["onoff"]:
                 previousData = data
-                print("current color:", unpackRGB(strip.getPixelColor(5))) # Just test code. Might be removed later
                 colorWipe(strip, Color(0,0,0))
 
     except KeyboardInterrupt: # This makes sure the RGB strip turns off when you close the script
