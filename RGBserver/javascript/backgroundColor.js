@@ -4,11 +4,11 @@ function updateBackgroundColor() {
 
 function updateBackgroundLightState(lightState) {
     if (lightState == true) {
-        const R = R.value * (brightness.value / 1000)
-        const G = G.value * (brightness.value / 1000)
-        const B = B.value * (brightness.value / 1000)
+        const red = R.value * (brightness.value / 1000)
+        const green = G.value * (brightness.value / 1000)
+        const blue = B.value * (brightness.value / 1000)
 
-        document.body.style.backgroundColor = `rgb(${R}, ${G}, ${B})`
+        document.body.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`
     }
     else {
         document.body.style.backgroundColor = `rgb(0, 0, 0)`
