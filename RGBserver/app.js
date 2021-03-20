@@ -322,6 +322,30 @@ app.get("/bpm", (req, res) => {
     }
 })
 
+app.get("/settings/standard", (req, res) => {
+    console.log("\nStandard settigns API loaded")
+    let rawdata = fs.readFileSync(path.join(__dirname, "/json/standardSettings.json"))
+    let standardSettings = JSON.parse(rawdata)
+    let save = false
+
+    if (req.query.colorChange) {
+        console.log(`new colorChange value: ${req.query.colorChange}`)
+        save = true
+        standardSettings.colorChange = req.query.colorChange
+    }
+
+    if (save) {
+        let stringified = JSON.stringify(standardSettings, null, 4)
+    
+        fs.writeFile(path.join(__dirname, "/json/standardSettings.json"), stringified, (err) => {
+            if (err) throw err
+            console.log("Data written to file")
+        })
+    }
+
+    res.sendFile(path.join(__dirname, "/json/standardSettings.json"))
+})
+
 // Longpolling:
 app.get("/reqdata", (req, res, next) => { // this is a long polling address for sending LED strip data to other devices
     res.setHeader("Content-Type", "text/html; charset=utf-8")
