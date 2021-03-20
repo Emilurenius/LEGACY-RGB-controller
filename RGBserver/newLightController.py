@@ -169,7 +169,7 @@ def fadeColor(strip, newColor, oldColor, wait_ms=10, changePerTick=1):
             oldColor[2] -= changePerTick
 
         solidColor(strip, Color(oldColor[0], oldColor[1], oldColor[2]))
-        time.sleep(delayMS / 1000) # Wait specified amount in delayMS
+        time.sleep(wait_ms / 1000) # Wait specified amount in delayMS
 
 def starryNight(strip, wait_ms=50):
     # Fades on and off one random LED at a time:
