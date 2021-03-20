@@ -727,6 +727,9 @@ if __name__ == '__main__':
                     mode(strip)
                 else:
                     print("Invalid mode")
+            elif previousData != data and not data["onoff"]:
+                print("current color:", strip.getPixelColor(5))
+                colorWipe(strip, Color(0,0,0))
             else:
                 time.sleep(0.5)
 
