@@ -116,6 +116,8 @@ def standard(strip):
         G = int(float(data["G"]) * float(data["brightness"]) / 1000)
         B = int(float(data["B"]) * float(data["brightness"]) / 1000)
 
+        print(data["oldR"],data["oldG"],data["oldB"])
+
         fadeColor(strip, [R,G,B], [data["oldR"],data["oldG"],data["oldB"]])
 
         data["oldR"] = R
@@ -145,6 +147,7 @@ def solidColor(strip, color):
     strip.show()
 
 def fadeColor(strip, newColor, oldColor, wait_ms=10, changePerTick=1):
+    print(oldColor)
     while True:
         if newColor == oldColor:
             break
