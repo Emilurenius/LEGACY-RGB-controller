@@ -758,4 +758,4 @@ if __name__ == '__main__':
                 standard(strip, [0,0,0])
 
     except KeyboardInterrupt: # This makes sure the RGB strip turns off when you close the script
-        standard(strip, [0,0,0])
+        colorWipe(strip, Color(0,0,0))
