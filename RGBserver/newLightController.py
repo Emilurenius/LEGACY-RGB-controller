@@ -755,7 +755,7 @@ if __name__ == '__main__':
                     print("Invalid mode")
             elif previousData != data and not data["onoff"]:
                 previousData = data
-                standard(strip, Color(0,0,0))
+                standard(strip, [0,0,0])
 
     except KeyboardInterrupt: # This makes sure the RGB strip turns off when you close the script
-        standard(strip, Color(0,0,0))
+        standard(strip, [0,0,0])
