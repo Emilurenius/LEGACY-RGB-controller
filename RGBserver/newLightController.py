@@ -44,6 +44,13 @@ def getDataval(dataval):
     except: # If you can't open the json file, just return False
         return False
 
+def unpackRGB(color):
+    r = 0xFF & (color >> 16)
+    r = 0xFF & (color >> 16)
+    g = 0xFF & (color >> 8)
+    b = 0xFF & color
+    return r, g, b
+
 # Define functions which animate LEDs in various ways:
 def randColor():
     color1 = random.randint(0, 255) # Random color 1
@@ -734,7 +741,7 @@ if __name__ == '__main__':
                     print("Invalid mode")
             elif previousData != data and not data["onoff"]:
                 previousData = data
-                print("current color:", strip.getPixelColor(5)) # Just test code. Might be removed later
+                print("current color:", unpackRGB(strip.getPixelColor(5))) # Just test code. Might be removed later
                 colorWipe(strip, Color(0,0,0))
 
     except KeyboardInterrupt: # This makes sure the RGB strip turns off when you close the script
