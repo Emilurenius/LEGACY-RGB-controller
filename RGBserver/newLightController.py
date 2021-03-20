@@ -77,7 +77,7 @@ def randColor():
     }
     return RGB
 
-def standard(strip):
+def standard(strip, colorOverride=None):
     print("\nStandard mode activated:")
     data = None
     standardSettings = None
@@ -99,13 +99,18 @@ def standard(strip):
             break
 
     if standardSettings["colorChange"] == "wipe":
-        R = int(float(data["R"]) * float(data["brightness"]) / 1000)
-        G = int(float(data["G"]) * float(data["brightness"]) / 1000)
-        B = int(float(data["B"]) * float(data["brightness"]) / 1000)
+        if colorOverride:
+            R = colorOverride[0]
+            G = colorOverride[1]
+            B = colorOverride[2]
+        else:
+            R = int(float(data["R"]) * float(data["brightness"]) / 1000)
+            G = int(float(data["G"]) * float(data["brightness"]) / 1000)
+            B = int(float(data["B"]) * float(data["brightness"]) / 1000)
 
-        data["oldR"] = R
-        data["oldG"] = G
-        data["oldB"] = B
+            data["oldR"] = R
+            data["oldG"] = G
+            data["oldB"] = B
 
         while True:
             try:
@@ -119,9 +124,14 @@ def standard(strip):
         colorWipe(strip, Color(R,G,B))
     
     elif standardSettings["colorChange"] == "fade":
-        R = int(float(data["R"]) * float(data["brightness"]) / 1000)
-        G = int(float(data["G"]) * float(data["brightness"]) / 1000)
-        B = int(float(data["B"]) * float(data["brightness"]) / 1000)
+        if colorOverride:
+            R = colorOverride[0]
+            G = colorOverride[1]
+            B = colorOverride[2]
+        else:
+            R = int(float(data["R"]) * float(data["brightness"]) / 1000)
+            G = int(float(data["G"]) * float(data["brightness"]) / 1000)
+            B = int(float(data["B"]) * float(data["brightness"]) / 1000)
 
         print(data["oldR"],data["oldG"],data["oldB"])
 
@@ -741,7 +751,7 @@ if __name__ == '__main__':
                     print("Invalid mode")
             elif previousData != data and not data["onoff"]:
                 previousData = data
-                colorWipe(strip, Color(0,0,0))
+                standard(strip, Color(0,0,0))
 
     except KeyboardInterrupt: # This makes sure the RGB strip turns off when you close the script
-        colorWipe(strip, Color(0,0,0))
+        standard(strip, Color(0,0,0))
