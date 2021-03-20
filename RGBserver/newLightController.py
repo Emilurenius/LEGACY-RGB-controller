@@ -110,19 +110,6 @@ def standard(strip, colorOverride=None):
             G = int(float(data["G"]) * float(data["brightness"]) / 1000)
             B = int(float(data["B"]) * float(data["brightness"]) / 1000)
 
-            data["oldR"] = R
-            data["oldG"] = G
-            data["oldB"] = B
-
-        while True:
-            try:
-                with open("./json/data.json", "w") as JSON:
-                    json.dump(data, JSON)
-                    print("Previous RGB value updated")
-                    break
-            except:
-                time.sleep(0.05)
-
         colorWipe(strip, Color(R,G,B))
     
     elif standardSettings["colorChange"] == "fade":
@@ -137,22 +124,7 @@ def standard(strip, colorOverride=None):
             G = int(float(data["G"]) * float(data["brightness"]) / 1000)
             B = int(float(data["B"]) * float(data["brightness"]) / 1000)
 
-        print(data["oldR"],data["oldG"],data["oldB"])
-
         fadeColor(strip, [R,G,B])
-
-        data["oldR"] = R
-        data["oldG"] = G
-        data["oldB"] = B
-
-        while True:
-            try:
-                with open("./json/data.json", "w") as JSON:
-                    json.dump(data, JSON)
-                    print("Previous RGB value updated")
-                    break
-            except:
-                time.sleep(0.05)
 
 def colorWipe(strip, color, wait_ms=3):
     """Wipe color across display a pixel at a time."""
