@@ -104,6 +104,7 @@ def standard(strip):
             try:
                 with open("./json/data.json", "w") as JSON:
                     json.dump(data, JSON)
+                    print("Previous RGB value updated")
                     break
             except:
                 time.sleep(0.05)
@@ -125,6 +126,7 @@ def standard(strip):
             try:
                 with open("./json/data.json", "w") as JSON:
                     json.dump(data, JSON)
+                    print("Previous RGB value updated")
                     break
             except:
                 time.sleep(0.05)
