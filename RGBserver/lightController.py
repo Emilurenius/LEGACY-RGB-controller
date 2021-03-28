@@ -211,6 +211,8 @@ def theaterChase(strip, wait_ms=50):
         while data == False:
             data = getData()
 
+        color = Color(data["R"], data["G"], data["B"])
+
         wait_ms = 100 - data["speed"] # Making sure the speed stays up to date with JSON file.
 
         if checkBreak("theaterChase"): # Stop function if the mode has changed, or the lights are turned off.
