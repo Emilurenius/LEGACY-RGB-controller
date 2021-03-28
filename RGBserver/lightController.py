@@ -52,12 +52,18 @@ def getDataval(dataval):
     except: # If you can't open the json file, just return False
         return False
 
-def unpackRGB(color):
+def unpackRGB(color): # Change 24 bit color into 8 bit RGB
     r = 0xFF & (color >> 16)
     r = 0xFF & (color >> 16)
     g = 0xFF & (color >> 8)
     b = 0xFF & color
     return [r, g, b]
+
+def timePrint(printVal, newLine=False):
+    if newLine:
+        print("\n")
+    currentTime = time.strftime("%H:%M:%S", time.localtime())
+    print(f"{currentTime}: {printVal}")
 
 # Define functions which animate LEDs in various ways:
 def randColor():
@@ -86,7 +92,7 @@ def randColor():
     return RGB
 
 def standard(strip, colorOverride=None):
-    print("\nStandard mode activated:")
+    timePrint("Standard mode activated:", newLine=True)
     data = None
     standardSettings = None
 
@@ -108,12 +114,12 @@ def standard(strip, colorOverride=None):
 
     if standardSettings["colorChange"] == "wipe":
         if colorOverride:
-            print("Color overridden")
+            timePrint("Color overridden")
             R = colorOverride[0]
             G = colorOverride[1]
             B = colorOverride[2]
         else:
-            print(colorOverride)
+            timePrint(colorOverride)
             R = int(float(data["R"]) * float(data["brightness"]) / 1000)
             G = int(float(data["G"]) * float(data["brightness"]) / 1000)
             B = int(float(data["B"]) * float(data["brightness"]) / 1000)
@@ -122,12 +128,12 @@ def standard(strip, colorOverride=None):
     
     elif standardSettings["colorChange"] == "fade":
         if colorOverride:
-            print("Color overridden")
+            timePrint("Color overridden")
             R = colorOverride[0]
             G = colorOverride[1]
             B = colorOverride[2]
         else:
-            print(colorOverride)
+            timePrint(colorOverride)
             R = int(float(data["R"]) * float(data["brightness"]) / 1000)
             G = int(float(data["G"]) * float(data["brightness"]) / 1000)
             B = int(float(data["B"]) * float(data["brightness"]) / 1000)
@@ -186,14 +192,14 @@ def starryNight(strip, wait_ms=50):
         strip.setPixelColor(LED, Color(x, x, x))
         strip.show()
         x += 1
-        print(LED, x)
+        timePrint(LED, x)
         time.sleep(wait_ms/1000.0)
     
     while x >= 0:
         strip.setPixelColor(LED, Color(x, x, x))
         strip.show()
         x -= 1
-        print(LED, x)
+        timePrint(LED, x)
         time.sleep(wait_ms/1000.0)
 
 def theaterChase(strip, wait_ms=50):
@@ -204,7 +210,7 @@ def theaterChase(strip, wait_ms=50):
         data = False
         while data == False:
             data = getData()
-            
+
         wait_ms = 100 - data["speed"] # Making sure the speed stays up to date with JSON file.
 
         if checkBreak("theaterChase"): # Stop function if the mode has changed, or the lights are turned off.
@@ -486,7 +492,7 @@ def elitus(strip, data):
             plus = False
             cancelAnimation = False
             while datetime.datetime.now().timestamp() - startTime < 20:
-                print(br)
+                timePrint(br)
                 for i in range(strip.numPixels()):
                     strip.setPixelColor(i, Color(int(float(255) * float(br / 100)), int(float(24) * float(br / 100)), 0))
                 strip.show()
@@ -605,7 +611,7 @@ def bpm(strip):
         
         RGB = randColor()
         solidColor(strip, Color(RGB["r"], RGB["g"], RGB["b"])) # Assign a random color to the whole light strip
-        print("Changed color")
+        timePrint("Changed color")
 
         startTime = time.time() # Save current seconds since 1.January 1970
         endTime = startTime + waitTime # Add wait time to startTime to get endTime
@@ -682,7 +688,7 @@ def screenSync(strip):
         if currentColor[2] < 0:
             currentColor[2] = 0
 
-        print(currentColor)
+        timePrint(currentColor)
         solidColor(strip, Color(currentColor[0], currentColor[1], currentColor[2])) # Set the RGB strip to the new color generated
         time.sleep(delayMS / 1000) # Wait specified amount in delayMS
 
@@ -735,7 +741,7 @@ if __name__ == '__main__':
                 if mode:
                     mode(strip)
                 else:
-                    print("Invalid mode")
+                    timePrint("Invalid mode")
             elif previousData != data and not data["onoff"]:
                 previousData = data
                 standard(strip, [0,0,0])
