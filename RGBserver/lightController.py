@@ -89,6 +89,7 @@ def randColor():
         "g": g,
         "b": b
     }
+    timePrint(f"Random color generated: {RGB}")
     return RGB
 
 def standard(strip, colorOverride=None):
@@ -119,11 +120,11 @@ def standard(strip, colorOverride=None):
             G = colorOverride[1]
             B = colorOverride[2]
         else:
-            timePrint(colorOverride)
             R = int(float(data["R"]) * float(data["brightness"]) / 1000)
             G = int(float(data["G"]) * float(data["brightness"]) / 1000)
             B = int(float(data["B"]) * float(data["brightness"]) / 1000)
 
+        timePrint(f"Wiping color to: {[R,G,B]}")
         colorWipe(strip, Color(R,G,B))
     
     elif standardSettings["colorChange"] == "fade":
@@ -133,11 +134,11 @@ def standard(strip, colorOverride=None):
             G = colorOverride[1]
             B = colorOverride[2]
         else:
-            timePrint(colorOverride)
             R = int(float(data["R"]) * float(data["brightness"]) / 1000)
             G = int(float(data["G"]) * float(data["brightness"]) / 1000)
             B = int(float(data["B"]) * float(data["brightness"]) / 1000)
 
+        timePrint(f"Fading color to: {[R,G,B]}")
         fadeColor(strip, [R,G,B])
 
 def colorWipe(strip, color, wait_ms=3):
@@ -204,6 +205,7 @@ def starryNight(strip, wait_ms=50):
 
 def theaterChase(strip, wait_ms=50):
     """Movie theater light style chaser animation."""
+    timePrint("Theater chase activated", newLine=True)
 
     while True:
 
@@ -246,6 +248,7 @@ def wheel(pos):
 
 def rainbow(strip, wait_ms=20):
     """Draw rainbow that fades across all pixels at once."""
+    timePrint("Rainbow mode activated", newLine=True)
     roundOne = True
     while True:
         if checkBreak("rainbow"): # Stop function if the mode has changed, or the lights are turned off.
@@ -287,6 +290,7 @@ def theaterChaseRainbow(strip, wait_ms=50):
 
 def norge(strip, wait_ms=50):
     # Makes the color strip create the norwegian flag!
+    timePrint("Norwegian flag being displayed", newLine=True)
 
     # Calculate number of LEDs for every color in the flag based on the amount of LEDs being controlled.
     # This makes the script compatible with any length of LED strip.
@@ -332,7 +336,7 @@ def norge(strip, wait_ms=50):
 
 def colorDrip(strip, wait_ms=50):
     # Colors drip in from the side, and collect in the end of the LED strip:
-    
+    timePrint("Color drip activated", newLine=True)
     while True:
         if checkBreak("colorDrip"): # Stop function if the mode has changed, or the lights are turned off.
             break
@@ -379,6 +383,7 @@ def colorDrip(strip, wait_ms=50):
                 colorWipe(strip, Color(0, 0, 0))
 
 def alarmClock(strip):
+    timePrint("Alarm clock mode activated", newLine=True)
     alarmDone = False
     while True:
 
@@ -585,6 +590,7 @@ def colorBubbles(strip):
         time.sleep(wait_ms/1000.0)
 
 def bpm(strip):
+    timePrint("BPM mode activated", newLine=True)
     while True:
         if checkBreak("bpm"):
             break
@@ -613,7 +619,6 @@ def bpm(strip):
         
         RGB = randColor()
         solidColor(strip, Color(RGB["r"], RGB["g"], RGB["b"])) # Assign a random color to the whole light strip
-        timePrint("Changed color")
 
         startTime = time.time() # Save current seconds since 1.January 1970
         endTime = startTime + waitTime # Add wait time to startTime to get endTime
@@ -743,7 +748,7 @@ if __name__ == '__main__':
                 if mode:
                     mode(strip)
                 else:
-                    timePrint("Invalid mode")
+                    timePrint("Invalid mode", newLine=True)
             elif previousData != data and not data["onoff"]:
                 previousData = data
                 standard(strip, [0,0,0])
