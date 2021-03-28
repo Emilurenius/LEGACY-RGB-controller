@@ -44,6 +44,13 @@ def getDataval(dataval):
     except: # If you can't open the json file, just return False
         return False
 
+def unpackRGB(color):
+    r = 0xFF & (color >> 16)
+    r = 0xFF & (color >> 16)
+    g = 0xFF & (color >> 8)
+    b = 0xFF & color
+    return [r, g, b]
+
 # Define functions which animate LEDs in various ways:
 def randColor():
     color1 = random.randint(0, 255) # Random color 1
@@ -70,7 +77,56 @@ def randColor():
     }
     return RGB
 
-def colorWipe(strip, color, wait_ms=50):
+def standard(strip, colorOverride=None):
+    print("\nStandard mode activated:")
+    data = None
+    standardSettings = None
+
+    while True: # Loop that makes sure all necessary files are loaded before continuing
+        try:
+            with open("./json/data.json") as JSON:
+                data = json.load(JSON)
+        except:
+            time.sleep(0.05)
+
+        try:
+            with open("./json/standardSettings.json") as JSON:
+                standardSettings = json.load(JSON)
+        except:
+            time.sleep(0.05)
+        
+        if data and standardSettings:
+            break
+
+    if standardSettings["colorChange"] == "wipe":
+        if colorOverride:
+            print("Color overridden")
+            R = colorOverride[0]
+            G = colorOverride[1]
+            B = colorOverride[2]
+        else:
+            print(colorOverride)
+            R = int(float(data["R"]) * float(data["brightness"]) / 1000)
+            G = int(float(data["G"]) * float(data["brightness"]) / 1000)
+            B = int(float(data["B"]) * float(data["brightness"]) / 1000)
+
+        colorWipe(strip, Color(R,G,B))
+    
+    elif standardSettings["colorChange"] == "fade":
+        if colorOverride:
+            print("Color overridden")
+            R = colorOverride[0]
+            G = colorOverride[1]
+            B = colorOverride[2]
+        else:
+            print(colorOverride)
+            R = int(float(data["R"]) * float(data["brightness"]) / 1000)
+            G = int(float(data["G"]) * float(data["brightness"]) / 1000)
+            B = int(float(data["B"]) * float(data["brightness"]) / 1000)
+
+        fadeColor(strip, [R,G,B])
+
+def colorWipe(strip, color, wait_ms=3):
     """Wipe color across display a pixel at a time."""
     for i in range(strip.numPixels()):
         strip.setPixelColor(i, color)
@@ -82,6 +138,36 @@ def solidColor(strip, color):
     for i in range(strip.numPixels()): # Assign color to every pixel
         strip.setPixelColor(i, color)
     strip.show()
+
+def fadeColor(strip, newColor, wait_ms=10, changePerTick=1):
+    oldColor = unpackRGB(strip.getPixelColor(0))
+    while True:
+        if newColor == oldColor:
+            break
+
+        if oldColor[0] == newColor[0]: # Change red channel
+            oldColor[0] = newColor[0]
+        elif oldColor[0] < newColor[0]:
+            oldColor[0] += changePerTick
+        elif oldColor[0] > newColor[0]:
+            oldColor[0] -= changePerTick
+        
+        if oldColor[1] == newColor[1]: # Change green channel
+            oldColor[1] = newColor[1]
+        elif oldColor[1] < newColor[1]:
+            oldColor[1] += changePerTick
+        elif oldColor[1] > newColor[1]:
+            oldColor[1] -= changePerTick
+            
+        if oldColor[2] == newColor[2]: # Change blue channel
+            oldColor[2] = newColor[2]
+        elif oldColor[2] < newColor[2]:
+            oldColor[2] += changePerTick
+        elif oldColor[2] > newColor[2]:
+            oldColor[2] -= changePerTick
+
+        solidColor(strip, Color(oldColor[0], oldColor[1], oldColor[2]))
+        time.sleep(wait_ms / 1000) # Wait specified amount in delayMS
 
 def starryNight(strip, wait_ms=50):
     # Fades on and off one random LED at a time:
@@ -589,6 +675,20 @@ def screenSync(strip):
         solidColor(strip, Color(currentColor[0], currentColor[1], currentColor[2])) # Set the RGB strip to the new color generated
         time.sleep(delayMS / 1000) # Wait specified amount in delayMS
 
+# This is the dictionary of all valid modes, and their accompanying function call:
+modes = {
+    "standard": standard,
+    "solidColor": solidColor,
+    "rainbow": rainbow,
+    "theaterChase": theaterChase,
+    "norway": norge,
+    "colorDrip": colorDrip,
+    "alarmClock": alarmClock,
+    "elitus": elitus,
+    "colorBubbles": colorBubbles,
+    "bpm": bpm,
+    "screenSync": screenSync
+}
 
 # Main program logic follows:
 if __name__ == '__main__':
@@ -607,72 +707,27 @@ if __name__ == '__main__':
         print('Use "-c" argument to clear LEDs on exit')
 
     try:
-        previousData = False
+        previousData = None
         while True:
             # Import data file:
-            try:
-                with open("./json/data.json") as JSON:
-                    data = json.load(JSON)
-            except:
-                time.sleep(0.05)
+            while True: # Run in a loop untill the file is loaded
+                try:
+                    with open("./json/data.json") as JSON:
+                        data = json.load(JSON)
+                        break
+                except:
+                    time.sleep(0.05)
             
-            if previousData != data:
-                print("\nChecking mode")
+            if previousData != data and data["onoff"]:
                 previousData = data
-                # Checking what mode to run:
-                if data["onoff"] and data["mode"] == "standard":
-                    print("Standard / ColorWipe")
-                    print("RGB:", data["R"], data["G"], data["B"])
-                    print("Brightness:", data["brightness"] / 10, "%")
-                    colorWipe(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 1000), int(float(data["G"]) * float(data["brightness"]) / 1000), int(float(data["B"]) * float(data["brightness"]) / 1000)), 3)
-                
-                elif data["onoff"] and data["mode"] == "solidColor":
-                    print("SolidColor")
-                    print("RGB:", data["R"], data["G"], data["B"])
-                    solidColor(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 1000), int(float(data["G"]) * float(data["brightness"]) / 1000), int(float(data["B"]) * float(data["brightness"]) / 1000)))
-                
-                elif data["onoff"] and data["mode"] == "rainbow":
-                    print("Rainbow")
-                    rainbow(strip, 100 - data["speed"])
-                
-                elif data["onoff"] and data["mode"] == "theaterChase":
-                    print("Theater chase")
-                    theaterChase(strip, Color(data["R"], data["G"], data["B"]), 100 - data["speed"])
-                
-                elif data["onoff"] and data["mode"] == "norway":
-                    print("NORWAY!")
-                    norge(strip)
-                
-                elif data["onoff"] and data["mode"] == "colorDrip":
-                    print("Color drip")
-                    colorDrip(strip, 100 - data["speed"])
-                
-                elif data["onoff"] and data["mode"] == "alarmClock":
-                    print("Alarm clock")
-                    print("Waking up at:", data["alarmClockData"]["alarmTime"])
-                    alarmClock(strip)
-                
-                elif data["onoff"] and data["mode"] == "elitus":
-                    print("Elitus mode")
-                    elitus(strip, data)
-
-                elif data["onoff"] and data["mode"] == "colorBubbles":
-                    print("Color bubbles")
-                    colorBubbles(strip)
-
-                elif data["onoff"] and data["mode"] == "bpm":
-                    print("bpm activated")
-                    bpm(strip)
-
-                elif data["onoff"] and data["mode"] == "screenSync":
-                    print("Screen syncing activated")
-                    screenSync(strip)
-                
+                mode = modes.get(data["mode"], None)
+                if mode:
+                    mode(strip)
                 else:
-                    print("Lights off")
-                    colorWipe(strip, Color(0, 0, 0), 3)
-            else:
-                time.sleep(0.5)
+                    print("Invalid mode")
+            elif previousData != data and not data["onoff"]:
+                previousData = data
+                standard(strip, [0,0,0])
 
     except KeyboardInterrupt: # This makes sure the RGB strip turns off when you close the script
-        colorWipe(strip, Color(0,0,0), 10)
+        colorWipe(strip, Color(0,0,0))
