@@ -36,6 +36,14 @@ def checkBreak(mode):
     except: # If you can't open the json file, just return False
         return False # If the JSON file can't be opened, just assume the lights should be on, and the mode hasn't changed
 
+def getData():
+    try: # Try opening the json file, and check it
+        with open("./json/data.json") as JSON:
+            data = json.load(JSON)
+        return data
+    except: # If you can't open the json file, just return False
+        return False
+
 def getDataval(dataval):
     try: # Try opening the json file, and check it
         with open("./json/data.json") as JSON:
@@ -188,13 +196,16 @@ def starryNight(strip, wait_ms=50):
         print(LED, x)
         time.sleep(wait_ms/1000.0)
 
-def theaterChase(strip, color, wait_ms=50):
+def theaterChase(strip, wait_ms=50):
     """Movie theater light style chaser animation."""
 
     while True:
-        newSpeed = getDataval("speed")
-        if newSpeed:
-            wait_ms = 100 - newSpeed # Making sure the speed stays up to date with JSON file.
+
+        data = False
+        while data == False:
+            data = getData()
+            
+        wait_ms = 100 - data["speed"] # Making sure the speed stays up to date with JSON file.
 
         if checkBreak("theaterChase"): # Stop function if the mode has changed, or the lights are turned off.
             break
