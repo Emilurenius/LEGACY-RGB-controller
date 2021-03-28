@@ -743,6 +743,7 @@ if __name__ == '__main__':
                     time.sleep(0.05)
             
             if previousData != data and data["onoff"]:
+                timePrint("Data has changed", newLine=True)
                 previousData = data
                 mode = modes.get(data["mode"], None)
                 if mode:
