@@ -472,11 +472,7 @@ def alarmClock(strip):
         else: # If the alarm time has not been reached, act like standard mode.
             if previousData != data and data["onoff"]:
                 previousData = data
-                mode = modes.get(data["mode"], None)
-                if mode:
-                    mode(strip)
-                else:
-                    timePrint("Invalid mode", newLine=True)
+                standard(strip)
             elif previousData != data and not data["onoff"]:
                 previousData = data
                 standard(strip, [0,0,0])
