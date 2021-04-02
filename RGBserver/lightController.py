@@ -385,12 +385,12 @@ def colorDrip(strip, wait_ms=50):
 def alarmClock(strip):
     timePrint("Alarm clock mode activated", newLine=True)
     alarmDone = False
+    previousData = False
     while True:
 
         if alarmDone:
             break
 
-        previousData = False
         try:
             with open("./json/data.json") as JSON: # Read data file
                 data = json.load(JSON)
