@@ -470,12 +470,16 @@ def alarmClock(strip):
                     break
 
         else: # If the alarm time has not been reached, act like standard mode.
-            if previousData != data: 
+            if previousData != data and data["onoff"]:
                 previousData = data
-                if data["onoff"]:
-                    colorWipe(strip, Color(int(float(data["R"]) * float(data["brightness"]) / 1000), int(float(data["G"]) * float(data["brightness"]) / 1000), int(float(data["B"]) * float(data["brightness"]) / 1000)), 3)
+                mode = modes.get(data["mode"], None)
+                if mode:
+                    mode(strip)
                 else:
-                    colorWipe(strip, Color(0, 0, 0), 3)
+                    timePrint("Invalid mode", newLine=True)
+            elif previousData != data and not data["onoff"]:
+                previousData = data
+                standard(strip, [0,0,0])
 
 def elitus(strip, data):
     while True:
