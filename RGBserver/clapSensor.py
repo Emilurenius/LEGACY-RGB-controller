@@ -26,6 +26,7 @@ try:
             time.sleep(0.1)
 
             startTime = datetime.datetime.now().timestamp()
+            print("Waiting for third clap")
             while datetime.datetime.now().timestamp() - startTime < 0.3:
                 if GPIO.input(clapSensor):
                     print("triple clap!")
@@ -34,7 +35,10 @@ try:
             time.sleep(0.1)
 
             startTime = datetime.datetime.now().timestamp()
+            print("Waiting for fourth clap")
             while datetime.datetime.now().timestamp() - startTime < 0.3:
+                if claps == 2:
+                    break
                 if GPIO.input(clapSensor):
                     print("DAMN! Four claps!")
                     claps += 1
