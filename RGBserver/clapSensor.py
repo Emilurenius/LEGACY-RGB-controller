@@ -59,14 +59,14 @@ try:
                 currentBR = requests.get("http://localhost:3000/br").text
                 if int(currentBR) <= 1000:
                     newBR = str(int(currentBR) + 100)
-                    newBR = clamp(newBR, 0, 1000)
+                    newBR = str(clamp(int(newBR), 0, 1000))
                     response = requests.get(f"http://localhost:3000/rgb?br={newBR}")
                     print("Changed brightness to", newBR)
             elif claps == 4:
                 currentBR = requests.get("http://localhost:3000/br").text
                 if int(currentBR) >= 0:
                     newBR = str(int(currentBR) - 100)
-                    newBR = clamp(newBR, 0, 1000)
+                    newBR = str(clamp(int(newBR), 0, 1000))
                     response = requests.get(f"http://localhost:3000/rgb?br={newBR}")
                     print("Changed brightness to", newBR)
 
