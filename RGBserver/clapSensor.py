@@ -49,12 +49,12 @@ try:
                 print(response.text)
             elif claps == 3:
                 currentBR = requests.get("http://localhost:3000/br").text
-                if currentBR <= 1000:
+                if int(currentBR) <= 1000:
                     newBR = str(int(currentBR) + 100)
                     response = requests.get(f"http://localhost:3000/rgb?br={newBR}")
             elif claps == 4:
                 currentBR = requests.get("http://localhost:3000/br").text
-                if currentBR >= 0:
+                if int(currentBR) >= 0:
                     newBR = str(int(currentBR) - 100)
                     response = requests.get(f"http://localhost:3000/rgb?br={newBR}")
 
