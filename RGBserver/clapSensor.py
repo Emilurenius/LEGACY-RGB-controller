@@ -23,7 +23,7 @@ try:
                     #response = requests.get("http://localhost:3000/lightstate?toggle=change")
                     #print(response.text)
                     break
-            time.sleep(0.1)
+            time.sleep(0.3)
 
             startTime = datetime.datetime.now().timestamp()
             print("Waiting for third clap")
@@ -32,7 +32,7 @@ try:
                     print("triple clap!")
                     claps += 1
                     break
-            time.sleep(0.1)
+            time.sleep(0.3)
 
             startTime = datetime.datetime.now().timestamp()
             print("Waiting for fourth clap")
