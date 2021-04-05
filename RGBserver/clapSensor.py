@@ -46,14 +46,14 @@ try:
             
             if claps == 2:
                 response = requests.get("http://localhost:3000/lightstate?toggle=change")
-                print(response)
+                print(response.text)
             elif claps == 3:
-                currentBR = requests.get("http://localhost:3000/br")
+                currentBR = requests.get("http://localhost:3000/br").text
                 if currentBR <= 1000:
                     newBR = str(int(currentBR) + 100)
                     response = requests.get(f"http://localhost:3000/rgb?br={newBR}")
             elif claps == 4:
-                currentBR = requests.get("http://localhost:3000/br")
+                currentBR = requests.get("http://localhost:3000/br").text
                 if currentBR >= 0:
                     newBR = str(int(currentBR) - 100)
                     response = requests.get(f"http://localhost:3000/rgb?br={newBR}")
