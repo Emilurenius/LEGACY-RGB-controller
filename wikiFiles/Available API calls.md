@@ -1,10 +1,9 @@
 **NOTE**: This is not complete
 # What will this page contain?
 This page will be explaining how to connect to the web server controlling the script called lightController.py.
-The page will be split in three pieces:
-* Available API calls, and what queries can be given to it (For simple lookup)
-* Example of how to use them with python (If you need help implementing)
-* Example of how to use them with javascript (If you need help implementing)
+
+This page will show all available API calls, and what queries can be given. The response from the server will also be documented here.
+More more specific examples of how to implement every API call, refer to this page: `link coming soon`
 
 # Available API calls:
 
@@ -153,3 +152,37 @@ The page will be split in three pieces:
 * currentSongProgress:
 	* Desc: This query represents the amount of milliseconds since the song started playing. This value is given by the spotify API, and is used to sync the BPM of the lights with the beat in the currently playing song.
 	* Example: `http://serverAddress.com/bpm?mode=spotifyResponse&bpm=50&messageSent=1617786197749&currentSongProgress=50`
+### Server response:
+* If the query "mode" is set to "updateBPM":
+	* Type: string
+	* Desc: The string response from the server will always be `"success"` if the API could complete the request
+* If the query "mode" is set to "spotifySync":
+	* Type: redirect
+	* Desc: This mode is used for connecting to the spotify API, and can be bypassed if you have your own way of talking to the spotify API.
+	Just be aware that connecting through this way requires some tweaking on your end. For more info on that, search up how to connect to the spotify API.
+	* **WARNING** This mode, and the response from it is currently set up to work for my setup. You might want another approach.
+* If the query "mode" is set to "spotifyResponse":
+	* Type: string representing a number
+	* Desc: The response will be the bpm of the currently playing song that the lights now has synced to.
+	This could be used to update a website's UI with the current bpm, like the website included with the server.'
+
+## /settings/standard:
+### Available queries:
+* colorChange: (string)
+	* Accepted values: (fade, wipe)
+	* Desc: This query changes the behaviour of standard mode for the lights.
+		If given the value "fade", the lights will nicely fade between the old color, and the new one given.
+		If given the value "wipe", the lights will wipe the new color over the old one.
+	* Example: `http://serverAddress.com/settings/standard?colorChange=fade`
+### Server response:
+* Type: JSON
+* Desc: The server will send the standard settings file located on the server as a response.
+	If values were changed with one of the queries above, this will be updated before the file is sent.
+	This means that the values inside the JSON file are always up to date with the settings for standard mode.
+* Example:
+
+		```
+		{
+    	"colorChange": "wipe"
+		}
+		```
