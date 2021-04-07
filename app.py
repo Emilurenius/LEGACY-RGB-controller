@@ -5,7 +5,7 @@ from spotipy.oauth2 import SpotifyOAuth
 
 app = Flask(__name__)
 
-app.secret_key = "ONcs92894fhno"
+app.secret_key = "secret key goes here"
 app.config["SESSION_COOKIE_NAME"] = "My cookie"
 
 @app.route("/")
