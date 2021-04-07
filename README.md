@@ -11,9 +11,9 @@ When You got everything set up, and strandtest runs fine, you will need to downl
 
 with terminal:
 
-sudo apt install nodejs, 
-sudo apt install npm, 
-sudo apt update, 
+`sudo apt install nodejs`
+`sudo apt install npm`
+`sudo apt update`
 
 Or open this in a browser on the Pi:
 
