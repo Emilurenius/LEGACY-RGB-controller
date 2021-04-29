@@ -26,6 +26,7 @@ function alarmTimes() {
                 for (let i = 0; i < alarms.length; i++) {
                     if (alarms[i] == event.target.id) {
                         console.log(event.target.id)
+                        getJSON(`${url}/alarmTimes/edit?mode=del&alarmTime=${event.target.id}`)
                     }
                 }
             }
