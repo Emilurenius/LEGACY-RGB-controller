@@ -1,4 +1,4 @@
-import ws281xSC, datetime
+import ws281xSC, datetime, time
 LEDs = ws281xSC.LEDs(149, "http://192.168.1.124:3000")
 
 def getTime():
@@ -6,9 +6,13 @@ def getTime():
     dt.strftime("%M")
     return f"{dt.strftime('%w')}-{dt.strftime('%H')}-{dt.strftime('%M')}"
 
-alarmTimes = ["4-15-05", "4-15-05", "5-15-08", "4-15-32"]
+alarmTimes = LEDs.getJSON("alarmTimes.json")["times"]
+print(alarmTimes)
 
-for alarmTime in alarmTimes:
-    if getTime() == alarmTime:
-        LEDs.setState(True)
-        LEDs.setMode("alarmClockEC")
+while True:
+    alarmTimes = LEDs.getJSON("alarmTimes.json")["times"]
+    for alarmTime in alarmTimes:
+        if getTime() == alarmTime:
+            LEDs.setState(True)
+            LEDs.setMode("alarmClockEC")
+            time.sleep(61)
