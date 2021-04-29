@@ -6,11 +6,11 @@ def getTime():
     dt.strftime("%M")
     return f"{dt.strftime('%w')}-{dt.strftime('%H')}-{dt.strftime('%M')}"
 
-alarmTimes = ["4-15-05", "4-15-05", "4-15-08"]
+alarmTimes = ["4-14-45"]
 
 print(alarmTimes)
 print(getTime())
 
 for alarmTime in alarmTimes:
     if getTime() == alarmTime:
-        LEDs.setMode("alarmClockEC")
+        print("ALARM")
