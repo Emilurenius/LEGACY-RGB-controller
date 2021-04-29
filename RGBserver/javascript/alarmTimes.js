@@ -22,7 +22,12 @@ function alarmTimes() {
             deleteButton.id = alarms[i]
 
             deleteButton.onclick = (event) => {
-                console.log(event.target.id)
+                alarms = getJSON(`${url}/json/alarmTimes.json`).times
+                for (let i = 0; i < alarms.length; i++) {
+                    if (alarms[i] == event.target.id) {
+                        console.log(event.target.id)
+                    }
+                }
             }
 
             const deleteIcon = document.createElement("i")
