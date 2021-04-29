@@ -13,7 +13,7 @@ function alarmTimes() {
         i++
     }
 
-    let i = 0
+    i = 0
     while (i < 60) {
         let option = document.createElement("option")
         option.value = `${i}`
