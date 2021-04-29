@@ -28,6 +28,7 @@ function alarmTimes() {
             const deleteIcon = document.createElement("i")
             deleteIcon.classList.add("fa")
             deleteIcon.classList.add("fa-trash")
+            deleteButton.id = alarms[i]
 
             deleteButton.appendChild(deleteIcon)
             alarmText.appendChild(deleteButton)
