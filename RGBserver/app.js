@@ -364,15 +364,19 @@ app.get("/alarmTimes/edit", (req, res) => {
         }
     }
     else if (req.query.mode == "del") {
+        let alarmFound = false
         for (let i = 0; i < alarmTimes.times.length; i++) {
             if (alarmTimes.times[i] == req.query.alarmTime) {
                 alarmTimes.times.splice(i, 1)
                 save = true
                 console.log(`Alarm time deleted: ${req.query.alarmTime}`)
                 res.send(alarmTimes)
-            }else {
-                res.send("alarm not found")
+                alarmFound = true
+                break
             }
+        }
+        if (!alarmFound) {
+            res.send("Alarm time not found")
         }
     }
 
