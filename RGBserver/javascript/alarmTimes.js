@@ -5,7 +5,7 @@ function alarmTimes() {
 
     document.createElement("option")
     let i = 0
-    while (i < 23) {
+    while (i < 24) {
         let option = document.createElement("option")
         option.value = `${i}`
         option.innerHTML = `${i}`
@@ -14,7 +14,7 @@ function alarmTimes() {
     }
 
     i = 0
-    while (i < 60) {
+    while (i < 61) {
         let option = document.createElement("option")
         option.value = `${i}`
         option.innerHTML = `${i}`
