@@ -7,6 +7,13 @@ function alarmTimes() {
     let i = 0
     while (i < 24) {
         let option = document.createElement("option")
+        if (i < 10) {
+            option.value = `0${i}`
+            option.innerHTML = `0${i}`
+        }else {
+            option.value = `${i}`
+            option.innerHTML = `${i}`
+        }
         option.value = `${i}`
         option.innerHTML = `${i}`
         alarmTimeHour.appendChild(option)
@@ -16,8 +23,13 @@ function alarmTimes() {
     i = 0
     while (i < 60) {
         let option = document.createElement("option")
-        option.value = `${i}`
-        option.innerHTML = `${i}`
+        if (i < 10) {
+            option.value = `0${i}`
+            option.innerHTML = `0${i}`
+        }else {
+            option.value = `${i}`
+            option.innerHTML = `${i}`
+        }
         alarmTimeMinute.appendChild(option)
         i++
     }
