@@ -8,6 +8,7 @@ function alarmTimes() {
 
     function populateAlarmsContainer() {
         activeAlarmsContainer.innerHTML = ""
+        alarms = getJSON(`${url}/json/alarmTimes.json`).times
         for (let i = 0; i < alarms.length; i++) {
             const alarmDiv = document.createElement("div")
             alarmDiv.classList.add("Content-subBox")
@@ -29,6 +30,7 @@ function alarmTimes() {
             alarmDiv.appendChild(alarmText)
             activeAlarmsContainer.appendChild(alarmDiv)
         }
+        activeAlarmsContainer.appendChild(document.createElement("br"))
     }
     populateAlarmsContainer()
 
