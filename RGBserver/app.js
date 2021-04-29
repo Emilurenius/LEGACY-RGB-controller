@@ -347,7 +347,7 @@ app.get("/settings/standard", (req, res) => {
 })
 
 app.get("/alarmTimes", (req, res) => {
-    console.log("/nAlarm times API loaded")
+    console.log("\nAlarm times API loaded")
     let save = false
     const rawdata = fs.readFileSync(path.join(__dirname, "/json/alarmTimes.json"))
     let alarmTimes = JSON.parse(rawdata)

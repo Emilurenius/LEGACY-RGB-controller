@@ -87,3 +87,6 @@ def createSpotifyOauth():
         redirect_uri=url_for("redirectPage", _external=True),
         scope="user-read-currently-playing"
     )
+
+if __name__ == "__main__":
+    app.run(port=8000, debug=True)
