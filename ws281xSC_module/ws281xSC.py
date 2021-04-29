@@ -25,6 +25,10 @@ class LEDs:
 
     def percentofLEDs(self, percentage):
         return int(self.LEDcount * percentage / 100)
+    
+    def setMode(self, mode):
+        response = requests.get(f"{self.address}/modes/set?mode={mode}")
+        return response
 
     def setPixelData(self, i, br=None, r=None, g=None, b=None):
         if br:
@@ -35,5 +39,3 @@ class LEDs:
             self.LEDdata[i]["g"] = g
         if b:
             self.LEDdata[i]["b"] = b
-
-    
