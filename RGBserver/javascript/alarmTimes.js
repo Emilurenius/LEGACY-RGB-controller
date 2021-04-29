@@ -19,6 +19,11 @@ function alarmTimes() {
 
             const deleteButton = document.createElement("button")
             deleteButton.classList.add("button")
+            deleteButton.id = alarms[i]
+
+            deleteButton.onclick = (event) => {
+                console.log(event.target.id)
+            }
 
             const deleteIcon = document.createElement("i")
             deleteIcon.classList.add("fa")
