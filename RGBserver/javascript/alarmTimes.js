@@ -2,8 +2,8 @@ function alarmTimes() {
     const alarmTimeDay = document.getElementById("alarmTimeDay")
     const alarmTimeHour = document.getElementById("alarmTimeHour")
     const alarmTimeMinute = document.getElementById("alarmTimeMinute")
+    const saveButton = document.getElementById("saveAlarmTimeButton")
 
-    document.createElement("option")
     let i = 0
     while (i < 24) {
         let option = document.createElement("option")
@@ -14,13 +14,17 @@ function alarmTimes() {
     }
 
     i = 0
-    while (i < 61) {
+    while (i < 60) {
         let option = document.createElement("option")
         option.value = `${i}`
         option.innerHTML = `${i}`
         alarmTimeMinute.appendChild(option)
         i++
     }
+
+    saveButton.addEventListener("click", (event) => {
+        console.log(`${alarmTimeDay.value}-${alarmTimeHour.value}-${alarmTimeMinute.value}`)
+    })
 }
 
 alarmTimes()
