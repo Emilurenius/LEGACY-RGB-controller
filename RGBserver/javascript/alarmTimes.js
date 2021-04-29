@@ -5,7 +5,7 @@ function alarmTimes() {
     const saveButton = document.getElementById("saveAlarmTimeButton")
     const activeAlarmsContainer = document.getElementById("activeAlarmsContainer")
 
-    const alarms = getJSON(`${url}/json/alarmTimes.json`).times
+    let alarms = getJSON(`${url}/json/alarmTimes.json`).times
 
     for (let i = 0; i < alarms.length; i++) {
         const alarmDiv = document.createElement("div")
