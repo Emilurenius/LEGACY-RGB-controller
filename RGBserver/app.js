@@ -139,19 +139,11 @@ app.get("/lightstate", (req, res) => {
         })
     }
 
-    if (data.onoff) {
-        res.send(true)
-    }else {
-        res.send(false)
-    }
+    res.send({"state":data.onoff})
 })
 
 app.get("/checklightstate", (req, res) => {
-    if (data.onoff) {
-        res.send(true)
-    }else {
-        res.send(false)
-    }
+    res.send({"state":data.onoff})
 })
 
 app.get("/br", (req, res) => {

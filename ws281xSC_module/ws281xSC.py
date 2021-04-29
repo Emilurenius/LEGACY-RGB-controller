@@ -30,6 +30,14 @@ class LEDs:
         response = requests.get(f"{self.address}/modes/set?mode={mode}")
         return response
 
+    def setState(self, state=None):
+        if state == None:
+            requests.get(f"{self.address}/lightstate?toggle=change")
+        else:
+            if requests.get(f"{self.address}/lightstate") == state:
+                print("Already", state)
+            print(requests.get(f"{self.address}/lightstate"))
+
     def setPixelData(self, i, br=None, r=None, g=None, b=None):
         if br:
             self.LEDdata[i]["br"] = br
