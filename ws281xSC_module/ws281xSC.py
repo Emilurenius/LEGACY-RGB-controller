@@ -34,9 +34,10 @@ class LEDs:
         if state == None:
             requests.get(f"{self.address}/lightstate?toggle=change")
         else:
-            if requests.get(f"{self.address}/lightstate") == state:
+            response = requests.get(f"{self.address}/lightstate")
+            if response == state:
                 print("Already", state)
-            print(requests.get(f"{self.address}/lightstate"))
+            print(response.json())
 
     def setPixelData(self, i, br=None, r=None, g=None, b=None):
         if br:
