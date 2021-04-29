@@ -481,42 +481,42 @@ def alarmClockEC(strip): # Externally controlled alarm clock
     while True: # This will run untill the user turns off the lights, or changes mode. Note that turning lights off and on will restart the alarmclock function.
                 
         colorWipe(strip, Color(255, 255, 255), 0)
-        if checkBreak("alarmClock"): # Stop function if the mode has changed, or the lights are turned off.
+        if checkBreak("alarmClockEC"): # Stop function if the mode has changed, or the lights are turned off.
             break
         colorWipe(strip, Color(0, 0, 0), 0)
-        if checkBreak("alarmClock"): # Stop function if the mode has changed, or the lights are turned off.
+        if checkBreak("alarmClockEC"): # Stop function if the mode has changed, or the lights are turned off.
             break
 
         solidColor(strip, Color(255, 255, 255))
-        if checkBreak("alarmClock"): # Stop function if the mode has changed, or the lights are turned off.
+        if checkBreak("alarmClockEC"): # Stop function if the mode has changed, or the lights are turned off.
             break
         time.sleep(0.3)
         solidColor(strip, Color(0, 0, 0))
-        if checkBreak("alarmClock"): # Stop function if the mode has changed, or the lights are turned off.
+        if checkBreak("alarmClockEC"): # Stop function if the mode has changed, or the lights are turned off.
             break
         time.sleep(0.3)
         solidColor(strip, Color(255, 255, 255))
-        if checkBreak("alarmClock"): # Stop function if the mode has changed, or the lights are turned off.
+        if checkBreak("alarmClockEC"): # Stop function if the mode has changed, or the lights are turned off.
             break
         time.sleep(0.3)
         solidColor(strip, Color(0, 0, 0))
-        if checkBreak("alarmClock"): # Stop function if the mode has changed, or the lights are turned off.
+        if checkBreak("alarmClockEC"): # Stop function if the mode has changed, or the lights are turned off.
             break
         time.sleep(0.3)
         solidColor(strip, Color(255, 255, 255))
-        if checkBreak("alarmClock"): # Stop function if the mode has changed, or the lights are turned off.
+        if checkBreak("alarmClockEC"): # Stop function if the mode has changed, or the lights are turned off.
             break
         time.sleep(0.3)
         solidColor(strip, Color(0, 0, 0))
-        if checkBreak("alarmClock"): # Stop function if the mode has changed, or the lights are turned off.
+        if checkBreak("alarmClockEC"): # Stop function if the mode has changed, or the lights are turned off.
             break
         time.sleep(0.3)
         solidColor(strip, Color(255, 255, 255))
-        if checkBreak("alarmClock"): # Stop function if the mode has changed, or the lights are turned off.
+        if checkBreak("alarmClockEC"): # Stop function if the mode has changed, or the lights are turned off.
             break
         time.sleep(0.3)
         solidColor(strip, Color(0, 0, 0))
-        if checkBreak("alarmClock"): # Stop function if the mode has changed, or the lights are turned off.
+        if checkBreak("alarmClockEC"): # Stop function if the mode has changed, or the lights are turned off.
             break
     
     requests.get("http://localhost:3000/modes/set?mode=standard")
