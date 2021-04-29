@@ -14,15 +14,18 @@ function alarmTimes() {
         const alarmText = document.createElement("p")
         alarmText.classList.add("Body-Text")
         alarmText.innerHTML = alarms[i]
-        alarmDiv.appendChild(alarmText)
 
         const deleteButton = document.createElement("button")
+        deleteButton.classList.add("button")
 
         const deleteIcon = document.createElement("i")
         deleteIcon.classList.add("fa")
         deleteIcon.classList.add("fa-trash")
+
         deleteButton.appendChild(deleteIcon)
-        alarmDiv.appendChild(deleteButton)
+        alarmText.appendChild(deleteButton)
+
+        alarmDiv.appendChild(alarmText)
         activeAlarmsContainer.appendChild(alarmDiv)
     }
 
