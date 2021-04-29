@@ -346,7 +346,7 @@ app.get("/settings/standard", (req, res) => {
     res.sendFile(path.join(__dirname, "/json/standardSettings.json"))
 })
 
-app.get("/alarmTimes", (req, res) => {
+app.get("/alarmTimes/edit", (req, res) => {
     console.log("\nAlarm times API loaded")
     let save = false
     const rawdata = fs.readFileSync(path.join(__dirname, "/json/alarmTimes.json"))
