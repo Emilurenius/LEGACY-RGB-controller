@@ -363,6 +363,12 @@ app.get("/alarmTimes/edit", (req, res) => {
             save = true
         }
     }
+    else if (req.query.mode == "del") {
+        if (alarmTimes.times.includes(req.query.alarmTime)) {
+            alarmTimes.times.splice(alarmTimes.indexOf(req.query.alarmTime), 1)
+            save = true
+        }
+    }
 
     if (save) {
         let stringified = JSON.stringify(alarmTimes, null, 4)
