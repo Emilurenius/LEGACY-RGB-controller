@@ -27,8 +27,10 @@ function alarmTimes() {
                     if (alarms[i] == event.target.id) {
                         console.log(event.target.id)
                         getJSON(`${url}/alarmTimes/edit?mode=del&alarmTime=${event.target.id}`)
+                        break
                     }
                 }
+                populateAlarmsContainer()
             }
 
             const deleteIcon = document.createElement("i")
