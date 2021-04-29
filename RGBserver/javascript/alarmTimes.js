@@ -33,7 +33,15 @@ function alarmTimes() {
     }
 
     saveButton.addEventListener("click", (event) => {
-        console.log(`${alarmTimeDay.value}-${alarmTimeHour.value}-${alarmTimeMinute.value}`)
+        const alarmTime = `${alarmTimeDay.value}-${alarmTimeHour.value}-${alarmTimeMinute.value}`
+        const alarms = getJSON(`${url}/json/alarmTimes.json`).times
+
+        if (alarms.includes(alarmTime)) {
+            alert("Alarm time already exists")
+        }
+        else {
+            getJSON(`${url}/alarmTimes?mode=new&alarmTime=${alarmTime}`)
+        }
     })
 }
 

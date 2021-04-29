@@ -346,6 +346,34 @@ app.get("/settings/standard", (req, res) => {
     res.sendFile(path.join(__dirname, "/json/standardSettings.json"))
 })
 
+app.get("/alarmTimes", (req, res) => {
+    console.log("/nAlarm times API loaded")
+    let save = false
+    const rawdata = fs.readFileSync(path.join(__dirname, "/json/alarmTimes.json"))
+    let alarmTimes = JSON.parse(rawdata)
+
+    if (req.query.mode == "new") {
+        const newAlarm = req.query.alarmTime
+        if (alarmTimes.times.includes(newAlarm)) {
+            res.send("Alarm exists")
+        }
+        else {
+            alarmTimes.times.push(newAlarm)
+            res.send(alarmTimes)
+            save = true
+        }
+    }
+
+    if (save) {
+        let stringified = JSON.stringify(alarmTimes, null, 4)
+    
+        fs.writeFile(path.join(__dirname, "/json/alarmTimes.json"), stringified, (err) => {
+            if (err) throw err
+            console.log("Data written to file")
+        })
+    }
+})
+
 // Longpolling:
 app.get("/reqdata", (req, res, next) => { // this is a long polling address for sending LED strip data to other devices
     res.setHeader("Content-Type", "text/html; charset=utf-8")
