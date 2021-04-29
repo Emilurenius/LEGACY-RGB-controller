@@ -364,9 +364,12 @@ app.get("/alarmTimes/edit", (req, res) => {
         }
     }
     else if (req.query.mode == "del") {
-        if (alarmTimes.times.includes(req.query.alarmTime)) {
-            alarmTimes.times.splice(alarmTimes.indexOf(req.query.alarmTime), 1)
-            save = true
+        for (let i = 0; i < alarmTimes.times.length; i++) {
+            if (alarmTimes.times[i] == req.query.alarmTime) {
+                alarmTimes.times.splice(i, 1)
+                save = true
+                console.log(`Alarm time deleted: ${req.query.alarmTime}`)
+            }
         }
     }
 
