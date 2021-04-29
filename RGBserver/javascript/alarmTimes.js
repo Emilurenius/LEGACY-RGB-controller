@@ -14,8 +14,6 @@ function alarmTimes() {
             option.value = `${i}`
             option.innerHTML = `${i}`
         }
-        option.value = `${i}`
-        option.innerHTML = `${i}`
         alarmTimeHour.appendChild(option)
         i++
     }
