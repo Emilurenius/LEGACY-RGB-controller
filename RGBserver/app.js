@@ -369,6 +369,9 @@ app.get("/alarmTimes/edit", (req, res) => {
                 alarmTimes.times.splice(i, 1)
                 save = true
                 console.log(`Alarm time deleted: ${req.query.alarmTime}`)
+                res.send(alarmTimes)
+            }else {
+                res.send("alarm not found")
             }
         }
     }
