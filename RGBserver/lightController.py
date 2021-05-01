@@ -521,7 +521,6 @@ def alarmClockEC(strip): # Externally controlled alarm clock
     
     requests.get("http://localhost:3000/modes/set?mode=standard")
 
-
 def elitus(strip, data):
     while True:
         if checkBreak("elitus"):
