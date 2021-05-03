@@ -44,6 +44,9 @@ def getData():
     except: # If you can't open the json file, just return False
         return False
 
+def getJSON(filename):
+    return requests.get(f"http://192.168.1.124:3000/json/{filename}.json").json()
+
 def getDataval(dataval):
     try: # Try opening the json file, and check it
         with open("./json/data.json") as JSON:
@@ -53,7 +56,6 @@ def getDataval(dataval):
         return False
 
 def unpackRGB(color): # Change 24 bit color into 8 bit RGB
-    r = 0xFF & (color >> 16)
     r = 0xFF & (color >> 16)
     g = 0xFF & (color >> 8)
     b = 0xFF & color
@@ -94,24 +96,8 @@ def randColor():
 
 def standard(strip, colorOverride=None):
     timePrint("Standard mode activated:", newLine=True)
-    data = None
-    standardSettings = None
-
-    while True: # Loop that makes sure all necessary files are loaded before continuing
-        try:
-            with open("./json/data.json") as JSON:
-                data = json.load(JSON)
-        except:
-            time.sleep(0.05)
-
-        try:
-            with open("./json/standardSettings.json") as JSON:
-                standardSettings = json.load(JSON)
-        except:
-            time.sleep(0.05)
-        
-        if data and standardSettings:
-            break
+    data = getJSON("data")
+    standardSettings = getJSON("standardSettings")
 
     if standardSettings["colorChange"] == "wipe":
         if colorOverride:
