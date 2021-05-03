@@ -779,13 +779,14 @@ if __name__ == '__main__':
         previousData = None
         while True:
             # Import data file:
-            while True: # Run in a loop untill the file is loaded
-                try:
-                    with open("./json/data.json") as JSON:
-                        data = json.load(JSON)
-                        break
-                except:
-                    time.sleep(0.05)
+            # while True: # Run in a loop untill the file is loaded
+            #     try:
+            #         with open("./json/data.json") as JSON:
+            #             data = json.load(JSON)
+            #             break
+            #     except:
+            #         time.sleep(0.05)
+            data = json.load(requests.get("http://192.168.1.124:3000/json/data.json").json)
             
             if previousData != data and data["onoff"]:
                 previousData = data
