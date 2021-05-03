@@ -2,4 +2,8 @@
 #This script runs all necessary files for the RGB server
 
 echo "Initializing"
-sudo python3 ./RGBserver/lightController.py &
+node ./RGBserver/app.js 3000 &
+python3 ./RGBserver/clapSensor.py &
+python3 ./ws281xSC_module/alarmController.py &
+python3 app.py &
+sudo python3 ./RGBserver/lightController.py
