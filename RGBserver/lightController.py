@@ -45,7 +45,11 @@ def getData():
         return False
 
 def getJSON(filename):
-    return requests.get(f"http://192.168.1.124:3000/json/{filename}.json").json()
+    while True:
+        try:
+            return requests.get(f"http://192.168.1.124:3000/json/{filename}.json").json()
+        except:
+            continue
 
 def getDataval(dataval):
     try: # Try opening the json file, and check it
@@ -772,7 +776,7 @@ if __name__ == '__main__':
             #             break
             #     except:
             #         time.sleep(0.05)
-            data = requests.get("http://192.168.1.124:3000/json/data.json").json()
+            data = getJSON("data")
             
             if previousData != data and data["onoff"]:
                 previousData = data
