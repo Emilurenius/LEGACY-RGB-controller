@@ -42,7 +42,7 @@ def getJSON(filename):
 
 def getDataval(dataval):
     data = getJSON("data")
-    returnn data[dataval]
+    return data[dataval]
 
 def unpackRGB(color): # Change 24 bit color into 8 bit RGB
     r = 0xFF & (color >> 16)
