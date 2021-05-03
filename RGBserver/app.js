@@ -289,6 +289,17 @@ app.get("/bpm", (req, res) => {
         })
         res.send("Success")
     }
+    else if (req.query.mode  == "resetDelay") {
+        const rawData = fs.readFileSync(path.join(__dirname, "/json/bpm.json"))
+        const bpmData = JSON.parse(rawData)
+        bpmData.syncDelay = 0
+        const stringified = JSON.stringify(bpmData, null, 4)
+        fs.writeFile(path.join(__dirname, "/json/bpm.json"), stringified, (err) => {
+            if (err) throw err
+            console.log("Data written to file")
+        })
+        res.send("Success")
+    }
     else if (req.query.mode == "spotifySync") {
         res.redirect("http://192.168.1.124:8000/getBPM")
     }

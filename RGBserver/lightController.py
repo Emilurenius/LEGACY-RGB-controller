@@ -20,44 +20,29 @@ LED_DMA        = 10      # DMA channel to use for generating signal (try 10)
 LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
 LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
+serverAddress = "http://192.168.1.124:3000"
 
 
-# A check to see if a mode is still chosen. 
-# will return False if the mode given to the function is the same as the one currently chosen on the web interface, or if there is an error loading the JSON file.
-# Will return True if the mode given to the function is not the same as the one currently chosen on the web interface.
 def checkBreak(mode):
-    try: # Try opening the json file, and check it
-        with open("./json/data.json") as JSON:
-            data = json.load(JSON)
-        if data["onoff"] != True or data["mode"] != mode: # Check if the mode has changed, and if the lights should be on
-            return True # Return True if lights should be off, or the mode has changed
-        else:
-            return False # Return False if lights should be on, and the mode has not changed
-    except: # If you can't open the json file, just return False
-        return False # If the JSON file can't be opened, just assume the lights should be on, and the mode hasn't changed
-
-def getData():
-    try: # Try opening the json file, and check it
-        with open("./json/data.json") as JSON:
-            data = json.load(JSON)
-        return data
-    except: # If you can't open the json file, just return False
+    # A check to see if a mode is still chosen. 
+    # will return False if the mode given to the function is the same as the one currently chosen on the web interface, or if there is an error loading the JSON file.
+    # Will return True if the mode given to the function is not the same as the one currently chosen on the web interface.
+    data = getJSON("data")
+    if data["onoff"] != True or data["mode"] != mode: # Check if the mode has changed, and if the lights should be on
+        return True
+    else:
         return False
 
 def getJSON(filename):
     while True:
         try:
-            return requests.get(f"http://192.168.1.124:3000/json/{filename}.json").json()
+            return requests.get(f"{serverAddress}/json/{filename}.json").json()
         except:
             continue
 
 def getDataval(dataval):
-    try: # Try opening the json file, and check it
-        with open("./json/data.json") as JSON:
-            data = json.load(JSON)
-        return data[dataval]
-    except: # If you can't open the json file, just return False
-        return False
+    data = getJSON("data")
+    returnn data[dataval]
 
 def unpackRGB(color): # Change 24 bit color into 8 bit RGB
     r = 0xFF & (color >> 16)
@@ -201,7 +186,7 @@ def theaterChase(strip, wait_ms=50):
 
         data = False
         while data == False:
-            data = getData()
+            data = getJSON("data")
 
         color = Color(data["R"], data["G"], data["B"])
 
@@ -381,12 +366,7 @@ def alarmClock(strip):
         if alarmDone:
             break
 
-        try:
-            with open("./json/data.json") as JSON: # Read data file
-                data = json.load(JSON)
-        except:
-            time.sleep(0.05)
-            continue
+        data = loadJSON("data")
 
         if data["mode"] != "alarmClock": # Check if alarmClock mode is still on
             break # Break out of loop, and exit function if mode is not alarmClock
@@ -629,21 +609,11 @@ def bpm(strip):
         if checkBreak("bpm"):
             break
 
-        # Load BPM data to see how long to wait until the color is changed again.
-        while True: # This goes in a loop until the JSON file can be loaded, or mode is changed
-            try:
-                with open("./json/bpm.json") as JSON: # Load BPM data saved to json file by server
-                    rawBPMdata = json.load(JSON) # Load JSON file as a dictionary
-                    BPM = rawBPMdata["value"] # Extract BPM value
-                    waitTime = 60 / int(BPM) # Calculate wait time based on BPM
-                    syncDelay = rawBPMdata["syncDelay"] # Check how long to wait for next beat in song
-                    rawBPMdata["syncDelay"] = 0 # Reset delay before next loop
-                    with open("./json/bpm.json", "w") as outFile: # Open json file for editing
-                        json.dump(rawBPMdata, outFile) # Save delay change 
-                    break
-            except:
-                if checkBreak("bpm"):
-                    break
+        rawBPMdata = getJSON("bpm") # Load JSON file as a dictionary
+        BPM = rawBPMdata["value"] # Extract BPM value
+        waitTime = 60 / int(BPM) # Calculate wait time based on BPM
+        syncDelay = rawBPMdata["syncDelay"] # Check how long to wait for next beat in song
+        requests.get(f"{serverAddress}/bpm?mode=resetDelay")
 
         while True: # Wait for next beat in song
             if syncDelay == 0:
@@ -661,20 +631,6 @@ def bpm(strip):
                 break
             elif checkBreak("bpm"): # Stop looping if mode is changed
                 break
-
-            try:
-                with open("./json/bpm.json") as JSON: # Load BPM data saved to json file by server
-                    rawBPMdata = json.load(JSON) # Load JSON file as a dictionary
-                    BPM = rawBPMdata["value"] # Extract BPM value
-                    newWaitTime = 60 / float(BPM) # Calculate wait time based on BPM
-                    new
-                    
-                    if newWaitTime != waitTime: # Stop waiting if the wait time is changed
-                        waitTime = newWaitTime
-                        break
-            except:
-                if checkBreak("bpm"):
-                    break
 
 def screenSync(strip):
     currentColor = None
@@ -768,14 +724,6 @@ if __name__ == '__main__':
     try:
         previousData = None
         while True:
-            # Import data file:
-            # while True: # Run in a loop untill the file is loaded
-            #     try:
-            #         with open("./json/data.json") as JSON:
-            #             data = json.load(JSON)
-            #             break
-            #     except:
-            #         time.sleep(0.05)
             data = getJSON("data")
             
             if previousData != data and data["onoff"]:
