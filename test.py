@@ -1,7 +1,3 @@
-import time
+import requests, json
 
-def timePrint(printVal):
-    currentTime = time.strftime("%H:%M:%S", time.localtime())
-    print(f"{currentTime}: {printVal}")
-
-timePrint("Hello world")
+data = requests.get("http://192.168.1.124:3000/json/data.json").json()
