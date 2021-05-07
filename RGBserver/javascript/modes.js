@@ -23,29 +23,29 @@ function loadModesButtons() {
     }
 }loadModesButtons()
 
-standard.addEventListener("click", (event) => {
-    getJSON(`${url}/modes/set?mode=standard`)
-})
+// standard.addEventListener("click", (event) => {
+//     getJSON(`${url}/modes/set?mode=standard`)
+// })
 
-rainbow.addEventListener("click", (event) => {
-    getJSON(`${url}/modes/set?mode=rainbow`)
-})
+// rainbow.addEventListener("click", (event) => {
+//     getJSON(`${url}/modes/set?mode=rainbow`)
+// })
 
-norway.addEventListener("click", (event) => {
-    getJSON(`${url}/modes/set?mode=norway`)
-})
+// norway.addEventListener("click", (event) => {
+//     getJSON(`${url}/modes/set?mode=norway`)
+// })
 
-colorDrip.addEventListener("click", (event) => {
-    getJSON(`${url}/modes/set?mode=colorDrip`)
-})
+// colorDrip.addEventListener("click", (event) => {
+//     getJSON(`${url}/modes/set?mode=colorDrip`)
+// })
 
-alarmClock.addEventListener("click", (event) => {
-    getJSON(`${url}/modes/set?mode=alarmClock`)
-})
+// alarmClock.addEventListener("click", (event) => {
+//     getJSON(`${url}/modes/set?mode=alarmClock`)
+// })
 
-theaterChase.addEventListener("click", (event) => {
-    getJSON(`${url}/modes/set?mode=theaterChase`)
-})
+// theaterChase.addEventListener("click", (event) => {
+//     getJSON(`${url}/modes/set?mode=theaterChase`)
+// })
 
 speed.value = getJSON(`${url}/json/data.json`).speed
 
