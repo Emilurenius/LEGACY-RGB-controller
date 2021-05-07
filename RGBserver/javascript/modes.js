@@ -6,13 +6,18 @@ const colorDrip = document.getElementById("colorDrip")
 const alarmClock = document.getElementById("alarmClock")
 const theaterChase = document.getElementById("theaterChase")
 const sliderButtonModes = document.getElementById("phonebutton-slider-modes")
+const modeButtonsContainer = document.getElementById("animations&presets")
 
 
 function loadModesButtons() {
     buttons = getJSON(`${url}/json/modeButtons.json`)
     console.log(buttons)
-}
-loadModesButtons()
+
+    modeButtonsContainer.innerHTML = ""
+    for (const [k, v] of Object.entries(JSONdata.animations)) {
+        const button = document.createElement("input")
+    }
+}loadModesButtons()
 
 standard.addEventListener("click", (event) => {
     getJSON(`${url}/modes/set?mode=standard`)

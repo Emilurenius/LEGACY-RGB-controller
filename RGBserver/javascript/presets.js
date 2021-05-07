@@ -32,8 +32,8 @@ function loadColorPresetButtons() {
         const button = document.createElement("input")
         button.type = "button"
         button.classList.add("button")
-        button.value = name
-        button.id = name
+        button.value = v.displayName
+        button.id = k
 
         button.onclick = (event) => {
             console.log(event.target.id)
