@@ -1,0 +1,28 @@
+{
+    "standardModes": {
+        "standard": {
+            "displayName": "Standard"
+        }
+    },
+
+    "animations": {
+        "rainbow": {
+            "displayName": "Rainbow"
+        },
+        "theaterChase": {
+            "displayName": "Theater Chase"
+        },
+        "colorDrip": {
+            "displayName": "Color Drip"
+        },
+        "colorBubbles": {
+            "displayName": "Color Bubbles"
+        }
+    },
+
+    "presets": {
+        "norway": {
+            "displayName": "Norwegian Flag"
+        }
+    }
+}

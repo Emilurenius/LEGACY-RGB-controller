@@ -8,6 +8,11 @@ const theaterChase = document.getElementById("theaterChase")
 const sliderButtonModes = document.getElementById("phonebutton-slider-modes")
 
 
+function loadModesButtons() {
+    buttons = getJSON(`${url}/json/modeButtons.json`)
+    console.log(buttons)
+}
+
 standard.addEventListener("click", (event) => {
     getJSON(`${url}/modes/set?mode=standard`)
 })
