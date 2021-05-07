@@ -20,6 +20,8 @@ function loadModesButtons() {
         button.classList.add("button")
         button.value = v.displayName
         button.id = k
+
+        modeButtonsContainer.appendChild(button)
     }
 }loadModesButtons()
 
