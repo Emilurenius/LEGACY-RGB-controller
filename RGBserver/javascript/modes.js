@@ -12,6 +12,7 @@ function loadModesButtons() {
     buttons = getJSON(`${url}/json/modeButtons.json`)
     console.log(buttons)
 }
+loadModesButtons()
 
 standard.addEventListener("click", (event) => {
     getJSON(`${url}/modes/set?mode=standard`)
