@@ -189,23 +189,16 @@ def theaterChase(strip, wait_ms=50):
 
         wait_ms = 100 - data["speed"] # Making sure the speed stays up to date with JSON file.
 
-        if checkBreak("theaterChase"): # Stop function if the mode has changed, or the lights are turned off.
-            break
         for q in range(3):
-            if checkBreak("theaterChase"):
-                break
 
             for i in range(0, strip.numPixels(), 3):
-                if checkBreak("theaterChase"):
-                    break
-
                 strip.setPixelColor(i+q, color)
             strip.show()
             #time.sleep(wait_ms/1000.0)
             timePrint(wait_ms)
+            if checkBreak("theaterChase"):
+                    return
             for i in range(0, strip.numPixels(), 3):
-                if checkBreak("theaterChase"):
-                    break
                 strip.setPixelColor(i+q, 0)
 
 def wheel(pos):
