@@ -183,10 +183,7 @@ def theaterChase(strip, wait_ms=50):
     timePrint("Theater chase activated", newLine=True)
 
     while True:
-
-        data = False
-        while data == False:
-            data = getJSON("data")
+        data = getJSON("data")
 
         color = Color(data["R"], data["G"], data["B"])
 
