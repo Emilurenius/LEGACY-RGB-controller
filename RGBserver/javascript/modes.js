@@ -24,6 +24,7 @@ function loadModesButtons() {
 
         button.onclick = (event) => {
             console.log(event.target.id)
+            getJSON(`${url}/modes/set?mode=${event.target.id}`)
         }
 
         modeButtonsContainer.appendChild(button)
