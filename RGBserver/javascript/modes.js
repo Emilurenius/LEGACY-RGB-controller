@@ -13,47 +13,32 @@ function loadModesButtons() {
     buttons = getJSON(`${url}/json/modeButtons.json`)
     console.log(buttons)
 
-    modeButtonsContainer.innerHTML = ""
-        modeButtonsContainer.appendChild(textFormat("Animations and presets", "Main-Text"))
-    for (const [k, v] of Object.entries(buttons.animations)) {
-        const button = document.createElement("input")
-        button.type = "button"
-        button.classList.add("button")
-        button.value = v.displayName
-        button.id = k
-
-        button.onclick = (event) => {
-            console.log(event.target.id)
-            getJSON(`${url}/modes/set?mode=${event.target.id}`)
+    function buttonLoader(val) {
+        for (const [k, v] of Object.entries(buttons[val])) {
+            const button = document.createElement("input")
+            button.type = "button"
+            button.classList.add("button")
+            button.value = v.displayName
+            button.id = k
+    
+            button.onclick = (event) => {
+                console.log(event.target.id)
+                getJSON(`${url}/modes/set?mode=${event.target.id}`)
+            }
+    
+            modeButtonsContainer.appendChild(button)
         }
-
-        modeButtonsContainer.appendChild(button)
     }
+
+    modeButtonsContainer.innerHTML = ""
+    modeButtonsContainer.appendChild(textFormat("Animations and presets", "Main-Text"))
+    buttonLoader("animations")
+    buttonLoader("presets")
 }loadModesButtons()
 
 standard.addEventListener("click", (event) => {
     getJSON(`${url}/modes/set?mode=standard`)
 })
-
-// rainbow.addEventListener("click", (event) => {
-//     getJSON(`${url}/modes/set?mode=rainbow`)
-// })
-
-// norway.addEventListener("click", (event) => {
-//     getJSON(`${url}/modes/set?mode=norway`)
-// })
-
-// colorDrip.addEventListener("click", (event) => {
-//     getJSON(`${url}/modes/set?mode=colorDrip`)
-// })
-
-// alarmClock.addEventListener("click", (event) => {
-//     getJSON(`${url}/modes/set?mode=alarmClock`)
-// })
-
-// theaterChase.addEventListener("click", (event) => {
-//     getJSON(`${url}/modes/set?mode=theaterChase`)
-// })
 
 speed.value = getJSON(`${url}/json/data.json`).speed
 
