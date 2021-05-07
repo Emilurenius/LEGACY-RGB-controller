@@ -14,12 +14,17 @@ function loadModesButtons() {
     console.log(buttons)
 
     modeButtonsContainer.innerHTML = ""
+        modeButtonsContainer.appendChild(textFormat("Animations and presets", "Main-Text"))
     for (const [k, v] of Object.entries(buttons.animations)) {
         const button = document.createElement("input")
         button.type = "button"
         button.classList.add("button")
         button.value = v.displayName
         button.id = k
+
+        button.onclick = (event) => {
+            console.log(event.target.id)
+        }
 
         modeButtonsContainer.appendChild(button)
     }

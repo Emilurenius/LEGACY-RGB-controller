@@ -1,4 +1,4 @@
-export function textFormat(rawText, textClass) {
+function textFormat(rawText, textClass) {
     const textBox = document.createElement("div")
     const bodyTextList = rawText.split("\n")
     let body = document.createElement("p")
