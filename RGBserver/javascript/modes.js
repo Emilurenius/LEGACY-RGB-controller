@@ -1,12 +1,7 @@
-const speed = document.getElementById("speed")
-const standard = document.getElementById("standard")
-const rainbow = document.getElementById("rainbow")
-const norway = document.getElementById("norway")
-const colorDrip = document.getElementById("colorDrip")
-const alarmClock = document.getElementById("alarmClock")
-const theaterChase = document.getElementById("theaterChase")
-const sliderButtonModes = document.getElementById("phonebutton-slider-modes")
-const modeButtonsContainer = document.getElementById("animations&presets")
+const speed                = document.getElementById("speed"                   )
+const standard             = document.getElementById("standard"                )
+const sliderButtonModes    = document.getElementById("phonebutton-slider-modes")
+const modeButtonsContainer = document.getElementById("animations&presets"      )
 
 
 function loadModesButtons() {
@@ -32,7 +27,7 @@ function loadModesButtons() {
 
     modeButtonsContainer.innerHTML = ""
     modeButtonsContainer.appendChild(textFormat("Animations and presets", "Main-Text"))
-    buttonLoader("animations")
+    buttonLoader("animations") // Separated in code, so they can be more easily separated in functionality and in the control panel later. (If needed)
     buttonLoader("presets")
 }loadModesButtons()
 
