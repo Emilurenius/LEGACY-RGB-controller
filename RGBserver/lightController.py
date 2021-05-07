@@ -557,7 +557,7 @@ def colorBubbles(strip):
     while True:
         wait_ms = 100 - getDataval("speed")
         if checkBreak("colorBubbles"):
-            break
+            return
 
         noneActive = True
         for i in range(len(stripBrightness)):
