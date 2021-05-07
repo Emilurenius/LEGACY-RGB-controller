@@ -205,6 +205,7 @@ def theaterChase(strip, wait_ms=50):
                 strip.setPixelColor(i+q, color)
             strip.show()
             time.sleep(wait_ms/1000.0)
+            timePrint(wait_ms)
             for i in range(0, strip.numPixels(), 3):
                 if checkBreak("theaterChase"):
                     break
