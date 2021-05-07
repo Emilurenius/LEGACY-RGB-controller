@@ -14,8 +14,12 @@ function loadModesButtons() {
     console.log(buttons)
 
     modeButtonsContainer.innerHTML = ""
-    for (const [k, v] of Object.entries(JSONdata.animations)) {
+    for (const [k, v] of Object.entries(buttons.animations)) {
         const button = document.createElement("input")
+        button.type = "button"
+        button.classList.add("button")
+        button.value = v.displayName
+        button.id = k
     }
 }loadModesButtons()
 
