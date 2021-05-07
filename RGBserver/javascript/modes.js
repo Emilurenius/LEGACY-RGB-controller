@@ -31,9 +31,9 @@ function loadModesButtons() {
     }
 }loadModesButtons()
 
-// standard.addEventListener("click", (event) => {
-//     getJSON(`${url}/modes/set?mode=standard`)
-// })
+standard.addEventListener("click", (event) => {
+    getJSON(`${url}/modes/set?mode=standard`)
+})
 
 // rainbow.addEventListener("click", (event) => {
 //     getJSON(`${url}/modes/set?mode=rainbow`)
