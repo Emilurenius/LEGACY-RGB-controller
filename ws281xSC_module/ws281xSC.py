@@ -27,7 +27,11 @@ class LEDs:
         return int(self.LEDcount * percentage / 100)
 
     def getJSON(self, fileName):
-        return requests.get(f"{self.address}/json/{fileName}").json()
+        while True:
+            try:
+                return requests.get(f"{self.address}/json/{fileName}").json()
+            except:
+                continue
     
     def setMode(self, mode): # Will set the mode of the lightController to given string
         response = requests.get(f"{self.address}/modes/set?mode={mode}")
