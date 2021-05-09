@@ -14,7 +14,7 @@ console.log(`${port} registered as server port`)
 const LIMIT = 20
 const DELAY = 1000
 let tick = 0
-let connections = []
+let connections = [] // Connections through long polling
 
 app.use(cors()) // Making sure the browser can request more data after it is loaded on the client computer.
 
