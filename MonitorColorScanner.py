@@ -36,8 +36,9 @@ while True: # Main script loop
         for x in range(0, xPixels, step): # Iterate through all pixels in the x direction, skipping the amount specified in step for every iteration
             px = imArr[y][x] # Grab pixel at current x and y coordinates
 
-            if px[0] != 0 and px[1] != 0 and px[2] != 0:
-                pixelArray.append([px[0], px[1], px[2]]) # Add the color if it is not complete black
+            # if px[0] != 0 and px[1] != 0 and px[2] != 0:
+            #     pixelArray.append([px[0], px[1], px[2]]) # Add the color if it is not complete black
+            pixelArray.append([px[0], px[1], px[2]]) # Add the color no matter what the RGB values are
 
     mostFrequentColor = mostFrequent(pixelArray) # Get most frequent color in list
     print(mostFrequentColor)
