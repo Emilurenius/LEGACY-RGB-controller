@@ -1,15 +1,18 @@
 # This code is made to run on the user's computer. Not on the server unit
 
-import numpy as np, cv2, requests, math
+import numpy as np, cv2, requests
 from PIL import ImageGrab
 
 def getAverageRGB(colors):
     average = [0, 0, 0]
+    count = 0
     for color in colors:
-        average[0] = average[0] + color[0] ** 2
-        average[1] = average[1] + color[1] ** 2
-        average[2] = average[2] + color[2] ** 2
-    return average
+        count += 1
+        average[0] += color[0]
+        average[1] += color[1]
+        average[2] += color[2]
+
+    return [average[0]/count, average[1]/count, average[2]/count]
 
 def mostFrequent(colorList):
     highestFreq = 0
@@ -27,10 +30,15 @@ def mostFrequent(colorList):
                 color2 = color
                 color = i
 
+        if color2 == None: # Make sure all three variables have a color in them
+            color2 = color
+        if color3 == None:
+            color3 = color2
+
         return getAverageRGB([color, color2, color3]) # Return the average of the 3 most frequent colors
     return [0, 0, 0] # Return black if the list of colors is empty
 
-step = 30 # How many pixels to skip in both x and y direction when sampling colors
+step = 25 # How many pixels to skip in both x and y direction when sampling colors
 xPixels = 1344 # Number of pixels in the x direction of the checked area
 yPixels = 756 # Number of pixels in the y direction of the checked area
 serverAddress = "http://192.168.1.124:3000" # Address for the main server that controls all info about the LED strip
