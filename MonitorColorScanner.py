@@ -9,6 +9,7 @@ def getAverageRGB(colors):
         average[0] = average[0] + color[0] ** 2
         average[1] = average[1] + color[1] ** 2
         average[2] = average[2] + color[2] ** 2
+    return average
 
 def mostFrequent(colorList):
     highestFreq = 0
