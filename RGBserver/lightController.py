@@ -36,7 +36,7 @@ def checkBreak(mode):
 def getJSON(filename):
     while True:
         try: # Try opening the json file, and check it
-            with open("./json/data.json") as JSON:
+            with open(f"./json/{filename}.json") as JSON:
                 data = json.load(JSON)
             return data
         except: # If you can't open the json file, just try again
