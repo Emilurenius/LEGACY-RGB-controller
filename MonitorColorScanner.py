@@ -1,19 +1,32 @@
 # This code is made to run on the user's computer. Not on the server unit
 
-import numpy as np, cv2, requests
+import numpy as np, cv2, requests, math
 from PIL import ImageGrab
+
+def getAverageRGB(colors):
+    average = [0, 0, 0]
+    for color in colors:
+        average[0] = average[0] + color[0] ** 2
+        average[1] = average[1] + color[1] ** 2
+        average[2] = average[2] + color[2] ** 2
 
 def mostFrequent(colorList):
     highestFreq = 0
     if colorList: # Check if the colorList has any RGB values in it
         color = colorList[0] # initiate color variable with the first RGB value
+        color2 = None
+        color3 = None
 
         for i in colorList: # Iterate through the list
             currFreq = colorList.count(i) # Count how many times the current color occurs in the list
             if currFreq > highestFreq: # Check if it appears more often than all other colors checked
                 highestFreq = currFreq # Set new value for highest frequency
-                color = i # Save the color in the variable that will be returned
-        return color # Return the most frequent color
+                # Save the the new highest frequency color, and move the two previous ones down to the other variables:
+                color3 = color2
+                color2 = color
+                color = i
+
+        return getAverageRGB([color, color2, color3]) # Return the average of the 3 most frequent colors
     return [0, 0, 0] # Return black if the list of colors is empty
 
 step = 30 # How many pixels to skip in both x and y direction when sampling colors
