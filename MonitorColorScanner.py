@@ -18,7 +18,7 @@ def getAverageRGB(colors):
         average[1] += color[1]
         average[2] += color[2]
 
-    return [average[0]/count, average[1]/count, average[2]/count]
+    return [int(average[0]/count), int(average[1]/count), int(average[2]/count)]
 
 print("Please give a speed/presicion modifier value:")
 step = int(input("Higher value = higher speed, Lower value = more presicion: ")) # How many pixels to skip in both x and y direction when sampling colors
