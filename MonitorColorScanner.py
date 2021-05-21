@@ -1,7 +1,13 @@
 # This code is made to run on the user's computer. Not on the server unit
 
-import numpy as np, requests
+import numpy as np, requests, time
 from PIL import ImageGrab
+
+def timePrint(printVal, newLine=False):
+    if newLine:
+        print("\n")
+    currentTime = time.strftime("%H:%M:%S", time.localtime())
+    print(f"{currentTime}: {printVal}")
 
 def getAverageRGB(colors):
     average = [0, 0, 0]
@@ -18,6 +24,7 @@ print("Please give a speed/presicion modifier value:")
 step = int(input("Higher value = higher speed, Lower value = more presicion: ")) # How many pixels to skip in both x and y direction when sampling colors
 xPixels = 1344 # Number of pixels in the x direction of the checked area
 yPixels = 756 # Number of pixels in the y direction of the checked area
+oldAverage = [0, 0, 0] # Initializing a check variable
 serverAddress = "http://192.168.1.124:3000" # Address for the main server that controls all info about the LED strip
 
 while True: # Main script loop
@@ -39,6 +46,11 @@ while True: # Main script loop
             #     pixelArray.append([px[0], px[1], px[2]]) # Add the color if it is not complete black
             pixelArray.append([px[0], px[1], px[2]])
 
-    mostFrequentColor = getAverageRGB(pixelArray) # Get most frequent color in list
-    print(mostFrequentColor)
-    requests.get(f"{serverAddress}/rgb?br=1000&r={mostFrequentColor[0]}&g={mostFrequentColor[1]}&b={mostFrequentColor[2]}") # Send the most frequent color to the main server
+    averageRGB = getAverageRGB(pixelArray) # Get most frequent color in list
+    diffR = averageRGB[0] - oldAverage[0]
+    diffG = averageRGB[1] - oldAverage[1]
+    diffB = averageRGB[2] - oldAverage[2]
+    if diffR < -1 or diffR > 1 or diffG < -1 or diffG > 1 or diffB < -1 or diffB > 1: # Check if difference is over one
+        timePrint(averageRGB)
+        oldAverage = averageRGB
+        requests.get(f"{serverAddress}/rgb?br=1000&r={averageRGB[0]}&g={averageRGB[1]}&b={averageRGB[2]}") # Send the most frequent color to the main server
