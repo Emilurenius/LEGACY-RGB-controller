@@ -663,7 +663,6 @@ def screenSync(strip):
         diff = diffR+diffG+diffB/3*4 # Get average, and double
         diff = clamp(diff, 255, 0)
         delayMS = (255 - diff) / 4
-        print(delayMS)
 
         if currentColor[0] < newColor[0]: # Change red channel
             currentColor[0] += changePerTick
@@ -689,7 +688,7 @@ def screenSync(strip):
         if currentColor[2] < 0:
             currentColor[2] = 0
 
-        #timePrint(currentColor)
+        timePrint(currentColor)
         solidColor(strip, Color(currentColor[0], currentColor[1], currentColor[2])) # Set the RGB strip to the new color generated
         time.sleep(delayMS / 1000) # Wait specified amount in delayMS
 
