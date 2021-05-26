@@ -652,7 +652,7 @@ def screenSync(strip):
         diffB = abs(newColor[2] - currentColor[2])
         diff = diffR+diffG+diffB/3 # Get average
         print(diff)
-        delayMS = 255 - diff
+        delayMS = (255 - diff) / 2
 
         if currentColor[0] < newColor[0]: # Change red channel
             currentColor[0] += changePerTick
