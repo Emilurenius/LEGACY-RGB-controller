@@ -644,14 +644,14 @@ def screenSync(strip):
         B = data["B"]
         newColor = [R, G, B]
 
+        if currentColor == None: # Set the value of the current color on the first round
+            currentColor = newColor
+
         diffR = abs(newColor[0] - currentColor[0])
         diffG = abs(newColor[1] - currentColor[1])
         diffB = abs(newColor[2] - currentColor[2])
         diff = diffR+diffG+diffB/3 # Get average
         print(diff)
-
-        if currentColor == None: # Set the value of the current color on the first round
-            currentColor = newColor
 
         if currentColor[0] < newColor[0]: # Change red channel
             currentColor[0] += changePerTick
