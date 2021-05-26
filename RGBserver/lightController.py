@@ -661,7 +661,7 @@ def screenSync(strip):
         diffG = abs(newColor[1] - currentColor[1])
         diffB = abs(newColor[2] - currentColor[2])
         diff = diffR+diffG+diffB/3*2 # Get average, and double
-        diff = clamp(diff, 0, 255)
+        diff = clamp(diff, 255, 0)
         print(diff)
         delayMS = (255 - diff) / 4
 
