@@ -638,18 +638,17 @@ def screenSync(strip):
         if checkBreak("screenSync"):
             break
         
-        while True:
-            try:
-                with open("./json/data.json") as JSON: # Load BPM data saved to json file by server
-                    data = json.load(JSON) # Load JSON file as a dictionary
-                    R = data["R"]
-                    G = data["G"]
-                    B = data["B"]
-                    break
-            except:
-                if checkBreak("screenSync"):
-                    break
+        data = getJSON("data") # Load JSON file as a dictionary
+        R = data["R"]
+        G = data["G"]
+        B = data["B"]
         newColor = [R, G, B]
+
+        diffR = abs(newColor[0] - currentColor[0])
+        diffG = abs(newColor[1] - currentColor[1])
+        diffB = abs(newColor[2] - currentColor[2])
+        diff = diffR+diffG+diffB/3 # Get average
+        print(diff)
 
         if currentColor == None: # Set the value of the current color on the first round
             currentColor = newColor
@@ -678,7 +677,7 @@ def screenSync(strip):
         if currentColor[2] < 0:
             currentColor[2] = 0
 
-        timePrint(currentColor)
+        #timePrint(currentColor)
         solidColor(strip, Color(currentColor[0], currentColor[1], currentColor[2])) # Set the RGB strip to the new color generated
         time.sleep(delayMS / 1000) # Wait specified amount in delayMS
 
