@@ -8,7 +8,6 @@
 # The original example script that this script is built upon can be found in the same github repository as this file
 # Or you can go to the original github repository here: https://github.com/jgarff/rpi_ws281x
 
-from RGBserver.clapSensor import clamp
 import time, json, os, random, datetime, argparse, requests
 from rpi_ws281x import *
 
