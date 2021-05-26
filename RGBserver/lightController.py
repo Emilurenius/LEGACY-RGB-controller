@@ -8,6 +8,7 @@
 # The original example script that this script is built upon can be found in the same github repository as this file
 # Or you can go to the original github repository here: https://github.com/jgarff/rpi_ws281x
 
+from RGBserver.clapSensor import clamp
 import time, json, os, random, datetime, argparse, requests
 from rpi_ws281x import *
 
@@ -57,6 +58,16 @@ def timePrint(printVal, newLine=False):
         print("\n")
     currentTime = time.strftime("%H:%M:%S", time.localtime())
     print(f"{currentTime}: {printVal}")
+
+def clamp(val, maxVal, minVal):
+    if val < maxVal and val > minVal:
+        return val
+    elif val > maxVal:
+        return maxVal
+    elif val < minVal:
+        return minVal
+    else:
+        return val
 
 # Define functions which animate LEDs in various ways:
 def randColor():
@@ -650,7 +661,8 @@ def screenSync(strip):
         diffR = abs(newColor[0] - currentColor[0])
         diffG = abs(newColor[1] - currentColor[1])
         diffB = abs(newColor[2] - currentColor[2])
-        diff = diffR+diffG+diffB/3 # Get average
+        diff = diffR+diffG+diffB/3*2 # Get average, and double
+        diff = clamp(diff, 0, 255)
         print(diff)
         delayMS = (255 - diff) / 4
 
