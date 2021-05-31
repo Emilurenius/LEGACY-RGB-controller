@@ -458,7 +458,7 @@ def alarmClockEC(strip): # Externally controlled alarm clock
                 
         if checkBreak("alarmClockEC"): # Stop function if the mode has changed, or the lights are turned off.
             break
-        
+
         if i == 0:
             colorWipe(strip, Color(255, 255, 255), 0)
         elif i == 1:
@@ -470,6 +470,7 @@ def alarmClockEC(strip): # Externally controlled alarm clock
                 solidColor(strip, Color(255, 255, 255))
             else:
                 solidColor(strip, Color(0, 0, 0))
+        i += 1
         
         # colorWipe(strip, Color(255, 255, 255), 0)
         # if checkBreak("alarmClockEC"): # Stop function if the mode has changed, or the lights are turned off.
