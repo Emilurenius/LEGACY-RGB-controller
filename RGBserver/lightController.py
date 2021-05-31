@@ -464,7 +464,7 @@ def alarmClockEC(strip): # Externally controlled alarm clock
         elif i == 1:
             colorWipe(strip, Color(0, 0, 0), 0)
         elif i == 10:
-            i = -1
+            i = -1 # Go one under 0, so it is 0 after adding 1 to index before next loop.
         else:
             if state:
                 solidColor(strip, Color(0, 0, 0))
@@ -475,47 +475,8 @@ def alarmClockEC(strip): # Externally controlled alarm clock
                 state = True
                 time.sleep(0.1)
         i += 1
-        
-        # colorWipe(strip, Color(255, 255, 255), 0)
-        # if checkBreak("alarmClockEC"): # Stop function if the mode has changed, or the lights are turned off.
-        #     break
-        # colorWipe(strip, Color(0, 0, 0), 0)
-        # if checkBreak("alarmClockEC"): # Stop function if the mode has changed, or the lights are turned off.
-        #     break
-
-        # solidColor(strip, Color(255, 255, 255))
-        # if checkBreak("alarmClockEC"): # Stop function if the mode has changed, or the lights are turned off.
-        #     break
-        # time.sleep(0.3)
-        # solidColor(strip, Color(0, 0, 0))
-        # if checkBreak("alarmClockEC"): # Stop function if the mode has changed, or the lights are turned off.
-        #     break
-        # time.sleep(0.3)
-        # solidColor(strip, Color(255, 255, 255))
-        # if checkBreak("alarmClockEC"): # Stop function if the mode has changed, or the lights are turned off.
-        #     break
-        # time.sleep(0.3)
-        # solidColor(strip, Color(0, 0, 0))
-        # if checkBreak("alarmClockEC"): # Stop function if the mode has changed, or the lights are turned off.
-        #     break
-        # time.sleep(0.3)
-        # solidColor(strip, Color(255, 255, 255))
-        # if checkBreak("alarmClockEC"): # Stop function if the mode has changed, or the lights are turned off.
-        #     break
-        # time.sleep(0.3)
-        # solidColor(strip, Color(0, 0, 0))
-        # if checkBreak("alarmClockEC"): # Stop function if the mode has changed, or the lights are turned off.
-        #     break
-        # time.sleep(0.3)
-        # solidColor(strip, Color(255, 255, 255))
-        # if checkBreak("alarmClockEC"): # Stop function if the mode has changed, or the lights are turned off.
-        #     break
-        # time.sleep(0.3)
-        # solidColor(strip, Color(0, 0, 0))
-        # if checkBreak("alarmClockEC"): # Stop function if the mode has changed, or the lights are turned off.
-        #     break
     
-    requests.get("http://localhost:3000/modes/set?mode=standard")
+    requests.get("http://localhost:3000/modes/set?mode=standard") # This practically breaks the loop through the checkBreak function, and changes to standard mode.
 
 def elitus(strip, data):
     while True:
