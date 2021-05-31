@@ -469,6 +469,7 @@ def alarmClockEC(strip): # Externally controlled alarm clock
             if state:
                 solidColor(strip, Color(0, 0, 0))
                 state = False
+                time.sleep(0.3)
             else:
                 solidColor(strip, Color(255, 255, 255))
                 state = True
