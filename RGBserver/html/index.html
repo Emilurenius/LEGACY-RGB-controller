@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/sliders.css">
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -11,6 +10,12 @@
 </head>
 <body id="body" onscroll="scroll()">
 
+    <div class="header">
+        <a class="button" href="/">Control panel</a>
+        <a class="button" href="/settings">Settings</a>
+        <a class="button" href="/alarm">Alarm</a>
+    </div>
+    
     <!-- Main controls -->
     <div class="Content" id="controls">
         <div class="Content-box">
@@ -40,10 +45,6 @@
             <input type="range" min="0" max="255" class="slider-b" id="B">
         </div>
 
-        <div class="phonebutton-slider">
-            <input type="button" id="phonebutton-slider-main" value="Send slider info" class="button">
-        </div>
-
         <!-- Preset buttons -->
         <div class="Content-box" id="presets">
         
@@ -64,10 +65,6 @@
                 <label for ="speed">Animation Speed:</label>
                 <input type="range" min="1" max="100" class="slider-br" id="speed">
             </div>
-
-            <div class="phonebutton-slider">
-                <input type="button" id="phonebutton-slider-modes" value="Send slider info" class="button">
-            </div>
         </div>
 
         <div class="Content-box">
@@ -76,67 +73,6 @@
             <input type="button" value="BPM" id="activateBPMmode" class="button">
         </div>
         
-    </div>
-
-    <!-- Settings start here -->
-
-    <!-- General settings for the RGB behaviour -->
-    <div class="Content" id="mainSettings">
-        <div class="Content-box">
-            <p class="Main-Text">Main settings</p>
-        </div>
-        
-        <label for="colorChangeModeSelect" class="Body-Text">Color change mode</label>
-        <select id="colorChangeModeSelect" class="dropDown">
-            <option value="fade">Fade</option>
-            <option value="wipe">Wipe</option>
-        </select>
-    </div>
-
-    <div class="Content" id="alarmTimes">
-        <div class="Content-box">
-            <p class="Main-Text">Alarm times</p>
-        </div>
-        <div class="Content-box">
-            <select id="alarmTimeDay" class="dropDown">
-                <option value="1">Mon</option>
-                <option value="2">Tue</option>
-                <option value="3">Wed</option>
-                <option value="4">Thu</option>
-                <option value="5">Fri</option>
-                <option value="6">Sat</option>
-                <option value="0">Sun</option>
-            </select>
-            <select id="alarmTimeHour" class="dropDown"></select>
-            <select id="alarmTimeMinute" class="dropDown"></select>
-            <input type="button" class="button" value="Save alarm time" id="saveAlarmTimeButton">
-        </div>
-        <div class="Content-box">
-            <p class="Body-Text">Active alarms:</p>
-            <div id="activeAlarmsContainer"></div>
-        </div>
-    </div>
-        
-    <!-- BPM settings panel -->
-    <div class="Content" id="BPM">
-        <div class="Content-box">
-            <p class="Main-Text">BPM settings</p>
-        </div>
-
-        <a class="button" href="" id="spotifySyncButton">Sync with spotify</a>
-        <input type="button" id="BPMcreatePreset" value="Save BPM as preset" class="button">
-
-        <p class="Main-text">Preset speeds</p>
-        <div class="Content-box" id="BPMpresets"></div>
-
-        <div class="slidecontainer">
-            <label for ="BPMslider" id="BPMsliderLabel">BPM:</label>
-            <input type="range" min="1" max="200" class="slider-br" id="BPMslider">
-        </div>
-
-        <div class="phonebutton-slider">
-            <input type="button" id="phonebutton-slider-bpm" value="Send slider info" class="button">
-        </div>
     </div>
 
     <!-- Value readout from the server -->
@@ -155,6 +91,7 @@
     <script src="/javascript/backgroundColor.js"></script>
     <script src="/javascript/getQueries.js"></script>
     <script src="/javascript/codeify.js"></script>
+    <script src="/javascript/functions.js"></script>
 
     <!-- Main scripts: -->
     <script src="/javascript/index.js"></script>
@@ -162,8 +99,5 @@
     <script src="/javascript/cookies.js"></script>
     <script src="/javascript/presets.js"></script>
     <script src="/javascript/serverValueDisplay.js"></script>
-    <script src="/javascript/bpm.js"></script>
-    <script src="/javascript/mainSettings.js"></script>
-    <script src="/javascript/alarmTimes.js"></script>
 </body>
 </html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/sliders.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarm control panel</title>
+</head>
+<body>
+
+    <div class="header">
+        <a class="button" href="/">Control panel</a>
+        <a class="button" href="/settings">Settings</a>
+        <a class="button" href="/alarm">Alarm</a>
+    </div>
+
+    <div class="Content" id="alarmTimes">
+        <div class="Content-box">
+            <p class="Main-Text">Alarm times</p>
+        </div>
+        <div class="Content-box">
+            <select id="alarmTimeDay" class="dropDown">
+                <option value="1">Mon</option>
+                <option value="2">Tue</option>
+                <option value="3">Wed</option>
+                <option value="4">Thu</option>
+                <option value="5">Fri</option>
+                <option value="6">Sat</option>
+                <option value="0">Sun</option>
+            </select>
+            <select id="alarmTimeHour" class="dropDown"></select>
+            <select id="alarmTimeMinute" class="dropDown"></select>
+            <input type="button" class="button" value="Save alarm time" id="saveAlarmTimeButton">
+        </div>
+        <div class="Content-box">
+            <p class="Body-Text">Active alarms:</p>
+            <div id="activeAlarmsContainer"></div>
+        </div>
+    </div>
+
+    <!-- Functions: -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/javascript/backgroundColor.js"></script>
+    <script src="/javascript/getQueries.js"></script>
+    <script src="/javascript/codeify.js"></script>
+    <script src="/javascript/functions.js"></script>
+
+    <!-- Main scripts: -->
+    <script src="/javascript/alarmTimes.js"></script>
+</body>
+</html>
