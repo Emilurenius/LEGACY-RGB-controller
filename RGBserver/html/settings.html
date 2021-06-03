@@ -17,32 +17,38 @@
 
     <!-- General settings for the RGB behaviour -->
     <div class="Content" id="mainSettings">
+        <input type="button" class="button" value="Expand" id="cddExpandCollapse">
         <div class="Content-box">
             <p class="Main-Text">Main settings</p>
         </div>
-        
-        <label for="colorChangeModeSelect" class="Body-Text">Color change mode</label>
-        <select id="colorChangeModeSelect" class="dropDown">
-            <option value="fade">Fade</option>
-            <option value="wipe">Wipe</option>
-        </select>
+
+        <div class="customDropDown" style="display: none;">
+            <label for="colorChangeModeSelect" class="Body-Text">Color change mode</label>
+            <select id="colorChangeModeSelect" class="dropDown">
+                <option value="fade">Fade</option>
+                <option value="wipe">Wipe</option>
+            </select>
+        </div>
     </div>
 
     <!-- BPM settings panel -->
     <div class="Content" id="BPM">
+        <input type="button" class="button" value="Expand" id="cddExpandCollapse">
         <div class="Content-box">
             <p class="Main-Text">BPM settings</p>
         </div>
 
-        <a class="button" href="" id="spotifySyncButton">Sync with spotify</a>
-        <input type="button" id="BPMcreatePreset" value="Save BPM as preset" class="button">
-
-        <p class="Main-text">Preset speeds</p>
-        <div class="Content-box" id="BPMpresets"></div>
-
-        <div class="slidecontainer">
-            <label for ="BPMslider" id="BPMsliderLabel">BPM:</label>
-            <input type="range" min="1" max="200" class="slider-br" id="BPMslider">
+        <div class="customDropDown" style="display: none;">
+            <a class="button" href="" id="spotifySyncButton">Sync with spotify</a>
+            <input type="button" id="BPMcreatePreset" value="Save BPM as preset" class="button">
+    
+            <p class="Main-text">Preset speeds</p>
+            <div class="Content-box" id="BPMpresets"></div>
+    
+            <div class="slidecontainer">
+                <label for ="BPMslider" id="BPMsliderLabel">BPM:</label>
+                <input type="range" min="1" max="200" class="slider-br" id="BPMslider">
+            </div>
         </div>
     </div>
 
@@ -56,5 +62,6 @@
     <!-- Main scripts: -->
     <script src="/javascript/mainSettings.js"></script>
     <script src="/javascript/bpm.js"></script>
+    <script src="/javascript/customDropDown.js"></script>
 </body>
 </html>
