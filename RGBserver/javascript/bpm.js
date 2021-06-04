@@ -1,7 +1,6 @@
 const bpmPresetContainer = document.getElementById("BPMpresets")
 const bpmSlider = document.getElementById("BPMslider")
 const bpmLabel = document.getElementById("BPMsliderLabel")
-const bpmSliderButton = document.getElementById("phonebutton-slider-bpm")
 const spotifySyncButton = document.getElementById("spotifySyncButton")
 const bpmData = getJSON(`${url}/bpm?mode=getBPM`)
 
