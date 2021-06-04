@@ -56,6 +56,7 @@ def getBPM():
     
     sp = spotipy.Spotify(auth=tokenInfo["access_token"])
     playingSong = sp.currently_playing()
+    print(playingSong)
     songID = playingSong["item"]["id"]
     tempo = sp.audio_features(songID)[0]["tempo"]
     messageSent = playingSong["timestamp"]
