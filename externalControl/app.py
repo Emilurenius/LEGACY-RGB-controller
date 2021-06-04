@@ -1,9 +1,11 @@
 import spotipy, time, requests
 from pprint import pprint
 from flask import Flask, request, url_for, session, redirect
+from flask_cors import CORS
 from spotipy.oauth2 import SpotifyOAuth
 
 app = Flask(__name__)
+CORS(app)
 
 app.secret_key = "secret key goes here"
 app.config["SESSION_COOKIE_NAME"] = "My cookie"
