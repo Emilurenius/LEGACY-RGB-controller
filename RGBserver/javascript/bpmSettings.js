@@ -8,7 +8,7 @@ function bpmSettings() {
     bpmSlider.value = bpmData.value
     bpmLabel.innerHTML = `BPM: ${bpmSlider.value}`
 
-    spotifySyncButton.onclick = () => {
+    spotifySyncButton.onclick = (event) => {
         const songData = getJSON("http://192.168.1.124:8000/getBPM")
         console.log(songData)
     }
@@ -18,3 +18,4 @@ function bpmSettings() {
         bpmLabel.innerHTML = `BPM: ${bpmSlider.value}`
     }
 }
+bpmSettings()
