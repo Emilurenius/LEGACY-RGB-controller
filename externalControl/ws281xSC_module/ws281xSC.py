@@ -26,7 +26,7 @@ class LEDs:
     def percentofLEDs(self, percentage): # Returns amount of LEDs in given percentage
         return int(self.LEDcount * percentage / 100)
 
-    def getJSON(self, fileName):
+    def getJSON(self, fileName): # Returns requested json file from RGB server
         while True:
             try:
                 return requests.get(f"{self.address}/json/{fileName}").json()

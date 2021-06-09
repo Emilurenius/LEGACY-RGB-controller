@@ -1,9 +1,23 @@
 // All external modules are loaded in:
 const express = require("express")
 const app = express()
+const bodyParser = require("body-parser")
 const path = require("path")
 const fs = require("fs")
 const cors = require("cors")
+const { O_DIRECT } = require("constants")
+
+function saveJSON(json, filename) {
+    let stringified = JSON.stringify(json, null, 4)
+    fs.writeFile(path.join(__dirname, filename), stringified, (err) => {
+        if (err) throw err
+        console.log("Data written to file")
+    })
+}
+
+function isNumber(number) {
+    return !isNaN(number)
+}
 
 // Reading input from terminal start
 const port = parseInt(process.argv[2])
@@ -16,12 +30,24 @@ const DELAY = 1000
 let tick = 0
 let connections = [] // Connections through long polling
 
+//Here we are configuring express to use body-parser as middle-ware.
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
 app.use(cors()) // Making sure the browser can request more data after it is loaded on the client computer.
 
 // JSON file loaded in before the server is started:
 let rawdata = fs.readFileSync(path.join(__dirname, "/json/data.json"))
 let data = JSON.parse(rawdata)
 console.log(`Data loaded: ${data}`)
+
+// Initializing directRGB json file
+const pixelCount = 149
+let pixelData = {}
+for (let i = 0; i < pixelCount; i++) {
+    pixelData[i] = [0,0,0]
+}
+saveJSON(pixelData, "/json/directRGB.json")
 
 // All server folders are set up:
 app.use("/css", express.static("css"))
@@ -71,12 +97,7 @@ app.get("/", (req, res) => {
         }
         
         if (save) {
-            let stringified = JSON.stringify(data, null, 4)
-        
-            fs.writeFile(path.join(__dirname, "/json/data.json"), stringified, (err) => {
-                if (err) throw err
-                console.log("Data written to file")
-            })
+            saveJSON(data, "/json/data.json")
         }
     }
     else if (req.query.panel == "modes") {
@@ -102,12 +123,7 @@ app.get("/", (req, res) => {
         }
         
         if (save) {
-            let stringified = JSON.stringify(data, null, 4)
-        
-            fs.writeFile(path.join(__dirname, "/json/data.json"), stringified, (err) => {
-                if (err) throw err
-                console.log("Data written to file")
-            })
+            saveJSON(data, "/json/data.json")
         }
     }
     
@@ -131,12 +147,7 @@ app.get("/lightstate", (req, res) => {
     }
 
     if (save) {
-        let stringified = JSON.stringify(data, null, 4)
-    
-        fs.writeFile(path.join(__dirname, "/json/data.json"), stringified, (err) => {
-            if (err) throw err
-            console.log("Data written to file")
-        })
+        saveJSON(data, "/json/data.json")
     }
 
     if (data.onoff) {
@@ -200,12 +211,7 @@ app.get("/rgb", (req, res) => {
     }
     
     if (save) {
-        let stringified = JSON.stringify(data, null, 4)
-    
-        fs.writeFile(path.join(__dirname, "/json/data.json"), stringified, (err) => {
-            if (err) throw err
-            console.log("Data written to file")
-        })
+        saveJSON(data, "/json/data.json")
         res.send("data recieved")
     } else {
         res.send("no data recieved")
@@ -227,12 +233,7 @@ app.get("/modes/set", (req, res) => {
     }
 
     if (save) {
-        let stringified = JSON.stringify(data, null, 4)
-    
-        fs.writeFile(path.join(__dirname, "/json/data.json"), stringified, (err) => {
-            if (err) throw err
-            console.log("Data written to file")
-        })
+        saveJSON(data, "/json/data.json")
         res.send(`Data recieved: mode changed to ${data.mode}`)
     } else {
         res.send("no data recieved")
@@ -257,11 +258,7 @@ app.get("/colorpresets", (req, res) => {
             "B": req.query.B
         }
 
-        let stringified = JSON.stringify(presetData, null, 4)
-        fs.writeFile(path.join(__dirname, "/json/presets.json"), stringified, (err) => {
-            if (err) throw err
-            console.log("Data written to file")
-        })
+        saveJSON(presetData, "/json/presets.json")
         res.send("Success")
     }
     else if (req.query.mode == "load") {
@@ -282,22 +279,14 @@ app.get("/bpm", (req, res) => {
         bpmData.syncDelay = 0
         console.log(`Current BPM: ${bpmData.value}`)
 
-        const stringified = JSON.stringify(bpmData, null, 4)
-        fs.writeFile(path.join(__dirname, "/json/bpm.json"), stringified, (err) => {
-            if (err) throw err
-            console.log("Data written to file")
-        })
+        saveJSON(bpmData, "/json/bpm.json")
         res.send("Success")
     }
     else if (req.query.mode  == "resetDelay") {
         const rawData = fs.readFileSync(path.join(__dirname, "/json/bpm.json"))
         const bpmData = JSON.parse(rawData)
         bpmData.syncDelay = 0
-        const stringified = JSON.stringify(bpmData, null, 4)
-        fs.writeFile(path.join(__dirname, "/json/bpm.json"), stringified, (err) => {
-            if (err) throw err
-            console.log("Data written to file")
-        })
+        saveJSON(bpmData, "/json/bpm.json")
         res.send("Success")
     }
     else if (req.query.mode == "spotifySync") {
@@ -323,11 +312,7 @@ app.get("/bpm", (req, res) => {
         console.log(`Current song progress: ${currentSongProgress}\nActivate in: ${activateIn}`)
 
 
-        const stringified = JSON.stringify(bpmData, null, 4)
-        fs.writeFile(path.join(__dirname, "/json/bpm.json"), stringified, (err) => {
-            if (err) throw err
-            console.log("Data written to file")
-        })
+        saveJSON(bpmData, "/json/bpm.json")
 
         res.send(`${bpmData.value}`)
     }
@@ -346,12 +331,7 @@ app.get("/settings/standard", (req, res) => {
     }
 
     if (save) {
-        let stringified = JSON.stringify(standardSettings, null, 4)
-    
-        fs.writeFile(path.join(__dirname, "/json/standardSettings.json"), stringified, (err) => {
-            if (err) throw err
-            console.log("Data written to file")
-        })
+        saveJSON(standardSettings, "/json/standardSettings.json")
     }
 
     res.sendFile(path.join(__dirname, "/json/standardSettings.json"))
@@ -392,13 +372,28 @@ app.get("/alarmTimes/edit", (req, res) => {
     }
 
     if (save) {
-        let stringified = JSON.stringify(alarmTimes, null, 4)
-    
-        fs.writeFile(path.join(__dirname, "/json/alarmTimes.json"), stringified, (err) => {
-            if (err) throw err
-            console.log("Data written to file")
-        })
+        saveJSON(alarmTimes, "/json/alarmTimes.json")
     }
+})
+
+// POST requests:
+app.post("/directRGB", (req, res) => {
+    console.log(req.body)
+    res.send(req.body)
+
+    for (x in req.body) {
+        if (isNaN(x)) {
+            console.log(`skipped ${x}`)
+            continue
+        }
+        else if (parseInt(x) > pixelCount -1 || parseInt(x) < 0) {
+            console.log(`skipped ${x}`)
+            continue
+        }
+        pixelData[x] = req.body[x]
+    }
+
+    saveJSON(pixelData, "/json/directRGB.json")
 })
 
 // Longpolling:
