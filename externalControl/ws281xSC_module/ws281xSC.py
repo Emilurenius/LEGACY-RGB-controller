@@ -51,6 +51,7 @@ class LEDs:
             self.LEDdata[i][2] = b
 
     def show(self, onlyChanged=False):
+        # Commented out code doesn't register a change from color to no color for some reason.
         # changedData = {}
         # for k, v in self.LEDdata.items():
         #     if self.LEDdata[k] != self.prevLEDdata[k]:
