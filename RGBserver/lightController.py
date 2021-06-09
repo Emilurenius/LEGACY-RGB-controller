@@ -678,7 +678,7 @@ def screenSync(strip):
 
 def directRGB(strip):
     while True:
-        if checkBreak(directRGB):
+        if checkBreak("directRGB"):
             break
         rgbData = getJSON(directRGB)
 
