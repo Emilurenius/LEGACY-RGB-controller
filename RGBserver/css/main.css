@@ -138,6 +138,15 @@ nav {
     transform: rotate(45deg) translate(-5px,-6px);
 }
 
+.header {
+    position: sticky;
+    top: 0;
+    text-align: center;
+    width: auto;
+    background-color: #353640;
+    z-index: 999;
+}
+
 .Content {
     color: white;
     text-align: center;

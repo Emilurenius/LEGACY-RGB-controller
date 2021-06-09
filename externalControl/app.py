@@ -1,9 +1,11 @@
 import spotipy, time, requests
 from pprint import pprint
 from flask import Flask, request, url_for, session, redirect
+from flask_cors import CORS
 from spotipy.oauth2 import SpotifyOAuth
 
 app = Flask(__name__)
+CORS(app)
 
 app.secret_key = "secret key goes here"
 app.config["SESSION_COOKIE_NAME"] = "My cookie"
@@ -56,6 +58,7 @@ def getBPM():
     
     sp = spotipy.Spotify(auth=tokenInfo["access_token"])
     playingSong = sp.currently_playing()
+    print(playingSong)
     songID = playingSong["item"]["id"]
     tempo = sp.audio_features(songID)[0]["tempo"]
     messageSent = playingSong["timestamp"]

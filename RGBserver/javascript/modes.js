@@ -1,7 +1,7 @@
-const speed                = document.getElementById("speed"                   )
-const standard             = document.getElementById("standard"                )
-const sliderButtonModes    = document.getElementById("phonebutton-slider-modes")
-const modeButtonsContainer = document.getElementById("animations&presets"      )
+const speed                = document.getElementById("speed"             )
+const standard             = document.getElementById("standard"          )
+const modeButtonsContainer = document.getElementById("animations&presets")
+const bpmActivate          = document.getElementById("activateBPMmode"   )
 
 
 function loadModesButtons() {
@@ -35,11 +35,11 @@ standard.addEventListener("click", (event) => {
     getJSON(`${url}/modes/set?mode=standard`)
 })
 
-speed.value = getJSON(`${url}/json/data.json`).speed
-
-sliderButtonModes.addEventListener("click", (event) => {
-    getJSON(`${url}/?panel=modes&speed=${speed.value}`)
+bpmActivate.addEventListener("click", (event) => {
+    getJSON(`${url}/modes/set?mode=bpm`)
 })
+
+speed.value = getJSON(`${url}/json/data.json`).speed
 
 alarmClock.addEventListener("click", (event) => {
     const alarmTime = prompt("What time do you want to wake up?", `${getJSON(`${url}/json/data.json`).alarmClockData.alarmTime}`)

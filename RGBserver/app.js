@@ -129,6 +129,14 @@ app.get("/", (req, res) => {
     
 })
 
+app.get("/settings", (req, res) => {
+    res.sendFile(path.join(__dirname, "/html/settings.html"))
+})
+
+app.get("/alarm", (req, res) => {
+    res.sendFile(path.join(__dirname, "/html/alarm.html"))
+})
+
 // API control:
 app.get("/lightstate", (req, res) => {
     console.log("\nAPI loaded: Lightstate")
