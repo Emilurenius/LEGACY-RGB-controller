@@ -638,7 +638,7 @@ def bpm(strip):
                 if stripBrightness[i + 1]["up"] == True and stripBrightness[i + 1]["val"] < 1000 and stripBrightness[i + 1]["active"] == True:
                     if stripBrightness[i + 1]["colorGiven"] == False:
                         stripBrightness[i + 1]["color"] = [RGB["r"], RGB["g"], RGB["b"]]
-                        stripBrightness[i + 1]["colorGiven"] = True:
+                        stripBrightness[i + 1]["colorGiven"] = True
                     stripBrightness[i + 1]["val"] += 400
                     if stripBrightness[i + 1]["val"] > 1000:
                         stripBrightness[i + 1]["val"] = 1000
