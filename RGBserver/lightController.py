@@ -600,7 +600,8 @@ def bpm(strip):
             "val": 0,
             "up": True,
             "active": False,
-            "color": [0, 0, 0]
+            "color": [0, 0, 0],
+            "colorGiven": False
         }
     while True:
         if checkBreak("bpm"):
@@ -635,7 +636,8 @@ def bpm(strip):
             for i in range(len(stripBrightness)):
                 # Fade up
                 if stripBrightness[i + 1]["up"] == True and stripBrightness[i + 1]["val"] < 1000 and stripBrightness[i + 1]["active"] == True:
-                    stripBrightness[i + 1]["color"] = [RGB["r"], RGB["g"], RGB["b"]]
+                    if stripBrightness[i + 1]["colorGiven"] == False:
+                        stripBrightness[i + 1]["color"] = [RGB["r"], RGB["g"], RGB["b"]]
                     stripBrightness[i + 1]["val"] += 400
                     if stripBrightness[i + 1]["val"] > 1000:
                         stripBrightness[i + 1]["val"] = 1000
@@ -649,6 +651,7 @@ def bpm(strip):
 
                 else: # Deactivate pixel
                     stripBrightness[i + 1]["active"] = False
+                    stripBrightness[i + 1]["colorGiven"] = False
 
                 if stripBrightness[i + 1]["val"] == 0 and stripBrightness[i + 1]["up"] == False: # Reset pixel
                     stripBrightness[i + 1]["up"] = True
@@ -656,6 +659,8 @@ def bpm(strip):
 
                 if stripBrightness[i + 1]["val"] > 999 and i < len(stripBrightness) - 1: # Activate next pixel
                     stripBrightness[i + 2]["active"] = True
+                    stripBrightness[i + 2]["color"] = stripBrightness[i + 1]["color"]
+
 
                 color = Color(int(float(stripBrightness[i + 1]["color"][0]) * float(stripBrightness[i + 1]["val"]) / 1000), # R
                               int(float(stripBrightness[i + 1]["color"][1]) * float(stripBrightness[i + 1]["val"]) / 1000), # G
