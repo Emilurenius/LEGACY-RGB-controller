@@ -684,6 +684,7 @@ def directRGB(strip):
 
         for k, v in rgbData.items():
             strip.setPixelColor(x, Color(v[0], v[1], v[2]))
+        strip.show()
 
 # This is the dictionary of all valid modes, and their accompanying function call:
 modes = {
