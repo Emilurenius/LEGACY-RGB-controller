@@ -391,11 +391,27 @@ app.post("/directRGB", (req, res) => {
 
     for (x in req.body) {
         if (isNaN(x)) {
-            console.log(`skipped ${x}`)
+            console.log(`skipped ${x}: Key is not a number`)
             continue
         }
         else if (parseInt(x) > pixelCount -1 || parseInt(x) < 0) {
-            console.log(`skipped ${x}`)
+            console.log(`skipped ${x}: Index out of range`)
+            continue
+        }
+        else if (typeof req.body[x] != "object") {
+            console.log(`skipped ${x}: RGB data not present`)
+            continue
+        }
+        else if (req.body[x].length != 3) {
+            console.log(`skipped ${x}: Not all RGB channels are present`)
+            continue
+        }
+        if (isNaN(req.body[x][0]) || isNaN(req.body[x][1]) || isNaN(req.body[x][2])) {
+            console.log(`skipped ${x}: RGB values not integers`)
+            continue
+        }
+        else if (req.body[x][0] < 0 || req.body[x][0] > 255 || req.body[x][1] < 0 || req.body[x][1] > 255 || req.body[x][2] < 0 || req.body[x][2] > 255) {
+            console.log(`skipped ${x}: RGB values out of range`)
             continue
         }
         pixelData[x] = req.body[x]
