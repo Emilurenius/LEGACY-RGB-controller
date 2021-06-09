@@ -1,5 +1,5 @@
 # Library for controlling lights connected to the server in this repository
-import requests
+import requests, copy
 
 class LEDs:
     def __init__(self, LEDcount, address):
@@ -8,13 +8,9 @@ class LEDs:
         self.LEDdata = {}
         i = 0
         while i < self.LEDcount:
-            self.LEDdata[i] = {
-                "br": 0,
-                "r": 0,
-                "g": 0,
-                "b": 0,
-            }
+            self.LEDdata[i] = [0, 0, 0]
             i += 1
+        self.prevLEDdata = copy.deepcopy(self.LEDdata)
     
     def checkAddress(self): # For debugging
         return self.address
@@ -26,7 +22,7 @@ class LEDs:
     def percentofLEDs(self, percentage): # Returns amount of LEDs in given percentage
         return int(self.LEDcount * percentage / 100)
 
-    def getJSON(self, fileName):
+    def getJSON(self, fileName): # Returns requested json file from RGB server
         while True:
             try:
                 return requests.get(f"{self.address}/json/{fileName}").json()
@@ -46,12 +42,21 @@ class LEDs:
             else:
                 requests.get(f"{self.address}/lightstate?toggle=change")
 
-    def setPixelData(self, i, br=None, r=None, g=None, b=None):
-        if br:
-            self.LEDdata[i]["br"] = br
-        if r:
-            self.LEDdata[i]["r"] = r
-        if g:
-            self.LEDdata[i]["g"] = g
-        if b:
-            self.LEDdata[i]["b"] = b
+    def setPixelData(self, i, r=None, g=None, b=None):
+        if r != None:
+            self.LEDdata[i][0] = r
+        if g != None:
+            self.LEDdata[i][1] = g
+        if b != None:
+            self.LEDdata[i][2] = b
+
+    def show(self, onlyChanged=False):
+        # Commented out code doesn't register a change from color to no color for some reason.
+        # changedData = {}
+        # for k, v in self.LEDdata.items():
+        #     if self.LEDdata[k] != self.prevLEDdata[k]:
+        #         changedData[k] = self.LEDdata[k]
+
+        # requests.post(f"{self.address}/directRGB", changedData)
+
+        requests.post(f"{self.address}/directRGB", self.LEDdata)

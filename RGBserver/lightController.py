@@ -25,7 +25,7 @@ serverAddress = "http://192.168.1.124:3000"
 
 def checkBreak(mode):
     # A check to see if a mode is still chosen. 
-    # will return False if the mode given to the function is the same as the one currently chosen on the web interface, or if there is an error loading the JSON file.
+    # will return False if the mode given to the function is the same as the one currently chosen on the web interface.
     # Will return True if the mode given to the function is not the same as the one currently chosen on the web interface.
     data = getJSON("data")
     if data["onoff"] != True or data["mode"] != mode: # Check if the mode has changed, and if the lights should be on
@@ -723,6 +723,16 @@ def screenSync(strip):
         solidColor(strip, Color(currentColor[0], currentColor[1], currentColor[2])) # Set the RGB strip to the new color generated
         time.sleep(delayMS / 1000) # Wait specified amount in delayMS
 
+def directRGB(strip):
+    while True:
+        if checkBreak("directRGB"):
+            break
+        rgbData = getJSON("directRGB")
+
+        for k, v in rgbData.items():
+            strip.setPixelColor(int(k), Color(int(v[0]), int(v[1]), int(v[2])))
+        strip.show()
+
 # This is the dictionary of all valid modes, and their accompanying function call:
 modes = {
     "standard": standard,
@@ -736,7 +746,8 @@ modes = {
     "elitus": elitus,
     "colorBubbles": colorBubbles,
     "bpm": bpm,
-    "screenSync": screenSync
+    "screenSync": screenSync,
+    "directRGB": directRGB
 }
 
 # Main program logic follows:
