@@ -655,7 +655,7 @@ def bpm(strip):
                 if stripBrightness[i + 1]["val"] > 999 and i < len(stripBrightness) - 1: # Activate next pixel
                     stripBrightness[i + 2]["active"] = True
 
-                color = Color(int(float(RGB["R"]) * float(stripBrightness[i + 1]["val"]) / 1000), int(float(RGB["G"]) * float(stripBrightness[i + 1]["val"]) / 1000), int(float(RGB["B"]) * float(stripBrightness[i + 1]["val"]) / 1000))
+                color = Color(int(float(RGB["r"]) * float(stripBrightness[i + 1]["val"]) / 1000), int(float(RGB["g"]) * float(stripBrightness[i + 1]["val"]) / 1000), int(float(RGB["b"]) * float(stripBrightness[i + 1]["val"]) / 1000))
                 strip.setPixelColor(i, color)
             strip.show()
             time.sleep(wait_ms/1000.0)
