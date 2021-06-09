@@ -680,7 +680,7 @@ def directRGB(strip):
     while True:
         if checkBreak("directRGB"):
             break
-        rgbData = getJSON(directRGB)
+        rgbData = getJSON("directRGB")
 
         for k, v in rgbData.items():
             strip.setPixelColor(int(k), Color(int(v[0]), int(v[1]), int(v[2])))
