@@ -660,12 +660,6 @@ def bpm(strip):
             strip.show()
             time.sleep(wait_ms/1000.0)
 
-            
-
-            
-
-            
-
 def screenSync(strip):
     currentColor = None
     data = None
