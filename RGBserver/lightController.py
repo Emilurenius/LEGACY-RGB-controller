@@ -621,7 +621,13 @@ def bpm(strip):
         
         RGB = randColor()
         wait_ms = 100 - getDataval("speed")
-        stripBrightness[1]["active"] = True
+        stripBrightness[1] = {
+            "val": 0,
+            "up": True,
+            "active": True,
+            "color": [0, 0, 0],
+            "colorGiven": False
+        }
         
         #solidColor(strip, Color(RGB["r"], RGB["g"], RGB["b"])) # Assign a random color to the whole light strip
         
