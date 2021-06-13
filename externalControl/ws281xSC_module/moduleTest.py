@@ -1,20 +1,33 @@
 import ws281xSC, time
 from datetime import datetime
 
-LEDs = ws281xSC.LEDs(149, "http://192.168.1.124:3000")
+strip = ws281xSC.strip(149, "http://192.168.1.124:3000")
+strip.setMode("directRGB")
 
-i = 0
-prevLED = None
+r = 0
+g = 0
+b = 0
 while True:
-    start = datetime.now()
-    LEDs.setPixelData(i, 255, 0, 0)
-    if prevLED != None:
-        LEDs.setPixelData(prevLED, 0, 0, 0)
-    prevLED = i
-    i +=1
+    total = r+g+b
+    dividedTotal = total/765
+    percentageDone = dividedTotal * 100
+    print(r, g, b, percentageDone, "%")
+    r+=1
 
-    if i > LEDs.LEDcount - 1:
-        i = 0
+    if r > 255:
+        r = 0
+        g+=1
 
-    LEDs.show()
-    print(datetime.now() - start)
+    if g > 255:
+        g = 0
+        b+=255
+
+    if b > 255:
+        time.sleep(1)
+        break
+
+    i = 0
+    while i < strip.LEDcount:
+        strip.setPixelData(i, r, g, b)
+        i+=1
+    strip.show()

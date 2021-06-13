@@ -1,5 +1,5 @@
 import ws281xSC, datetime, time
-LEDs = ws281xSC.LEDs(149, "http://192.168.1.124:3000")
+LEDs = ws281xSC.strip(149, "http://192.168.1.124:3000")
 
 def getTime():
     dt = datetime.datetime.today()

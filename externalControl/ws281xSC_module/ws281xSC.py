@@ -1,7 +1,7 @@
 # Library for controlling lights connected to the server in this repository
 import requests, copy
 
-class LEDs:
+class strip:
     def __init__(self, LEDcount, address):
         self.LEDcount = LEDcount
         self.address = address
