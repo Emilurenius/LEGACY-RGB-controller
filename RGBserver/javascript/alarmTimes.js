@@ -18,10 +18,7 @@ function alarmTimes() {
 
             const alarmText = document.createElement("p")
             alarmText.classList.add("Body-Text")
-
             const alarmTimeSplit = alarms[i].split("-")
-
-
             alarmText.innerHTML = `${daysLookup[parseInt(alarmTimeSplit[0])]}-${alarmTimeSplit[1]}:${alarmTimeSplit[2]}`
 
             const deleteButton = document.createElement("button")
