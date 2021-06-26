@@ -1,6 +1,6 @@
 function alarmTimes() {
 
-     const daysLookup = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
+    const daysLookup = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
 
     const alarmTimeDay = document.getElementById("alarmTimeDay")
     const alarmTimeHour = document.getElementById("alarmTimeHour")
