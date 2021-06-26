@@ -1,4 +1,7 @@
 function alarmTimes() {
+
+     const daysLookup = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
+
     const alarmTimeDay = document.getElementById("alarmTimeDay")
     const alarmTimeHour = document.getElementById("alarmTimeHour")
     const alarmTimeMinute = document.getElementById("alarmTimeMinute")
@@ -15,7 +18,11 @@ function alarmTimes() {
 
             const alarmText = document.createElement("p")
             alarmText.classList.add("Body-Text")
-            alarmText.innerHTML = alarms[i]
+
+            const alarmTimeSplit = alarms[i].split("-")
+
+
+            alarmText.innerHTML = `${daysLookup[parseInt(alarmTimeSplit[0])]}-${alarmTimeSplit[1]}:${alarmTimeSplit[2]}`
 
             const deleteButton = document.createElement("button")
             deleteButton.classList.add("button")
