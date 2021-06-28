@@ -1,18 +1,29 @@
 import ws281xSC, datetime, time
-LEDs = ws281xSC.strip(149, "http://192.168.1.124:3000")
+strip = ws281xSC.strip(149, "http://192.168.1.124:3000")
 
-def getTime():
+daysLookup = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
+
+def getDay():
     dt = datetime.datetime.today()
-    dt.strftime("%M")
-    return f"{dt.strftime('%w')}-{dt.strftime('%H')}-{dt.strftime('%M')}"
+    return dt.strftime('%w')
 
-alarmTimes = LEDs.getJSON("alarmTimes.json")["times"]
-print(alarmTimes)
+def getHour():
+    dt = datetime.datetime.today()
+    return dt.strftime('%H')
+
+def getMin():
+    dt = datetime.datetime.today()
+    return dt.strftime('%M')
 
 while True:
-    alarmTimes = LEDs.getJSON("alarmTimes.json")["times"]
-    for alarmTime in alarmTimes:
-        if getTime() == alarmTime:
-            LEDs.setState(True)
-            LEDs.setMode("alarmClockEC")
-            time.sleep(61)
+    time.sleep(1)
+    alarmTimes = strip.getJSON("alarmTimes.json")
+
+    for k,v in  alarmTimes.items():
+        activeToday = v["days"][daysLookup[int(getDay())]] == "true"
+        currentTime = v["time"] == f"{getHour()}:{getMin()}"
+        if activeToday and currentTime:
+            strip.setMode("alarmClockEC")
+            strip.setState(True)
+            print("Alarm activated")
+            time.sleep(60)

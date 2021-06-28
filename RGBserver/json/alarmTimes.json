@@ -1,14 +1,1 @@
-{
-    "Ferie": {
-        "time": "09:00",
-        "days": {
-            "SUN": "true",
-            "MON": "true",
-            "TUE": "true",
-            "WED": "true",
-            "THU": "true",
-            "FRI": "true",
-            "SAT": "true"
-        }
-    }
-}
+{}
