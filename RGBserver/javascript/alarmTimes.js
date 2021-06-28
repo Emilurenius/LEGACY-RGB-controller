@@ -1,97 +1,67 @@
 function alarmTimes() {
 
-    const daysLookup = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
+    function dayColorLookup(state) {
+        if (state) {
+            return "color: white;"
+        }else {
+            return "color: black;"
+        }
+    }
 
-    const alarmTimeDay = document.getElementById("alarmTimeDay")
-    const alarmTimeHour = document.getElementById("alarmTimeHour")
-    const alarmTimeMinute = document.getElementById("alarmTimeMinute")
-    const saveButton = document.getElementById("saveAlarmTimeButton")
-    const activeAlarmsContainer = document.getElementById("activeAlarmsContainer")
-    let alarms = getJSON(`${url}/json/alarmTimes.json`).times
-
-    function populateAlarmsContainer() {
-        activeAlarmsContainer.innerHTML = ""
-        alarms = getJSON(`${url}/json/alarmTimes.json`).times
-        for (let i = 0; i < alarms.length; i++) {
-            const alarmDiv = document.createElement("div")
-            alarmDiv.classList.add("Content-subBox")
-
-            const alarmText = document.createElement("p")
-            alarmText.classList.add("Body-Text")
-            const alarmTimeSplit = alarms[i].split("-")
-            alarmText.innerHTML = `${daysLookup[parseInt(alarmTimeSplit[0])]}-${alarmTimeSplit[1]}:${alarmTimeSplit[2]}`
-
-            const deleteButton = document.createElement("button")
-            deleteButton.classList.add("button")
-            deleteButton.id = alarms[i]
-
-            deleteButton.onclick = (event) => {
-                alarms = getJSON(`${url}/json/alarmTimes.json`).times
-                for (let i = 0; i < alarms.length; i++) {
-                    if (alarms[i] == event.target.id) {
-                        console.log(event.target.id)
-                        getJSON(`${url}/alarmTimes/edit?mode=del&alarmTime=${event.target.id}`)
-                        break
-                    }
-                }
-                populateAlarmsContainer()
+    function formatDays(days) {
+        for (let i = 0; i < daysLookup.length; i++) {
+            if (days[daysLookup[i]] == "true") { // Reformat the true/false strings into booleans
+                days[daysLookup[i]] = true
+            }else {
+                days[daysLookup[i]] = false
             }
-
-            const deleteIcon = document.createElement("i")
-            deleteIcon.classList.add("fa")
-            deleteIcon.classList.add("fa-trash")
-            deleteIcon.id = alarms[i]
-
-            deleteButton.appendChild(deleteIcon)
-            alarmText.appendChild(deleteButton)
-
-            alarmDiv.appendChild(alarmText)
-            activeAlarmsContainer.appendChild(alarmDiv)
         }
-        activeAlarmsContainer.appendChild(document.createElement("br"))
-    }
-    populateAlarmsContainer()
-
-    let i = 0
-    while (i < 24) {
-        let option = document.createElement("option")
-        if (i < 10) {
-            option.value = `0${i}`
-            option.innerHTML = `0${i}`
-        }else {
-            option.value = `${i}`
-            option.innerHTML = `${i}`
-        }
-        alarmTimeHour.appendChild(option)
-        i++
+        return days
     }
 
-    i = 0
-    while (i < 60) {
-        let option = document.createElement("option")
-        if (i < 10) {
-            option.value = `0${i}`
-            option.innerHTML = `0${i}`
-        }else {
-            option.value = `${i}`
-            option.innerHTML = `${i}`
+    const createNewAlarm = document.getElementById("createNewAlarm")
+    createNewAlarm.href = `${url}/alarm/edit`
+
+    const daysLookup = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
+    const alarmContainer = document.getElementById("alarmContainer")
+    console.log(alarmContainer)
+    let alarms = getJSON(`${url}/json/alarmTimes.json`)
+
+    for ([key, val] of Object.entries(alarms)) {
+        const container = document.createElement("div")
+        container.classList.add("Content-box")
+
+        const editButton = document.createElement("a")
+        editButton.classList.add("button")
+        editButton.style = "float: right;"
+        editButton.innerHTML = "Edit"
+        editButton.href = `${url}/alarm/edit?alarmTime=${key}`
+        container.appendChild(editButton)
+
+        alarms[key].days = formatDays(alarms[key].days)
+        console.log(key, val)
+
+        const alarmName = document.createElement("p")
+        alarmName.classList.add("Body-Text")
+        alarmName.innerHTML = key
+        container.appendChild(alarmName)
+
+        const dayshours = document.createElement("p")
+        dayshours.classList.add("Body-Text-alignLeft")
+        for (let i = 0; i < daysLookup.length; i++) {
+            const daySpan = document.createElement("span")
+            daySpan.innerHTML = `${daysLookup[i]} `
+            daySpan.style = dayColorLookup(val.days[daysLookup[i]])
+            dayshours.appendChild(daySpan)
         }
-        alarmTimeMinute.appendChild(option)
-        i++
+
+        const hourmins = document.createElement("span")
+        hourmins.innerHTML = `&nbsp; &nbsp;${val.time}`
+        dayshours.appendChild(hourmins)
+        container.appendChild(dayshours)
+
+        alarmContainer.appendChild(container)
     }
-
-    saveButton.addEventListener("click", (event) => {
-        const alarmTime = `${alarmTimeDay.value}-${alarmTimeHour.value}-${alarmTimeMinute.value}`
-        alarms = getJSON(`${url}/json/alarmTimes.json`).times
-
-        if (alarms.includes(alarmTime)) {
-            alert("Alarm time already exists")
-        }
-        else {
-            getJSON(`${url}/alarmTimes/edit?mode=new&alarmTime=${alarmTime}`)
-        }
-        populateAlarmsContainer()
-    })
 }
 
 alarmTimes()

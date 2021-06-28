@@ -5,8 +5,8 @@
             "SUN": "true",
             "MON": "true",
             "TUE": "true",
-            "WED": "false",
-            "THU": "false",
+            "WED": "true",
+            "THU": "true",
             "FRI": "true",
             "SAT": "true"
         }

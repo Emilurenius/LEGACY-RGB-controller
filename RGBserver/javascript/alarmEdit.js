@@ -16,9 +16,9 @@ function alarmEdit() {
             }
 
             if (daysSelected[daysLookup[i]]) {
-                document.getElementById(`${daysLookup[i]}Select`).style = "background: black; color: white;"
-            }else {
                 document.getElementById(`${daysLookup[i]}Select`).style = "background: white; color: black;"
+            }else {
+                document.getElementById(`${daysLookup[i]}Select`).style = "background: black; color: white;"
             }
         }
     }
@@ -29,6 +29,7 @@ function alarmEdit() {
     const alarmTimeMinute = document.getElementById("alarmTimeMinute")
     const daysSelect = document.getElementById("daysSelect")
     const saveButton = document.getElementById("saveAlarmTimeButton")
+    const deleteButton = document.getElementById("deleteAlarm")
     const alarmTime = queries.alarmTime
 
     let daysSelected = {} // Create a dictionary to save what days are selected
@@ -59,16 +60,16 @@ function alarmEdit() {
         dayButton.innerHTML = daysLookup[i]
         dayButton.classList.add("squareButton")
         dayButton.id = `${daysLookup[i]}Select`
-        dayButton.style = "background: white; color: black;"
+        dayButton.style = "background: black; color: white;"
 
         dayButton.onclick = (event) => {
             console.log(event.target.innerHTML)
             if (daysSelected[event.target.innerHTML]) {
-                event.target.style = "background: white; color: black;"
+                event.target.style = "background: black; color: white;"
                 daysSelected[event.target.innerHTML] = false
             }
             else {
-                event.target.style = "background: black; color: white;"
+                event.target.style = "background: white; color: black;"
                 daysSelected[event.target.innerHTML] = true
             }
         }
@@ -104,5 +105,12 @@ function alarmEdit() {
         }
         console.log(alarmData)
         console.log(postJSON(`${url}/alarm/edit`, alarmData))
+        window.location.replace(`${url}/alarm`)
+    })
+
+    deleteButton.addEventListener("click", (event) => {
+        data = {"name": `${alarmName.value}`}
+        console.log(postJSON(`${url}/alarm/delete`, data))
+        window.location.replace(`${url}/alarm`)
     })
 }alarmEdit()

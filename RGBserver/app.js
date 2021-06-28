@@ -349,44 +349,6 @@ app.get("/settings/standard", (req, res) => {
     res.sendFile(path.join(__dirname, "/json/standardSettings.json"))
 })
 
-app.get("/alarmTimes/edit", (req, res) => {
-    console.log("\nAlarm times API loaded")
-    let save = false
-    let alarmTimes = loadJSON("/json/alarmTimes.json")
-
-    if (req.query.mode == "new") {
-        const newAlarm = req.query.alarmTime
-        if (alarmTimes.times.includes(newAlarm)) {
-            res.send("Alarm exists")
-        }
-        else {
-            alarmTimes.times.push(newAlarm)
-            res.send(alarmTimes)
-            save = true
-        }
-    }
-    else if (req.query.mode == "del") {
-        let alarmFound = false
-        for (let i = 0; i < alarmTimes.times.length; i++) {
-            if (alarmTimes.times[i] == req.query.alarmTime) {
-                alarmTimes.times.splice(i, 1)
-                save = true
-                console.log(`Alarm time deleted: ${req.query.alarmTime}`)
-                res.send(alarmTimes)
-                alarmFound = true
-                break
-            }
-        }
-        if (!alarmFound) {
-            res.send("Alarm time not found")
-        }
-    }
-
-    if (save) {
-        saveJSON(alarmTimes, "/json/alarmTimes.json")
-    }
-})
-
 // API POST:
 app.post("/directRGB", (req, res) => {
     console.log(req.body)
@@ -425,7 +387,6 @@ app.post("/directRGB", (req, res) => {
 
 app.post("/alarm/edit", (req, res) => {
     let alarmTimes = loadJSON("/json/alarmTimes.json")
-    console.log(req.body["days[SAT]"])
     alarmTimes[req.body.name] = {
         "time": req.body.time,
         "days": {
@@ -438,6 +399,14 @@ app.post("/alarm/edit", (req, res) => {
             "SAT": req.body["days[SAT]"]
         }
     }
+    saveJSON(alarmTimes, "/json/alarmTimes.json")
+    res.send(alarmTimes)
+})
+
+app.post("/alarm/delete", (req, res) => {
+    let alarmTimes = loadJSON("/json/alarmTimes.json")
+    delete alarmTimes[req.body.name]
+
     saveJSON(alarmTimes, "/json/alarmTimes.json")
     res.send(alarmTimes)
 })

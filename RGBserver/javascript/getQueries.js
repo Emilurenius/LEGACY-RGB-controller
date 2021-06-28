@@ -6,6 +6,9 @@ function getQueries() {
 
     for (let i=0; i<=queriesList.length - 1; i++) {
         const keyValue = queriesList[i].split("=")
+        if (keyValue[1]) {
+            keyValue[1] = keyValue[1].replace("%20", " ")
+        }
         queriesDict[keyValue[0]] = keyValue[1]
     }
 

@@ -15,12 +15,19 @@ function textFormat(rawText, textClass) {
 
                 if (command[0] == "link") {
                     let link = document.createElement("a")
-                    link.classList.add("linkStyle")
+                    link.classList.add(command[3])
                     link.href = command[1]
                     const linkText = document.createTextNode(`${command[2]} `)
                     link.appendChild(linkText)
                     body.appendChild(link)
-                } 
+                }
+                else if (command[0] == "color") {
+                    command[1] = command[1].replaceAll("_", " ")
+                    const text = document.createElement("p")
+                    text.innerHTML = command[1]
+                    text.style = `color: ${command[2]}`
+                    body.appendChild(text)
+                }
                 else {
                     const text = document.createTextNode(`<${command}> `)
                     body.appendChild(text)
@@ -35,4 +42,16 @@ function textFormat(rawText, textClass) {
     }
     textBox.appendChild(body)
     return textBox
+}
+
+function translate(json) {
+    for (let key of Object.keys(json)) {
+        if (key == "header") {
+            console.log(`Translating to: ${json[key].language}`)
+        }
+        else {
+            console.log(key)
+            document.getElementById(key).innerHTML = json[key]
+        }
+    }
 }
