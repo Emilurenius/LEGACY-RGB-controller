@@ -137,7 +137,11 @@ app.get("/alarm", (req, res) => {
     res.sendFile(path.join(__dirname, "/html/alarm.html"))
 })
 
-// API control:
+app.get("/alarm/edit", (req, res) => {
+    res.sendFile(path.join(__dirname, "/html/alarmEdit.html"))
+})
+
+// API GET:
 app.get("/lightstate", (req, res) => {
     console.log("\nAPI loaded: Lightstate")
     save = false
@@ -384,7 +388,7 @@ app.get("/alarmTimes/edit", (req, res) => {
     }
 })
 
-// POST requests:
+// API POST:
 app.post("/directRGB", (req, res) => {
     console.log(req.body)
     res.send(req.body)
@@ -418,6 +422,11 @@ app.post("/directRGB", (req, res) => {
     }
 
     saveJSON(pixelData, "/json/directRGB.json")
+})
+
+app.post("/alarm/edit", (req, res) => {
+    console.log(req.body)
+    res.send(req.body)
 })
 
 // Longpolling:

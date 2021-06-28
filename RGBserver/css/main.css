@@ -209,6 +209,20 @@ nav {
     margin: 15px;
 }
 
+.squareButton {
+    background-color: var(--secondary-background-color);
+  	border: none;
+ 	color: white;
+  	text-align: center;
+ 	text-decoration: none;
+  	display: inline-block;
+  	font-size: 30px;
+  	cursor: pointer;
+    padding: 10px;
+    font-family: 'Quicksand', sans-serif;
+    margin: 15px;
+}
+
 .Content-box .button {
     background-color: var(--main-background-color);
   	border: none;
@@ -234,6 +248,20 @@ nav {
   	font-size: 30px;
   	cursor: pointer;
     border-radius: 10px;
+    padding: 10px;
+    font-family: 'Quicksand', sans-serif;
+    margin: 15px;
+}
+
+.Content-subBox .squareButton {
+    background-color: var(--secondary-background-color);
+  	border: none;
+ 	color: white;
+  	text-align: center;
+ 	text-decoration: none;
+  	display: inline-block;
+  	font-size: 30px;
+  	cursor: pointer;
     padding: 10px;
     font-family: 'Quicksand', sans-serif;
     margin: 15px;
@@ -296,7 +324,7 @@ nav {
         height:50%;
     }
 
-    .Content .Body-Text, Content .Body-Text-alignLeft, .Content .button, .Content-box .button, .Content-subBox .button {
+    .Body-Text, .Body-Text-alignLeft, .button, .button, .squareButton {
         font-size: 15px;
     }
 }
