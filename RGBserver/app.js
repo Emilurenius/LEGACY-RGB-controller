@@ -5,18 +5,19 @@ const bodyParser = require("body-parser")
 const path = require("path")
 const fs = require("fs")
 const cors = require("cors")
-const { O_DIRECT } = require("constants")
+
+function loadJSON(filename) {
+    const rawdata = fs.readFileSync(path.join(__dirname, filename))
+    const data = JSON.parse(rawdata)
+    return data
+}
 
 function saveJSON(json, filename) {
-    let stringified = JSON.stringify(json, null, 4)
+    const stringified = JSON.stringify(json, null, 4)
     fs.writeFile(path.join(__dirname, filename), stringified, (err) => {
         if (err) throw err
         console.log("Data written to file")
     })
-}
-
-function isNumber(number) {
-    return !isNaN(number)
 }
 
 // Reading input from terminal start
@@ -37,8 +38,7 @@ app.use(bodyParser.json())
 app.use(cors()) // Making sure the browser can request more data after it is loaded on the client computer.
 
 // JSON file loaded in before the server is started:
-let rawdata = fs.readFileSync(path.join(__dirname, "/json/data.json"))
-let data = JSON.parse(rawdata)
+let data = loadJSON("/json/data.json")
 console.log(`Data loaded: ${data}`)
 
 // Initializing directRGB json file
@@ -352,8 +352,7 @@ app.get("/settings/standard", (req, res) => {
 app.get("/alarmTimes/edit", (req, res) => {
     console.log("\nAlarm times API loaded")
     let save = false
-    const rawdata = fs.readFileSync(path.join(__dirname, "/json/alarmTimes.json"))
-    let alarmTimes = JSON.parse(rawdata)
+    let alarmTimes = loadJSON("/json/alarmTimes.json")
 
     if (req.query.mode == "new") {
         const newAlarm = req.query.alarmTime
@@ -425,8 +424,22 @@ app.post("/directRGB", (req, res) => {
 })
 
 app.post("/alarm/edit", (req, res) => {
-    console.log(req.body)
-    res.send(req.body)
+    let alarmTimes = loadJSON("/json/alarmTimes.json")
+    console.log(req.body["days[SAT]"])
+    alarmTimes[req.body.name] = {
+        "time": req.body.time,
+        "days": {
+            "SUN": req.body["days[SUN]"],
+            "MON": req.body["days[MON]"],
+            "TUE": req.body["days[TUE]"],
+            "WED": req.body["days[WED]"],
+            "THU": req.body["days[THU]"],
+            "FRI": req.body["days[FRI]"],
+            "SAT": req.body["days[SAT]"]
+        }
+    }
+    saveJSON(alarmTimes, "/json/alarmTimes.json")
+    res.send(alarmTimes)
 })
 
 // Longpolling:

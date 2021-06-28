@@ -7,13 +7,28 @@ function alarmEdit() {
         return val
     }
 
+    function updateDaysSelect() {
+        for (let i = 0; i < daysLookup.length; i++) {
+            if (daysSelected[daysLookup[i]] == "true") { // Reformat the true/false strings into booleans
+                daysSelected[daysLookup[i]] = true
+            }else {
+                daysSelected[daysLookup[i]] = false
+            }
+
+            if (daysSelected[daysLookup[i]]) {
+                document.getElementById(`${daysLookup[i]}Select`).style = "background: black; color: white;"
+            }else {
+                document.getElementById(`${daysLookup[i]}Select`).style = "background: white; color: black;"
+            }
+        }
+    }
+
     const daysLookup = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
     const alarmName = document.getElementById("alarmName")
     const alarmTimeHour = document.getElementById("alarmTimeHour")
     const alarmTimeMinute = document.getElementById("alarmTimeMinute")
     const daysSelect = document.getElementById("daysSelect")
     const saveButton = document.getElementById("saveAlarmTimeButton")
-    let alarms = getJSON(`${url}/json/alarmTimes.json`)
     const alarmTime = queries.alarmTime
 
     let daysSelected = {} // Create a dictionary to save what days are selected
@@ -61,7 +76,15 @@ function alarmEdit() {
     }
 
     if (alarmTime) {
-        console.log(alarmTime)
+        let alarms = getJSON(`${url}/json/alarmTimes.json`)
+
+        console.log(alarms[alarmTime])
+        const hourMins = alarms[alarmTime].time.split(":")
+        alarmName.value = alarmTime
+        alarmTimeHour.value = hourMins[0]
+        alarmTimeMinute.value = hourMins[1]
+        daysSelected = alarms[alarmTime].days
+        updateDaysSelect()
     }else {
         const now = new Date()
         const currentMin = doubleDigit(now.getMinutes())
