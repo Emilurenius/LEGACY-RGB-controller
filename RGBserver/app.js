@@ -372,8 +372,8 @@ app.get("/spotify/getBPM", async (req, res) => {
 
         const features = await spotifyAPI.getAudioFeaturesForTrack(trackID)
         const tempo = features.body.tempo
-        const songProgress = result.body.progress_ms
-        const messageSent = result.body.timestamp + songProgress
+        const songProgress = parseInt(result.body.progress_ms)
+        const messageSent = parseInt(result.body.timestamp) + songProgress
         const sinceSent = Date.now() - parseInt(req.query.messageSent)
         console.log(messageSent + sinceSent)
         const currentSongProgress = parseInt(req.query.songProgress) + sinceSent
