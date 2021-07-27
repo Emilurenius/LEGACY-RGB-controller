@@ -393,7 +393,7 @@ app.get("/spotify/getBPM", async (req, res) => {
             activateAt = activateAt + waitTimeMS
         }while (activateAt < currentSongProgress + 100)
         const activateIn = activateAt - currentSongProgress // In milliseconds
-        bpmData.syncDelay = (Date.now() + activateIn) / 1000
+        bpmData.syncDelay = parseFloat((Date.now() + activateIn) / 1000)
 
         console.log(`Current song progress: ${currentSongProgress}\nActivate in: ${activateIn}`)
         console.log(bpmData)
