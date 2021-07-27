@@ -6,6 +6,9 @@ const path = require("path")
 const fs = require("fs")
 const cors = require("cors")
 
+const SpotifyWebAPI = require('spotify-web-api-node');
+scopes = ["user-read-playback-state"]
+
 function loadJSON(filename) {
     const rawdata = fs.readFileSync(path.join(__dirname, filename))
     const data = JSON.parse(rawdata)
@@ -19,6 +22,14 @@ function saveJSON(json, filename) {
         console.log("Data written to file")
     })
 }
+
+const clientData = loadJSON("/spotifyClientData.json")
+const spotifyAPI = new SpotifyWebAPI({
+    clientId: clientData.clientID,
+    clientSecret: clientData.clientSecret,
+    redirectUri: clientData.loginRedirect
+})
+console.log(clientData)
 
 // Reading input from terminal start
 const port = parseInt(process.argv[2])
@@ -327,6 +338,49 @@ app.get("/bpm", (req, res) => {
         saveJSON(bpmData, "/json/bpm.json")
 
         res.send(`${bpmData.value}`)
+    }
+})
+
+app.get('/spotify/login', (req, res) => {
+    const loginPage = spotifyAPI.createAuthorizeURL(scopes)
+    res.redirect(`${loginPage}`)
+    console.log("Login initiated")
+})
+
+app.get("/spotify/login/success", async (req, res) => {
+    const { code } = req.query
+
+    try {
+        const data = await spotifyAPI.authorizationCodeGrant(code)
+        const { access_token, refresh_token } = data.body
+        spotifyAPI.setAccessToken(access_token)
+        spotifyAPI.setRefreshToken(refresh_token)
+
+        // res.send(`Logged in! ${access_token} ${refresh_token}`)
+        res.redirect("/spotify/getBPM")
+        console.log("Logged in")
+    } catch (err) {
+        res.send("Oops, something went wrong")
+        console.log("Login failed")
+    }
+})
+
+app.get("/spotify/getBPM", async (req, res) => {
+    try {
+        const result = await spotifyAPI.getMyCurrentPlayingTrack()
+        const trackID = result.body.item.id
+        const features = await spotifyAPI.getAudioFeaturesForTrack(trackID)
+        const tempo = features.body.tempo
+        const songProgress = result.body.progress_ms
+        const messageSent = result.body.timestamp + songProgress
+        console.log(tempo, messageSent, songProgress)
+        res.status(200).send({
+            "tempo": tempo,
+            "songProgress": songProgress,
+            "messageSent": messageSent
+        })
+    } catch (err) {
+        res.status(400).send(false)
     }
 })
 
