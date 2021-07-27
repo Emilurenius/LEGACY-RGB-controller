@@ -385,12 +385,13 @@ app.get("/spotify/getBPM", async (req, res) => {
         })
 
         bpmData = loadJSON("/json/bpm.json")
-        bpmData.value = (tempo)
+        bpmData.value = parseFloat(tempo)
         const waitTimeMS = (60 / parseFloat(tempo)) * 1000
         let activateAt = 0
 
         do {
             activateAt = activateAt + waitTimeMS
+            console.log(activateAt)
         }while (activateAt < currentSongProgress + 100)
         const activateIn = activateAt - currentSongProgress // In milliseconds
         bpmData.syncDelay = parseFloat((Date.now() + activateIn) / 1000)
