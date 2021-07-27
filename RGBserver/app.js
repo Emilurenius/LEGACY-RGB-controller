@@ -385,8 +385,8 @@ app.get("/spotify/getBPM", async (req, res) => {
         })
 
         bpmData = loadJSON("/json/bpm.json")
-        bpmData.value = tempo
-        const waitTimeMS = (60 / bpmData.value) * 1000
+        bpmData.value = (tempo)
+        const waitTimeMS = (60 / parseFloat(tempo)) * 1000
         let activateAt = 0
 
         do {
