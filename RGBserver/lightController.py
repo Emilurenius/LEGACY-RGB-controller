@@ -594,15 +594,6 @@ def colorBubbles(strip):
 
 def bpm(strip):
     timePrint("BPM mode activated", newLine=True)
-    stripBrightness = {}
-    for i in range(strip.numPixels()):
-        stripBrightness[i + 1] = {
-            "val": 0,
-            "up": True,
-            "active": False,
-            "color": [0, 0, 0],
-            "colorGiven": False
-        }
     while True:
         if checkBreak("bpm"):
             break
@@ -620,62 +611,16 @@ def bpm(strip):
                 break # Break out of loop when the next beat comes
         
         RGB = randColor()
-        wait_ms = 100 - getDataval("speed")
-        stripBrightness[1] = {
-            "val": 0,
-            "up": True,
-            "active": True,
-            "color": [0, 0, 0],
-            "colorGiven": False
-        }
         
-        #solidColor(strip, Color(RGB["r"], RGB["g"], RGB["b"])) # Assign a random color to the whole light strip
+        solidColor(strip, Color(RGB["r"], RGB["g"], RGB["b"])) # Assign a random color to the whole light strip
         
-        startTime = time.time() # Save current seconds since 1.January 1970
+        startTime = time.time() # Save timestamp
         endTime = startTime + waitTime # Add wait time to startTime to get endTime
         while True:
             if time.time() >= endTime: # Stop looping when current time equals endTime
                 break
             elif checkBreak("bpm"): # Stop looping if mode is changed
                 break
-
-            for i in range(len(stripBrightness)):
-                # Fade up
-                if stripBrightness[i + 1]["up"] == True and stripBrightness[i + 1]["val"] < 1000 and stripBrightness[i + 1]["active"] == True:
-                    if stripBrightness[i + 1]["colorGiven"] == False:
-                        stripBrightness[i + 1]["color"] = [RGB["r"], RGB["g"], RGB["b"]]
-                        stripBrightness[i + 1]["colorGiven"] = True
-                    stripBrightness[i + 1]["val"] += 400
-                    if stripBrightness[i + 1]["val"] > 1000:
-                        stripBrightness[i + 1]["val"] = 1000
-
-                # Fade down
-                elif stripBrightness[i + 1]["active"] == True and stripBrightness[i + 1]["val"] > 0:
-                    stripBrightness[i + 1]["up"] = False
-                    stripBrightness[i + 1]["val"] -= 100
-                    if stripBrightness[i + 1]["val"] < 0:
-                        stripBrightness[i + 1]["val"] = 0
-
-                else: # Deactivate pixel
-                    stripBrightness[i + 1]["active"] = False
-                    stripBrightness[i + 1]["colorGiven"] = False
-
-                if stripBrightness[i + 1]["val"] == 0 and stripBrightness[i + 1]["up"] == False: # Reset pixel
-                    stripBrightness[i + 1]["up"] = True
-                    stripBrightness[i + 1]["active"] = False
-
-                if stripBrightness[i + 1]["val"] > 999 and i < len(stripBrightness) - 1: # Activate next pixel
-                    stripBrightness[i + 2]["active"] = True
-                    stripBrightness[i + 2]["color"] = stripBrightness[i + 1]["color"]
-                    stripBrightness[i + 2]["colorGiven"] = True
-
-
-                color = Color(int(float(stripBrightness[i + 1]["color"][0]) * float(stripBrightness[i + 1]["val"]) / 1000), # R
-                              int(float(stripBrightness[i + 1]["color"][1]) * float(stripBrightness[i + 1]["val"]) / 1000), # G
-                              int(float(stripBrightness[i + 1]["color"][2]) * float(stripBrightness[i + 1]["val"]) / 1000)) # B
-                strip.setPixelColor(i, color)
-            strip.show()
-            time.sleep(wait_ms/1000.0)
 
 def screenSync(strip):
     currentColor = None
@@ -794,4 +739,4 @@ if __name__ == '__main__':
                 standard(strip, [0,0,0])
 
     except KeyboardInterrupt: # This makes sure the RGB strip turns off when you close the script
-        colorWipe(strip, Color(0,0,0))
+        standard(strip, [0,0,0])

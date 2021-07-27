@@ -357,7 +357,7 @@ app.get("/spotify/login/success", async (req, res) => {
         spotifyAPI.setRefreshToken(refresh_token)
 
         // res.send(`Logged in! ${access_token} ${refresh_token}`)
-        res.redirect("/spotify/getBPM")
+        res.redirect("/")
         console.log("Logged in")
     } catch (err) {
         res.send("Oops, something went wrong")
@@ -369,16 +369,36 @@ app.get("/spotify/getBPM", async (req, res) => {
     try {
         const result = await spotifyAPI.getMyCurrentPlayingTrack()
         const trackID = result.body.item.id
+
         const features = await spotifyAPI.getAudioFeaturesForTrack(trackID)
         const tempo = features.body.tempo
         const songProgress = result.body.progress_ms
         const messageSent = result.body.timestamp + songProgress
+        const sinceSent = Date.now() - parseInt(req.query.messageSent)
+        const currentSongProgress = parseInt(req.query.songProgress) + sinceSent
+
         console.log(tempo, messageSent, songProgress)
         res.status(200).send({
             "tempo": tempo,
             "songProgress": songProgress,
             "messageSent": messageSent
         })
+
+        bpmData = loadJSON("/json/bpm.json")
+        bpmData.value = tempo
+        const waitTimeMS = (60 / bpmData.value) * 1000
+        let activateAt = 0
+
+        do {
+            activateAt = activateAt + waitTimeMS
+        }while (activateAt < currentSongProgress + 100)
+        const activateIn = activateAt - currentSongProgress // In milliseconds
+        bpmData.syncDelay = (Date.now() + activateIn) / 1000
+
+        console.log(`Current song progress: ${currentSongProgress}\nActivate in: ${activateIn}`)
+
+        saveJSON(bpmData, "/json/bpm.json")
+
     } catch (err) {
         res.status(400).send(false)
     }
