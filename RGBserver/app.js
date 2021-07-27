@@ -374,11 +374,9 @@ app.get("/spotify/getBPM", async (req, res) => {
         const tempo = features.body.tempo
         const songProgress = parseInt(result.body.progress_ms)
         const messageSent = parseInt(result.body.timestamp) + songProgress
-        const sinceSent = Date.now() - parseInt(req.query.messageSent)
-        console.log(messageSent + sinceSent)
-        const currentSongProgress = parseInt(req.query.songProgress) + sinceSent
+        const sinceSent = Date.now() - messageSent
+        const currentSongProgress = songProgress + sinceSent
 
-        console.log(tempo, messageSent, songProgress)
         res.status(200).send({
             "tempo": tempo,
             "songProgress": songProgress,
@@ -396,7 +394,7 @@ app.get("/spotify/getBPM", async (req, res) => {
         const activateIn = activateAt - currentSongProgress // In milliseconds
         bpmData.syncDelay = parseFloat((Date.now() + activateIn) / 1000)
 
-        console.log(`Current song progress: ${currentSongProgress}\nActivate in: ${activateIn}`)
+        console.log(`Current song progress: ${currentSongProgress} ms\nActivate in: ${activateIn} ms`)
         console.log(bpmData)
 
         saveJSON(bpmData, "/json/bpm.json")
