@@ -92,7 +92,7 @@ def randColor():
         "g": g,
         "b": b
     }
-    #timePrint(f"Random color generated: {RGB}")
+    timePrint(f"Random color generated: {RGB}")
     return RGB
 
 def standard(strip, colorOverride=None):
@@ -601,7 +601,6 @@ def bpm(strip):
         rawBPMdata = getJSON("bpm") # Load JSON file as a dictionary
 
         doneAt = rawBPMdata["doneAt"]
-        print(doneAt, time.time())
         if float(doneAt) <= float(time.time()): # Check if song is done
             res = requests.get(f"{serverAddress}/spotify/getBPM")
             print("Requested new song data")
