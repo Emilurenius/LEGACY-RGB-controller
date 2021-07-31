@@ -395,8 +395,12 @@ app.get("/spotify/getBPM", async (req, res) => {
         bpmData.syncDelay = parseFloat((Date.now() + activateIn) / 1000)
 
         console.log(`Current song progress: ${currentSongProgress} ms\nActivate in: ${activateIn} ms`)
-        console.log(bpmData)
 
+        const songDoneAt = Date.now() + features.body.duration_ms - currentSongProgress
+        console.log(songDoneAt)
+        bpmData.doneAt = songDoneAt
+
+        console.log(bpmData)
         saveJSON(bpmData, "/json/bpm.json")
 
     } catch (err) {

@@ -596,18 +596,28 @@ def bpm(strip):
     timePrint("BPM mode activated", newLine=True)
     while True:
         if checkBreak("bpm"):
-            break
+            return
 
         rawBPMdata = getJSON("bpm") # Load JSON file as a dictionary
+
+        doneAt = rawBPMdata["doneAt"]
+        if float(doneAt) <= float(time.time()): # Check if song is done
+            res = requests.get(f"{serverAddress}/spotify/getBPM")
+            print("Requested new song data")
+            if res.status_code == 400:
+                requests.get(f"{serverAddress}/spotify/login")
+                time.sleep(0.3)
+                requests.get(f"{serverAddress}/spotify/getBPM")
+                print("Server wasn't logged in: Resolved")
+            continue
+
         BPM = rawBPMdata["value"] # Extract BPM value
         waitTime = 60 / int(BPM) # Calculate wait time based on BPM
         syncDelay = rawBPMdata["syncDelay"] # Check how long to wait for next beat in song
         requests.get(f"{serverAddress}/bpm?mode=resetDelay")
 
-        while True: # Wait for next beat in song
-            if syncDelay == 0:
-                break # If there is no wait time, just carry on
-            elif time.time() >= syncDelay:
+        while syncDelay != 0: # Wait for next beat in song
+            if time.time() >= syncDelay:
                 break # Break out of loop when the next beat comes
         
         RGB = randColor()
@@ -620,7 +630,7 @@ def bpm(strip):
             if time.time() >= endTime: # Stop looping when current time equals endTime
                 break
             elif checkBreak("bpm"): # Stop looping if mode is changed
-                break
+                return
 
 def screenSync(strip):
     currentColor = None

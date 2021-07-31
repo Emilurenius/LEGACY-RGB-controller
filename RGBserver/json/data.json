@@ -1,6 +1,6 @@
 {
     "onoff": true,
-    "mode": "alarmClockEC",
+    "mode": "standard",
     "speed": 100,
     "brightness": 10,
     "R": 0,
