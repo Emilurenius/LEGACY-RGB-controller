@@ -489,6 +489,15 @@ app.post("/alarm/delete", (req, res) => {
     res.send(alarmTimes)
 })
 
+// misc:
+app.get("/ping", (req, res) => {
+    res.send(
+        {
+            serverName: "lightController"
+        }
+    )
+})
+
 // Longpolling:
 app.get("/reqdata", (req, res, next) => { // this is a long polling address for sending LED strip data to other devices
     res.setHeader("Content-Type", "text/html; charset=utf-8")
