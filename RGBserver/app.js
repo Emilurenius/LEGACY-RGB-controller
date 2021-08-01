@@ -6,6 +6,8 @@ const path = require("path")
 const fs = require("fs")
 const cors = require("cors")
 
+const serverAddress = "http://192.168.1.124:8000"
+
 const SpotifyWebAPI = require('spotify-web-api-node');
 scopes = ["user-read-playback-state"]
 
@@ -313,7 +315,7 @@ app.get("/bpm", (req, res) => {
         res.send("Success")
     }
     else if (req.query.mode == "spotifySync") {
-        res.redirect("http://192.168.1.124:8000/getBPM")
+        res.redirect("/getBPM")
     }
     else if (req.query.mode == "spotifyResponse") {
         console.log("\nSpotify sync response recieved:")
