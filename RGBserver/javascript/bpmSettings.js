@@ -13,10 +13,9 @@ function bpmSettings() {
     }
 
     spotifySync.addEventListener("click", (event) => {
-        console.log("spotifySync")
 
         res = getJSON(`${url}/spotify/getBPM`)
-        console.log(url)
+        console.log(res)
         if (res.length == 0) {
             alert("No song data recieved! Attempting login")
             window.location.replace(`${url}/spotify/login`)
