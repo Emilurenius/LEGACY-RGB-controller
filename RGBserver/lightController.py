@@ -602,14 +602,12 @@ def bpm(strip):
 
         doneAt = rawBPMdata["doneAt"]
         print(doneAt, time.time())
-        if float(doneAt) <= float(time.time()): # Check if song is done
+        if float(doneAt)/1000 <= time.time(): # Check if song is done
             res = requests.get(f"{serverAddress}/spotify/getBPM")
             print("Requested new song data")
             if res.status_code == 400:
-                requests.get(f"{serverAddress}/spotify/login")
-                time.sleep(0.3)
-                requests.get(f"{serverAddress}/spotify/getBPM")
-                print("Server wasn't logged in: Resolved")
+                print("No song data recieved")
+                return
             continue
 
         BPM = rawBPMdata["value"] # Extract BPM value

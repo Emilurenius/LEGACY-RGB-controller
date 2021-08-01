@@ -302,6 +302,7 @@ app.get("/bpm", (req, res) => {
 
         bpmData.value = req.query.bpm
         bpmData.syncDelay = 0
+        bpmData.doneAt = 0
         console.log(`Current BPM: ${bpmData.value}`)
 
         saveJSON(bpmData, "/json/bpm.json")
