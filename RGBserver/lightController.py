@@ -612,7 +612,7 @@ def bpm(strip):
                 return
             continue
 
-        waitTime = 60 / int(BPM) # Calculate wait time based on BPM
+        waitTime = 60 / float(BPM) # Calculate wait time based on BPM
         syncDelay = rawBPMdata["syncDelay"] # Check how long to wait for next beat in song
         requests.get(f"{serverAddress}/bpm?mode=resetDelay")
 
