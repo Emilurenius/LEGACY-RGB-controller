@@ -601,16 +601,17 @@ def bpm(strip):
         rawBPMdata = getJSON("bpm") # Load JSON file as a dictionary
 
         doneAt = rawBPMdata["doneAt"]
+        BPM = rawBPMdata["value"] # Extract BPM value
         print(doneAt, time.time())
-        if float(doneAt)/1000 <= time.time(): # Check if song is done
+        if float(doneAt)/1000 <= time.time() or int(doneAt == 0): # Check if song is done, or if there was a song synced at all
             res = requests.get(f"{serverAddress}/spotify/getBPM")
             print("Requested new song data")
             if res.status_code == 400:
                 print("No song data recieved")
+                requests.get(f"{serverAddress}/bpm?mode=updateBPM&bpm={float(BPM)}") # This resets doneAt to 0, making sure the code doesn't just loop back here.
                 return
             continue
 
-        BPM = rawBPMdata["value"] # Extract BPM value
         waitTime = 60 / int(BPM) # Calculate wait time based on BPM
         syncDelay = rawBPMdata["syncDelay"] # Check how long to wait for next beat in song
         requests.get(f"{serverAddress}/bpm?mode=resetDelay")
