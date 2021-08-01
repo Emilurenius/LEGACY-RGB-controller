@@ -351,7 +351,7 @@ app.get("/spotify/getBPM", async (req, res) => {
         const songProgress = parseInt(result.body.progress_ms)
         const messageSent = parseInt(result.body.timestamp) + songProgress
         const sinceSent = Date.now() - messageSent
-        console.log("Song progress:", songProgress)
+        console.log(messageSent, Date.now())
         console.log("Since sent:", sinceSent)
         const currentSongProgress = songProgress + sinceSent
         console.log("Current song progress:", currentSongProgress)
