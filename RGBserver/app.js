@@ -314,33 +314,6 @@ app.get("/bpm", (req, res) => {
         saveJSON(bpmData, "/json/bpm.json")
         res.send("Success")
     }
-    else if (req.query.mode == "spotifySync") {
-        res.redirect("/getBPM")
-    }
-    else if (req.query.mode == "spotifyResponse") {
-        console.log("\nSpotify sync response recieved:")
-        const rawData = fs.readFileSync(path.join(__dirname, "/json/bpm.json"))
-        const bpmData = JSON.parse(rawData)
-        bpmData.value = parseFloat(req.query.bpm)
-
-        const sinceSent = Date.now() - parseInt(req.query.messageSent)
-        const currentSongProgress = parseInt(req.query.songProgress) + sinceSent
-        
-        const waitTimeMS = (60 / bpmData.value) * 1000
-        let activateAt = 0
-        do {
-            activateAt = activateAt + waitTimeMS
-        }while (activateAt < currentSongProgress + 100)
-        const activateIn = activateAt - currentSongProgress // In milliseconds
-        bpmData.syncDelay = (Date.now() + activateIn) / 1000
-
-        console.log(`Current song progress: ${currentSongProgress}\nActivate in: ${activateIn}`)
-
-
-        saveJSON(bpmData, "/json/bpm.json")
-
-        res.send(`${bpmData.value}`)
-    }
 })
 
 app.get('/spotify/login', (req, res) => {

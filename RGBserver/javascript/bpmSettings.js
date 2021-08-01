@@ -1,21 +1,26 @@
 function bpmSettings() {
-    const bpmPresetContainer = document.getElementById("BPMpresets")
+    const spotifySync = document.getElementById("spotifySyncButton")
     const bpmSlider = document.getElementById("BPMslider")
-    const bpmLabel = document.getElementById("BPMsliderLabel")
-    const spotifySyncButton = document.getElementById("spotifySyncButton")
-    const bpmData = getJSON(`${url}/bpm?mode=getBPM`)
+    const bpmSliderLabel = document.getElementById("BPMsliderLabel")
+    bpmData = getJSON(`${url}/json/bpm.json`)
+    console.log(bpmData)
 
-    bpmSlider.value = bpmData.value
-    bpmLabel.innerHTML = `BPM: ${bpmSlider.value}`
-
-    spotifySyncButton.onclick = (event) => {
-        const songData = getJSON("http://192.168.1.124:8000/getBPM")
-        console.log(songData)
-    }
+    bpmSliderLabel.innerHTML = `BPM: ${bpmData.value}`
 
     bpmSlider.onchange = () => {
+        bpmSliderLabel.innerHTML = `BPM: ${bpmSlider.value}`
         getJSON(`${url}/bpm?mode=updateBPM&bpm=${bpmSlider.value}`)
-        bpmLabel.innerHTML = `BPM: ${bpmSlider.value}`
     }
+
+    spotifySync.addEventListener("click", (event) => {
+        console.log("spotifySync")
+
+        res = getJSON(`${url}/spotify/getBPM`)
+        console.log(url)
+        if (res.length == 0) {
+            alert("No song data recieved! Attempting login")
+            window.location.replace(`${url}/spotify/login`)
+        }
+    })
 }
 bpmSettings()

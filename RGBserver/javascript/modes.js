@@ -1,7 +1,6 @@
 const speed                = document.getElementById("speed"             )
 const standard             = document.getElementById("standard"          )
 const modeButtonsContainer = document.getElementById("animations&presets")
-const bpmActivate          = document.getElementById("activateBPMmode"   )
 
 
 function loadModesButtons() {
@@ -35,9 +34,7 @@ standard.addEventListener("click", (event) => {
     getJSON(`${url}/modes/set?mode=standard`)
 })
 
-bpmActivate.addEventListener("click", (event) => {
-    getJSON(`${url}/modes/set?mode=bpm`)
-})
+
 
 speed.value = getJSON(`${url}/json/data.json`).speed
 
