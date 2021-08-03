@@ -12,8 +12,8 @@ function bpmSettings() {
     syncSlider()
 
     bpmSlider.onchange = () => {
-        syncSlider()
         getJSON(`${url}/bpm?mode=updateBPM&bpm=${bpmSlider.value}`)
+        syncSlider()
     }
 
     spotifySync.addEventListener("click", (event) => {
