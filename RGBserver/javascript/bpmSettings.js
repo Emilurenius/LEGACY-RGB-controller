@@ -6,6 +6,7 @@ function bpmSettings() {
     console.log(bpmData)
 
     function syncSlider(onlyLabel=false) {
+        bpmData = getJSON(`${url}/json/bpm.json`)
         if (!onlyLabel) {
             bpmSlider.value = bpmData.value
         }
