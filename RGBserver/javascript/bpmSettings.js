@@ -9,7 +9,7 @@ function bpmSettings() {
         if (!onlyLabel) {
             bpmSlider.value = bpmData.value
         }
-
+        console.log(bpmSlider.value)
         bpmSliderLabel.innerHTML = `BPM: ${bpmData.value}`
     }
     syncSlider()
