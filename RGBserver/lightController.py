@@ -600,9 +600,11 @@ def bpm(strip):
 
         rawBPMdata = getJSON("bpm") # Load JSON file as a dictionary
 
-        doneAt = rawBPMdata["doneAt"]
+        # Extract needed data from server:
+        doneAt = rawBPMdata["doneAt"] # Unix timestamp of when the currently synced song ends. Set to 0 if no song is synced.
         BPM = rawBPMdata["value"] # Extract BPM value
-        print(float(doneAt)/1000, time.time())
+
+        # Check if synced spotify song is done, and if so, tell the server to refresh it's data:
         if float(doneAt)/1000 + 1 <= time.time() and int(doneAt) != 0: # Check if song is done, or if there was a song synced at all
             res = requests.get(f"{serverAddress}/spotify/getBPM")
             print("Requested new song data")

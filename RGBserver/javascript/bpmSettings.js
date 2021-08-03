@@ -5,10 +5,14 @@ function bpmSettings() {
     bpmData = getJSON(`${url}/json/bpm.json`)
     console.log(bpmData)
 
-    bpmSliderLabel.innerHTML = `BPM: ${bpmData.value}`
+    function syncSlider() {
+        bpmSlider.value = bpmData.value
+        bpmSliderLabel.innerHTML = `BPM: ${bpmData.value}`
+    }
+    syncSlider()
 
     bpmSlider.onchange = () => {
-        bpmSliderLabel.innerHTML = `BPM: ${bpmSlider.value}`
+        syncSlider()
         getJSON(`${url}/bpm?mode=updateBPM&bpm=${bpmSlider.value}`)
     }
 
@@ -20,6 +24,7 @@ function bpmSettings() {
             alert("No song data recieved! Attempting login")
             window.location.replace(`${url}/spotify/login`)
         }
+        syncSlider()
     })
 }
 bpmSettings()
