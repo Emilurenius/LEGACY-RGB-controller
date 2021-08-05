@@ -594,7 +594,8 @@ def colorBubbles(strip):
 
 def pulsate(strip, animationTime, RGB):
 
-    changePerMS = (255) / (animationTime*1000)
+    changePerMS = 255 / animationTime*1000
+    print(animationTime, changePerMS)
     brightness = 0
     goingUP = True
     while True:
@@ -603,9 +604,7 @@ def pulsate(strip, animationTime, RGB):
             brightness += changePerMS
         else:
             brightness -= changePerMS
-
-        print(brightness)
-
+            
         if brightness >= 255:
             goingUP = False
         elif brightness <= 0:
