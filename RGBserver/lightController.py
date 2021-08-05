@@ -607,6 +607,7 @@ def pulsate(strip, animationTime, RGB):
         if brightness >= 255:
             goingUP = False
         elif brightness <= 0:
+            print("Done with pulsating")
             break
 
         R = int(float(RGB["r"]) * float(brightness) / 1000)
