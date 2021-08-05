@@ -604,6 +604,8 @@ def pulsate(strip, animationTime, RGB):
         else:
             brightness -= changePerMS
 
+        print(brightness)
+
         if brightness >= 255:
             goingUP = False
         elif brightness <= 0:
