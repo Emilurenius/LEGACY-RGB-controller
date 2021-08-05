@@ -619,8 +619,6 @@ def pulsate(strip, animationTime, RGB):
 
         time.sleep(0.001)
 
-
-
 def bpm(strip):
     timePrint("BPM mode activated", newLine=True)
     while True:

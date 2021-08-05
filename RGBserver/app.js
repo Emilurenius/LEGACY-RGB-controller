@@ -416,7 +416,7 @@ app.get("/settings/bpm", (req, res) => {
     }
 
     if (save) {
-        saveJSON(standardSettings, "/json/bpmSettings.json")
+        saveJSON(bpmSettings, "/json/bpmSettings.json")
     }
 
     res.sendFile(path.join(__dirname, "/json/bpmSettings.json"))
