@@ -651,6 +651,8 @@ def bpm(strip):
         while syncDelay != 0: # Wait for next beat in song
             if time.time() >= syncDelay:
                 break # Break out of loop when the next beat comes
+
+        startTime = time.time() # Save timestamp for waiting for next beat later.
         
         RGB = randColor() # Color to be used in selected animation
         
@@ -658,7 +660,6 @@ def bpm(strip):
         pulsate(strip, waitTime, RGB)
 
         # Wait for next beat, without halting the script completely:
-        startTime = time.time() # Save timestamp
         endTime = startTime + waitTime # Add wait time to startTime to get endTime
         while True:
             if time.time() >= endTime: # Stop looping when current time equals endTime
