@@ -1,4 +1,7 @@
-import requests, json
+import time
 
-data = requests.get("http://192.168.1.124:3000/reqdata").json()
-print(data)
+i = 0
+while True:
+    i += 1
+    print("beat", i)
+    time.sleep(0.3)
