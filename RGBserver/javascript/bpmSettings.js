@@ -2,6 +2,7 @@ function bpmSettings() {
     const spotifySync = document.getElementById("spotifySyncButton")
     const bpmSlider = document.getElementById("BPMslider")
     const bpmSliderLabel = document.getElementById("BPMsliderLabel")
+    const BPManimationType = document.getElementById("BPManimationType")
     bpmData = getJSON(`${url}/json/bpm.json`)
     console.log(bpmData)
 
@@ -29,6 +30,10 @@ function bpmSettings() {
             window.location.replace(`${url}/spotify/login`)
         }
         syncSlider()
+    })
+
+    BPManimationType.addEventListener("change", (event) => {
+        getJSON(`${url}/settings/bpm?animationType=${BPManimationType.options[BPManimationType.selectedIndex].value}`)
     })
 }
 bpmSettings()

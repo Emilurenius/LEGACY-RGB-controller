@@ -597,6 +597,7 @@ def pulsate(strip, animationTime, RGB):
     changePerMS = 15
     brightness = 0
     goingUP = True
+
     while True:
 
         if goingUP:
@@ -607,7 +608,7 @@ def pulsate(strip, animationTime, RGB):
         if brightness >= 255:
             goingUP = False
         elif brightness <= 0:
-            solidColor(strip, Color(R,G,B))
+            solidColor(strip, Color(0,0,0)) # Make sure the strip goes black after animation
             break
 
         R = int(float(RGB["r"]) * float(brightness) / 1000)
@@ -627,6 +628,7 @@ def bpm(strip):
             return
 
         rawBPMdata = getJSON("bpm") # Load JSON file as a dictionary
+        bpmSettings = getJSON("bpmSettings") # Load settings
 
         # Extract needed data from server:
         doneAt = rawBPMdata["doneAt"] # Unix timestamp of when the currently synced song ends. Set to 0 if no song is synced.
@@ -654,8 +656,10 @@ def bpm(strip):
         
         RGB = randColor() # Color to be used in selected animation
         
-        #solidColor(strip, Color(RGB["r"], RGB["g"], RGB["b"])) # Assign a random color to the whole light strip
-        pulsate(strip, waitTime, RGB)
+        if bpmSettings["animationType"] == "solid":
+            solidColor(strip, Color(RGB["r"], RGB["g"], RGB["b"])) # Assign a random color to the whole light strip
+        elif bpmSettings["animationType"] == "pulsate":
+            pulsate(strip, waitTime, RGB)
 
         # Wait for next beat, without halting the script completely:
         endTime = startTime + waitTime # Add wait time to startTime to get endTime

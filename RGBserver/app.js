@@ -389,8 +389,7 @@ app.get("/spotify/getBPM", async (req, res) => {
 
 app.get("/settings/standard", (req, res) => {
     console.log("\nStandard settigns API loaded")
-    let rawdata = fs.readFileSync(path.join(__dirname, "/json/standardSettings.json"))
-    let standardSettings = JSON.parse(rawdata)
+    let standardSettings = loadJSON("/json/standardSettings.json")
     let save = false
 
     if (req.query.colorChange) {
@@ -404,6 +403,23 @@ app.get("/settings/standard", (req, res) => {
     }
 
     res.sendFile(path.join(__dirname, "/json/standardSettings.json"))
+})
+
+app.get("/settings/bpm", (req, res) => {
+    console.log("\nBPM settings API loaded:")
+    let bpmSettings = loadJSON("/json/bpmSettings.json")
+    let save = false
+
+    if (req.query.animationType) {
+        bpmSettings.animationType = req.query.animationType
+        save = true
+    }
+
+    if (save) {
+        saveJSON(standardSettings, "/json/bpmSettings.json")
+    }
+
+    res.sendFile(path.join(__dirname, "/json/bpmSettings.json"))
 })
 
 // API POST:
