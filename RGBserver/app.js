@@ -6,7 +6,7 @@ const path = require("path")
 const fs = require("fs")
 const cors = require("cors")
 
-const serverAddress = "http://192.168.1.124:8000"
+const serverAddress = "localhost:8000"
 
 const SpotifyWebAPI = require('spotify-web-api-node');
 scopes = ["user-read-playback-state"]
