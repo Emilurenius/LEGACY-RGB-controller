@@ -333,7 +333,7 @@ app.get("/spotify/login/success", async (req, res) => {
         spotifyAPI.setRefreshToken(refresh_token)
 
         // res.send(`Logged in! ${access_token} ${refresh_token}`)
-        res.redirect("/")
+        res.redirect("/settings")
         console.log("Logged in")
     } catch (err) {
         res.send("Oops, something went wrong")

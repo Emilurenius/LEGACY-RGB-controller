@@ -614,10 +614,10 @@ def bpm(strip):
                 return
             continue
 
+        # Sync with beat in song:
         waitTime = 60 / float(BPM) # Calculate wait time based on BPM
         syncDelay = rawBPMdata["syncDelay"] # Check how long to wait for next beat in song
         requests.get(f"{serverAddress}/bpm?mode=resetDelay")
-
         while syncDelay != 0: # Wait for next beat in song
             if time.time() >= syncDelay:
                 break # Break out of loop when the next beat comes
@@ -626,6 +626,7 @@ def bpm(strip):
         
         solidColor(strip, Color(RGB["r"], RGB["g"], RGB["b"])) # Assign a random color to the whole light strip
         
+        # Wait for next beat, without halting the script completely:
         startTime = time.time() # Save timestamp
         endTime = startTime + waitTime # Add wait time to startTime to get endTime
         while True:
