@@ -609,9 +609,9 @@ def pulsate(strip, animationTime, RGB):
         elif brightness <= 0:
             break
 
-        R = int(float(RGB["R"]) * float(brightness) / 1000)
-        G = int(float(RGB["G"]) * float(brightness) / 1000)
-        B = int(float(RGB["B"]) * float(brightness) / 1000)
+        R = int(float(RGB["r"]) * float(brightness) / 1000)
+        G = int(float(RGB["g"]) * float(brightness) / 1000)
+        B = int(float(RGB["b"]) * float(brightness) / 1000)
 
         solidColor(strip, color(R,G,B))
 
