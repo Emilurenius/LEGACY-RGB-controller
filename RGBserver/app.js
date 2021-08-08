@@ -25,6 +25,19 @@ function saveJSON(json, filename) {
     })
 }
 
+function refreshAccessToken() {
+    spotifyAPI.refreshAccessToken().then(
+        (data) => { 
+            console.log("Access token refreshed")
+
+            spotifyAPI.setAccessToken(data.body["access_token"])
+        },
+        (err) => {
+            console.log("Could not refresh access token", err)
+        }
+    )
+}
+
 const clientData = loadJSON("/spotifyClientData.json")
 const spotifyAPI = new SpotifyWebAPI({
     clientId: clientData.clientID,
@@ -383,7 +396,8 @@ app.get("/spotify/getBPM", async (req, res) => {
         saveJSON(bpmData, "/json/bpm.json")
 
     } catch (err) {
-        res.status(400).send(false)
+        refreshAccessToken()
+        res.redirect(`/spotify/getBPM`)
     }
 })
 
