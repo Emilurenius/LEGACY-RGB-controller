@@ -611,9 +611,9 @@ def pulsate(strip, RGB):
             solidColor(strip, Color(0,0,0)) # Make sure the strip goes black after animation
             break
 
-        R = int(float(RGB["r"]) * float(brightness) / 1000)
-        G = int(float(RGB["g"]) * float(brightness) / 1000)
-        B = int(float(RGB["b"]) * float(brightness) / 1000)
+        R = int(float(RGB["R"]) * float(brightness) / 1000)
+        G = int(float(RGB["G"]) * float(brightness) / 1000)
+        B = int(float(RGB["B"]) * float(brightness) / 1000)
 
         solidColor(strip, Color(R,G,B))
 
