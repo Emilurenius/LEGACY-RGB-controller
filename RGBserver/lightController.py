@@ -592,7 +592,7 @@ def colorBubbles(strip):
         strip.show()
         time.sleep(wait_ms/1000.0)
 
-def pulsate(strip, animationTime, RGB):
+def pulsate(strip, RGB):
 
     changePerMS = 15
     brightness = 0
@@ -621,6 +621,8 @@ def pulsate(strip, animationTime, RGB):
 
 def bpm(strip):
     timePrint("BPM mode activated", newLine=True)
+    colorList = [[0,150,255], [170, 0, 255]] # Temp code
+    colorIndex = 0
     while True:
         if checkBreak("bpm"):
             return
@@ -652,12 +654,16 @@ def bpm(strip):
 
         startTime = time.time() # Save timestamp for waiting for next beat later.
         
-        RGB = randColor() # Color to be used in selected animation
+        # RGB = randColor() # Color to be used in selected animation
+
+        RGB = colorList[colorIndex]
+        colorIndex += 1
+        print(RGB)
         
         if bpmSettings["animationType"] == "solid":
             solidColor(strip, Color(RGB["r"], RGB["g"], RGB["b"])) # Assign a random color to the whole light strip
         elif bpmSettings["animationType"] == "pulsate":
-            pulsate(strip, waitTime, RGB)
+            pulsate(strip, RGB)
 
         # Wait for next beat, without halting the script completely:
         endTime = startTime + waitTime # Add wait time to startTime to get endTime
