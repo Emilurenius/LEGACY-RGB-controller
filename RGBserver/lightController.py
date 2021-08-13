@@ -678,7 +678,7 @@ def bpm(strip): # [0,150,255], [170, 0, 255]
         print(RGB)
         
         if bpmSettings["animationType"] == "solid":
-            solidColor(strip, Color(RGB["r"], RGB["g"], RGB["b"])) # Assign a random color to the whole light strip
+            solidColor(strip, Color(int(RGB["r"]), int(RGB["g"]), int(RGB["b"]))) # Assign a random color to the whole light strip
         elif bpmSettings["animationType"] == "pulsate":
             pulsate(strip, RGB)
 
