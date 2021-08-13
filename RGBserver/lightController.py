@@ -619,9 +619,20 @@ def pulsate(strip, RGB):
 
         time.sleep(0.001)
 
-def bpm(strip):
+def bpm(strip): # [0,150,255], [170, 0, 255]
     timePrint("BPM mode activated", newLine=True)
-    colorList = [[0,150,255], [170, 0, 255]] # Temp code
+    colorList = [
+            {
+                "r": 0,
+                "g": 150,
+                "b": 255
+            },
+            {
+                "r": 170,
+                "g": 0,
+                "b": 255
+            }
+        ] # Temp code
     colorIndex = 0
     while True:
         if checkBreak("bpm"):
