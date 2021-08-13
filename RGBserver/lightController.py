@@ -88,9 +88,9 @@ def randColor():
         g = color2
         b = 255
     RGB = {
-        "r": r,
-        "g": g,
-        "b": b
+        "R": r,
+        "G": g,
+        "B": b
     }
     #timePrint(f"Random color generated: {RGB}")
     return RGB
@@ -625,14 +625,14 @@ def bpm(strip): # [0,150,255], [170, 0, 255]
     keyList = list(colorList.keys()) # Extract keys for easy iteration later
     # colorList = [
     #         {
-    #             "r": 0,
-    #             "g": 150,
-    #             "b": 255
+    #             "R": 0,
+    #             "G": 150,
+    #             "B": 255
     #         },
     #         {
-    #             "r": 170,
-    #             "g": 0,
-    #             "b": 255
+    #             "R": 170,
+    #             "G": 0,
+    #             "B": 255
     #         }
     #     ]
     colorIndex = 0
@@ -678,16 +678,10 @@ def bpm(strip): # [0,150,255], [170, 0, 255]
             colorIndex = 0
         print(RGB)
         
-        try: # use of uppercase and lowercase with rgb values has to be normalized!
-            if bpmSettings["animationType"] == "solid":
-                solidColor(strip, Color(int(RGB["r"]), int(RGB["g"]), int(RGB["b"]))) # Assign a random color to the whole light strip
-            elif bpmSettings["animationType"] == "pulsate":
-                pulsate(strip, RGB)
-        except:
-            if bpmSettings["animationType"] == "solid":
-                solidColor(strip, Color(int(RGB["R"]), int(RGB["G"]), int(RGB["B"]))) # Assign a random color to the whole light strip
-            elif bpmSettings["animationType"] == "pulsate":
-                pulsate(strip, RGB)
+        if bpmSettings["animationType"] == "solid":
+            solidColor(strip, Color(int(RGB["R"]), int(RGB["G"]), int(RGB["B"]))) # Assign a random color to the whole light strip
+        elif bpmSettings["animationType"] == "pulsate":
+            pulsate(strip, RGB)
 
         # Wait for next beat, without halting the script completely:
         endTime = startTime + waitTime # Add wait time to startTime to get endTime
