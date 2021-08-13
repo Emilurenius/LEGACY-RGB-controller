@@ -658,6 +658,8 @@ def bpm(strip):
 
         RGB = colorList[colorIndex]
         colorIndex += 1
+        if colorIndex > len(colorList) - 1:
+            colorIndex = 0
         print(RGB)
         
         if bpmSettings["animationType"] == "solid":
