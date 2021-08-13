@@ -138,10 +138,10 @@ def colorWipe(strip, color, wait_ms=3):
 def solidColor(strip, color):
     # Displays a single solid color untill told otherwise:
     for i in range(strip.numPixels()): # Assign color to every pixel
-        if i < 62:
-            strip.setPixelColor(i, color)
-        else:
+        if i < 67:
             strip.setPixelColor(i, Color(0,150,255))
+        else:
+            strip.setPixelColor(i, color)
     strip.show()
 
 def fadeColor(strip, newColor, wait_ms=10, changePerTick=1):
