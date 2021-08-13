@@ -622,6 +622,7 @@ def pulsate(strip, RGB):
 def bpm(strip): # [0,150,255], [170, 0, 255]
     timePrint("BPM mode activated", newLine=True)
     colorList = getJSON("presets") # Temp code
+    keyList = list(colorList.keys()) # Extract keys for easy iteration later
     # colorList = [
     #         {
     #             "r": 0,
@@ -671,7 +672,7 @@ def bpm(strip): # [0,150,255], [170, 0, 255]
         
         # RGB = randColor() # Color to be used in selected animation
 
-        RGB = colorList[colorIndex]
+        RGB = colorList[keyList[colorIndex]]
         colorIndex += 1
         if colorIndex > len(colorList) - 1:
             colorIndex = 0
