@@ -8,7 +8,7 @@
 # The original example script that this script is built upon can be found in the same github repository as this file
 # Or you can go to the original github repository here: https://github.com/jgarff/rpi_ws281x
 
-import time, json, os, random, datetime, argparse, requests, eventlet
+import time, json, os, random, datetime, argparse, requests
 from rpi_ws281x import *
 
 # LED strip configuration:
@@ -635,7 +635,7 @@ def bpm(strip):
         BPM = rawBPMdata["value"] # Extract BPM value
 
         # Check if synced spotify song is done, and if so, tell the server to refresh it's data:
-        with eventlet.Timeout(1):
+        try:
             if float(doneAt)/1000 + 1 <= time.time() and int(doneAt) != 0: # Check if song is done, or if there was a song synced at all
                 res = requests.get(f"{serverAddress}/spotify/getBPM")
                 print("Requested new song data")
@@ -644,6 +644,8 @@ def bpm(strip):
                     requests.get(f"{serverAddress}/bpm?mode=updateBPM&bpm={float(BPM)}") # This resets doneAt to 0, making sure the code doesn't just loop back here.
                     return
                 continue
+        except:
+            pass
 
         # Sync with beat in song:
         waitTime = 60 / float(BPM) # Calculate wait time based on BPM
