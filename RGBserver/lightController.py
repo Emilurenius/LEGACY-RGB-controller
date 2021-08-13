@@ -678,10 +678,16 @@ def bpm(strip): # [0,150,255], [170, 0, 255]
             colorIndex = 0
         print(RGB)
         
-        if bpmSettings["animationType"] == "solid":
-            solidColor(strip, Color(int(RGB["r"]), int(RGB["g"]), int(RGB["b"]))) # Assign a random color to the whole light strip
-        elif bpmSettings["animationType"] == "pulsate":
-            pulsate(strip, RGB)
+        try: # use of uppercase and lowercase with rgb values has to be normalized!
+            if bpmSettings["animationType"] == "solid":
+                solidColor(strip, Color(int(RGB["r"]), int(RGB["g"]), int(RGB["b"]))) # Assign a random color to the whole light strip
+            elif bpmSettings["animationType"] == "pulsate":
+                pulsate(strip, RGB)
+        except:
+            if bpmSettings["animationType"] == "solid":
+                solidColor(strip, Color(int(RGB["R"]), int(RGB["G"]), int(RGB["B"]))) # Assign a random color to the whole light strip
+            elif bpmSettings["animationType"] == "pulsate":
+                pulsate(strip, RGB)
 
         # Wait for next beat, without halting the script completely:
         endTime = startTime + waitTime # Add wait time to startTime to get endTime
