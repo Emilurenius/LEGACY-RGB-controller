@@ -302,6 +302,17 @@ app.get("/colorpresets", (req, res) => {
     else if (req.query.mode == "load") {
         res.sendFile(path.join(__dirname, "/json/presets.json"))
     }
+    else if (req.query.mode == "delete") {
+        presetData = loadJSON("/json/presets.json")
+
+        if (presetData[req.query.preset]) {
+            delete presetData[req.query.preset]
+            saveJSON(presetData, "/json/presets.json")
+            res.sendFile(path.join(__dirname, "/json/presets.json"))
+        }else {
+            res.status(400).send("Error: no preset provided")
+        }
+    }
 })
 
 app.get("/bpm", (req, res) => {
