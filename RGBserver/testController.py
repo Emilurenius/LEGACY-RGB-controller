@@ -328,10 +328,10 @@ def colorDrip(strip, wait_ms=50):
             while x < steps: # Repeated for every LED in the strip
 
                 # generate droplet with tail:
-                strip.setPixelColor(x, Color(RGB["r"], RGB["g"], RGB["b"])) # main pixel
-                strip.setPixelColor(x - 1, Color(int(float(RGB["r"]) * float(60 / 100)), int(float(RGB["g"]) * float(60 / 100)), int(float(RGB["b"]) * float(60 / 100)))) # Tail pixel 1
-                strip.setPixelColor(x - 2, Color(int(float(RGB["r"]) * float(20 / 100)), int(float(RGB["g"]) * float(20 / 100)), int(float(RGB["b"]) * float(20 / 100)))) # Tail pixel 2
-                strip.setPixelColor(x - 3, Color(int(float(RGB["r"]) * float(1 / 100)), int(float(RGB["g"]) * float(1 / 100)), int(float(RGB["b"]) * float(1 / 100)))) # Tail pixel 3
+                strip.setPixelColor(x, Color(RGB["R"], RGB["G"], RGB["B"])) # main pixel
+                strip.setPixelColor(x - 1, Color(int(float(RGB["R"]) * float(60 / 100)), int(float(RGB["G"]) * float(60 / 100)), int(float(RGB["B"]) * float(60 / 100)))) # Tail pixel 1
+                strip.setPixelColor(x - 2, Color(int(float(RGB["R"]) * float(20 / 100)), int(float(RGB["G"]) * float(20 / 100)), int(float(RGB["B"]) * float(20 / 100)))) # Tail pixel 2
+                strip.setPixelColor(x - 3, Color(int(float(RGB["R"]) * float(1 / 100)), int(float(RGB["G"]) * float(1 / 100)), int(float(RGB["B"]) * float(1 / 100)))) # Tail pixel 3
                 strip.setPixelColor(x - 4, Color(0, 0, 0)) # Reset overflowing tail pixels
                 strip.show()
                 if getDataval("speed"): #Update speed for animation from JSON file
