@@ -1,5 +1,5 @@
 import ws281xSC, datetime, time
-strip = ws281xSC.strip(149, "http://192.168.1.124:3000")
+strip = ws281xSC.strip(149, "http://172.16.4.195:3000")
 
 daysLookup = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
 
