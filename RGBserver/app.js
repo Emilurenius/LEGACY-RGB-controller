@@ -83,76 +83,25 @@ app.use("/json", express.static("json"))
 // Graphical control interface:
 app.get("/", (req, res) => {
     
-    res.sendFile(path.join(__dirname, "/html/index.html"))
-    console.log("\nWebsite loaded")
-    
-    if (req.query.panel == "main") {
-        console.log("\nControl panel loaded")
-        let save = false
-
-        if (req.query.toggle == "change") {
-            if (data.onoff == true) {
-                data.onoff = false
-                save = true
-            }else {
-                data.onoff = true
-                save = true
+    try {
+        if (connectCode) {
+            codeData = loadJSON("/json/connectCode.json")
+            console.log(connectCode == codeData.code)
+            if (connectCode == codeData.code && codeData.expires < Date.now()+ 24 * 60 * 60 * 1000) {
+                res.sendFile(path.join(__dirname, "/html/index.html"))
             }
-            console.log(`Light state changed to: ${data.onoff}`)
+            else {
+                res.sendFile(path.join(__dirname, "/html/clientConnect.html"))
+            }
         }
-        
-        if (req.query.br) {
-            data.brightness = parseInt(req.query.br)
-            console.log(`BR changed to: ${data.brightness}`)
-            save = true
+        else {
+            console.log("No code data")
+            res.sendFile(path.join(__dirname, "/html/clientConnect.html"))
         }
-        if (req.query.r) {
-            data.R = parseInt(req.query.r)
-            console.log(`R changed to: ${data.R}`)
-            save = true
-        }
-        if (req.query.g) {
-            data.G = parseInt(req.query.g)
-            console.log(`G changed to: ${data.G}`)
-            save = true
-        }
-        if (req.query.b) {
-            data.B = parseInt(req.query.b)
-            console.log(`B changed to: ${data.B}`)
-            save = true
-        }
-        
-        if (save) {
-            saveJSON(data, "/json/data.json")
-        }
+    } catch (err) {
+        console.log(`An error occured: ${err.message}\nAttempting login`)
+        res.sendFile(path.join(__dirname, "/html/clientConnect.html"))
     }
-    else if (req.query.panel == "modes") {
-        console.log("\nMode select loaded")
-        let save = false
-
-        if (req.query.mode != undefined) {
-            save = true
-            data.mode = req.query.mode
-            console.log(`Mode changed to: ${data.mode}`)
-        }
-        
-        if (req.query.speed) {
-            save = true
-            data.speed = parseInt(req.query.speed)
-            console.log(`Speed channged to: ${data.speed}`)
-        }
-    
-        if (req.query.alarmTime) {
-            save = true
-            data.alarmClockData.alarmTime = req.query.alarmTime
-            console.log(`Alarm set to activate at: ${data.alarmClockData.alarmTime}`)
-        }
-        
-        if (save) {
-            saveJSON(data, "/json/data.json")
-        }
-    }
-    
 })
 
 app.get("/settings", (req, res) => {
