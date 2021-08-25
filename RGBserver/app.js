@@ -5,6 +5,8 @@ const bodyParser = require("body-parser")
 const path = require("path")
 const fs = require("fs")
 const cors = require("cors")
+const cookieParser = require("cookie-parser")
+const bcrypt = require("bcrypt")
 
 const serverAddress = "http://192.168.1.124:8000"
 
@@ -60,6 +62,8 @@ let connections = [] // Connections through long polling
 //Here we are configuring express to use body-parser as middle-ware.
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(cookieParser()) // Middleware for handling cookies
+app.use(cors()) // Making sure the browser can request more data after it is loaded on the client computer.
 
 app.use(cors()) // Making sure the browser can request more data after it is loaded on the client computer.
 
@@ -83,24 +87,36 @@ app.use("/json", express.static("json"))
 // Graphical control interface:
 app.get("/", (req, res) => {
     
-    try {
-        if (connectCode) {
-            codeData = loadJSON("/json/connectCode.json")
-            console.log(connectCode == codeData.code)
-            if (connectCode == codeData.code && codeData.expires < Date.now()+ 24 * 60 * 60 * 1000) {
-                res.sendFile(path.join(__dirname, "/html/index.html"))
-            }
-            else {
-                res.sendFile(path.join(__dirname, "/html/clientConnect.html"))
-            }
+    const pass = req.cookies.adminPass
+    let passCorrect = false
+    console.log(pass)
+    const hashedPass = loadJSON("/adminPass/pass.json").pass
+
+    try{
+        if (pass) {
+            bcrypt.compare(pass, hashedPass, (err, result) => {
+                if (err) {
+                    res.send("Oops! Something went wrong!<br>Please contact system administrator!")
+                    throw new Error(err)
+                }else {
+                    passCorrect = result
+                }
+                if (passCorrect) {
+                    res.sendFile(path.join(__dirname, "/html/index.html"))
+                    console.log("admin logged in successfully")
+                } else {
+                    res.sendFile(path.join(__dirname, "/html/loginPage.html"))
+                    console.log("Login initiated")
+                }
+            })
         }
         else {
-            console.log("No code data")
-            res.sendFile(path.join(__dirname, "/html/clientConnect.html"))
+            res.sendFile(path.join(__dirname, "/html/loginPage.html"))
+            console.log("Login initiated")
         }
     } catch (err) {
-        console.log(`An error occured: ${err.message}\nAttempting login`)
-        res.sendFile(path.join(__dirname, "/html/clientConnect.html"))
+        console.log(`An error has occured: ${err.message}\nAttempting login`)
+
     }
 })
 
