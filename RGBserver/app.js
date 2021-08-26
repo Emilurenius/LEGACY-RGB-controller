@@ -40,6 +40,44 @@ function refreshAccessToken() {
     )
 }
 
+function loginCheck(req, res) {
+    const pass = req.cookies.adminPass
+    let passCorrect = false
+    console.log(pass)
+    const hashedPass = loadJSON("/adminPass/pass.json").pass
+
+
+    try{
+        if (pass) {
+            bcrypt.compare(pass, hashedPass, (err, result) => {
+                if (err) {
+                    res.send("Oops! Something went wrong!<br>Please contact system administrator!")
+                    throw new Error(err)
+                }else {
+                    passCorrect = result
+                }
+                if (passCorrect) {
+                    console.log(result)
+                    return result
+                } else {
+                    res.sendFile(path.join(__dirname, "/html/loginPage.html"))
+                    console.log("Login initiated")
+                    return false
+                }
+            })
+        }
+        else {
+            res.sendFile(path.join(__dirname, "/html/loginPage.html"))
+            console.log("Login initiated")
+        }
+    } catch (err) {
+        console.log(`An error has occured: ${err.message}\nAttempting login`)
+        res.sendFile(path.join(__dirname, "/html/loginPage.html"))
+        console.log("Login initiated")
+        return false
+    }
+}
+
 const clientData = loadJSON("/spotifyClientData.json")
 const spotifyAPI = new SpotifyWebAPI({
     clientId: clientData.clientID,
@@ -86,38 +124,48 @@ app.use("/json", express.static("json"))
 
 // Graphical control interface:
 app.get("/", (req, res) => {
+
+    const result = loginCheck(req, res)
+    console.log(`Result: ${result}`)
+
+    // if (loginCheck(req, res) == true) {
+    //     res.sendFile(path.join(__dirname, "/html/index.html"))
+    //     console.log("logged in successfully")
+    // } else {
+    //     console.log("Something aint right")
+    // }
     
-    const pass = req.cookies.adminPass
-    let passCorrect = false
-    console.log(pass)
-    const hashedPass = loadJSON("/adminPass/pass.json").pass
+    // const pass = req.cookies.adminPass
+    // let passCorrect = false
+    // console.log(pass)
+    // const hashedPass = loadJSON("/adminPass/pass.json").pass
 
-    try{
-        if (pass) {
-            bcrypt.compare(pass, hashedPass, (err, result) => {
-                if (err) {
-                    res.send("Oops! Something went wrong!<br>Please contact system administrator!")
-                    throw new Error(err)
-                }else {
-                    passCorrect = result
-                }
-                if (passCorrect) {
-                    res.sendFile(path.join(__dirname, "/html/index.html"))
-                    console.log("admin logged in successfully")
-                } else {
-                    res.sendFile(path.join(__dirname, "/html/loginPage.html"))
-                    console.log("Login initiated")
-                }
-            })
-        }
-        else {
-            res.sendFile(path.join(__dirname, "/html/loginPage.html"))
-            console.log("Login initiated")
-        }
-    } catch (err) {
-        console.log(`An error has occured: ${err.message}\nAttempting login`)
+    // try{
+    //     if (pass) {
+    //         bcrypt.compare(pass, hashedPass, (err, result) => {
+    //             if (err) {
+    //                 res.send("Oops! Something went wrong!<br>Please contact system administrator!")
+    //                 throw new Error(err)
+    //             }else {
+    //                 passCorrect = result
+    //             }
+    //             if (passCorrect) {
+    //                 res.sendFile(path.join(__dirname, "/html/index.html"))
+    //                 console.log("admin logged in successfully")
+    //             } else {
+    //                 res.sendFile(path.join(__dirname, "/html/loginPage.html"))
+    //                 console.log("Login initiated")
+    //             }
+    //         })
+    //     }
+    //     else {
+    //         res.sendFile(path.join(__dirname, "/html/loginPage.html"))
+    //         console.log("Login initiated")
+    //     }
+    // } catch (err) {
+    //     console.log(`An error has occured: ${err.message}\nAttempting login`)
 
-    }
+    // }
 })
 
 app.get("/settings", (req, res) => {
