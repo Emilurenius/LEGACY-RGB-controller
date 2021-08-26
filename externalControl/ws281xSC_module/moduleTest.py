@@ -1,12 +1,7 @@
-import ws281xSC, time, progressbar
-from datetime import datetime
+import ws281xSC
 
-strip = ws281xSC.strip(149, "http://192.168.1.124:3000")
+strip = ws281xSC.strip(149, "http://192.168.1.124:3000") # Address will be different for you
 strip.setMode("directRGB")
 
-r = 0
-g = 0
-b = 0
-
-strip.setMode("directRGB")
-strip.show()
+strip.setMode("standard")
+strip.setState(True)
