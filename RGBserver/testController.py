@@ -680,6 +680,7 @@ def bpm(strip): # [0,150,255], [170, 0, 255]
                 return
 
 def songAnimation(strip):
+    print("animation started")
     animatedSongs = getJSON("songAnimation")
     print(animatedSongs)
     for k, v in animatedSongs:
