@@ -681,6 +681,7 @@ def bpm(strip): # [0,150,255], [170, 0, 255]
 
 def songAnimation(strip):
     animatedSongs = getJSON("songAnimation")
+    print(animatedSongs)
     for k, v in animatedSongs:
         print(f"uri: {k}.. Path: {v['animationFilepath']}.. fileName: {v['animationFilename']}")
 
