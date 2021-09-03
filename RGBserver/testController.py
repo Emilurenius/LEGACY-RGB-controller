@@ -621,22 +621,10 @@ def pulsate(strip, RGB):
 
 def bpm(strip): # [0,150,255], [170, 0, 255]
     timePrint("BPM mode activated", newLine=True)
-    # colorList = [
-    #         {
-    #             "R": 0,
-    #             "G": 150,
-    #             "B": 255
-    #         },
-    #         {
-    #             "R": 170,
-    #             "G": 0,
-    #             "B": 255
-    #         }
-    #     ]
     colorIndex = 0
     while True:
-        colorList = getJSON("presets") # Temp code
-        keyList = list(colorList.keys()) # Extract keys for easy iteration later
+        # colorList = getJSON("presets") # Temp code
+        # keyList = list(colorList.keys()) # Extract keys for easy iteration later
         if checkBreak("bpm"):
             return
 
@@ -670,13 +658,13 @@ def bpm(strip): # [0,150,255], [170, 0, 255]
 
         startTime = time.time() # Save timestamp for waiting for next beat later.
         
-        # RGB = randColor() # Color to be used in selected animation
+        RGB = randColor() # Color to be used in selected animation
 
-        RGB = colorList[keyList[colorIndex]]
-        colorIndex += 1
-        if colorIndex > len(colorList) - 1:
-            colorIndex = 0
-        print(RGB)
+        # RGB = colorList[keyList[colorIndex]]
+        # colorIndex += 1
+        # if colorIndex > len(colorList) - 1:
+        #     colorIndex = 0
+        # print(RGB)
         
         if bpmSettings["animationType"] == "solid":
             solidColor(strip, Color(int(RGB["R"]), int(RGB["G"]), int(RGB["B"]))) # Assign a random color to the whole light strip
