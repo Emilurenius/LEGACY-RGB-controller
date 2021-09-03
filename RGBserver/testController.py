@@ -679,6 +679,11 @@ def bpm(strip): # [0,150,255], [170, 0, 255]
             elif checkBreak("bpm"): # Stop looping if mode is changed
                 return
 
+def songAnimation(strip):
+    animatedSongs = getJSON("songAnimation")
+    for k, v in animatedSongs:
+        print(f"uri: {k}.. Path: {v['animationFilepath']}.. fileName: {v['animationFilename']}")
+
 def screenSync(strip):
     currentColor = None
     data = None
@@ -759,6 +764,7 @@ modes = {
     "elitus": elitus,
     "colorBubbles": colorBubbles,
     "bpm": bpm,
+    "songAnimation": songAnimation,
     "screenSync": screenSync,
     "directRGB": directRGB
 }
