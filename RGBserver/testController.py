@@ -795,6 +795,7 @@ if __name__ == '__main__':
                 previousData = data
                 mode = modes.get(data["mode"], None)
                 if mode:
+                    print(mode)
                     mode(strip)
                 else:
                     timePrint("Invalid mode", newLine=True)
