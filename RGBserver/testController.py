@@ -611,7 +611,7 @@ def pulsate(strip, RGB):
     #         solidColor(strip, Color(0,0,0)) # Make sure the strip goes black after animation
     #         break
 
-    brightness = 1000
+    brightness = 400
     while True:
         brightness -= changePerMS
 
