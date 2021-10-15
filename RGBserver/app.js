@@ -63,7 +63,6 @@ let connections = [] // Connections through long polling
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cookieParser()) // Middleware for handling cookies
-app.use(cors()) // Making sure the browser can request more data after it is loaded on the client computer.
 
 app.use(cors()) // Making sure the browser can request more data after it is loaded on the client computer.
 
