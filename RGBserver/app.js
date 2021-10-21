@@ -231,6 +231,12 @@ app.get("/speed", (req, res) => {
     else {
         res.send("no data recieved")
     }
+    if (save) {
+        saveJSON(data, "/json/data.json")
+        res.send("data recieved")
+    } else {
+        res.send("no data recieved")
+    }
 })
 
 app.get("/modes/set", (req, res) => {
