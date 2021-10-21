@@ -620,6 +620,10 @@ def pulsate(strip, RGB):
 
         time.sleep(0.001)
 
+def reactiveSync(strip, RGB):
+    SA = requests.get(f"{serverAddress}/spotify/getAnalysis") # Get song analysis of currently playing song
+    print(SA["body"]["bars"][0])
+
 def bpm(strip): # [0,150,255], [170, 0, 255]
     timePrint("BPM mode activated", newLine=True)
     # colorList = [
@@ -679,18 +683,24 @@ def bpm(strip): # [0,150,255], [170, 0, 255]
             colorIndex = 0
         print(RGB)
         
+        delayActive = False
         if bpmSettings["animationType"] == "solid":
             solidColor(strip, Color(int(RGB["R"]), int(RGB["G"]), int(RGB["B"]))) # Assign a random color to the whole light strip
+            delayActive = True
         elif bpmSettings["animationType"] == "pulsate":
             pulsate(strip, RGB)
+            delayActive = True
+        elif bpmSettings["animationType"] == "reactive":
+            reactiveSync(strip, RGB)
 
-        # Wait for next beat, without halting the script completely:
-        endTime = startTime + waitTime # Add wait time to startTime to get endTime
-        while True:
-            if time.time() >= endTime: # Stop looping when current time equals endTime
-                break
-            elif checkBreak("bpm"): # Stop looping if mode is changed
-                return
+        if delayActive:
+            # Wait for next beat, without halting the script completely:
+            endTime = startTime + waitTime # Add wait time to startTime to get endTime
+            while True:
+                if time.time() >= endTime: # Stop looping when current time equals endTime
+                    break
+                elif checkBreak("bpm"): # Stop looping if mode is changed
+                    return
 
 def screenSync(strip):
     currentColor = None

@@ -393,6 +393,20 @@ app.get("/spotify/getBPM", async (req, res) => {
     }
 })
 
+app.get("/spotify/getAnalysis", async (req, res) => {
+    try {
+        const result = await spotifyAPI.getMyCurrentPlayingTrack()
+        const trackID = result.body.item.id
+
+        const analysis = await spotifyAPI.getAudioAnalysisForTrack(trackID)
+        res.send(analysis)
+
+    } catch (err) {
+        refreshAccessToken()
+        res.redirect(`/spotify/getAnalysis`)
+    }
+})
+
 app.get("/settings/standard", (req, res) => {
     console.log("\nStandard settigns API loaded")
     let standardSettings = loadJSON("/json/standardSettings.json")
