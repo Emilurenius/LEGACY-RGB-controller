@@ -226,7 +226,7 @@ app.get("/speed", (req, res) => {
     let save = false
     if (req.query.speed) {
         save = true
-        data.speed = req.query.speed
+        data.speed = parseInt(req.query.speed)
     }
     console.log(data.speed)
     if (save) {
