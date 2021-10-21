@@ -622,7 +622,7 @@ def pulsate(strip, RGB):
 
 def reactiveSync(strip, RGB):
     SA = requests.get(f"{serverAddress}/spotify/getAnalysis") # Get song analysis of currently playing song
-    print(SA["body"]["bars"][0])
+    print(SA["body"]["bars"])
 
 def bpm(strip): # [0,150,255], [170, 0, 255]
     timePrint("BPM mode activated", newLine=True)
