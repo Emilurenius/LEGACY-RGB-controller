@@ -227,6 +227,7 @@ app.get("/speed", (req, res) => {
     if (req.query.speed) {
         data.speed = req.query.speed
     }
+    console.log(data.speed)
     if (save) {
         saveJSON(data, "/json/data.json")
         res.send("data recieved")
