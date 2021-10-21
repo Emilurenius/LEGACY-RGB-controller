@@ -51,5 +51,5 @@ alarmClock.addEventListener("click", (event) => {
 })
 
 speed.onchange = () => {
-    getJSON(`${url}/?panel=modes&speed=${speed.value}`)
+    getJSON(`${url}/speed?speed=${speed.value}`)
 }

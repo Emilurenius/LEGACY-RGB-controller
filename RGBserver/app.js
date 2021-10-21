@@ -220,6 +220,19 @@ app.get("/rgb", (req, res) => {
     }
 })
 
+app.get("/speed", (req, res) => {
+    console.log("\nAPI loaded: animation speed")
+
+    let save = false
+    if (req.query.speed) {
+        data.speed = req.query.speed
+        res.send(data.speed)
+    }
+    else {
+        res.send("no data recieved")
+    }
+})
+
 app.get("/modes/set", (req, res) => {
     console.log("\nAPI loaded: Mode select")
 
