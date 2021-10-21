@@ -668,7 +668,7 @@ def bpm(strip): # [0,150,255], [170, 0, 255]
                 if res.status_code == 400:
                     print("No song data recieved")
                     requests.get(f"{serverAddress}/bpm?mode=updateBPM&bpm={float(BPM)}") # This resets doneAt to 0, making sure the code doesn't just loop back here.
-                    return
+                    break
                 continue
         except:
             pass
