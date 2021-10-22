@@ -346,6 +346,22 @@ app.get("/spotify/login/success", async (req, res) => {
     }
 })
 
+app.get("/spotify/songProgress", async (req, res) => {
+    try {
+        const result = await spotifyAPI.getMyCurrentPlayingTrack()
+        const trackID = result.body.item.id
+
+        const features = await spotifyAPI.getAudioFeaturesForTrack(trackID)
+        const tempo = features.body.tempo
+        const songProgress = parseInt(result.body.progress_ms)
+        const messageSent = parseInt(result.body.timestamp) + songProgress
+        const sinceSent = Date.now() - messageSent
+    } catch (err) {
+        refreshAccessToken()
+        res.redirect(`/spotify/songProgress`)
+    }
+})
+
 app.get("/spotify/getBPM", async (req, res) => {
     try {
         const result = await spotifyAPI.getMyCurrentPlayingTrack()
@@ -440,6 +456,19 @@ app.get("/settings/bpm", (req, res) => {
     }
 
     res.sendFile(path.join(__dirname, "/json/bpmSettings.json"))
+})
+
+app.get("/directRGB", (req, res) => { // A simpler version of the directRGB post address. Should only be used if POST requests are not possible in your usecase
+    let pixelData = loadJSON("/json/directRGB.json")
+    
+    if (req.query.mode == "pixel" && parseInt(req.query.i) < pixelCount - 1) {
+        pixelData[req.query.i] = [req.query.r,req.query.g,req.query.b]
+        res.send(pixelData[req.query.i])
+    }
+    else {
+        console.log(req.query.mode, req.query.i)
+        res.send("Invalid data recieved")
+    }
 })
 
 // API POST:
