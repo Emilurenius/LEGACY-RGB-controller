@@ -460,14 +460,20 @@ app.get("/settings/bpm", (req, res) => {
 
 app.get("/directRGB", (req, res) => { // A simpler version of the directRGB post address. Should only be used if POST requests are not possible in your usecase
     let pixelData = loadJSON("/json/directRGB.json")
+    let save = false
     
     if (req.query.mode == "pixel" && parseInt(req.query.i) < pixelCount - 1) {
         pixelData[req.query.i] = [req.query.r,req.query.g,req.query.b]
         res.send(pixelData[req.query.i])
+        save = true
     }
     else {
         console.log(req.query.mode, req.query.i)
         res.send("Invalid data recieved")
+    }
+
+    if (save) {
+        saveJSON(pixelData, "/json/directRGB.json")
     }
 })
 
