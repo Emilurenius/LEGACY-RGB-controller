@@ -11,7 +11,7 @@ If you already know how to set up the lights, here's a reminder of a neat comman
 
 If it still doesn't work, try following this:
 
-`https://stackoverflow.com/questions/53045343/adafruit-raspberry-pi-neopixel-library-throws-error-importerror-no-module-name`
+https://stackoverflow.com/questions/53045343/adafruit-raspberry-pi-neopixel-library-throws-error-importerror-no-module-name
 
 Now for my part of the script:
 
