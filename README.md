@@ -6,6 +6,7 @@ For setting up your lights, follow this tutorial:
 https://www.youtube.com/watch?v=Pxt9sGTsvFk
 
 If you already know how to set up the lights, here's a reminder of a neat command that downloads everything:
+
 `curl -L http://coreelec.io/33 | bash`
 
 Now for my part of the script:
