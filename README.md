@@ -2,14 +2,37 @@
 A controller for WS2812b RGB strip on raspberry pi
 
 # Setup:
-For setting up your lights, follow this tutorial:
-https://www.youtube.com/watch?v=Pxt9sGTsvFk
-
-If you already know how to set up the lights, here's a reminder of a neat command that downloads everything:
+To set up the lights, run this command in the terminal:
 
 `curl -L http://coreelec.io/33 | bash`
 
-If it still doesn't work, try following this:
+This command will download all required dependencies and files.
+
+Test if the download was successful by writing these commands:
+
+`cd rpi_ws281x/python/examples`
+
+`sudo python3 strandtest.py`
+
+If you get an error saying `ImportError: No module named _rpi_ws281x`, follow these steps to fix it:
+
+`sudo apt-get install python-dev git scons swig`
+
+`git clone https://github.com/jgarff/rpi_ws281x.git`
+
+`cd rpi_ws281x`
+
+`sudo scons`
+
+`cd python`
+
+`sudo python3 setup.py install`
+
+`sudo pip3 uninstall rpi_ws281x`
+
+`sudo pip3 install rpi_ws281x`
+
+The error should now be gone! Double check by trying to run strandtest.py again. Source:
 
 https://stackoverflow.com/questions/53045343/adafruit-raspberry-pi-neopixel-library-throws-error-importerror-no-module-name
 
