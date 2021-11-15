@@ -9,6 +9,10 @@ If you already know how to set up the lights, here's a reminder of a neat comman
 
 `curl -L http://coreelec.io/33 | bash`
 
+If it still doesn't work, try following this:
+
+`https://stackoverflow.com/questions/53045343/adafruit-raspberry-pi-neopixel-library-throws-error-importerror-no-module-name`
+
 Now for my part of the script:
 
 When You got everything set up, and strandtest runs fine, you will need to download the newest version of node on your raspberry pi:
