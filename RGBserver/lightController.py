@@ -34,6 +34,7 @@ def checkBreak(mode):
         return False
 
 def getJSON(filename):
+    triesCounter = 0
      while True:
         try: # Try opening the json file, and check it
             # with open(f'./json/{filename}.json', 'r') as JSON:
@@ -43,8 +44,14 @@ def getJSON(filename):
             data = json.load(file)
             file.close()
             return data
-        except: # If you can't open the json file, just try again
-            continue
+        except Exception as ex: # If you can't open the json file, just try again
+            if triesCounter > 100:
+                print(f'Exception has happened {triesCounter} times. Stopping script!')
+                raise Exception(ex)
+            else:
+                print(f'Exception has happened {triesCounter} times')
+                triesCounter += 1
+                continue
 
 def getDataval(dataval):
     data = getJSON("data")
