@@ -42,14 +42,8 @@ When You got everything set up, and strandtest runs fine, you will need to downl
 
 with terminal:
 
-`sudo apt install nodejs`
-`sudo apt install npm`
-`sudo apt update`
-
-Or open this in a browser on the Pi:
-
-https://nodejs.org/dist/v14.15.1/node-v14.15.1-linux-arm64.tar.xz
-
+`sudo apt install nvm`
+`nvm install stable`
 
 Then when node.js is up and running on your computer, you are ready to install the github repository.
 Use your desired way to download the repository, and then open the directory called RGBserver. 
