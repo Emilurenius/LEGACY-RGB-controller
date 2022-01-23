@@ -25,7 +25,7 @@ step = int(input("Higher value = higher speed, Lower value = more presicion: "))
 xPixels = 1344 # Number of pixels in the x direction of the checked area
 yPixels = 756 # Number of pixels in the y direction of the checked area
 oldAverage = [0, 0, 0] # Initializing a check variable
-serverAddress = "http://172.16.4.195:3000" # Address for the main server that controls all info about the LED strip
+serverAddress = "http://raspi4:3000" # Address for the main server that controls all info about the LED strip
 
 while True: # Main script loop
     if requests.get(f"{serverAddress}/modes/current") != "screenSync": # Check if the LED strip is currently in the right mode
