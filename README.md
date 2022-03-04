@@ -42,7 +42,11 @@ When You got everything set up, and strandtest runs fine, you will need to downl
 
 with terminal:
 
-`sudo apt install nvm`
+`curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash`
+
+`export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"`
+
 `nvm install stable`
 
 Then when node.js is up and running on your computer, you are ready to install the github repository.
