@@ -567,6 +567,10 @@ def colorBubbles(strip):
         colorBubblesSettings = getJSON("colorBubblesSettings")
         tLength = colorBubblesSettings['tailLength']
         bDistance = colorBubblesSettings['bubbleDistance']
+
+        if bDistance > strip.numPixels() - 1:
+            bDistance = strip.numPixels() - 1
+
         if checkBreak("colorBubbles"):
             return
 
