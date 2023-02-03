@@ -562,13 +562,16 @@ def colorBubbles(strip):
         }
     
     while True:
-        wait_ms = 100 - getDataval("speed")
+        speed = getDataval("speed") * 10
         data = getJSON("data")
+        colorBubblesSettings = getJSON("colorBubblesSettings")
+        tLength = colorBubblesSettings['tailLength']
+        bDistance = colorBubblesSettings['bubbleDistance']
         if checkBreak("colorBubbles"):
             return
 
         noneActive = True
-        for i in range(len(stripBrightness)):
+        for i in range(bDistance):
             if stripBrightness[i + 1]["active"] == True:
                 noneActive = False
                 break
@@ -578,14 +581,14 @@ def colorBubbles(strip):
         for i in range(len(stripBrightness)):
             # Fade up
             if stripBrightness[i + 1]["up"] == True and stripBrightness[i + 1]["val"] < 1000 and stripBrightness[i + 1]["active"] == True:
-                stripBrightness[i + 1]["val"] += 400
+                stripBrightness[i + 1]["val"] += speed
                 if stripBrightness[i + 1]["val"] > 1000:
                     stripBrightness[i + 1]["val"] = 1000
 
             # Fade down
             elif stripBrightness[i + 1]["active"] == True and stripBrightness[i + 1]["val"] > 0:
                 stripBrightness[i + 1]["up"] = False
-                stripBrightness[i + 1]["val"] -= 100
+                stripBrightness[i + 1]["val"] -= speed/tLength
                 if stripBrightness[i + 1]["val"] < 0:
                     stripBrightness[i + 1]["val"] = 0
 
@@ -602,7 +605,6 @@ def colorBubbles(strip):
             color = Color(int(float(data["R"]) * float(stripBrightness[i + 1]["val"]) / 1000), int(float(data["G"]) * float(stripBrightness[i + 1]["val"]) / 1000), int(float(data["B"]) * float(stripBrightness[i + 1]["val"]) / 1000))
             strip.setPixelColor(i, color)
         strip.show()
-        time.sleep(wait_ms/1000.0)
 
 def pulsate(strip, RGB):
 
