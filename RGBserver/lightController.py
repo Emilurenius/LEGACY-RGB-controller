@@ -562,6 +562,7 @@ def colorBubbles(strip):
         }
     
     while True:
+        print("Running bubble loop")
         speed = getDataval("speed") * 10
         data = getJSON("data")
         colorBubblesSettings = getJSON("colorBubblesSettings")
