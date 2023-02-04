@@ -605,6 +605,7 @@ class colorBubbles_class:
 
             color = Color(int(float(data["R"]) * float(self.stripBrightness[i]["val"]) / 1000), int(float(data["G"]) * float(self.stripBrightness[i]["val"]) / 1000), int(float(data["B"]) * float(self.stripBrightness[i]["val"]) / 1000))
             strip.setPixelColor(i, color)
+        print("Showing strip")
         strip.show()
 
 def colorBubbles(strip): 
