@@ -615,7 +615,7 @@ def colorBubbles(strip):
     while True:
         speed = getDataval("speed") * 10
         data = getJSON("data")
-        rgb = [data[["R"], data["G"], data["B"]]]
+        rgb = [data["R"], data["G"], data["B"]]
         colorBubblesSettings = getJSON("colorBubblesSettings")
         tLength = colorBubblesSettings['tailLength']
         bDistance = colorBubblesSettings['bubbleDistance']
