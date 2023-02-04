@@ -555,7 +555,6 @@ class colorBubbles_class:
 
     def __init__(self, strip):
         print("Color bubbles object created")
-        self.strip = strip
 
         self.stripBrightness = {}
 
@@ -566,19 +565,19 @@ class colorBubbles_class:
                 "active": False
             }
 
-    def activatePixel(self, pixel=0):
+    def activatePixel(self, strip, pixel=0):
         print(f"Pixel {pixel} activated")
         if pixel > 0 and pixel < self.strip.numPixels():
             self.stripBrightness[pixel]["active"] == True
 
-    def checkActivePixels(self, bDistance): # Returns True if a pixel is active within the given bDistance range
+    def checkActivePixels(self, strip, bDistance): # Returns True if a pixel is active within the given bDistance range
         print("Checking for active pixels")
         for i in range(bDistance):
             if self.stripBrightness[i]["active"] == True:
                 return True
         return False
 
-    def runFrame(self, speed, tLength): # Calculates one frame of animation
+    def runFrame(self, strip, speed, tLength): # Calculates one frame of animation
         print("Calculating animation frame")
         for i in range(len(self.stripBrightness)):
             # Fade up
@@ -624,10 +623,10 @@ def colorBubbles(strip):
         if checkBreak("colorBubbles"):
             return
 
-        if colorBubbles_obj.checkActivePixels(bDistance):
-            colorBubbles_obj.activateFirstPixel()
+        if colorBubbles_obj.checkActivePixels(strip, bDistance):
+            colorBubbles_obj.activateFirstPixel(strip)
 
-        colorBubbles_obj.runFrame(speed, tLength)
+        colorBubbles_obj.runFrame(strip, speed, tLength)
         time.sleep(0.05)
 
 def pulsate(strip, RGB):
