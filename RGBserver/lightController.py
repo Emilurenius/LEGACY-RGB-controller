@@ -551,15 +551,61 @@ def elitus(strip, data):
                     break
                 time.sleep(0.05)
 
-def colorBubbles(strip): 
-    stripBrightness = {}
+class colorBubbles_class:
 
-    for i in range(strip.numPixels()):
-        stripBrightness[i + 1] = {
-            "val": 0,
-            "up": True,
-            "active": False
-        }
+    def __init__(self, strip):
+        self.strip = strip
+
+        self.stripBrightness = {}
+
+        for i in range(strip.numPixels()):
+            self.stripBrightness[i] = {
+                "val": 0,
+                "up": True,
+                "active": False
+            }
+
+    def activatePixel(self, pixel=0):
+        if pixel > 0 and pixel < strip.numPixels():
+            self.stripBrightness[pixel]["active"] == True
+
+    def checkActivePixels(self, bDistance): # Returns True if a pixel is active within the given bDistance range
+        for i in range(bDistance):
+            if self.stripBrightness[i + 1]["active"] == True:
+                return True
+        return False
+
+    def runFrame(self, speed, tLength): # Calculates one frame of animation
+        for i in range(len(self.stripBrightness)):
+            # Fade up
+            if self.stripBrightness[i]["up"] == True and self.stripBrightness[i + 1]["val"] < 1000 and self.stripBrightness[i + 1]["active"] == True:
+                self.stripBrightness[i]["val"] += speed
+                if self.stripBrightness[i]["val"] > 1000:
+                    self.stripBrightness[i]["val"] = 1000
+
+            # Fade down
+            elif self.stripBrightness[i]["active"] == True and self.stripBrightness[i + 1]["val"] > 0:
+                self.stripBrightness[i]["up"] = False
+                self.stripBrightness[i]["val"] -= speed/tLength
+                if self.stripBrightness[i]["val"] < 0:
+                    self.stripBrightness[i]["val"] = 0
+
+            else: # Deactivate pixel
+                self.stripBrightness[i]["active"] = False
+
+            if self.stripBrightness[i]["val"] == 0 and self.stripBrightness[i + 1]["up"] == False: # Reset pixel
+                self.stripBrightness[i]["up"] = True
+                self.stripBrightness[i]["active"] = False
+
+            if self.stripBrightness[i]["val"] > 999 and i < len(self.stripBrightness) - 1: # Activate next pixel
+                self.stripBrightness[i + 1]["active"] = True
+
+            color = Color(int(float(data["R"]) * float(self.stripBrightness[i + 1]["val"]) / 1000), int(float(data["G"]) * float(self.stripBrightness[i + 1]["val"]) / 1000), int(float(data["B"]) * float(stripBrightness[i + 1]["val"]) / 1000))
+            strip.setPixelColor(i, color)
+        strip.show()
+
+def colorBubbles(strip): 
+    colorBubbles_obj = colorBubbles_class(strip)
     
     while True:
         speed = getDataval("speed") * 10
@@ -574,41 +620,10 @@ def colorBubbles(strip):
         if checkBreak("colorBubbles"):
             return
 
-        noneActive = True
-        for i in range(bDistance):
-            if stripBrightness[i + 1]["active"] == True:
-                noneActive = False
-                break
-        if noneActive:
-            stripBrightness[1]["active"] = True
+        if colorBubbles_obj.checkActivePixels(bDistance):
+            colorBubbles_obj.activateFirstPixel()
 
-        for i in range(len(stripBrightness)):
-            # Fade up
-            if stripBrightness[i + 1]["up"] == True and stripBrightness[i + 1]["val"] < 1000 and stripBrightness[i + 1]["active"] == True:
-                stripBrightness[i + 1]["val"] += speed
-                if stripBrightness[i + 1]["val"] > 1000:
-                    stripBrightness[i + 1]["val"] = 1000
-
-            # Fade down
-            elif stripBrightness[i + 1]["active"] == True and stripBrightness[i + 1]["val"] > 0:
-                stripBrightness[i + 1]["up"] = False
-                stripBrightness[i + 1]["val"] -= speed/tLength
-                if stripBrightness[i + 1]["val"] < 0:
-                    stripBrightness[i + 1]["val"] = 0
-
-            else: # Deactivate pixel
-                stripBrightness[i + 1]["active"] = False
-
-            if stripBrightness[i + 1]["val"] == 0 and stripBrightness[i + 1]["up"] == False: # Reset pixel
-                stripBrightness[i + 1]["up"] = True
-                stripBrightness[i + 1]["active"] = False
-
-            if stripBrightness[i + 1]["val"] > 999 and i < len(stripBrightness) - 1: # Activate next pixel
-                stripBrightness[i + 2]["active"] = True
-
-            color = Color(int(float(data["R"]) * float(stripBrightness[i + 1]["val"]) / 1000), int(float(data["G"]) * float(stripBrightness[i + 1]["val"]) / 1000), int(float(data["B"]) * float(stripBrightness[i + 1]["val"]) / 1000))
-            strip.setPixelColor(i, color)
-        strip.show()
+        colorBubbles_obj.runFrame(speed)
         time.sleep(0.05)
 
 def pulsate(strip, RGB):
