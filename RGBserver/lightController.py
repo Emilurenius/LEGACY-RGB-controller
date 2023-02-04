@@ -600,7 +600,7 @@ class colorBubbles_class:
             if self.stripBrightness[i]["val"] > 999 and i < len(self.stripBrightness) - 1: # Activate next pixel
                 self.stripBrightness[i + 1]["active"] = True
 
-            color = Color(int(float(data["R"]) * float(self.stripBrightness[i + 1]["val"]) / 1000), int(float(data["G"]) * float(self.stripBrightness[i + 1]["val"]) / 1000), int(float(data["B"]) * float(self.stripBrightness[i + 1]["val"]) / 1000))
+            color = Color(int(float(data["R"]) * float(self.stripBrightness[i]["val"]) / 1000), int(float(data["G"]) * float(self.stripBrightness[i]["val"]) / 1000), int(float(data["B"]) * float(self.stripBrightness[i]["val"]) / 1000))
             strip.setPixelColor(i, color)
         strip.show()
 
