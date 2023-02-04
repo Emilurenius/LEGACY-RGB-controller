@@ -571,7 +571,7 @@ class colorBubbles_class:
 
     def checkActivePixels(self, bDistance): # Returns True if a pixel is active within the given bDistance range
         for i in range(bDistance):
-            if self.stripBrightness[i + 1]["active"] == True:
+            if self.stripBrightness[i]["active"] == True:
                 return True
         return False
 
@@ -593,7 +593,7 @@ class colorBubbles_class:
             else: # Deactivate pixel
                 self.stripBrightness[i]["active"] = False
 
-            if self.stripBrightness[i]["val"] == 0 and self.stripBrightness[i + 1]["up"] == False: # Reset pixel
+            if self.stripBrightness[i]["val"] == 0 and self.stripBrightness[i]["up"] == False: # Reset pixel
                 self.stripBrightness[i]["up"] = True
                 self.stripBrightness[i]["active"] = False
 
