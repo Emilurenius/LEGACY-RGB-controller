@@ -567,7 +567,7 @@ class colorBubbles_class:
 
     def activatePixel(self, strip, pixel=0):
         print(f"Pixel {pixel} activated")
-        if pixel > 0 and pixel < self.strip.numPixels():
+        if pixel > 0 and pixel < strip.numPixels():
             self.stripBrightness[pixel]["active"] == True
 
     def checkActivePixels(self, strip, bDistance): # Returns True if a pixel is active within the given bDistance range
@@ -604,8 +604,8 @@ class colorBubbles_class:
                 self.stripBrightness[i + 1]["active"] = True
 
             color = Color(int(float(data["R"]) * float(self.stripBrightness[i]["val"]) / 1000), int(float(data["G"]) * float(self.stripBrightness[i]["val"]) / 1000), int(float(data["B"]) * float(self.stripBrightness[i]["val"]) / 1000))
-            self.strip.setPixelColor(i, color)
-        self.strip.show()
+            strip.setPixelColor(i, color)
+        strip.show()
 
 def colorBubbles(strip): 
     print("Color Bubbles activated:")
