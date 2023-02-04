@@ -554,6 +554,7 @@ def elitus(strip, data):
 class colorBubbles_class:
 
     def __init__(self, strip):
+        print("Color bubbles object created")
         self.strip = strip
 
         self.stripBrightness = {}
@@ -566,16 +567,19 @@ class colorBubbles_class:
             }
 
     def activatePixel(self, pixel=0):
+        print(f"Pixel {pixel} activated")
         if pixel > 0 and pixel < strip.numPixels():
             self.stripBrightness[pixel]["active"] == True
 
     def checkActivePixels(self, bDistance): # Returns True if a pixel is active within the given bDistance range
+        print("Checking for active pixels")
         for i in range(bDistance):
             if self.stripBrightness[i]["active"] == True:
                 return True
         return False
 
     def runFrame(self, speed, tLength): # Calculates one frame of animation
+        print("Calculating animation frame")
         for i in range(len(self.stripBrightness)):
             # Fade up
             if self.stripBrightness[i]["up"] == True and self.stripBrightness[i]["val"] < 1000 and self.stripBrightness[i]["active"] == True:
@@ -605,11 +609,11 @@ class colorBubbles_class:
         strip.show()
 
 def colorBubbles(strip): 
+    print("Color Bubbles activated:")
     colorBubbles_obj = colorBubbles_class(strip)
     
     while True:
         speed = getDataval("speed") * 10
-        data = getJSON("data")
         colorBubblesSettings = getJSON("colorBubblesSettings")
         tLength = colorBubblesSettings['tailLength']
         bDistance = colorBubblesSettings['bubbleDistance']
