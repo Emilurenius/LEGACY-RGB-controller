@@ -609,7 +609,6 @@ def colorBubbles(strip):
             color = Color(int(float(data["R"]) * float(stripBrightness[i + 1]["val"]) / 1000), int(float(data["G"]) * float(stripBrightness[i + 1]["val"]) / 1000), int(float(data["B"]) * float(stripBrightness[i + 1]["val"]) / 1000))
             strip.setPixelColor(i, color)
         strip.show()
-        time.sleep(0.1)
 
 def pulsate(strip, RGB):
 
