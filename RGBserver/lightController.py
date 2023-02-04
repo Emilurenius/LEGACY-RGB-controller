@@ -578,13 +578,13 @@ class colorBubbles_class:
     def runFrame(self, speed, tLength): # Calculates one frame of animation
         for i in range(len(self.stripBrightness)):
             # Fade up
-            if self.stripBrightness[i]["up"] == True and self.stripBrightness[i + 1]["val"] < 1000 and self.stripBrightness[i + 1]["active"] == True:
+            if self.stripBrightness[i]["up"] == True and self.stripBrightness[i]["val"] < 1000 and self.stripBrightness[i]["active"] == True:
                 self.stripBrightness[i]["val"] += speed
                 if self.stripBrightness[i]["val"] > 1000:
                     self.stripBrightness[i]["val"] = 1000
 
             # Fade down
-            elif self.stripBrightness[i]["active"] == True and self.stripBrightness[i + 1]["val"] > 0:
+            elif self.stripBrightness[i]["active"] == True and self.stripBrightness[i]["val"] > 0:
                 self.stripBrightness[i]["up"] = False
                 self.stripBrightness[i]["val"] -= speed/tLength
                 if self.stripBrightness[i]["val"] < 0:
