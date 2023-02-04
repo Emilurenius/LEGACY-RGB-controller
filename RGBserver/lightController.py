@@ -623,7 +623,7 @@ def colorBubbles(strip):
         if colorBubbles_obj.checkActivePixels(bDistance):
             colorBubbles_obj.activateFirstPixel()
 
-        colorBubbles_obj.runFrame(speed)
+        colorBubbles_obj.runFrame(speed, tLength)
         time.sleep(0.05)
 
 def pulsate(strip, RGB):
