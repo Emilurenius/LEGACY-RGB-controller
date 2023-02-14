@@ -759,6 +759,7 @@ def bpm(strip): # [0,150,255], [170, 0, 255]
                         "active": False
                     }
                 stripBrightness[0]["active"] = True
+                delayActive = True
 
         if delayActive:
             # Wait for next beat, without halting the script completely:
