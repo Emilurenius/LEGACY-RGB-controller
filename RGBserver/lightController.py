@@ -79,32 +79,6 @@ def clamp(val, maxVal, minVal):
         return val
 
 # Define functions which animate LEDs in various ways:
-def old_randColor():
-    color1 = random.randint(0, 255) # Random color 1
-    color2 = random.randint(0, 255) # Random color 2
-    fullColor = random.randint(0, 2) # Choose one of the three RGB channels to be full brightness
-
-    # The RGB channel chosen to be full brightness is set to 255, the others get assigned color1 and color2, wich are randomly generated
-    if fullColor == 0:
-        r = 255
-        g = color1
-        b = color2
-    elif fullColor == 1:
-        r = color1
-        g = 255
-        b = color2
-    elif fullColor == 2:
-        r = color1
-        g = color2
-        b = 255
-    RGB = {
-        "R": r,
-        "G": g,
-        "B": b
-    }
-    #timePrint(f"Random color generated: {RGB}")
-    return RGB
-
 def randColor():
     R = random.randint(0, 255)
     G = random.randint(0, 255)
@@ -701,6 +675,11 @@ def bpmColorBubbles(strip, stripBrightness, speed, tLength):
 
 def bpm(strip): # [0,150,255], [170, 0, 255]
     timePrint("BPM mode activated", newLine=True)
+    RGB = { # Initializing RGB to make sure it is in the correct scope
+        "R": 0,
+        "G": 0,
+        "B": 0
+    }
     stripBrightness = {} # Generated for later:
     for i in range(strip.numPixels()):
         stripBrightness[i] = {
@@ -759,7 +738,21 @@ def bpm(strip): # [0,150,255], [170, 0, 255]
 
         startTime = time.time() # Save timestamp for waiting for next beat later.
         
-        RGB = randColor() # Color to be used in selected animation
+        oldRGB = RGB
+        while True:
+            RGB = randColor() # Color to be used in selected animation
+            diff = 0
+            for k, v in RGB.items():
+                if v > oldRGB[k]:
+                    diff += v-oldRGB[k]
+                else:
+                    diff += oldRGB[k]-v
+            
+            if diff > 255:
+                timePrint("Random color was sufficiently different from the last one")
+                break
+            else:
+                timePrint("Random color was not sufficiently different from the last one")
 
         # RGB = colorList[keyList[colorIndex]]
         # colorIndex += 1
