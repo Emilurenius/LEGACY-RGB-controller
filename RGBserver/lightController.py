@@ -650,7 +650,6 @@ def reactiveSync(strip, RGB):
     timePrint(SA["body"]["bars"][0])
 
 def bpmColorBubbles(strip, stripBrightness, speed, tLength):
-    print(type(stripBrightness))
     for i in range(strip.numPixels()):
         # Fade up
         if stripBrightness[i]["up"] == True and stripBrightness[i]["val"] < 1000 and stripBrightness[i]["active"] == True:
@@ -690,8 +689,6 @@ def bpm(strip): # [0,150,255], [170, 0, 255]
             "up": True,
             "active": False
         }
-
-    print(type(stripBrightness))
     
     # colorList = [
     #         {
@@ -763,10 +760,10 @@ def bpm(strip): # [0,150,255], [170, 0, 255]
         elif bpmSettings["animationType"] == "colorBubbles":
             stripBrightness[0]["active"] = True
             delayActive = True
-            print(type(stripBrightness))
+            
 
         if delayActive:
-            print(type(stripBrightness))
+            
             # Wait for next beat, without halting the script completely:
             endTime = startTime + waitTime # Add wait time to startTime to get endTime
             while True:
