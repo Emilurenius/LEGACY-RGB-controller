@@ -677,6 +677,7 @@ def bpmColorBubbles(strip, stripBrightness, speed, tLength):
         color = Color(int(float(data["R"]) * float(stripBrightness[i + 1]["val"]) / 1000), int(float(data["G"]) * float(stripBrightness[i + 1]["val"]) / 1000), int(float(data["B"]) * float(stripBrightness[i + 1]["val"]) / 1000))
         strip.setPixelColor(i, color)
     strip.show()
+    time.sleep(0.05)
 
 def bpm(strip): # [0,150,255], [170, 0, 255]
     timePrint("BPM mode activated", newLine=True)
