@@ -651,7 +651,7 @@ def reactiveSync(strip, RGB):
 
 def bpmColorBubbles(strip, stripBrightness, speed, tLength):
     print(stripBrightness)
-    for i in range(len(stripBrightness)):
+    for i in range(strip.numPixels()):
         # Fade up
         if stripBrightness[i]["up"] == True and stripBrightness[i]["val"] < 1000 and stripBrightness[i]["active"] == True:
             stripBrightness[i]["val"] += speed
