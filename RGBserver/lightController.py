@@ -79,7 +79,7 @@ def clamp(val, maxVal, minVal):
         return val
 
 # Define functions which animate LEDs in various ways:
-def randColor():
+def old_randColor():
     color1 = random.randint(0, 255) # Random color 1
     color2 = random.randint(0, 255) # Random color 2
     fullColor = random.randint(0, 2) # Choose one of the three RGB channels to be full brightness
@@ -104,6 +104,25 @@ def randColor():
     }
     #timePrint(f"Random color generated: {RGB}")
     return RGB
+
+def randColor():
+    R = random.randint(0, 255)
+    G = random.randint(0, 255)
+    B = random.randint(0, 255)
+
+    highest = max(R, G, B)
+    neededChange = 255 - highest
+    R = R + neededChange
+    G = G + neededChange
+    B = B + neededChange
+
+    RGB = {
+        "R": R,
+        "G": G,
+        "B": B
+    }
+    return RGB
+        
 
 def standard(strip, colorOverride=None):
     timePrint("Standard mode activated:", newLine=True)
