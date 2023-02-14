@@ -740,12 +740,12 @@ def bpm(strip): # [0,150,255], [170, 0, 255]
 
         startTime = time.time() # Save timestamp for waiting for next beat later.
         
-        # RGB = randColor() # Color to be used in selected animation
+        RGB = randColor() # Color to be used in selected animation
 
-        RGB = colorList[keyList[colorIndex]]
-        colorIndex += 1
-        if colorIndex > len(colorList) - 1:
-            colorIndex = 0
+        # RGB = colorList[keyList[colorIndex]]
+        # colorIndex += 1
+        # if colorIndex > len(colorList) - 1:
+        #     colorIndex = 0
         print(RGB)
         
         delayActive = False
