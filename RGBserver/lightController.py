@@ -768,7 +768,7 @@ def bpm(strip): # [0,150,255], [170, 0, 255]
             endTime = startTime + waitTime # Add wait time to startTime to get endTime
             while True:
                 if bpmSettings["animationType"] == "colorBubbles":
-                    stripBrightness = bpmColorBubbles(strip, stripBrightness, speed, 3)
+                    stripBrightness = bpmColorBubbles(strip, stripBrightness, speed, 1)
                 if time.time() >= endTime: # Stop looping when current time equals endTime
                     break
                 elif checkBreak("bpm"): # Stop looping if mode is changed
