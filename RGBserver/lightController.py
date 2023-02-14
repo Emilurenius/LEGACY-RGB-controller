@@ -681,6 +681,13 @@ def bpmColorBubbles(strip, stripBrightness, speed, tLength):
 
 def bpm(strip): # [0,150,255], [170, 0, 255]
     timePrint("BPM mode activated", newLine=True)
+    stripBrightness = {} # Generated for later:
+    for i in range(strip.numPixels()):
+        stripBrightness[i] = {
+            "val": 0,
+            "up": True,
+            "active": False
+        }
     # colorList = [
     #         {
     #             "R": 0,
@@ -749,15 +756,6 @@ def bpm(strip): # [0,150,255], [170, 0, 255]
         elif bpmSettings["animationType"] == "reactive":
             reactiveSync(strip, RGB)
         elif bpmSettings["animationType"] == "colorBubbles":
-            if 'stripBrightness' not in locals():
-                stripBrightness = {}
-
-                for i in range(strip.numPixels()):
-                    stripBrightness[i] = {
-                        "val": 0,
-                        "up": True,
-                        "active": False
-                    }
                 stripBrightness[0]["active"] = True
                 delayActive = True
 
