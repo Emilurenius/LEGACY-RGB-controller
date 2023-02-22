@@ -13,7 +13,7 @@ from rpi_ws281x import *
 
 # LED strip configuration:
 LED_COUNT      = 7      # Number of LED pixels.
-LED_PIN        = 18      # GPIO pin connected to the pixels (18 uses PWM!).
+LED_PIN        = 21      # GPIO pin connected to the pixels (18 uses PWM!).
 #LED_PIN        = 10      # GPIO pin connected to the pixels (10 uses SPI /dev/spidev0.0).
 LED_FREQ_HZ    = 800000  # LED signal frequency in hertz (usually 800khz)
 LED_DMA        = 10      # DMA channel to use for generating signal (try 10)
@@ -21,7 +21,6 @@ LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
 LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 serverAddress = "http://localhost:3000"
-
 
 def checkBreak(mode):
     # A check to see if a mode is still chosen. 
@@ -81,30 +80,23 @@ def clamp(val, maxVal, minVal):
 
 # Define functions which animate LEDs in various ways:
 def randColor():
-    color1 = random.randint(0, 255) # Random color 1
-    color2 = random.randint(0, 255) # Random color 2
-    fullColor = random.randint(0, 2) # Choose one of the three RGB channels to be full brightness
+    R = random.randint(0, 255)
+    G = random.randint(0, 255)
+    B = random.randint(0, 255)
 
-    # The RGB channel chosen to be full brightness is set to 255, the others get assigned color1 and color2, wich are randomly generated
-    if fullColor == 0:
-        r = 255
-        g = color1
-        b = color2
-    elif fullColor == 1:
-        r = color1
-        g = 255
-        b = color2
-    elif fullColor == 2:
-        r = color1
-        g = color2
-        b = 255
+    highest = max(R, G, B)
+    neededChange = 255 - highest
+    R = R + neededChange
+    G = G + neededChange
+    B = B + neededChange
+
     RGB = {
-        "R": r,
-        "G": g,
-        "B": b
+        "R": R,
+        "G": G,
+        "B": B
     }
-    #timePrint(f"Random color generated: {RGB}")
     return RGB
+        
 
 def standard(strip, colorOverride=None):
     timePrint("Standard mode activated:", newLine=True)
@@ -555,21 +547,28 @@ def colorBubbles(strip):
     stripBrightness = {}
 
     for i in range(strip.numPixels()):
-        stripBrightness[i + 1] = {
+        stripBrightness[i] = {
             "val": 0,
             "up": True,
             "active": False
         }
     
     while True:
-        wait_ms = 100 - getDataval("speed")
+        speed = getDataval("speed") * 10
         data = getJSON("data")
+        colorBubblesSettings = getJSON("colorBubblesSettings")
+        tLength = colorBubblesSettings['tailLength']
+        bDistance = colorBubblesSettings['bubbleDistance']
+
+        if bDistance > strip.numPixels() - 1:
+            bDistance = strip.numPixels() - 1
+
         if checkBreak("colorBubbles"):
             return
 
         noneActive = True
-        for i in range(len(stripBrightness)):
-            if stripBrightness[i + 1]["active"] == True:
+        for i in range(bDistance):
+            if stripBrightness[i]["active"] == True:
                 noneActive = False
                 break
         if noneActive:
@@ -577,32 +576,32 @@ def colorBubbles(strip):
 
         for i in range(len(stripBrightness)):
             # Fade up
-            if stripBrightness[i + 1]["up"] == True and stripBrightness[i + 1]["val"] < 1000 and stripBrightness[i + 1]["active"] == True:
-                stripBrightness[i + 1]["val"] += 400
-                if stripBrightness[i + 1]["val"] > 1000:
-                    stripBrightness[i + 1]["val"] = 1000
+            if stripBrightness[i]["up"] == True and stripBrightness[i]["val"] < 1000 and stripBrightness[i]["active"] == True:
+                stripBrightness[i]["val"] += speed
+                if stripBrightness[i]["val"] > 1000:
+                    stripBrightness[i]["val"] = 1000
 
             # Fade down
-            elif stripBrightness[i + 1]["active"] == True and stripBrightness[i + 1]["val"] > 0:
-                stripBrightness[i + 1]["up"] = False
-                stripBrightness[i + 1]["val"] -= 100
-                if stripBrightness[i + 1]["val"] < 0:
-                    stripBrightness[i + 1]["val"] = 0
+            elif stripBrightness[i]["active"] == True and stripBrightness[i]["val"] > 0:
+                stripBrightness[i]["up"] = False
+                stripBrightness[i]["val"] -= speed/tLength
+                if stripBrightness[i]["val"] < 0:
+                    stripBrightness[i]["val"] = 0
 
             else: # Deactivate pixel
-                stripBrightness[i + 1]["active"] = False
+                stripBrightness[i]["active"] = False
 
-            if stripBrightness[i + 1]["val"] == 0 and stripBrightness[i + 1]["up"] == False: # Reset pixel
-                stripBrightness[i + 1]["up"] = True
-                stripBrightness[i + 1]["active"] = False
+            if stripBrightness[i]["val"] == 0 and stripBrightness[i]["up"] == False: # Reset pixel
+                stripBrightness[i]["up"] = True
+                stripBrightness[i]["active"] = False
 
-            if stripBrightness[i + 1]["val"] > 999 and i < len(stripBrightness) - 1: # Activate next pixel
-                stripBrightness[i + 2]["active"] = True
+            if stripBrightness[i]["val"] > 999 and i < len(stripBrightness) - 1: # Activate next pixel
+                stripBrightness[i+1]["active"] = True
 
-            color = Color(int(float(data["R"]) * float(stripBrightness[i + 1]["val"]) / 1000), int(float(data["G"]) * float(stripBrightness[i + 1]["val"]) / 1000), int(float(data["B"]) * float(stripBrightness[i + 1]["val"]) / 1000))
+            color = Color(int(float(data["R"]) * float(stripBrightness[i]["val"]) / 1000), int(float(data["G"]) * float(stripBrightness[i]["val"]) / 1000), int(float(data["B"]) * float(stripBrightness[i]["val"]) / 1000))
             strip.setPixelColor(i, color)
         strip.show()
-        time.sleep(wait_ms/1000.0)
+        time.sleep(0.05)
 
 def pulsate(strip, RGB):
 
@@ -643,8 +642,52 @@ def reactiveSync(strip, RGB):
     SA = requests.get(f"{serverAddress}/spotify/getAnalysis").json() # Get song analysis of currently playing song
     timePrint(SA["body"]["bars"][0])
 
+def bpmColorBubbles(strip, stripBrightness, speed, tLength):
+    for i in range(strip.numPixels()):
+        # Fade up
+        if stripBrightness[i]["up"] == True and stripBrightness[i]["val"] < 1000 and stripBrightness[i]["active"] == True:
+            stripBrightness[i]["val"] += speed
+            if stripBrightness[i]["val"] > 1000:
+                stripBrightness[i]["val"] = 1000
+
+        # Fade down
+        elif stripBrightness[i]["active"] == True and stripBrightness[i]["val"] > 0:
+            stripBrightness[i]["up"] = False
+            stripBrightness[i]["val"] -= speed/tLength
+            if stripBrightness[i]["val"] < 0:
+                stripBrightness[i]["val"] = 0
+
+        else: # Deactivate pixel
+            stripBrightness[i]["active"] = False
+
+        if stripBrightness[i]["val"] == 0 and stripBrightness[i]["up"] == False: # Reset pixel
+            stripBrightness[i]["up"] = True
+            stripBrightness[i]["active"] = False
+
+        if stripBrightness[i]["val"] > 999 and i < len(stripBrightness) - 1: # Activate next pixel
+            stripBrightness[i+1]["active"] = True
+
+        color = Color(int(float(data["R"]) * float(stripBrightness[i]["val"]) / 1000), int(float(data["G"]) * float(stripBrightness[i]["val"]) / 1000), int(float(data["B"]) * float(stripBrightness[i]["val"]) / 1000))
+        strip.setPixelColor(i, color)
+    strip.show()
+    time.sleep(0.05)
+    return stripBrightness
+
 def bpm(strip): # [0,150,255], [170, 0, 255]
     timePrint("BPM mode activated", newLine=True)
+    RGB = { # Initializing RGB to make sure it is in the correct scope
+        "R": 0,
+        "G": 0,
+        "B": 0
+    }
+    stripBrightness = {} # Generated for later:
+    for i in range(strip.numPixels()):
+        stripBrightness[i] = {
+            "val": 0,
+            "up": True,
+            "active": False
+        }
+    
     # colorList = [
     #         {
     #             "R": 0,
@@ -659,6 +702,7 @@ def bpm(strip): # [0,150,255], [170, 0, 255]
     #     ]
     colorIndex = 0
     while True:
+        speed = getDataval("speed") * 10
         colorList = getJSON("presets") # Temp code
         keyList = list(colorList.keys()) # Extract keys for easy iteration later
         if checkBreak("bpm"):
@@ -694,12 +738,26 @@ def bpm(strip): # [0,150,255], [170, 0, 255]
 
         startTime = time.time() # Save timestamp for waiting for next beat later.
         
-        # RGB = randColor() # Color to be used in selected animation
+        oldRGB = RGB
+        while True:
+            RGB = randColor() # Color to be used in selected animation
+            diff = 0
+            for k, v in RGB.items():
+                if v > oldRGB[k]:
+                    diff += v-oldRGB[k]
+                else:
+                    diff += oldRGB[k]-v
+            
+            if diff > 255:
+                timePrint("Random color was sufficiently different from the last one")
+                break
+            else:
+                timePrint("Random color was not sufficiently different from the last one")
 
-        RGB = colorList[keyList[colorIndex]]
-        colorIndex += 1
-        if colorIndex > len(colorList) - 1:
-            colorIndex = 0
+        # RGB = colorList[keyList[colorIndex]]
+        # colorIndex += 1
+        # if colorIndex > len(colorList) - 1:
+        #     colorIndex = 0
         print(RGB)
         
         delayActive = False
@@ -711,11 +769,18 @@ def bpm(strip): # [0,150,255], [170, 0, 255]
             delayActive = True
         elif bpmSettings["animationType"] == "reactive":
             reactiveSync(strip, RGB)
+        elif bpmSettings["animationType"] == "colorBubbles":
+            stripBrightness[0]["active"] = True
+            delayActive = True
+            
 
         if delayActive:
+            
             # Wait for next beat, without halting the script completely:
             endTime = startTime + waitTime # Add wait time to startTime to get endTime
             while True:
+                if bpmSettings["animationType"] == "colorBubbles":
+                    stripBrightness = bpmColorBubbles(strip, stripBrightness, speed, 1)
                 if time.time() >= endTime: # Stop looping when current time equals endTime
                     break
                 elif checkBreak("bpm"): # Stop looping if mode is changed
@@ -814,6 +879,7 @@ if __name__ == '__main__':
 
     # Create NeoPixel object with appropriate configuration.
     strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+
     # Intialize the library (must be called once before other functions).
     strip.begin()
 

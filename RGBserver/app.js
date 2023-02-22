@@ -456,6 +456,27 @@ app.get("/settings/bpm", (req, res) => {
     res.sendFile(path.join(__dirname, "/json/bpmSettings.json"))
 })
 
+app.get("/settings/colorBubbles", (req, res) => {
+    console.log("\nColor Bubbles API loaded:")
+    let colorBubblesSettings = loadJSON("/json/colorBubblesSettings.json")
+    let save = false
+
+    if (req.query.tLength) {
+        colorBubblesSettings.tailLength = parseInt(req.query.tLength)
+        save = true
+    }
+    if (req.query.bDist) {
+        colorBubblesSettings.bubbleDistance = parseInt(req.query.bDist)
+        save = true
+    }
+
+    if (save) {
+        saveJSON(colorBubblesSettings, "/json/colorBubblesSettings.json")
+    }
+
+    res.sendFile(path.join(__dirname, "/json/bpmSettings.json"))
+})
+
 app.get("/directRGB", (req, res) => { // A simpler version of the directRGB post address. Should only be used if POST requests are not possible in your usecase
     let pixelData = loadJSON("/json/directRGB.json")
     let save = false
