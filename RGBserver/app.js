@@ -8,8 +8,6 @@ const cors = require("cors")
 const cookieParser = require("cookie-parser")
 const bcrypt = require("bcrypt")
 
-const serverAddress = "http://172.16.2.144:3000"
-
 const SpotifyWebAPI = require('spotify-web-api-node');
 scopes = ["user-read-playback-state"]
 
