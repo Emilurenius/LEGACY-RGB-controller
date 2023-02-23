@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+
+:root {
+    --main-background-color: #26272e;
+    --secondary-background-color: #0f153b;
+}
+
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000000;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  text-align: center;
+  width: auto;
+  background-color: #353640;
+  z-index: 999;
+}
+
+.content {
+  color: white;
+  text-align: center;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 30px;
+  padding-top: 20px;
+  padding-bottom: 30px;
+  border-radius: 25px;
+  background: var(--main-background-color);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.Content-box {
+  margin: 20px;
+  border-radius: 25px;
+  background: var(--secondary-background-color);
+}
+
+.Content-subBox {
+  margin: 20px;
+  border-radius: 25px;
+  background: var(--main-background-color);
+}
+
+.Main-Text {
+  font-size: 50px;
+  margin: 20px;
+}
+
+.Body-Text {
+  font-size: 25px;
+  padding: 5px;
+}
+
+.Body-Text-alignLeft {
+  font-size: 25px;
+  padding: 5px;
+  padding-left: 50px;
+  padding-right: 50px;
+  text-align: left;
+}
+
+.button {
+  background-color: var(--secondary-background-color);
+  border: none;
+ color: white;
+  text-align: center;
+ text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 10px;
+  font-family: 'Quicksand', sans-serif;
+  margin: 15px;
+}
