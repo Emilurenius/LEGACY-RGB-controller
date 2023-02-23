@@ -20,6 +20,26 @@ const Button = (props) => {
   )
 }
 
+const Slider = (props) => {
+  return (
+    <div className="slidecontainer">
+      <label for={`${props.id}`}>{props.label}</label>
+      <input type="range" min={props.min} max={props.max} className={props.className} id={props.id}></input>
+    </div>
+  )
+}
+
+const Brgb = () => {
+  return (
+    <div>
+      <Slider min="10" max="1000" className="slider-br" id="brightness" label="Brightness:"/>
+      <Slider min="10" max="1000" className="slider-r" id="R" label="RED:"/>
+      <Slider min="10" max="1000" className="slider-g" id="G" label="GREEN:"/>
+      <Slider min="10" max="1000" className="slider-b" id="B" label="BLUE:"/>
+    </div>
+  )
+}
+
 const MainControls = () => {
 
   const toggleLights = () => {
@@ -35,6 +55,7 @@ const MainControls = () => {
         <p className="Main-Text">RGB LED strip control panel</p>
       </div>
       <Button onClick={toggleLights} value="Toggle Lights"/>
+      <Brgb/>
     </div>
   )
 }

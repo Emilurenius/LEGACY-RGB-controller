@@ -85,3 +85,77 @@ body {
   font-family: 'Quicksand', sans-serif;
   margin: 15px;
 }
+
+/* #region Slider styling */
+.slidecontainer {
+  color: white;
+  font-size: 25px;
+  width: 50%;
+  margin-left: 25%;
+  margin-top: 25px;
+}
+
+.slider-br, .slider-r, .slider-g, .slider-b {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 15px;
+  outline: none;
+  background: #ced2ed;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider-br:hover, .slider-br:focus, .slider-r:hover, .slider-r:focus, .slider-g:hover, .slider-g:focus, .slider-b:hover, .slider-b:focus {
+  opacity: 1;
+}
+
+.slider-br::-webkit-slider-thumb, .slider-r::-webkit-slider-thumb, .slider-g::-webkit-slider-thumb, .slider-b::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  border-radius: 50%;
+  background: #e34f00;
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider-br::-moz-range-thumb, .slider-r::-moz-range-thumb, .slider-g::-moz-range-thumb, .slider-b::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  border-radius: 50%;
+  background: #e34f00;
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider-r {
+  background: red;
+}
+
+.slider-g {
+  background: green;
+}
+
+.slider-b {
+  background: blue;
+}
+
+.phonebutton-slider {
+  margin: 40px;
+}
+
+@media screen and (min-width: 769px) {
+  .phonebutton-slider {
+      display: none;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .slidecontainer {
+      width: 80%;
+      margin-left: 10%;
+  }
+}
+/* #endregion Slider styling */
