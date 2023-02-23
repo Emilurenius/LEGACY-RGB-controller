@@ -1,6 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
 
+//const url = (new URL(document.location)).origin
+const url = 'http://localhost:3001'
+
 const Header = () => {
   return (
     <div className="header">
@@ -21,6 +24,9 @@ const MainControls = () => {
 
   const toggleLights = () => {
     console.log('Toggled lights')
+    fetch(`${url}/lightState?toggle=change`)
+      .then(res => res.json())
+      .then(res => console.log(res))
   }
 
   return (
@@ -33,7 +39,7 @@ const MainControls = () => {
   )
 }
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <Header/>
