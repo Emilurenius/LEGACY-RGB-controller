@@ -11,18 +11,24 @@ const Header = () => {
   )
 }
 
-const Button = (onClick, value) => {
+const Button = (props) => {
   return (
-    <input type="button" className="button" onClick="${onClick}"/>
+    <input type="button" className="button" onClick={props.onClick} value={props.value}/>
   )
 }
 
 const MainControls = () => {
+
+  const toggleLights = () => {
+    console.log('Toggled lights')
+  }
+
   return (
     <div className="content">
-      <div class="Content-box">
-        <p class="Main-Text">RGB LED strip control panel</p>
+      <div className="Content-box">
+        <p className="Main-Text">RGB LED strip control panel</p>
       </div>
+      <Button onClick={toggleLights} value="Toggle Lights"/>
     </div>
   )
 }

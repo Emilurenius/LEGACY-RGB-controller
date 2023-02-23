@@ -74,9 +74,9 @@ body {
 .button {
   background-color: var(--secondary-background-color);
   border: none;
- color: white;
+  color: white;
   text-align: center;
- text-decoration: none;
+  text-decoration: none;
   display: inline-block;
   font-size: 30px;
   cursor: pointer;
