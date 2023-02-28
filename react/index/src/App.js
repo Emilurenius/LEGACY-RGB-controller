@@ -50,8 +50,6 @@ const MainControls = () => {
   }
 
   const brgbSlidersListener = (e) => {
-    console.log(e.target.id)
-    console.log(e.target.value)
     fetch(`${url}/rgb?${e.target.id}=${e.target.value}`)
   }
 
