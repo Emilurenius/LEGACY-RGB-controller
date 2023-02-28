@@ -41,14 +41,36 @@ const Brgb = (props) => {
   )
 }
 
+const Presets = (props) => {
+  
+  const presetButtons = props.presets.map(val => {
+    <Button onClick={()=> {console.log("Preset button pressed")}} value="Preset"/>
+  })
+
+  return (
+    <div className="Content-box">
+      {presetButtons}
+    </div>
+  )
+}
+
 const MainControls = () => {
 
   const [br, setBR] = React.useState(0)
   const [r, setR] = React.useState(0)
   const [g, setG] = React.useState(0)
   const [b, setB] = React.useState(0)
+  
+  const [presets, setPresets] = React.useState({})
 
-  const brgbDataHandlers = {
+  const updatePresets = () => {
+    fetch(`${url}/json/presets.json`)
+      .then(res => res.json())
+      .then(res => setPresets(res))
+  }
+  updatePresets()
+
+  const brgbDataHandlers = { // Put functions for changing brgb variables in a dictionary for dynamic indexing in code
     "br": setBR,
     "r": setR,
     "g": setG,
@@ -65,7 +87,6 @@ const MainControls = () => {
   const brgbSlidersListener = (e) => {
     fetch(`${url}/rgb?${e.target.id}=${e.target.value}`)
     const updateFunc = brgbDataHandlers[e.target.id]
-    console.log(updateFunc)
     updateFunc(e.target.value)
   }
 
@@ -84,6 +105,7 @@ const MainControls = () => {
       <Button onClick={toggleLights} value="Toggle Lights"/>
       <Button onClick={savePreset} value="Save Preset"/>
       <Brgb onChange={brgbSlidersListener}/>
+      <Presets presets={presets}/>
     </div>
   )
 }
