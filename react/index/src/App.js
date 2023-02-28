@@ -24,18 +24,18 @@ const Slider = (props) => {
   return (
     <div className="slidecontainer">
       <label for={`${props.id}`}>{props.label}</label>
-      <input type="range" min={props.min} max={props.max} className={props.className} id={props.id}></input>
+      <input type="range" min={props.min} max={props.max} className={props.className} id={props.id} onChange={props.onChange}></input>
     </div>
   )
 }
 
-const Brgb = () => {
+const Brgb = (props) => {
   return (
     <div>
-      <Slider min="10" max="1000" className="slider-br" id="brightness" label="Brightness:"/>
-      <Slider min="10" max="1000" className="slider-r" id="R" label="RED:"/>
-      <Slider min="10" max="1000" className="slider-g" id="G" label="GREEN:"/>
-      <Slider min="10" max="1000" className="slider-b" id="B" label="BLUE:"/>
+      <Slider min="10" max="1000" className="slider-br" id="br" label="Brightness:" onChange={props.onChange}/>
+      <Slider min="10" max="1000" className="slider-r"  id="r"  label="RED:"        onChange={props.onChange}/>
+      <Slider min="10" max="1000" className="slider-g"  id="g"  label="GREEN:"      onChange={props.onChange}/>
+      <Slider min="10" max="1000" className="slider-b"  id="b"  label="BLUE:"       onChange={props.onChange}/>
     </div>
   )
 }
@@ -49,13 +49,19 @@ const MainControls = () => {
       .then(res => console.log(res))
   }
 
+  const brgbSlidersListener = (e) => {
+    console.log(e.target.id)
+    console.log(e.target.value)
+    fetch(`${url}/rgb?${e.target.id}=${e.target.value}`)
+  }
+
   return (
     <div className="content">
       <div className="Content-box">
         <p className="Main-Text">RGB LED strip control panel</p>
       </div>
       <Button onClick={toggleLights} value="Toggle Lights"/>
-      <Brgb/>
+      <Brgb onChange={brgbSlidersListener}/>
     </div>
   )
 }
