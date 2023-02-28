@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import React from 'react';
 
 //const url = (new URL(document.location)).origin
 const url = 'http://localhost:3001'
@@ -42,6 +43,18 @@ const Brgb = (props) => {
 
 const MainControls = () => {
 
+  const [br, setBR] = React.useState(0)
+  const [r, setR] = React.useState(0)
+  const [g, setG] = React.useState(0)
+  const [b, setB] = React.useState(0)
+
+  const brgbDataHandlers = {
+    "br": setBR,
+    "r": setR,
+    "g": setG,
+    "b": setB
+  }
+
   const toggleLights = () => {
     console.log('Toggled lights')
     fetch(`${url}/lightState?toggle=change`)
@@ -51,6 +64,16 @@ const MainControls = () => {
 
   const brgbSlidersListener = (e) => {
     fetch(`${url}/rgb?${e.target.id}=${e.target.value}`)
+    const updateFunc = brgbDataHandlers[e.target.id]
+    console.log(updateFunc)
+    updateFunc(e.target.value)
+  }
+
+  const savePreset = () => {
+    console.log("Saving preset")
+    console.log(`R: ${r}, G: ${g}, B: ${b}`)
+    const presetName = prompt("What do you want to call the preset?", "")
+    fetch(`${url}/colorpresets?mode=new&presetName=${presetName}&R=${r}&G=${g}&B=${b}`)
   }
 
   return (
@@ -59,6 +82,7 @@ const MainControls = () => {
         <p className="Main-Text">RGB LED strip control panel</p>
       </div>
       <Button onClick={toggleLights} value="Toggle Lights"/>
+      <Button onClick={savePreset} value="Save Preset"/>
       <Brgb onChange={brgbSlidersListener}/>
     </div>
   )
