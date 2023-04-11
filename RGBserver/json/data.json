@@ -2,10 +2,10 @@
     "onoff": false,
     "mode": "standard",
     "speed": 100,
-    "brightness": 745,
-    "R": 221,
-    "G": 816,
-    "B": 92,
+    "brightness": 1000,
+    "R": 255,
+    "G": 0,
+    "B": 0,
     "alarmClockData": {
         "alarmTime": "06:00"
     },
