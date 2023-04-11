@@ -1,4 +1,4 @@
-const strip = require('rpi-ws281x-native')
+const ws281x = require('rpi-ws281x-native')
 
 const LED_COUNT = 7
 
