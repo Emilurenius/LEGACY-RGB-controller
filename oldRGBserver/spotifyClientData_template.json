@@ -1,0 +1,5 @@
+{
+    "clientID": "",
+    "clientSecret": "",
+    "loginRedirect": "http://localhost:80/login/success"
+}

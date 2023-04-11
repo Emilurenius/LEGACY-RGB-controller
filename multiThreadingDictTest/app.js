@@ -15,6 +15,8 @@ exec('nproc', (err, output) => {
     THREAD_COUNT = parseInt(output)
 })
 
+
+
 const localPath = (path) => {
     return `${WORKING_FOLDER}/${path}`
 }

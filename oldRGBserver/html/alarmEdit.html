@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/main.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarm edit</title>
+</head>
+<body>
+    <div class="Content">
+        <input type="text" class="Main-Text" id="alarmName" value="New Alarm" style="max-width: 90%;">
+    </div>
+
+    <div class="Content">
+        <label for="alarmHour" class="Body-Text">Hours:</label>
+        <select id="alarmTimeHour" class="dropDown" name="alarmHour"></select>
+        <label for="alarmMinute" class="Body-Text">Minutes:</label>
+        <select id="alarmTimeMinute" class="dropDown" name="alarmMinute"></select>
+        <div class="Content-box" id="daysSelect"></div>
+        <input type="button" class="button" value="Save alarm time" id="saveAlarmTimeButton">
+        <input type="button" class="button" value="Delete alarm" id="deleteAlarm">
+    </div>
+
+    <!-- Functions: -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/javascript/backgroundColor.js"></script>
+    <script src="/javascript/getQueries.js"></script>
+    <script src="/javascript/codeify.js"></script>
+    <script src="/javascript/functions.js"></script>
+
+    <!-- Main scripts: -->
+    <script src="/javascript/alarmEdit.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+    "onoff": false,
+    "mode": "standard",
+    "speed": 100,
+    "brightness": 1000,
+    "R": 255,
+    "G": 0,
+    "B": 0,
+    "alarmClockData": {
+        "alarmTime": "06:00"
+    },
+    "eliteData": {
+        "mode": "standard"
+    }
+}

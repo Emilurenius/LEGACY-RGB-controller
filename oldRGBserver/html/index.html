@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/sliders.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RGB control panel</title>
+</head>
+<body id="body" onscroll="scroll()">
+
+    <div class="header">
+        <a class="button" href="/">Control panel</a>
+        <a class="button" href="/settings">Settings</a>
+        <a class="button" href="/alarm">Alarm</a>
+    </div>
+    
+    <!-- Main controls -->
+    <div class="Content" id="controls">
+        <div class="Content-box">
+            <p class="Main-Text">RGB LED strip control panel</p>
+        </div>
+
+        <input type="button" id="toggle" class="button" value="Toggle lights">
+        <input type="button" id="savePreset" value="Save as preset" class="button">
+
+        <div class="slidecontainer">
+            <label for ="brightness">Brightness:</label>
+            <input type="range" min="10" max="1000" class="slider-br" id="brightness">
+        </div>
+
+        <div class="slidecontainer">
+            <label for ="R">Red:</label>
+            <input type="range" min="0" max="255" class="slider-r" id="R">
+        </div>
+
+        <div class="slidecontainer">
+            <label for ="G">Green:</label>
+            <input type="range" min="0" max="255" class="slider-g" id="G">
+        </div>
+
+        <div class="slidecontainer">
+            <label for ="B">Blue:</label>
+            <input type="range" min="0" max="255" class="slider-b" id="B">
+        </div>
+
+        <input type="button" class="button" id="deletePreset" value="Delete Preset">
+        <!-- Preset buttons -->
+        <div class="Content-box" id="presets">
+        
+        </div>
+    </div>
+
+    <!-- Mode select -->
+    <div class="Content" id="modes">
+        <div class="Content-box">
+            <p class="Main-Text">RGB LED strip Mode select</p>
+        </div>
+        <input type="button" id="standard" class="button" value="Standard">
+
+        <div class="Content-box">
+            <div id="animations&presets"></div>
+
+            <div class="slidecontainer">
+                <label for ="speed">Animation Speed:</label>
+                <input type="range" min="1" max="100" class="slider-br" id="speed">
+            </div>
+        </div>
+
+        <div class="Content-box">
+            <p class="Main-Text">Functions</p>
+            <input type="button" id="alarmClock" value="Alarm Clock" class="button">
+            <input type="button" value="BPM" id="activateBPMmode" class="button">
+        </div>
+        
+    </div>
+
+    <!-- Value readout from the server -->
+    <div class="Content" id="readout">
+        <div class="Content-box">
+            <p class="Main-Text">Current server status</p>
+        </div>
+        <input type="button" class="button" value="Refresh" id="serverValueReset">
+        <div id="serverReadout">
+            <p class="Body-Text">Loading...</p><br><br><br><br><br><br><br><br>
+        </div>
+    </div>
+
+    <!-- Functions: -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/javascript/backgroundColor.js"></script>
+    <script src="/javascript/getQueries.js"></script>
+    <script src="/javascript/codeify.js"></script>
+    <script src="/javascript/functions.js"></script>
+
+    <!-- Main scripts: -->
+    <script src="/javascript/index.js"></script>
+    <script src="/javascript/modes.js"></script>
+    <script src="/javascript/cookies.js"></script>
+    <script src="/javascript/presets.js"></script>
+    <script src="/javascript/serverValueDisplay.js"></script>
+    <script src="/javascript/bpm.js"></script>
+</body>
+</html>

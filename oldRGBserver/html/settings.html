@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/sliders.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+</head>
+<body>
+    <div class="header">
+        <a class="button" href="/">Control panel</a>
+        <a class="button" href="/settings">Settings</a>
+        <a class="button" href="/alarm">Alarm</a>
+    </div>
+
+    <!-- General settings for the RGB behaviour -->
+    <div class="Content" id="mainSettings">
+        <input type="button" class="button" value="Expand" id="cddExpandCollapse">
+        <div class="Content-box">
+            <p class="Main-Text">Main settings</p>
+        </div>
+
+        <div class="customDropDown" style="display: none;">
+            <label for="colorChangeModeSelect" class="Body-Text">Color change mode</label>
+            <select id="colorChangeModeSelect" class="dropDown">
+                <option value="fade">Fade</option>
+                <option value="wipe">Wipe</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- BPM settings panel -->
+    <div class="Content" id="BPM">
+        <input type="button" class="button" value="Expand" id="cddExpandCollapse">
+        <div class="Content-box">
+            <p class="Main-Text">BPM settings</p>
+        </div>
+
+        <div class="customDropDown" style="display: none;">
+            <input type="button" class="button" id="spotifySyncButton" value="Sync with Spotify">
+
+            <label for="BPManimationType" class="Body-Text">BPM animation type</label>
+            <select id="BPManimationType" class="dropDown">
+                <option value="solid">Solid</option>
+                <option value="pulsate">Pulsate</option>
+                <option value="reactive">Reactive Sync</option>
+                <option value="colorBubbles">Color bubbles</option>
+            </select>
+    
+            <div class="slidecontainer">
+                <label for ="BPMslider" id="BPMsliderLabel">BPM:</label>
+                <input type="range" min="1" max="200" class="slider-br" id="BPMslider">
+            </div>
+        </div>
+    </div>
+
+    <div class="Content" id="bubbles">
+        <input type="button" class="button" value="Expand" id="cddExpandCollapse">
+        <div class="Content-box">
+            <p class="Main-Text">Color Bubbles Settings</p>
+        </div>
+
+        <div class="customDropDown" style="display: none;">
+            <div class="slidecontainer">
+                <label for ="tLengthSlider" id="tLengthSliderLabel">Tail Length:</label>
+                <input type="range" min="1" max="10" class="slider-br" id="tLengthSlider">
+            </div>
+            <div class="slidecontainer">
+                <label for ="bDistSlider" id="bDistSliderLabel">Bubble Distance:</label>
+                <input type="range" min="1" max="10" class="slider-br" id="bDistSlider">
+            </div>
+        </div>
+    </div>
+
+    <!-- Functions: -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/javascript/backgroundColor.js"></script>
+    <script src="/javascript/getQueries.js"></script>
+    <script src="/javascript/codeify.js"></script>
+    <script src="/javascript/functions.js"></script>
+
+    <!-- Main scripts: -->
+    <script src="/javascript/mainSettings.js"></script>
+    <script src="/javascript/customDropDown.js"></script>
+    <script src="/javascript/bpmSettings.js"></script>
+    <script src="/javascript/colorBubblesSettings.js"></script>
+</body>
+</html>
