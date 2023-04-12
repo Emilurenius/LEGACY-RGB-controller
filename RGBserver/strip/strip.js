@@ -5,7 +5,7 @@ const LED_COUNT = 7
 const options = {
     dma: 10,
     freq: 800000,
-    gpio: 18,
+    gpio: 21,
     invert: false,
     brightness: 255,
     stripType: ws281x.stripType.WS2812
