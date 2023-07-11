@@ -1,5 +1,7 @@
 # !!! This repository is no longer under development, but a new one has been created !!!
 
+New repository is here: https://github.com/Emilurenius/RGB-Controller/blob/main/README.md
+
 # RGB-controller
 A controller for WS2812b RGB strip on raspberry pi
 
