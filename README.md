@@ -1,3 +1,5 @@
+# !!! This repository is no longer under development, but a new one has been created !!!
+
 # RGB-controller
 A controller for WS2812b RGB strip on raspberry pi
 
